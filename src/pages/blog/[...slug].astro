@@ -42,6 +42,29 @@ const shareTitle = post.data.title;
 
   <article class="py-12">
     <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <!-- Back to Blog -->
+      <nav class="mb-8">
+        <a
+          href={`${import.meta.env.BASE_URL}blog`}
+          class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        >
+          <svg
+            class="mr-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+          Về trang Blog
+        </a>
+      </nav>
+
       <!-- Hero Image -->
       {
         post.data.heroImage && (
@@ -220,10 +243,10 @@ const shareTitle = post.data.title;
     // Load Giscus comments
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
-    script.setAttribute('data-repo', 'yourusername/behivest');
-    script.setAttribute('data-repo-id', 'YOUR_REPO_ID');
+    script.setAttribute('data-repo', 'behitek/behivest');
+    script.setAttribute('data-repo-id', 'R_kgDOQMjAkA');
     script.setAttribute('data-category', 'Comments');
-    script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID');
+    script.setAttribute('data-category-id', 'DIC_kwDOQMjAkM4CxSL1');
     script.setAttribute('data-mapping', 'pathname');
     script.setAttribute('data-strict', '0');
     script.setAttribute('data-reactions-enabled', '1');
