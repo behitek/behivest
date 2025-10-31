@@ -72,8 +72,8 @@ Files to update:
 - [ ] `src/pages/index.astro` (home page CTA)
 - [ ] `src/pages/tools/index.astro` (tools CTA)
 - [ ] `src/pages/blog/[...slug].astro` (blog post CTA)
-- [ ] `src/content/blog/quy-mo-la-gi.mdx` (post content)
-- [ ] `src/content/blog/fmarket-app-dau-tu-quy-mo.mdx` (post content)
+- [ ] `src/content/blog/mutual-funds.mdx` (post content)
+- [ ] `src/content/blog/fmarket.mdx` (post content)
 
 **Command to find all occurrences:**
 

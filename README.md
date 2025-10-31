@@ -187,10 +187,10 @@ The slug will be automatically generated from the filename.
 
 ### Vietnamese Slugs
 
-Use kebab-case Vietnamese slugs for SEO:
+Use kebab-case English slugs for SEO:
 
-- ✅ Good: `quy-mo-la-gi.mdx` → `/blog/quy-mo-la-gi`
-- ❌ Avoid: `quy_mo_la_gi.mdx` or `QuỹMởLàGì.mdx`
+- ✅ Good: `mutual-funds.mdx` → `/blog/mutual-funds`
+- ❌ Avoid: `quy_mo_la_gi.mdx` or `MutualFunds.mdx`
 
 ## ⚙️ Configuration
 

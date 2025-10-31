@@ -47,7 +47,7 @@ npm run format:check      # Check code formatting
 - Content schema defined in `src/content/config.ts` using Zod validation
 - Required frontmatter: `title`, `description`, `pubDate`
 - Optional: `heroImage`, `tags`, `author`, `updatedDate`
-- Use kebab-case Vietnamese slugs (e.g., `quy-mo-la-gi.mdx` → `/blog/quy-mo-la-gi`)
+- Use kebab-case English slugs (e.g., `mutual-funds.mdx` → `/blog/mutual-funds`)
 - Rendered via dynamic route: `src/pages/blog/[...slug].astro`
 
 **Financial Calculators**: Pure functions in `src/utils/calculators.ts`
@@ -212,7 +212,7 @@ author: 'Behivest Team'
 - Primary language is Vietnamese (`<html lang="vi">`)
 - Use Vietnamese currency formatting: `formatCurrency()` uses `vi-VN` locale
 - Use Vietnamese number formatting with dot separators: `formatNumber()`
-- Blog slugs should be kebab-case Vietnamese (e.g., `quy-mo-la-gi`, not `quyMoLaGi`)
+- Blog slugs should be kebab-case English (e.g., `mutual-funds`, not `mutualFunds`)
 - Keep English technical terms where commonly used (e.g., "SIP", "compound interest")
 
 ## Important Notes
