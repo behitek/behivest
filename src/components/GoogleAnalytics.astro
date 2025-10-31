@@ -10,14 +10,17 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_ID || 'G-XXXXXXX';
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
       />
-      <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+      <script
+        is:inline
+        set:html={`
         window.dataLayer = window.dataLayer || [];
         function gtag() {
           dataLayer.push(arguments);
         }
         gtag('js', new Date());
-        gtag('config', GA_MEASUREMENT_ID);
-      </script>
+        gtag('config', '${GA_MEASUREMENT_ID}');
+      `}
+      />
     </>
   )
 }

@@ -1,4 +1,3 @@
-
 # Testing Documentation
 
 This document describes the testing strategy, coverage, and manual QA procedures for the Behivest project.
@@ -51,19 +50,21 @@ npm run test -- --coverage
 ### Example Test Cases
 
 **Compound Interest Calculator:**
-```typescript
-// Test: 10M VND at 10% for 5 years
+
+```
+Test: 10M VND at 10% for 5 years
 Input: principal=10000000, rate=10, years=5, monthly=0
 Expected: finalAmount ≈ 16,105,100 VND
 
-// Test: With monthly contributions
+Test: With monthly contributions
 Input: principal=10M, rate=10, years=10, monthly=1M
 Expected: finalAmount > totalContributions > initialPrincipal
 ```
 
 **SIP Calculator:**
-```typescript
-// Test: 1M VND/month for 10 years at 12%
+
+```
+Test: 1M VND/month for 10 years at 12%
 Input: monthly=1000000, rate=12, years=10
 Expected:
   - totalInvested = 120,000,000
@@ -72,8 +73,9 @@ Expected:
 ```
 
 **Budget Allocator:**
-```typescript
-// Test: 20M VND income
+
+```
+Test: 20M VND income
 Input: monthlyIncome=20000000
 Expected:
   - needs = 10,000,000 (50%)
@@ -88,6 +90,7 @@ Expected:
 E2E tests verify complete user workflows:
 
 #### Home Page (`tests/e2e/home.spec.ts`)
+
 - ✅ Page loads successfully
 - ✅ Hero section displays branding
 - ✅ CTA links to Fmarket affiliate
@@ -97,6 +100,7 @@ E2E tests verify complete user workflows:
 - ✅ Mobile menu functionality
 
 #### Blog (`tests/e2e/blog.spec.ts`)
+
 - ✅ Blog listing displays posts
 - ✅ Navigate to single post
 - ✅ Post metadata visible (date, tags, author)
@@ -107,6 +111,7 @@ E2E tests verify complete user workflows:
 - ✅ SEO meta tags
 
 #### Tools (`tests/e2e/tools.spec.ts`)
+
 - ✅ Tools listing page loads
 - ✅ Navigate to each calculator
 - ✅ **Compound Interest**: Calculation with default/custom values
@@ -117,6 +122,7 @@ E2E tests verify complete user workflows:
 - ✅ Informational content present
 
 #### Contact (`tests/e2e/contact.spec.ts`)
+
 - ✅ Contact form displayed
 - ✅ Required field validation
 - ✅ Form can be filled
@@ -162,6 +168,7 @@ npm run lint
 ```
 
 Common issues caught:
+
 - Unused variables
 - Missing imports
 - TypeScript type errors
@@ -184,6 +191,7 @@ npm run format
 Before deploying to production, manually verify the following:
 
 ### 🏠 Home Page
+
 - [ ] Page loads without errors
 - [ ] Hero section displays correctly
 - [ ] CTA button links to Fmarket affiliate
@@ -194,6 +202,7 @@ Before deploying to production, manually verify the following:
 - [ ] Mobile responsive (test on 375px, 768px, 1920px)
 
 ### 📝 Blog
+
 - [ ] Blog listing shows all posts
 - [ ] Posts sorted by date (newest first)
 - [ ] Click post → navigates to single post page
@@ -207,10 +216,12 @@ Before deploying to production, manually verify the following:
 - [ ] Mobile responsive
 
 ### 🧮 Tools
+
 - [ ] Tools page lists all 4 calculators
 - [ ] Click each tool → navigates correctly
 
 **Compound Interest:**
+
 - [ ] Form pre-fills with defaults
 - [ ] Calculation auto-runs on load
 - [ ] Results update when inputs change
@@ -218,23 +229,27 @@ Before deploying to production, manually verify the following:
 - [ ] Numbers formatted with Vietnamese separators
 
 **SIP Calculator:**
+
 - [ ] Default calculation runs
 - [ ] Results show total invested, returns, final amount
 - [ ] Ratio bar displays
 - [ ] Input validation (no negative numbers)
 
 **Budget Allocator:**
+
 - [ ] 50/30/20 allocation calculates correctly
 - [ ] Visual chart displays
 - [ ] Test with 20M → should show 10M/6M/4M
 
 **Investment Comparison:**
+
 - [ ] Shows investment vs savings
 - [ ] Difference calculated correctly
 - [ ] Percentage difference displayed
 - [ ] Investment amount > savings (with default rates)
 
 ### 📞 Contact
+
 - [ ] Form fields present (name, email, subject, message)
 - [ ] Required fields validated
 - [ ] Email link clickable
@@ -242,6 +257,7 @@ Before deploying to production, manually verify the following:
 - [ ] Help information visible
 
 ### 🎨 Design & UX
+
 - [ ] Light mode: All text readable, good contrast
 - [ ] Dark mode: All text readable, good contrast
 - [ ] Smooth transitions (theme toggle, hover effects)
@@ -250,6 +266,7 @@ Before deploying to production, manually verify the following:
 - [ ] Focus indicators visible (keyboard navigation)
 
 ### 📱 Mobile (375px width)
+
 - [ ] Navigation collapses to hamburger menu
 - [ ] Menu opens/closes correctly
 - [ ] All pages scrollable
@@ -259,6 +276,7 @@ Before deploying to production, manually verify the following:
 - [ ] Tables/charts responsive
 
 ### 🔍 SEO & Performance
+
 - [ ] Every page has unique `<title>`
 - [ ] Every page has meta description
 - [ ] Open Graph tags present
@@ -271,6 +289,7 @@ Before deploying to production, manually verify the following:
 - [ ] Lighthouse score: Performance > 90, SEO > 90
 
 ### 🔗 Links & Navigation
+
 - [ ] All internal links work
 - [ ] All external links open in new tab
 - [ ] Affiliate links include `?ref=affiliate-demo` (or your ID)
@@ -278,6 +297,7 @@ Before deploying to production, manually verify the following:
 - [ ] Breadcrumbs work (if applicable)
 
 ### ⚙️ Configuration
+
 - [ ] Google Analytics tracking (check in GA dashboard)
 - [ ] Giscus comments load (if configured)
 - [ ] Formspree form submits (if configured)
@@ -348,6 +368,7 @@ GitHub Actions automatically runs tests on:
 - Every pull request
 
 **CI Pipeline:**
+
 1. Lint code (ESLint + Prettier)
 2. Run unit tests (Vitest)
 3. Build project (Astro)
