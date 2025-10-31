@@ -12,10 +12,10 @@ const currentPath = Astro.url.pathname;
   >
     <div class="flex items-center space-x-2">
       <a
-        href="/"
+        href={import.meta.env.BASE_URL}
         class="flex items-center space-x-2 font-bold text-gray-900 dark:text-white"
       >
-        <img src="/logo.svg" alt="Behivest" class="h-8 w-auto dark:invert" />
+        <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="Behivest" class="h-8 w-auto dark:invert" />
       </a>
     </div>
 
@@ -46,9 +46,9 @@ const currentPath = Astro.url.pathname;
     <!-- Desktop menu -->
     <div class="hidden md:flex md:items-center md:space-x-6">
       <a
-        href="/"
+        href={import.meta.env.BASE_URL}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/'
+          currentPath === '/' || currentPath === import.meta.env.BASE_URL
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -56,9 +56,9 @@ const currentPath = Astro.url.pathname;
         Trang chủ
       </a>
       <a
-        href="/blog"
+        href={`${import.meta.env.BASE_URL}blog`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/blog')
+          currentPath.startsWith('/blog') || currentPath.startsWith(`${import.meta.env.BASE_URL}blog`)
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -66,9 +66,9 @@ const currentPath = Astro.url.pathname;
         Blog
       </a>
       <a
-        href="/tools"
+        href={`${import.meta.env.BASE_URL}tools`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/tools')
+          currentPath.startsWith('/tools') || currentPath.startsWith(`${import.meta.env.BASE_URL}tools`)
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -76,9 +76,9 @@ const currentPath = Astro.url.pathname;
         Công cụ
       </a>
       <a
-        href="/about"
+        href={`${import.meta.env.BASE_URL}about`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/about'
+          currentPath === '/about' || currentPath === `${import.meta.env.BASE_URL}about`
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -86,9 +86,9 @@ const currentPath = Astro.url.pathname;
         Giới thiệu
       </a>
       <a
-        href="/contact"
+        href={`${import.meta.env.BASE_URL}contact`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/contact'
+          currentPath === '/contact' || currentPath === `${import.meta.env.BASE_URL}contact`
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -105,31 +105,31 @@ const currentPath = Astro.url.pathname;
       class="space-y-1 border-t border-gray-200 px-4 pb-3 pt-2 dark:border-gray-800"
     >
       <a
-        href="/"
+        href={import.meta.env.BASE_URL}
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
         Trang chủ
       </a>
       <a
-        href="/blog"
+        href={`${import.meta.env.BASE_URL}blog`}
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
         Blog
       </a>
       <a
-        href="/tools"
+        href={`${import.meta.env.BASE_URL}tools`}
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
         Công cụ
       </a>
       <a
-        href="/about"
+        href={`${import.meta.env.BASE_URL}about`}
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
         Giới thiệu
       </a>
       <a
-        href="/contact"
+        href={`${import.meta.env.BASE_URL}contact`}
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
         Liên hệ

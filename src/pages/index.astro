@@ -36,13 +36,13 @@ function formatDate(date: Date): string {
         </p>
         <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <a
-            href="/blog"
+            href={`${import.meta.env.BASE_URL}blog`}
             class="btn-primary bg-white text-primary-600 hover:bg-gray-100"
           >
             Đọc Blog
           </a>
           <a
-            href="/tools"
+            href={`${import.meta.env.BASE_URL}tools`}
             class="btn-secondary border-white text-white hover:bg-white/10"
           >
             Khám phá Công cụ
@@ -99,7 +99,7 @@ function formatDate(date: Date): string {
                 </time>
                 <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={`${import.meta.env.BASE_URL}blog/${post.slug}`}
                     class="hover:text-primary-600 dark:hover:text-primary-400"
                   >
                     {post.data.title}
@@ -109,7 +109,7 @@ function formatDate(date: Date): string {
                   {post.data.description}
                 </p>
                 <a
-                  href={`/blog/${post.slug}`}
+                  href={`${import.meta.env.BASE_URL}blog/${post.slug}`}
                   class="mt-4 inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                 >
                   Đọc tiếp
@@ -134,7 +134,7 @@ function formatDate(date: Date): string {
       </div>
 
       <div class="mt-12 text-center">
-        <a href="/blog" class="btn-secondary"> Xem tất cả bài viết → </a>
+        <a href={`${import.meta.env.BASE_URL}blog`} class="btn-secondary"> Xem tất cả bài viết → </a>
       </div>
     </div>
   </section>
@@ -155,7 +155,7 @@ function formatDate(date: Date): string {
 
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <a
-          href="/tools/compound-interest"
+          href={`${import.meta.env.BASE_URL}tools/compound-interest`}
           class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
         >
           <div class="text-5xl">📈</div>
@@ -168,7 +168,7 @@ function formatDate(date: Date): string {
         </a>
 
         <a
-          href="/tools/sip-calculator"
+          href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
           class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
         >
           <div class="text-5xl">💰</div>
@@ -181,7 +181,7 @@ function formatDate(date: Date): string {
         </a>
 
         <a
-          href="/tools/budget-allocator"
+          href={`${import.meta.env.BASE_URL}tools/budget-allocator`}
           class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
         >
           <div class="text-5xl">🎯</div>
@@ -194,7 +194,7 @@ function formatDate(date: Date): string {
         </a>
 
         <a
-          href="/tools/investment-comparison"
+          href={`${import.meta.env.BASE_URL}tools/investment-comparison`}
           class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
         >
           <div class="text-5xl">⚖️</div>
@@ -208,7 +208,7 @@ function formatDate(date: Date): string {
       </div>
 
       <div class="mt-12 text-center">
-        <a href="/tools" class="btn-secondary"> Xem tất cả công cụ → </a>
+        <a href={`${import.meta.env.BASE_URL}tools`} class="btn-secondary"> Xem tất cả công cụ → </a>
       </div>
     </div>
   </section>

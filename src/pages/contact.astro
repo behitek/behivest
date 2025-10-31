@@ -187,12 +187,12 @@ import Layout from '@layouts/Layout.astro';
             >
               <li>
                 • Đọc các bài viết hướng dẫn trên <a
-                  href="/blog"
+                  href={`${import.meta.env.BASE_URL}blog`}
                   class="underline">Blog</a
                 >
               </li>
               <li>
-                • Sử dụng <a href="/tools" class="underline"
+                • Sử dụng <a href={`${import.meta.env.BASE_URL}tools`} class="underline"
                   >Công cụ tính toán</a
                 >
               </li>
