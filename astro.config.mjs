@@ -4,8 +4,16 @@ import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
 import { remarkBaseUrl } from './src/lib/remark-base-url.ts';
 
-// Use '/' for local development, '/behivest/' for production
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/behivest/' : '/';
+// IMPORTANT: Update BASE_URL_PROD for your deployment
+// For GitHub Pages: '/repository-name/'
+// For custom domain: '/'
+const BASE_URL_PROD = '/behivest/';
+
+// Determine base URL based on command
+// - 'npm run dev' uses '/' for local development
+// - 'npm run build' uses BASE_URL_PROD for production
+const isDev = process.argv.includes('dev');
+const BASE_URL = isDev ? '/' : BASE_URL_PROD;
 
 // https://astro.build/config
 export default defineConfig({

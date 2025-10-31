@@ -218,7 +218,7 @@ author: 'Behivest Team'
 ## Important Notes
 
 - **Never commit sensitive data**: GA IDs, Formspree IDs, etc. should use env vars or be added during deployment
-- **Base path awareness**: All internal URLs must respect the `base` path from Astro config
+- **Base path awareness**: Internal image and link paths in MDX are automatically transformed by the remark plugin (`src/lib/remark-base-url.ts`). Simply use absolute paths like `/blog/image.jpg` or `/blog/post` and they'll work in both dev and production.
 - **Pure functions**: Keep calculator logic pure (no side effects) for testability
 - **MDX content**: Blog posts can use JSX components, but keep them simple for maintainability
 - **Affiliate links**: Must open in new tab (`target="_blank"`) with `rel="noopener noreferrer"`
