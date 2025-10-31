@@ -1,0 +1,71 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Background -->
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34d399;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#grad2)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="200" cy="500" r="90" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="1000" cy="150" r="110" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="100" cy="100" r="70" fill="rgba(255,255,255,0.15)"/>
+
+  <!-- Chart area background -->
+  <rect x="300" y="150" width="600" height="320" rx="20" fill="white" opacity="0.95"/>
+
+  <!-- Area chart -->
+  <defs>
+    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Chart path (growth curve) -->
+  <path d="M 330 400 Q 420 380, 480 340 T 630 280 T 780 240 T 870 220"
+        stroke="#059669" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Area fill under curve -->
+  <path d="M 330 400 Q 420 380, 480 340 T 630 280 T 780 240 T 870 220 L 870 450 L 330 450 Z"
+        fill="url(#chartGrad)"/>
+
+  <!-- Data points -->
+  <circle cx="330" cy="400" r="6" fill="#059669"/>
+  <circle cx="480" cy="340" r="6" fill="#059669"/>
+  <circle cx="630" cy="280" r="6" fill="#059669"/>
+  <circle cx="780" cy="240" r="6" fill="#059669"/>
+  <circle cx="870" cy="220" r="6" fill="#059669"/>
+
+  <!-- Pie chart icon -->
+  <g transform="translate(150, 300)">
+    <circle cx="0" cy="0" r="70" fill="white" opacity="0.9"/>
+    <path d="M 0 -70 A 70 70 0 0 1 60.6 -35 L 0 0 Z" fill="#059669"/>
+    <path d="M 60.6 -35 A 70 70 0 0 1 35 60.6 L 0 0 Z" fill="#10b981"/>
+    <path d="M 35 60.6 A 70 70 0 0 1 -60.6 35 L 0 0 Z" fill="#34d399"/>
+    <path d="M -60.6 35 A 70 70 0 0 1 0 -70 L 0 0 Z" fill="#6ee7b7"/>
+  </g>
+
+  <!-- Dollar/Growth icon -->
+  <g transform="translate(1050, 350)">
+    <circle cx="0" cy="0" r="60" fill="white" opacity="0.9"/>
+    <path d="M -5 -30 L -5 -40 M 5 -30 L 5 -40 M 0 -35 Q -15 -35, -15 -20 Q -15 -5, 0 -5 Q 15 -5, 15 10 Q 15 25, 0 25 M -5 30 L -5 40 M 5 30 L 5 40"
+          stroke="#059669" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 25 -15 L 35 -25 M 25 -5 L 35 -15" stroke="#059669" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="540" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="white" text-anchor="middle">
+    Quỹ Mở Là Gì?
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="595" font-family="Arial, sans-serif" font-size="30" fill="white" text-anchor="middle" opacity="0.95">
+    Hiểu về đầu tư quỹ mở
+  </text>
+</svg>

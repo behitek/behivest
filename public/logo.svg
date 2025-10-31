@@ -1,0 +1,9 @@
+<svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20 4L28 8V16L20 20L12 16V8L20 4Z" fill="#F59300" opacity="0.8"/>
+  <path d="M20 12L24 14V18L20 20L16 18V14L20 12Z" fill="#F59300"/>
+  <circle cx="20" cy="16" r="2" fill="#FFF"/>
+
+  <text x="36" y="26" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="currentColor">
+    Behivest
+  </text>
+</svg>
