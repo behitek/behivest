@@ -5,11 +5,11 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourusername.github.io',
+  site: 'https://behitek.github.io',
   // IMPORTANT: Update 'base' to match your GitHub repository name
   // Example: If repo is github.com/username/behivest, use '/behivest'
   // For custom domain or root deployment, set to '/'
-  base: '/',
+  base: '/behivest',
   integrations: [
     mdx(),
     sitemap(),
