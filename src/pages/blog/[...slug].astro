@@ -26,12 +26,17 @@ function formatDate(date: Date): string {
 
 const shareUrl = Astro.url.toString();
 const shareTitle = post.data.title;
+
+// Prepend BASE_URL to heroImage for proper meta tags
+const heroImageWithBase = post.data.heroImage
+  ? `${import.meta.env.BASE_URL}${post.data.heroImage}`.replace('//', '/')
+  : undefined;
 ---
 
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={post.data.heroImage}
+  image={heroImageWithBase}
   article={true}
   publishedTime={post.data.pubDate.toISOString()}
   modifiedTime={post.data.updatedDate?.toISOString()}
@@ -66,10 +71,10 @@ const shareTitle = post.data.title;
 
       <!-- Hero Image -->
       {
-        post.data.heroImage && (
+        heroImageWithBase && (
           <div class="mb-8 overflow-hidden rounded-2xl">
             <img
-              src={post.data.heroImage}
+              src={heroImageWithBase}
               alt={post.data.title}
               class="h-auto w-full object-cover"
               style="max-height: 500px"
@@ -175,7 +180,7 @@ const shareTitle = post.data.title;
           Tải Fmarket và khám phá cơ hội đầu tư quỹ mở phù hợp với bạn
         </p>
         <a
-          href="/blog/fmarket"
+          href={`${import.meta.env.BASE_URL}blog/fmarket-app-dau-tu-quy-mo`}
           class="mt-6 inline-block rounded-lg bg-white px-8 py-3 font-semibold text-primary-600 transition-all hover:bg-gray-100"
         >
           Tìm hiểu thêm về Fmarket →

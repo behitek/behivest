@@ -218,7 +218,9 @@ author: 'Behivest Team'
 ## Important Notes
 
 - **Never commit sensitive data**: GA IDs, Formspree IDs, etc. should use env vars or be added during deployment
-- **Base path awareness**: Internal image and link paths in MDX are automatically transformed by the remark plugin (`src/lib/remark-base-url.ts`). Simply use absolute paths like `/blog/image.jpg` or `/blog/post` and they'll work in both dev and production.
+- **Base path awareness**:
+  - Internal image and link paths in MDX content are automatically transformed by the remark plugin (`src/lib/remark-base-url.ts`). Simply use absolute paths like `/blog/image.jpg` or `/blog/post` and they'll work in both dev and production.
+  - `heroImage` in blog post frontmatter is automatically handled by the blog templates - just use the path as-is (e.g., `/blog/image.jpg`).
 - **Pure functions**: Keep calculator logic pure (no side effects) for testability
 - **MDX content**: Blog posts can use JSX components, but keep them simple for maintainability
 - **Affiliate links**: Must open in new tab (`target="_blank"`) with `rel="noopener noreferrer"`

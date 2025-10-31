@@ -10,9 +10,25 @@ We've implemented an automatic path transformation system using a custom remark 
 
 ## How to Use
 
-### In Blog Posts (MDX)
+### Frontmatter Hero Images
 
-Simply use normal absolute paths starting with `/` for both images and links:
+Hero images in blog post frontmatter work automatically - no base URL needed:
+
+```mdx
+---
+title: 'My Post'
+heroImage: '/blog/my-image.jpg'  # Just use the path as-is
+---
+```
+
+The blog templates automatically handle prepending the base URL for:
+- The hero image display on the post page
+- Open Graph meta tags
+- Blog listing cards
+
+### In Blog Post Content (MDX)
+
+Simply use normal absolute paths starting with `/` for both images and links in the markdown content:
 
 ```mdx
 <!-- Images -->
