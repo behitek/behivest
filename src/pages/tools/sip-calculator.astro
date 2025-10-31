@@ -149,7 +149,9 @@ import Layout from '@layouts/Layout.astro';
               </div>
             </div>
 
-            <div class="rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <div
+              class="rounded-lg border border-gray-200 p-4 dark:border-gray-700"
+            >
               <p class="text-sm text-gray-600 dark:text-gray-400">
                 Tỷ lệ lợi nhuận / vốn
               </p>
@@ -176,34 +178,36 @@ import Layout from '@layouts/Layout.astro';
       </div>
 
       <!-- Info Section -->
-      <div class="mt-12 card">
+      <div class="card mt-12">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
           SIP là gì?
         </h2>
         <p class="mt-4 text-gray-600 dark:text-gray-300">
-          <strong>SIP (Systematic Investment Plan)</strong> là phương pháp đầu
-          tư định kỳ một khoản tiền cố định vào quỹ đầu tư. Thay vì bỏ ra một
-          khoản lớn một lần, bạn đầu tư đều đặn hàng tháng.
+          <strong>SIP (Systematic Investment Plan)</strong> là phương pháp đầu tư
+          định kỳ một khoản tiền cố định vào quỹ đầu tư. Thay vì bỏ ra một khoản
+          lớn một lần, bạn đầu tư đều đặn hàng tháng.
         </p>
         <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
           Lợi ích của SIP:
         </h3>
-        <ul class="mt-2 list-inside list-disc space-y-2 text-gray-600 dark:text-gray-300">
+        <ul
+          class="mt-2 list-inside list-disc space-y-2 text-gray-600 dark:text-gray-300"
+        >
           <li>
             <strong>Kỷ luật đầu tư:</strong> Tự động đầu tư định kỳ giúp bạn xây
             dựng thói quen tốt
           </li>
           <li>
-            <strong>Giảm rủi ro thời điểm:</strong> Không cần lo lắng thời điểm
-            thị trường tốt hay xấu
+            <strong>Giảm rủi ro thời điểm:</strong> Không cần lo lắng thời điểm thị
+            trường tốt hay xấu
           </li>
           <li>
             <strong>Vốn nhỏ:</strong> Bắt đầu với số tiền nhỏ, phù hợp với người
             mới
           </li>
           <li>
-            <strong>Hiệu ứng lãi kép:</strong> Lợi nhuận được tái đầu tư, tăng
-            trưởng theo cấp số nhân
+            <strong>Hiệu ứng lãi kép:</strong> Lợi nhuận được tái đầu tư, tăng trưởng
+            theo cấp số nhân
           </li>
         </ul>
       </div>
@@ -219,7 +223,8 @@ import Layout from '@layouts/Layout.astro';
       e.preventDefault();
 
       const monthlyInvestment = parseFloat(
-        (document.getElementById('monthly-investment') as HTMLInputElement).value
+        (document.getElementById('monthly-investment') as HTMLInputElement)
+          .value
       );
       const returnRate = parseFloat(
         (document.getElementById('return-rate') as HTMLInputElement).value
@@ -241,9 +246,11 @@ import Layout from '@layouts/Layout.astro';
 
         // Update ratio
         const ratio = (result.totalReturns / result.totalInvested) * 100;
-        document.getElementById('sip-ratio-bar')!.style.width = `${Math.min(ratio, 100)}%`;
-        document.getElementById('sip-ratio-text')!.textContent = `${ratio.toFixed(1)}%`;
-      } catch (error) {
+        document.getElementById('sip-ratio-bar')!.style.width =
+          `${Math.min(ratio, 100)}%`;
+        document.getElementById('sip-ratio-text')!.textContent =
+          `${ratio.toFixed(1)}%`;
+      } catch {
         alert('Vui lòng kiểm tra lại các giá trị nhập vào');
       }
     });

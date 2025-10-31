@@ -109,8 +109,7 @@ Find the Giscus section and update:
   data-category="Comments"
   data-category-id="YOUR_CATEGORY_ID"
   ...
->
-</div>
+></div>
 ```
 
 Also update the script section:
@@ -137,7 +136,7 @@ script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID');
 **File: `src/pages/contact.astro`**
 
 ```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST"></form>
 ```
 
 - [ ] Replace `YOUR_FORM_ID` with your actual form ID
@@ -224,22 +223,26 @@ Visit your site: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME`
 ### 3. Post-Deployment Checks
 
 **Google Analytics:**
+
 - [ ] Visit your site
 - [ ] Check Google Analytics dashboard
 - [ ] Verify real-time tracking works
 
 **Giscus Comments:**
+
 - [ ] Navigate to a blog post
 - [ ] Check if comments section loads
 - [ ] Try posting a test comment
 
 **Contact Form:**
+
 - [ ] Fill out contact form
 - [ ] Submit form
 - [ ] Check Formspree dashboard for submission
 - [ ] Verify email notification received
 
 **SEO:**
+
 - [ ] Run Lighthouse audit (Chrome DevTools)
 - [ ] Check SEO score > 90
 - [ ] Verify sitemap: `YOUR_SITE/sitemap-index.xml`
@@ -281,6 +284,7 @@ PUBLIC_GA_ID=G-XXXXXXXXXX
 ```
 
 Add to production (GitHub Secrets if needed):
+
 - Currently, only `PUBLIC_GA_ID` is needed
 - GitHub Pages deployment uses repository token automatically
 
@@ -352,6 +356,7 @@ Before going live:
 
 **Issue:** 404 error on GitHub Pages
 **Solution:**
+
 1. Check GitHub Actions → Ensure deployment succeeded
 2. Verify `base` path matches repository name
 3. Wait 5 minutes for cache to clear
@@ -360,6 +365,7 @@ Before going live:
 
 **Issue:** Images/CSS not loading
 **Solution:**
+
 1. Verify `base` in `astro.config.mjs`
 2. Ensure assets in `public/` directory
 3. Hard refresh browser (Ctrl+Shift+R)
@@ -368,6 +374,7 @@ Before going live:
 
 **Issue:** No data in Google Analytics
 **Solution:**
+
 1. Verify GA_MEASUREMENT_ID is correct
 2. Check that ID doesn't equal placeholder `G-XXXXXXX`
 3. Wait 24-48 hours for data to appear
@@ -377,6 +384,7 @@ Before going live:
 
 **Issue:** Giscus comments don't appear
 **Solution:**
+
 1. Verify repository is public
 2. Check Giscus app is installed
 3. Verify repo ID and category ID are correct

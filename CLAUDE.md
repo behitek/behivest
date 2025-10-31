@@ -13,6 +13,7 @@ Behivest is a Vietnamese personal finance blog and affiliate marketing website b
 ## Essential Commands
 
 ### Development
+
 ```bash
 npm run dev          # Start dev server at http://localhost:4321
 npm run build        # Build for production (includes type checking)
@@ -20,6 +21,7 @@ npm run preview      # Preview production build locally
 ```
 
 ### Testing
+
 ```bash
 npm run test              # Run unit tests (Vitest)
 npm run test:watch        # Run unit tests in watch mode
@@ -29,6 +31,7 @@ npx playwright test --debug tests/e2e/home.spec.ts  # Debug specific E2E test
 ```
 
 ### Code Quality
+
 ```bash
 npm run lint              # Run ESLint
 npm run format            # Auto-fix formatting with Prettier
@@ -40,6 +43,7 @@ npm run format:check      # Check code formatting
 ### 1. Content Architecture
 
 **Blog Posts**: Located in `src/content/blog/` as MDX files
+
 - Content schema defined in `src/content/config.ts` using Zod validation
 - Required frontmatter: `title`, `description`, `pubDate`
 - Optional: `heroImage`, `tags`, `author`, `updatedDate`
@@ -47,6 +51,7 @@ npm run format:check      # Check code formatting
 - Rendered via dynamic route: `src/pages/blog/[...slug].astro`
 
 **Financial Calculators**: Pure functions in `src/utils/calculators.ts`
+
 - All calculator logic is separated from UI components for testability
 - Each calculator exports TypeScript interfaces for type safety
 - Functions include: `calculateCompoundInterest()`, `calculateSIP()`, `calculateBudgetAllocation()`, `compareInvestmentVsSavings()`
@@ -55,11 +60,13 @@ npm run format:check      # Check code formatting
 ### 2. Component Structure
 
 **Layout System**:
+
 - `src/layouts/Layout.astro`: Base layout with Header, Footer, SEO, and GoogleAnalytics
 - Accepts props: `title`, `description`, `image`, `article`, `publishedTime`, `modifiedTime`
 - All pages should use this layout for consistency
 
 **Core Components**:
+
 - `SEO.astro`: Meta tags, Open Graph, structured data for articles
 - `GoogleAnalytics.astro`: GA4 tracking (reads `PUBLIC_GA_ID` from env or uses hardcoded fallback)
 - `Header.astro`: Navigation with mobile menu and dark mode toggle
@@ -69,6 +76,7 @@ npm run format:check      # Check code formatting
 ### 3. Routing
 
 Astro file-based routing:
+
 - `src/pages/index.astro` → `/` (home page)
 - `src/pages/about.astro` → `/about`
 - `src/pages/contact.astro` → `/contact`
@@ -77,6 +85,7 @@ Astro file-based routing:
 - `src/pages/tools/*.astro` → `/tools/*` (calculator pages)
 
 **Base Path Handling**:
+
 - Configured in `astro.config.mjs` as `base: '/behivest'` for GitHub Pages
 - Change to `base: '/'` for custom domain deployment
 - All internal links should use base path-aware URL construction
@@ -84,11 +93,13 @@ Astro file-based routing:
 ### 4. Styling System
 
 **TailwindCSS Configuration** (`tailwind.config.mjs`):
+
 - Custom color palette: Primary (orange/amber), Secondary (green)
 - Typography plugin enabled for prose content
 - Dark mode: `class` strategy (toggle via `.dark` class on `<html>`)
 
 **Global Styles** (`src/styles/global.css`):
+
 - Custom CSS variables for theming
 - Base styles and utility classes
 - Dark mode color overrides
@@ -133,17 +144,20 @@ See `CONFIGURATION.md` for detailed checklist.
 ## Testing Strategy
 
 ### Unit Tests (`tests/unit/`)
+
 - Test pure calculator functions in isolation
 - 100% coverage of calculator logic
 - Run before build in CI to catch calculation errors early
 
 ### E2E Tests (`tests/e2e/`)
+
 - Test complete user workflows: navigation, calculators, forms, dark mode
 - Run against production build to ensure build artifacts work correctly
 - Use Playwright with Chromium browser
 - Tests are organized by page/feature: `home.spec.ts`, `blog.spec.ts`, `tools.spec.ts`, `contact.spec.ts`
 
 **Test Development Pattern**:
+
 1. Write/modify calculator function in `src/utils/calculators.ts`
 2. Add/update unit tests in `tests/unit/calculators.test.ts`
 3. Verify E2E tests pass (they use the UI which consumes the functions)
@@ -155,6 +169,7 @@ See `CONFIGURATION.md` for detailed checklist.
 
 1. Create file: `src/content/blog/your-slug.mdx`
 2. Add frontmatter:
+
 ```mdx
 ---
 title: 'Your Title'
@@ -165,6 +180,7 @@ tags: ['investment', 'finance']
 author: 'Behivest Team'
 ---
 ```
+
 3. Write content in MDX (supports JSX components)
 4. Test locally: `npm run dev` → visit `/blog/your-slug`
 
@@ -212,20 +228,24 @@ author: 'Behivest Team'
 ## Troubleshooting
 
 **Build fails with module not found**:
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 **E2E tests fail locally**:
+
 ```bash
 npx playwright install --with-deps chromium
 ```
 
 **Assets not loading on GitHub Pages**:
+
 - Verify `base` in `astro.config.mjs` matches repository name exactly
 - Check that all asset paths use base-aware URL construction
 
 **TypeScript errors**:
+
 - Run `npm run build` to see all type errors
 - Fix issues before committing (CI will fail on type errors)

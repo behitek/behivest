@@ -183,14 +183,14 @@ import Layout from '@layouts/Layout.astro';
       </div>
 
       <!-- Info Section -->
-      <div class="mt-12 card">
+      <div class="card mt-12">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
           Lãi kép là gì?
         </h2>
         <p class="mt-4 text-gray-600 dark:text-gray-300">
-          <strong>Lãi kép</strong> là lãi được tính trên cả vốn gốc và lãi đã
-          tích lũy trước đó. Khác với lãi đơn chỉ tính trên vốn gốc, lãi kép
-          giúp số tiền của bạn tăng trưởng nhanh hơn theo thời gian.
+          <strong>Lãi kép</strong> là lãi được tính trên cả vốn gốc và lãi đã tích
+          lũy trước đó. Khác với lãi đơn chỉ tính trên vốn gốc, lãi kép giúp số tiền
+          của bạn tăng trưởng nhanh hơn theo thời gian.
         </p>
         <p class="mt-2 text-gray-600 dark:text-gray-300">
           Ví dụ: Nếu bạn đầu tư 10 triệu đồng với lãi suất 10%/năm, sau năm thứ
@@ -198,7 +198,8 @@ import Layout from '@layouts/Layout.astro';
           (không phải 10 triệu), cho kết quả 12.1 triệu.
         </p>
         <p class="mt-4 text-gray-600 dark:text-gray-300">
-          Công thức: <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+          Công thức: <code
+            class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
             >FV = PV × (1 + r)^n</code
           >
         </p>
@@ -231,7 +232,12 @@ import Layout from '@layouts/Layout.astro';
       );
 
       try {
-        const result = calculateCompoundInterest(principal, rate, years, monthly);
+        const result = calculateCompoundInterest(
+          principal,
+          rate,
+          years,
+          monthly
+        );
 
         // Update results
         document.getElementById('final-amount')!.textContent = formatCurrency(
@@ -255,7 +261,7 @@ import Layout from '@layouts/Layout.astro';
         `
           )
           .join('');
-      } catch (error) {
+      } catch {
         alert('Vui lòng kiểm tra lại các giá trị nhập vào');
       }
     });

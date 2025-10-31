@@ -114,18 +114,18 @@ The site will be available at `http://localhost:4321`
 
 ### Available Scripts
 
-| Command              | Description                              |
-| -------------------- | ---------------------------------------- |
-| `npm run dev`        | Start development server                 |
-| `npm run build`      | Build for production                     |
-| `npm run preview`    | Preview production build locally         |
-| `npm run test`       | Run unit tests                           |
-| `npm run test:watch` | Run unit tests in watch mode             |
-| `npm run test:e2e`   | Run E2E tests                            |
-| `npm run test:e2e:ui`| Run E2E tests with UI                    |
-| `npm run lint`       | Run ESLint                               |
-| `npm run format`     | Format code with Prettier                |
-| `npm run format:check` | Check code formatting                  |
+| Command                | Description                      |
+| ---------------------- | -------------------------------- |
+| `npm run dev`          | Start development server         |
+| `npm run build`        | Build for production             |
+| `npm run preview`      | Preview production build locally |
+| `npm run test`         | Run unit tests                   |
+| `npm run test:watch`   | Run unit tests in watch mode     |
+| `npm run test:e2e`     | Run E2E tests                    |
+| `npm run test:e2e:ui`  | Run E2E tests with UI            |
+| `npm run lint`         | Run ESLint                       |
+| `npm run format`       | Format code with Prettier        |
+| `npm run format:check` | Check code formatting            |
 
 ## 🧪 Testing
 
@@ -148,6 +148,7 @@ npm run test:e2e
 ```
 
 Tests cover:
+
 - Home page loads and displays content
 - Blog listing and single post pages
 - All calculator tools function correctly
@@ -187,6 +188,7 @@ The slug will be automatically generated from the filename.
 ### Vietnamese Slugs
 
 Use kebab-case Vietnamese slugs for SEO:
+
 - ✅ Good: `quy-mo-la-gi.mdx` → `/blog/quy-mo-la-gi`
 - ❌ Avoid: `quy_mo_la_gi.mdx` or `QuỹMởLàGì.mdx`
 
@@ -235,10 +237,12 @@ Get your GA ID from [Google Analytics](https://analytics.google.com/).
 Replace the placeholder affiliate link throughout the project:
 
 **Find and replace:**
+
 - Search: `https://fmarket.vn?ref=affiliate-demo`
 - Replace: `https://go.behitek.com/fmarket`
 
 Files to update:
+
 - `src/pages/index.astro`
 - `src/pages/tools/index.astro`
 - `src/pages/blog/[...slug].astro`
@@ -266,7 +270,7 @@ data-category-id="YOUR_CATEGORY_ID"
 4. Edit `src/pages/contact.astro`:
 
 ```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST"></form>
 ```
 
 ### 6. Update Brand Information

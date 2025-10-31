@@ -46,7 +46,9 @@ describe('calculateCompoundInterest', () => {
     expect(() => calculateCompoundInterest(-10000000, 10, 5, 0)).toThrow();
     expect(() => calculateCompoundInterest(10000000, -10, 5, 0)).toThrow();
     expect(() => calculateCompoundInterest(10000000, 10, -5, 0)).toThrow();
-    expect(() => calculateCompoundInterest(10000000, 10, 5, -1000000)).toThrow();
+    expect(() =>
+      calculateCompoundInterest(10000000, 10, 5, -1000000)
+    ).toThrow();
   });
 
   it('should have correct yearly breakdown structure', () => {
@@ -152,7 +154,10 @@ describe('calculateBudgetAllocation', () => {
     expect(result.savings).toBe(3000000);
 
     // Total should equal income
-    expect(result.needs + result.wants + result.savings).toBeCloseTo(15000000, -3);
+    expect(result.needs + result.wants + result.savings).toBeCloseTo(
+      15000000,
+      -3
+    );
   });
 });
 
@@ -160,7 +165,9 @@ describe('compareInvestmentVsSavings', () => {
   it('should compare investment and savings correctly', () => {
     const result = compareInvestmentVsSavings(50000000, 12, 5, 10);
 
-    expect(result.investmentFinalAmount).toBeGreaterThan(result.savingsFinalAmount);
+    expect(result.investmentFinalAmount).toBeGreaterThan(
+      result.savingsFinalAmount
+    );
     expect(result.difference).toBeGreaterThan(0);
     expect(result.investmentReturns).toBeGreaterThan(result.savingsInterest);
   });

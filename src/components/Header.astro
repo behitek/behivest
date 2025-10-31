@@ -4,10 +4,17 @@ import ThemeToggle from './ThemeToggle.astro';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/80">
-  <nav class="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+<header
+  class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/80"
+>
+  <nav
+    class="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+  >
     <div class="flex items-center space-x-2">
-      <a href="/" class="flex items-center space-x-2 font-bold text-gray-900 dark:text-white">
+      <a
+        href="/"
+        class="flex items-center space-x-2 font-bold text-gray-900 dark:text-white"
+      >
         <img src="/logo.svg" alt="Behivest" class="h-8 w-auto dark:invert" />
       </a>
     </div>
@@ -41,7 +48,9 @@ const currentPath = Astro.url.pathname;
       <a
         href="/"
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+          currentPath === '/'
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-700 dark:text-gray-300'
         }`}
       >
         Trang chủ
@@ -49,7 +58,9 @@ const currentPath = Astro.url.pathname;
       <a
         href="/blog"
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/blog') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+          currentPath.startsWith('/blog')
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-700 dark:text-gray-300'
         }`}
       >
         Blog
@@ -57,7 +68,9 @@ const currentPath = Astro.url.pathname;
       <a
         href="/tools"
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/tools') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+          currentPath.startsWith('/tools')
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-700 dark:text-gray-300'
         }`}
       >
         Công cụ
@@ -65,7 +78,9 @@ const currentPath = Astro.url.pathname;
       <a
         href="/about"
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/about' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+          currentPath === '/about'
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-700 dark:text-gray-300'
         }`}
       >
         Giới thiệu
@@ -73,7 +88,9 @@ const currentPath = Astro.url.pathname;
       <a
         href="/contact"
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/contact' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+          currentPath === '/contact'
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-700 dark:text-gray-300'
         }`}
       >
         Liên hệ
@@ -84,7 +101,9 @@ const currentPath = Astro.url.pathname;
 
   <!-- Mobile menu -->
   <div class="hidden md:hidden" id="mobile-menu">
-    <div class="space-y-1 border-t border-gray-200 px-4 pb-3 pt-2 dark:border-gray-800">
+    <div
+      class="space-y-1 border-t border-gray-200 px-4 pb-3 pt-2 dark:border-gray-800"
+    >
       <a
         href="/"
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"

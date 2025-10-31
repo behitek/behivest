@@ -119,9 +119,7 @@ import Layout from '@layouts/Layout.astro';
               />
             </div>
 
-            <button type="submit" class="btn-primary w-full">
-              So sánh
-            </button>
+            <button type="submit" class="btn-primary w-full"> So sánh </button>
           </form>
         </div>
 
@@ -132,10 +130,14 @@ import Layout from '@layouts/Layout.astro';
           </h2>
           <div id="comparison-results" class="mt-6 space-y-6">
             <!-- Investment -->
-            <div class="rounded-lg border-2 border-primary-200 bg-primary-50 p-4 dark:border-primary-800 dark:bg-primary-900/20">
+            <div
+              class="rounded-lg border-2 border-primary-200 bg-primary-50 p-4 dark:border-primary-800 dark:bg-primary-900/20"
+            >
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="text-sm font-medium text-primary-900 dark:text-primary-300">
+                  <p
+                    class="text-sm font-medium text-primary-900 dark:text-primary-300"
+                  >
                     Đầu tư quỹ mở
                   </p>
                   <p
@@ -144,8 +146,13 @@ import Layout from '@layouts/Layout.astro';
                   >
                     0 ₫
                   </p>
-                  <p class="mt-1 text-sm text-primary-700 dark:text-primary-400">
-                    Lợi nhuận: <span id="investment-returns" class="font-semibold">0 ₫</span>
+                  <p
+                    class="mt-1 text-sm text-primary-700 dark:text-primary-400"
+                  >
+                    Lợi nhuận: <span
+                      id="investment-returns"
+                      class="font-semibold">0 ₫</span
+                    >
                   </p>
                 </div>
                 <div class="text-4xl">📈</div>
@@ -153,10 +160,14 @@ import Layout from '@layouts/Layout.astro';
             </div>
 
             <!-- Savings -->
-            <div class="rounded-lg border-2 border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+            <div
+              class="rounded-lg border-2 border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
+            >
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="text-sm font-medium text-gray-900 dark:text-gray-300">
+                  <p
+                    class="text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >
                     Tiết kiệm ngân hàng
                   </p>
                   <p
@@ -166,7 +177,9 @@ import Layout from '@layouts/Layout.astro';
                     0 ₫
                   </p>
                   <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Lãi: <span id="savings-interest" class="font-semibold">0 ₫</span>
+                    Lãi: <span id="savings-interest" class="font-semibold"
+                      >0 ₫</span
+                    >
                   </p>
                 </div>
                 <div class="text-4xl">🏦</div>
@@ -174,8 +187,12 @@ import Layout from '@layouts/Layout.astro';
             </div>
 
             <!-- Difference -->
-            <div class="rounded-lg border-2 border-secondary-200 bg-secondary-50 p-4 dark:border-secondary-800 dark:bg-secondary-900/20">
-              <p class="text-sm font-medium text-secondary-900 dark:text-secondary-300">
+            <div
+              class="rounded-lg border-2 border-secondary-200 bg-secondary-50 p-4 dark:border-secondary-800 dark:bg-secondary-900/20"
+            >
+              <p
+                class="text-sm font-medium text-secondary-900 dark:text-secondary-300"
+              >
                 Chênh lệch
               </p>
               <p
@@ -184,8 +201,13 @@ import Layout from '@layouts/Layout.astro';
               >
                 0 ₫
               </p>
-              <p class="mt-2 text-sm text-secondary-700 dark:text-secondary-400">
-                Đầu tư mang lại nhiều hơn <span id="difference-percent" class="font-semibold">0%</span>
+              <p
+                class="mt-2 text-sm text-secondary-700 dark:text-secondary-400"
+              >
+                Đầu tư mang lại nhiều hơn <span
+                  id="difference-percent"
+                  class="font-semibold">0%</span
+                >
               </p>
             </div>
           </div>
@@ -193,20 +215,25 @@ import Layout from '@layouts/Layout.astro';
       </div>
 
       <!-- Info Section -->
-      <div class="mt-12 card">
+      <div class="card mt-12">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
           Nên chọn đầu tư hay tiết kiệm?
         </h2>
         <p class="mt-4 text-gray-600 dark:text-gray-300">
-          Cả hai đều quan trọng và có vai trò riêng trong quản lý tài chính cá nhân:
+          Cả hai đều quan trọng và có vai trò riêng trong quản lý tài chính cá
+          nhân:
         </p>
 
         <div class="mt-6 grid gap-6 md:grid-cols-2">
-          <div class="rounded-lg border border-primary-200 bg-primary-50 p-6 dark:border-primary-800 dark:bg-primary-900/20">
+          <div
+            class="rounded-lg border border-primary-200 bg-primary-50 p-6 dark:border-primary-800 dark:bg-primary-900/20"
+          >
             <h3 class="font-semibold text-primary-900 dark:text-primary-300">
               ✅ Đầu tư (Quỹ mở)
             </h3>
-            <ul class="mt-3 space-y-2 text-sm text-primary-800 dark:text-primary-300">
+            <ul
+              class="mt-3 space-y-2 text-sm text-primary-800 dark:text-primary-300"
+            >
               <li>✓ Lợi nhuận cao hơn trong dài hạn</li>
               <li>✓ Chống lạm phát tốt hơn</li>
               <li>✓ Quản lý chuyên nghiệp</li>
@@ -215,7 +242,9 @@ import Layout from '@layouts/Layout.astro';
             </ul>
           </div>
 
-          <div class="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+          <div
+            class="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800"
+          >
             <h3 class="font-semibold text-gray-900 dark:text-gray-300">
               ✅ Tiết kiệm (Ngân hàng)
             </h3>
@@ -234,8 +263,10 @@ import Layout from '@layouts/Layout.astro';
             💡 Gợi ý: Kết hợp cả hai!
           </p>
           <p class="mt-2 text-sm text-blue-800 dark:text-blue-300">
-            • Giữ 3-6 tháng chi phí sinh hoạt trong tài khoản tiết kiệm (quỹ khẩn cấp)<br />
-            • Đầu tư phần còn lại vào quỹ mở cho mục tiêu dài hạn (mua nhà, nghỉ hưu, con cái)
+            • Giữ 3-6 tháng chi phí sinh hoạt trong tài khoản tiết kiệm (quỹ
+            khẩn cấp)<br />
+            • Đầu tư phần còn lại vào quỹ mở cho mục tiêu dài hạn (mua nhà, nghỉ
+            hưu, con cái)
           </p>
         </div>
       </div>
@@ -293,7 +324,7 @@ import Layout from '@layouts/Layout.astro';
           (result.difference / result.savingsFinalAmount) * 100;
         document.getElementById('difference-percent')!.textContent =
           diffPercent.toFixed(1) + '%';
-      } catch (error) {
+      } catch {
         alert('Vui lòng kiểm tra lại các giá trị nhập vào');
       }
     });

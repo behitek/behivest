@@ -183,9 +183,7 @@ test.describe('Investment Comparison', () => {
     await page.waitForTimeout(300);
 
     // Get difference percentage
-    const diffPercent = await page
-      .locator('#difference-percent')
-      .textContent();
+    const diffPercent = await page.locator('#difference-percent').textContent();
 
     // Difference should be positive
     expect(diffPercent).toContain('%');
@@ -195,9 +193,7 @@ test.describe('Investment Comparison', () => {
 });
 
 test.describe('Tools Navigation', () => {
-  test('should have back to tools link on each tool page', async ({
-    page,
-  }) => {
+  test('should have back to tools link on each tool page', async ({ page }) => {
     const tools = [
       '/tools/compound-interest',
       '/tools/sip-calculator',

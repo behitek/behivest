@@ -6,7 +6,9 @@ import Layout from '@layouts/Layout.astro';
   title="Liên hệ"
   description="Liên hệ với Behivest. Chúng tôi luôn sẵn sàng lắng nghe ý kiến, câu hỏi và đóng góp của bạn."
 >
-  <div class="bg-gradient-to-b from-primary-50 to-white py-16 dark:from-gray-900 dark:to-gray-950">
+  <div
+    class="bg-gradient-to-b from-primary-50 to-white py-16 dark:from-gray-900 dark:to-gray-950"
+  >
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
         Liên hệ
@@ -132,9 +134,7 @@ import Layout from '@layouts/Layout.astro';
                   ></path>
                 </svg>
                 <div>
-                  <p class="font-medium text-gray-900 dark:text-white">
-                    Email
-                  </p>
+                  <p class="font-medium text-gray-900 dark:text-white">Email</p>
                   <a
                     href="mailto:hello@behivest.com"
                     class="text-primary-600 hover:text-primary-700 dark:text-primary-400"
@@ -182,9 +182,18 @@ import Layout from '@layouts/Layout.astro';
             <p class="mt-2 text-sm text-primary-800 dark:text-primary-300">
               Trước khi liên hệ, hãy thử:
             </p>
-            <ul class="mt-2 space-y-1 text-sm text-primary-800 dark:text-primary-300">
-              <li>• Đọc các bài viết hướng dẫn trên <a href="/blog" class="underline">Blog</a></li>
-              <li>• Sử dụng <a href="/tools" class="underline">Công cụ tính toán</a></li>
+            <ul
+              class="mt-2 space-y-1 text-sm text-primary-800 dark:text-primary-300"
+            >
+              <li>
+                • Đọc các bài viết hướng dẫn trên <a
+                  href="/blog"
+                  class="underline">Blog</a>
+              </li>
+              <li>
+                • Sử dụng <a href="/tools" class="underline"
+                  >Công cụ tính toán</a>
+              </li>
               <li>• Xem phần bình luận trong bài viết</li>
             </ul>
           </div>
@@ -228,7 +237,9 @@ import Layout from '@layouts/Layout.astro';
 
   <script>
     const form = document.getElementById('contact-form') as HTMLFormElement;
-    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const submitBtn = document.getElementById(
+      'submit-btn'
+    ) as HTMLButtonElement;
     const formStatus = document.getElementById('form-status') as HTMLDivElement;
 
     form?.addEventListener('submit', async (e) => {
@@ -248,17 +259,39 @@ import Layout from '@layouts/Layout.astro';
         });
 
         if (response.ok) {
-          formStatus.classList.remove('hidden', 'bg-red-50', 'text-red-800', 'dark:bg-red-900/20', 'dark:text-red-300');
-          formStatus.classList.add('bg-green-50', 'text-green-800', 'dark:bg-green-900/20', 'dark:text-green-300');
+          formStatus.classList.remove(
+            'hidden',
+            'bg-red-50',
+            'text-red-800',
+            'dark:bg-red-900/20',
+            'dark:text-red-300'
+          );
+          formStatus.classList.add(
+            'bg-green-50',
+            'text-green-800',
+            'dark:bg-green-900/20',
+            'dark:text-green-300'
+          );
           formStatus.textContent =
             '✓ Cảm ơn bạn! Tin nhắn đã được gửi thành công.';
           form.reset();
         } else {
           throw new Error('Form submission failed');
         }
-      } catch (error) {
-        formStatus.classList.remove('hidden', 'bg-green-50', 'text-green-800', 'dark:bg-green-900/20', 'dark:text-green-300');
-        formStatus.classList.add('bg-red-50', 'text-red-800', 'dark:bg-red-900/20', 'dark:text-red-300');
+      } catch {
+        formStatus.classList.remove(
+          'hidden',
+          'bg-green-50',
+          'text-green-800',
+          'dark:bg-green-900/20',
+          'dark:text-green-300'
+        );
+        formStatus.classList.add(
+          'bg-red-50',
+          'text-red-800',
+          'dark:bg-red-900/20',
+          'dark:text-red-300'
+        );
         formStatus.textContent =
           '✗ Có lỗi xảy ra. Vui lòng thử lại sau hoặc gửi email trực tiếp.';
       } finally {

@@ -31,7 +31,10 @@ test.describe('Blog', () => {
     await page.goto('/blog');
 
     // Click on the first blog post
-    await page.getByRole('link', { name: /Đọc tiếp/i }).first().click();
+    await page
+      .getByRole('link', { name: /Đọc tiếp/i })
+      .first()
+      .click();
 
     // Wait for navigation
     await page.waitForURL(/\/blog\/.+/);
@@ -111,9 +114,7 @@ test.describe('Blog', () => {
     await page.goto('/blog/quy-mo-la-gi');
 
     // Scroll to bottom
-    await page.evaluate(() =>
-      window.scrollTo(0, document.body.scrollHeight)
-    );
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 
     // Check that comments heading exists
     await expect(

@@ -192,12 +192,7 @@ export function compareInvestmentVsSavings(
   savingsRate: number,
   years: number
 ): InvestmentComparison {
-  if (
-    initialAmount < 0 ||
-    investmentRate < 0 ||
-    savingsRate < 0 ||
-    years < 0
-  ) {
+  if (initialAmount < 0 || investmentRate < 0 || savingsRate < 0 || years < 0) {
     throw new Error('All values must be non-negative');
   }
 

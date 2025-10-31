@@ -11,7 +11,9 @@ test.describe('Home Page', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
       'Behivest'
     );
-    await expect(page.getByText('Đầu tư dễ hiểu, sinh lời bền vững')).toBeVisible();
+    await expect(
+      page.getByText('Đầu tư dễ hiểu, sinh lời bền vững')
+    ).toBeVisible();
   });
 
   test('should have CTA link to affiliate', async ({ page }) => {

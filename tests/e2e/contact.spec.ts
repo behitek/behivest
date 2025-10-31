@@ -42,9 +42,7 @@ test.describe('Contact Page', () => {
     await expect(page.getByText(/hello@behivest\.com/i)).toBeVisible();
 
     // Check for location
-    await expect(
-      page.getByText(/Thành phố Hồ Chí Minh/i)
-    ).toBeVisible();
+    await expect(page.getByText(/Thành phố Hồ Chí Minh/i)).toBeVisible();
   });
 
   test('should validate required fields', async ({ page }) => {
@@ -108,6 +106,9 @@ test.describe('Contact Page', () => {
     const emailLink = page.getByRole('link', {
       name: /hello@behivest\.com/i,
     });
-    await expect(emailLink).toHaveAttribute('href', 'mailto:hello@behivest.com');
+    await expect(emailLink).toHaveAttribute(
+      'href',
+      'mailto:hello@behivest.com'
+    );
   });
 });
