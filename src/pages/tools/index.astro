@@ -1,0 +1,105 @@
+---
+import Layout from '@layouts/Layout.astro';
+
+const tools = [
+  {
+    title: 'Tính lãi kép',
+    description:
+      'Tính toán lợi nhuận đầu tư với lãi suất kép và đóng góp định kỳ',
+    href: '/tools/compound-interest',
+    icon: '📈',
+  },
+  {
+    title: 'Tính SIP',
+    description: 'Ước tính giá trị đầu tư định kỳ hàng tháng (SIP)',
+    href: '/tools/sip-calculator',
+    icon: '💰',
+  },
+  {
+    title: 'Phân bổ ngân sách',
+    description: 'Công cụ phân bổ ngân sách theo quy tắc 50/30/20',
+    href: '/tools/budget-allocator',
+    icon: '🎯',
+  },
+  {
+    title: 'So sánh đầu tư',
+    description: 'So sánh lợi nhuận giữa đầu tư và tiết kiệm ngân hàng',
+    href: '/tools/investment-comparison',
+    icon: '⚖️',
+  },
+];
+---
+
+<Layout
+  title="Công cụ tài chính"
+  description="Bộ công cụ tính toán và phân tích tài chính miễn phí giúp bạn đưa ra quyết định đầu tư thông minh."
+>
+  <div class="bg-gradient-to-b from-primary-50 to-white py-16 dark:from-gray-900 dark:to-gray-950">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
+        Công cụ tài chính
+      </h1>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
+        Các công cụ miễn phí giúp bạn lập kế hoạch tài chính và đầu tư thông
+        minh
+      </p>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid gap-8 md:grid-cols-2">
+      {
+        tools.map((tool) => (
+          <a
+            href={tool.href}
+            class="card group block transition-all hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700"
+          >
+            <div class="flex items-start space-x-4">
+              <div class="text-4xl">{tool.icon}</div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-semibold text-gray-900 group-hover:text-primary-600 dark:text-white dark:group-hover:text-primary-400">
+                  {tool.title}
+                </h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                  {tool.description}
+                </p>
+                <span class="mt-4 inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400">
+                  Sử dụng công cụ
+                  <svg
+                    class="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- CTA Section -->
+    <div class="mt-16 rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 p-8 text-center text-white md:p-12">
+      <h2 class="text-3xl font-bold">Sẵn sàng đầu tư thật?</h2>
+      <p class="mt-4 text-lg text-primary-50">
+        Sử dụng Fmarket để đầu tư quỹ mở một cách dễ dàng và an toàn
+      </p>
+      <a
+        href="https://go.behitek.com/fmarket"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-block rounded-lg bg-white px-8 py-3 font-semibold text-primary-600 transition-all hover:bg-gray-100"
+      >
+        Khám phá Fmarket →
+      </a>
+    </div>
+  </div>
+</Layout>

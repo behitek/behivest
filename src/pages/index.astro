@@ -1,0 +1,268 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+
+const allPosts = await getCollection('blog');
+const featuredPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('vi-VN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}
+---
+
+<Layout
+  title="Trang chủ"
+  description="Behivest - Đầu tư dễ hiểu, sinh lời bền vững. Kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người Việt."
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-600 py-20 text-white">
+    <div class="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl text-center">
+        <h1 class="text-5xl font-bold md:text-6xl lg:text-7xl">
+          Behivest
+        </h1>
+        <p class="mt-6 text-2xl font-medium text-primary-50 md:text-3xl">
+          Đầu tư dễ hiểu, sinh lời bền vững
+        </p>
+        <p class="mt-4 text-lg text-primary-100">
+          Kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người Việt
+        </p>
+        <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+          <a href="/blog" class="btn-primary bg-white text-primary-600 hover:bg-gray-100">
+            Đọc Blog
+          </a>
+          <a href="/tools" class="btn-secondary border-white text-white hover:bg-white/10">
+            Khám phá Công cụ
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Decorative elements -->
+    <div class="absolute inset-0 overflow-hidden opacity-10">
+      <svg class="absolute left-0 top-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polygon points="0,0 100,0 50,100" fill="white" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Featured Posts -->
+  <section class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">
+          Bài viết nổi bật
+        </h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">
+          Kiến thức mới nhất về đầu tư và tài chính cá nhân
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          featuredPosts.map((post) => (
+            <article class="card group overflow-hidden transition-all hover:shadow-lg">
+              {post.data.heroImage && (
+                <div class="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div class="p-6">
+                <time
+                  datetime={post.data.pubDate.toISOString()}
+                  class="text-sm text-gray-500 dark:text-gray-400"
+                >
+                  {formatDate(post.data.pubDate)}
+                </time>
+                <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+                  <a
+                    href={`/blog/${post.slug}`}
+                    class="hover:text-primary-600 dark:hover:text-primary-400"
+                  >
+                    {post.data.title}
+                  </a>
+                </h3>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">
+                  {post.data.description}
+                </p>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="mt-4 inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                >
+                  Đọc tiếp
+                  <svg
+                    class="ml-1 h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/blog" class="btn-secondary">
+          Xem tất cả bài viết →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Section -->
+  <section class="bg-gray-50 py-16 dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">
+          Công cụ tài chính miễn phí
+        </h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">
+          Tính toán và lập kế hoạch tài chính dễ dàng
+        </p>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/tools/compound-interest" class="card group text-center transition-all hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700">
+          <div class="text-5xl">📈</div>
+          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
+            Tính lãi kép
+          </h3>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            Dự đoán lợi nhuận đầu tư
+          </p>
+        </a>
+
+        <a href="/tools/sip-calculator" class="card group text-center transition-all hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700">
+          <div class="text-5xl">💰</div>
+          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
+            Tính SIP
+          </h3>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            Đầu tư định kỳ hàng tháng
+          </p>
+        </a>
+
+        <a href="/tools/budget-allocator" class="card group text-center transition-all hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700">
+          <div class="text-5xl">🎯</div>
+          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
+            Phân bổ ngân sách
+          </h3>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            Quy tắc 50/30/20
+          </p>
+        </a>
+
+        <a href="/tools/investment-comparison" class="card group text-center transition-all hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-700">
+          <div class="text-5xl">⚖️</div>
+          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
+            So sánh đầu tư
+          </h3>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            Đầu tư vs Tiết kiệm
+          </p>
+        </a>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/tools" class="btn-secondary">
+          Xem tất cả công cụ →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 px-8 py-16 text-center text-white md:px-12">
+        <h2 class="text-3xl font-bold md:text-4xl">
+          Sẵn sàng bắt đầu đầu tư?
+        </h2>
+        <p class="mt-4 text-lg text-primary-50">
+          Tải Fmarket - Ứng dụng đầu tư quỹ mở an toàn, dễ sử dụng nhất Việt Nam
+        </p>
+        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+          <a
+            href="https://go.behitek.com/fmarket"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-primary-600 transition-all hover:bg-gray-100"
+          >
+            Tìm hiểu thêm về Fmarket →
+          </a>
+        </div>
+        <p class="mt-4 text-sm text-primary-100">
+          Chỉ cần 500.000 đồng để bắt đầu • An toàn • Minh bạch
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Behivest -->
+  <section class="bg-gray-50 py-16 dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">
+          Tại sao chọn Behivest?
+        </h2>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="card text-center">
+          <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-3xl dark:bg-primary-900/30">
+            📚
+          </div>
+          <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
+            Kiến thức dễ hiểu
+          </h3>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">
+            Nội dung được viết bằng ngôn ngữ đơn giản, phù hợp với người Việt mới bắt đầu đầu tư
+          </p>
+        </div>
+
+        <div class="card text-center">
+          <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-secondary-100 text-3xl dark:bg-secondary-900/30">
+            🧮
+          </div>
+          <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
+            Công cụ miễn phí
+          </h3>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">
+            Bộ công cụ tính toán giúp bạn đưa ra quyết định tài chính thông minh
+          </p>
+        </div>
+
+        <div class="card text-center">
+          <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-orange-100 text-3xl dark:bg-orange-900/30">
+            🎯
+          </div>
+          <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
+            Hành động thực tế
+          </h3>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">
+            Không chỉ lý thuyết, mà còn hướng dẫn cụ thể để bạn bắt đầu ngay
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

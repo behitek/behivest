@@ -1,0 +1,266 @@
+---
+import Layout from '@layouts/Layout.astro';
+---
+
+<Layout
+  title="Phân bổ ngân sách 50/30/20"
+  description="Công cụ phân bổ ngân sách theo quy tắc 50/30/20 - 50% nhu cầu thiết yếu, 30% mong muốn, 20% tiết kiệm"
+>
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <a
+        href="/tools"
+        class="inline-flex items-center text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400"
+      >
+        <svg
+          class="mr-1 h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Quay lại công cụ
+      </a>
+
+      <h1 class="mt-8 text-4xl font-bold text-gray-900 dark:text-white">
+        Phân bổ ngân sách 50/30/20
+      </h1>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        Công cụ giúp bạn phân chia thu nhập một cách khoa học
+      </p>
+
+      <div class="mt-12 grid gap-8 lg:grid-cols-2">
+        <!-- Input Form -->
+        <div class="card p-4 sm:p-6">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Thu nhập hàng tháng
+          </h2>
+          <form id="budget-form" class="mt-6 space-y-6">
+            <div>
+              <label
+                for="monthly-income"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Thu nhập sau thuế (VNĐ)
+              </label>
+              <input
+                type="number"
+                id="monthly-income"
+                name="monthly-income"
+                value="20000000"
+                min="0"
+                step="100000"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              />
+            </div>
+
+            <button type="submit" class="btn-primary w-full">
+              Tính toán
+            </button>
+          </form>
+
+          <!-- Visual Chart -->
+          <div class="mt-8">
+            <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Biểu đồ phân bổ
+            </h3>
+            <div class="mt-4 h-8 w-full overflow-hidden rounded-full">
+              <div class="flex h-full">
+                <div
+                  class="flex items-center justify-center bg-blue-500 text-sm font-medium text-white"
+                  style="width: 50%"
+                  title="Nhu cầu thiết yếu: 50%"
+                >
+                  50%
+                </div>
+                <div
+                  class="flex items-center justify-center bg-green-500 text-sm font-medium text-white"
+                  style="width: 30%"
+                  title="Mong muốn: 30%"
+                >
+                  30%
+                </div>
+                <div
+                  class="flex items-center justify-center bg-orange-500 text-sm font-medium text-white"
+                  style="width: 20%"
+                  title="Tiết kiệm & Đầu tư: 20%"
+                >
+                  20%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="card p-4 sm:p-6">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Kết quả phân bổ
+          </h2>
+          <div id="budget-results" class="mt-6 space-y-4">
+            <div class="rounded-lg border-l-4 border-blue-500 bg-blue-50 p-4 dark:bg-blue-900/20">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="min-w-0 flex-1">
+                  <p class="font-semibold text-blue-900 dark:text-blue-300">
+                    Nhu cầu thiết yếu (50%)
+                  </p>
+                  <p class="mt-1 text-xs leading-relaxed text-blue-700 dark:text-blue-400">
+                    Nhà ở, thức ăn, đi lại, điện nước
+                  </p>
+                </div>
+                <p
+                  id="needs-amount"
+                  class="flex-shrink-0 text-2xl font-bold text-blue-600 dark:text-blue-400"
+                >
+                  0 ₫
+                </p>
+              </div>
+            </div>
+
+            <div class="rounded-lg border-l-4 border-green-500 bg-green-50 p-4 dark:bg-green-900/20">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="min-w-0 flex-1">
+                  <p class="font-semibold text-green-900 dark:text-green-300">
+                    Mong muốn (30%)
+                  </p>
+                  <p class="mt-1 text-xs leading-relaxed text-green-700 dark:text-green-400">
+                    Giải trí, du lịch, sở thích
+                  </p>
+                </div>
+                <p
+                  id="wants-amount"
+                  class="flex-shrink-0 text-2xl font-bold text-green-600 dark:text-green-400"
+                >
+                  0 ₫
+                </p>
+              </div>
+            </div>
+
+            <div class="rounded-lg border-l-4 border-orange-500 bg-orange-50 p-4 dark:bg-orange-900/20">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="min-w-0 flex-1">
+                  <p class="font-semibold text-orange-900 dark:text-orange-300">
+                    Tiết kiệm & Đầu tư (20%)
+                  </p>
+                  <p class="mt-1 text-xs leading-relaxed text-orange-700 dark:text-orange-400">
+                    Dự phòng, đầu tư, trả nợ
+                  </p>
+                </div>
+                <p
+                  id="savings-amount"
+                  class="flex-shrink-0 text-2xl font-bold text-orange-600 dark:text-orange-400"
+                >
+                  0 ₫
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="card mt-12 p-4 sm:p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+          Quy tắc 50/30/20 là gì?
+        </h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">
+          Quy tắc <strong>50/30/20</strong> là phương pháp quản lý tài chính cá
+          nhân đơn giản, giúp bạn phân bổ thu nhập sau thuế thành 3 nhóm:
+        </p>
+
+        <div class="mt-6 space-y-4">
+          <div class="flex space-x-4">
+            <div class="flex-shrink-0">
+              <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">50%</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 dark:text-white">
+                Nhu cầu thiết yếu
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                Chi phí cần thiết để sống: tiền nhà, thức ăn, đi lại, điện nước, bảo hiểm, trả nợ tối thiểu.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex space-x-4">
+            <div class="flex-shrink-0">
+              <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30">
+                <span class="text-2xl font-bold text-green-600 dark:text-green-400">30%</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 dark:text-white">
+                Mong muốn
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                Chi phí không bắt buộc: ăn ngoài, giải trí, du lịch, sở thích, mua sắm.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex space-x-4">
+            <div class="flex-shrink-0">
+              <div class="flex h-16 w-16 items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-900/30">
+                <span class="text-2xl font-bold text-orange-600 dark:text-orange-400">20%</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-900 dark:text-white">
+                Tiết kiệm & Đầu tư
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                Quỹ dự phòng khẩn cấp, đầu tư dài hạn, trả nợ sớm để giảm lãi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import {
+      calculateBudgetAllocation,
+      formatCurrency,
+    } from '@/utils/calculators';
+
+    const form = document.getElementById('budget-form') as HTMLFormElement;
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const monthlyIncome = parseFloat(
+        (document.getElementById('monthly-income') as HTMLInputElement).value
+      );
+
+      try {
+        const result = calculateBudgetAllocation(monthlyIncome);
+
+        // Update results
+        document.getElementById('needs-amount')!.textContent = formatCurrency(
+          result.needs
+        );
+        document.getElementById('wants-amount')!.textContent = formatCurrency(
+          result.wants
+        );
+        document.getElementById('savings-amount')!.textContent = formatCurrency(
+          result.savings
+        );
+      } catch (error) {
+        alert('Vui lòng kiểm tra lại các giá trị nhập vào');
+      }
+    });
+
+    // Initial calculation
+    form?.dispatchEvent(new Event('submit'));
+  </script>
+</Layout>

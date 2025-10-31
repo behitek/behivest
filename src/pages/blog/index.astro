@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('vi-VN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+}
+---
+
+<Layout
+  title="Blog"
+  description="Khám phá kiến thức về tài chính cá nhân, đầu tư thông minh và xây dựng tài sản bền vững."
+>
+  <div class="bg-gradient-to-b from-primary-50 to-white py-16 dark:from-gray-900 dark:to-gray-950">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
+        Blog
+      </h1>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
+        Kiến thức về tài chính cá nhân, đầu tư và quản lý tài sản
+      </p>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {
+        sortedPosts.map((post) => (
+          <article class="card group overflow-hidden transition-all hover:shadow-lg">
+            {post.data.heroImage && (
+              <div class="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+                <img
+                  src={post.data.heroImage}
+                  alt={post.data.title}
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div class="p-6">
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="text-sm text-gray-500 dark:text-gray-400"
+              >
+                {formatDate(post.data.pubDate)}
+              </time>
+              <h2 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="hover:text-primary-600 dark:hover:text-primary-400"
+                >
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="mt-2 text-gray-600 dark:text-gray-300">
+                {post.data.description}
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {post.data.tags.slice(0, 3).map((tag) => (
+                  <span class="rounded-full bg-primary-100 px-3 py-1 text-xs font-medium text-primary-800 dark:bg-primary-900/30 dark:text-primary-300">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={`/blog/${post.slug}`}
+                class="mt-4 inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+              >
+                Đọc tiếp
+                <svg
+                  class="ml-1 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

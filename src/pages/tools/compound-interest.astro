@@ -1,0 +1,266 @@
+---
+import Layout from '@layouts/Layout.astro';
+---
+
+<Layout
+  title="Tính lãi kép"
+  description="Công cụ tính toán lợi nhuận đầu tư với lãi suất kép và đóng góp định kỳ hàng tháng"
+>
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <a
+        href="/tools"
+        class="inline-flex items-center text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400"
+      >
+        <svg
+          class="mr-1 h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Quay lại công cụ
+      </a>
+
+      <h1 class="mt-4 text-4xl font-bold text-gray-900 dark:text-white">
+        Tính lãi kép
+      </h1>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        Tính toán lợi nhuận đầu tư với lãi suất kép và đóng góp hàng tháng
+      </p>
+
+      <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <!-- Input Form -->
+        <div class="card">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Thông tin đầu vào
+          </h2>
+          <form id="compound-form" class="mt-6 space-y-6">
+            <div>
+              <label
+                for="principal"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Vốn đầu tư ban đầu (VNĐ)
+              </label>
+              <input
+                type="number"
+                id="principal"
+                name="principal"
+                value="10000000"
+                min="0"
+                step="100000"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                for="rate"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Lãi suất hàng năm (%)
+              </label>
+              <input
+                type="number"
+                id="rate"
+                name="rate"
+                value="10"
+                min="0"
+                max="100"
+                step="0.1"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                for="years"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Thời gian đầu tư (năm)
+              </label>
+              <input
+                type="number"
+                id="years"
+                name="years"
+                value="10"
+                min="1"
+                max="50"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              />
+            </div>
+
+            <div>
+              <label
+                for="monthly"
+                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Đóng góp hàng tháng (VNĐ)
+              </label>
+              <input
+                type="number"
+                id="monthly"
+                name="monthly"
+                value="1000000"
+                min="0"
+                step="100000"
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+              />
+            </div>
+
+            <button type="submit" class="btn-primary w-full">
+              Tính toán
+            </button>
+          </form>
+        </div>
+
+        <!-- Results -->
+        <div class="card">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Kết quả
+          </h2>
+          <div id="results" class="mt-6 space-y-4">
+            <div class="rounded-lg bg-primary-50 p-4 dark:bg-primary-900/20">
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Tổng giá trị cuối kỳ
+              </p>
+              <p
+                id="final-amount"
+                class="mt-1 text-3xl font-bold text-primary-600 dark:text-primary-400"
+              >
+                0 ₫
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Tổng đóng góp
+                </p>
+                <p
+                  id="total-contributions"
+                  class="mt-1 text-xl font-semibold text-gray-900 dark:text-white"
+                >
+                  0 ₫
+                </p>
+              </div>
+
+              <div class="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Lãi kiếm được
+                </p>
+                <p
+                  id="total-interest"
+                  class="mt-1 text-xl font-semibold text-secondary-600 dark:text-secondary-400"
+                >
+                  0 ₫
+                </p>
+              </div>
+            </div>
+
+            <div id="breakdown" class="mt-4">
+              <h3 class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Chi tiết theo năm
+              </h3>
+              <div
+                id="breakdown-list"
+                class="mt-2 max-h-96 space-y-2 overflow-y-auto"
+              >
+                <!-- Breakdown items will be inserted here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="mt-12 card">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+          Lãi kép là gì?
+        </h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">
+          <strong>Lãi kép</strong> là lãi được tính trên cả vốn gốc và lãi đã
+          tích lũy trước đó. Khác với lãi đơn chỉ tính trên vốn gốc, lãi kép
+          giúp số tiền của bạn tăng trưởng nhanh hơn theo thời gian.
+        </p>
+        <p class="mt-2 text-gray-600 dark:text-gray-300">
+          Ví dụ: Nếu bạn đầu tư 10 triệu đồng với lãi suất 10%/năm, sau năm thứ
+          nhất bạn có 11 triệu. Năm thứ hai, lãi 10% được tính trên 11 triệu
+          (không phải 10 triệu), cho kết quả 12.1 triệu.
+        </p>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">
+          Công thức: <code class="rounded bg-gray-100 px-2 py-1 dark:bg-gray-800"
+            >FV = PV × (1 + r)^n</code
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import {
+      calculateCompoundInterest,
+      formatCurrency,
+    } from '@/utils/calculators';
+
+    const form = document.getElementById('compound-form') as HTMLFormElement;
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const principal = parseFloat(
+        (document.getElementById('principal') as HTMLInputElement).value
+      );
+      const rate = parseFloat(
+        (document.getElementById('rate') as HTMLInputElement).value
+      );
+      const years = parseInt(
+        (document.getElementById('years') as HTMLInputElement).value
+      );
+      const monthly = parseFloat(
+        (document.getElementById('monthly') as HTMLInputElement).value
+      );
+
+      try {
+        const result = calculateCompoundInterest(principal, rate, years, monthly);
+
+        // Update results
+        document.getElementById('final-amount')!.textContent = formatCurrency(
+          result.finalAmount
+        );
+        document.getElementById('total-contributions')!.textContent =
+          formatCurrency(result.totalContributions);
+        document.getElementById('total-interest')!.textContent = formatCurrency(
+          result.totalInterest
+        );
+
+        // Update breakdown
+        const breakdownList = document.getElementById('breakdown-list')!;
+        breakdownList.innerHTML = result.yearlyBreakdown
+          .map(
+            (year) => `
+          <div class="flex justify-between rounded-lg bg-gray-50 p-3 text-sm dark:bg-gray-800">
+            <span class="font-medium">Năm ${year.year}</span>
+            <span class="text-gray-900 dark:text-white">${formatCurrency(year.balance)}</span>
+          </div>
+        `
+          )
+          .join('');
+      } catch (error) {
+        alert('Vui lòng kiểm tra lại các giá trị nhập vào');
+      }
+    });
+
+    // Initial calculation
+    form?.dispatchEvent(new Event('submit'));
+  </script>
+</Layout>
