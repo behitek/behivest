@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('Blog', () => {
   test('should load blog listing page', async ({ page }) => {
@@ -47,7 +47,7 @@ test.describe('Blog', () => {
   });
 
   test('should display post metadata', async ({ page }) => {
-    await page.goto('/blog/quy-mo-la-gi');
+    await page.goto('/blog/mutual-funds');
 
     // Check title
     await expect(
@@ -64,7 +64,7 @@ test.describe('Blog', () => {
   });
 
   test('should have share buttons on blog post', async ({ page }) => {
-    await page.goto('/blog/quy-mo-la-gi');
+    await page.goto('/blog/mutual-funds');
 
     // Check that share section exists
     await expect(page.getByText(/Chia sẻ:/i)).toBeVisible();
@@ -79,7 +79,7 @@ test.describe('Blog', () => {
   });
 
   test('should have reading progress bar', async ({ page }) => {
-    await page.goto('/blog/quy-mo-la-gi');
+    await page.goto('/blog/mutual-funds');
 
     // Check that progress bar exists
     const progressBar = page.locator('#reading-progress');
@@ -111,7 +111,7 @@ test.describe('Blog', () => {
   });
 
   test('should have comments section placeholder', async ({ page }) => {
-    await page.goto('/blog/quy-mo-la-gi');
+    await page.goto('/blog/mutual-funds');
 
     // Scroll to bottom
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -126,7 +126,7 @@ test.describe('Blog', () => {
   });
 
   test('should have proper meta tags for SEO', async ({ page }) => {
-    await page.goto('/blog/quy-mo-la-gi');
+    await page.goto('/blog/mutual-funds');
 
     // Check meta description
     const metaDescription = page.locator('meta[name="description"]');
