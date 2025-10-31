@@ -1,0 +1,134 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/80">
+  <nav class="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <div class="flex items-center space-x-2">
+      <a href="/" class="flex items-center space-x-2 font-bold text-gray-900 dark:text-white">
+        <img src="/logo.svg" alt="Behivest" class="h-8 w-auto dark:invert" />
+      </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      id="mobile-menu-button"
+      type="button"
+      class="inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Mở menu</span>
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Desktop menu -->
+    <div class="hidden md:flex md:items-center md:space-x-6">
+      <a
+        href="/"
+        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+          currentPath === '/' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        Trang chủ
+      </a>
+      <a
+        href="/blog"
+        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+          currentPath.startsWith('/blog') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        Blog
+      </a>
+      <a
+        href="/tools"
+        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+          currentPath.startsWith('/tools') ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        Công cụ
+      </a>
+      <a
+        href="/about"
+        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+          currentPath === '/about' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        Giới thiệu
+      </a>
+      <a
+        href="/contact"
+        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+          currentPath === '/contact' ? 'text-primary-600 dark:text-primary-400' : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        Liên hệ
+      </a>
+      <ThemeToggle />
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="space-y-1 border-t border-gray-200 px-4 pb-3 pt-2 dark:border-gray-800">
+      <a
+        href="/"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Trang chủ
+      </a>
+      <a
+        href="/blog"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Blog
+      </a>
+      <a
+        href="/tools"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Công cụ
+      </a>
+      <a
+        href="/about"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Giới thiệu
+      </a>
+      <a
+        href="/contact"
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Liên hệ
+      </a>
+      <div class="px-3 py-2">
+        <ThemeToggle />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const button = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  button?.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', (!expanded).toString());
+    menu?.classList.toggle('hidden');
+  });
+</script>

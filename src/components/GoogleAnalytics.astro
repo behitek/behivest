@@ -1,0 +1,23 @@
+---
+// Replace G-XXXXXXX with your actual Google Analytics measurement ID
+const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_ID || 'G-XXXXXXX';
+---
+
+{
+  GA_MEASUREMENT_ID !== 'G-XXXXXXX' && (
+    <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+      />
+      <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID);
+      </script>
+    </>
+  )
+}
