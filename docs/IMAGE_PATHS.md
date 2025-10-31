@@ -1,48 +1,69 @@
-# Image Path Handling with Base URL
+# Image & Link Path Handling with Base URL
 
 ## Problem
 
-When deploying to GitHub Pages with a base URL (e.g., `/behivest/`), image paths need to include the base URL. Writing `/blog/image.jpg` in markdown would fail on GitHub Pages because it looks for `/blog/image.jpg` instead of `/behivest/blog/image.jpg`.
+When deploying to GitHub Pages with a base URL (e.g., `/behivest/`), image and link paths need to include the base URL. Writing `/blog/image.jpg` or `/blog/post` in markdown would fail on GitHub Pages because it looks for `/blog/...` instead of `/behivest/blog/...`.
 
 ## Solution
 
-We've implemented an automatic image path transformation system using a custom remark plugin that automatically prepends the base URL to all image paths in your markdown/MDX files.
+We've implemented an automatic path transformation system using a custom remark plugin that automatically prepends the base URL to all **images** and **internal links** in your markdown/MDX files.
 
 ## How to Use
 
 ### In Blog Posts (MDX)
 
-Simply use normal absolute paths starting with `/`:
+Simply use normal absolute paths starting with `/` for both images and links:
 
 ```mdx
+<!-- Images -->
 ![Alt text](/blog/my-image.jpg)
+
+<!-- Internal links -->
+[Read more](/blog/another-post)
+[Check our tools](/tools/calculator)
 ```
 
-This will automatically become `/behivest/blog/my-image.jpg` when deployed to GitHub Pages.
+These will automatically transform when deployed to GitHub Pages:
+- `/blog/my-image.jpg` → `/behivest/blog/my-image.jpg`
+- `/blog/another-post` → `/behivest/blog/another-post`
 
-### Image Path Rules
+### Path Transformation Rules
 
 1. **Absolute paths** (starting with `/`) → Base URL is prepended
-   - `/blog/image.jpg` → `/behivest/blog/image.jpg` ✅
+   - Images: `/blog/image.jpg` → `/behivest/blog/image.jpg` ✅
+   - Links: `/blog/post` → `/behivest/blog/post` ✅
 
 2. **External URLs** (starting with `http://` or `https://`) → No change
-   - `https://example.com/image.jpg` → `https://example.com/image.jpg` ✅
+   - `https://example.com/image.jpg` → No change ✅
+   - `https://example.com/page` → No change ✅
 
-3. **Relative paths** → No change (not recommended for blog posts)
-   - `../images/photo.jpg` → `../images/photo.jpg`
+3. **Hash links** (starting with `#`) → No change
+   - `#section-heading` → No change ✅
+
+4. **Relative paths** → No change (not recommended for blog posts)
+   - `../images/photo.jpg` → No change
+   - `./related-post` → No change
 
 ## Technical Implementation
 
 ### 1. Remark Plugin (`src/lib/remark-base-url.ts`)
 
-The plugin traverses the markdown AST and transforms image URLs:
+The plugin traverses the markdown AST and transforms both image and link URLs:
 
 ```typescript
 export function remarkBaseUrl(options: RemarkBaseUrlOptions = {}) {
   const baseUrl = options.baseUrl || '/'
 
   return (tree: Root) => {
+    // Transform image paths
     visit(tree, 'image', (node: Image) => {
+      if (node.url.startsWith('/') && !node.url.startsWith('http')) {
+        node.url = `${baseUrl}${node.url}`.replace(/\/+/g, '/')
+      }
+    })
+
+    // Transform internal link paths
+    visit(tree, 'link', (node: Link) => {
       if (node.url.startsWith('/') && !node.url.startsWith('http')) {
         node.url = `${baseUrl}${node.url}`.replace(/\/+/g, '/')
       }
@@ -70,8 +91,12 @@ export default defineConfig({
 ```
 
 This ensures:
-- **Development** (`npm run dev`): Images load from `http://localhost:4321/blog/image.jpg`
-- **Production** (`npm run build`): Images transform to `/behivest/blog/image.jpg`
+- **Development** (`npm run dev`):
+  - Images load from `http://localhost:4321/blog/image.jpg`
+  - Links point to `http://localhost:4321/blog/post`
+- **Production** (`npm run build`):
+  - Images transform to `/behivest/blog/image.jpg`
+  - Links transform to `/behivest/blog/post`
 
 ### 3. Optional: BlogImage Component
 
