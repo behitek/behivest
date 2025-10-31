@@ -9,19 +9,21 @@
  */
 
 interface Props {
-  src: string
-  alt: string
-  width?: number
-  height?: number
-  class?: string
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
 }
 
-const { src, alt, width, height, class: className } = Astro.props
-const baseUrl = import.meta.env.BASE_URL
+const { src, alt, width, height, class: className } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
 
 // Only prepend BASE_URL if src starts with / (absolute path)
 // Don't prepend for external URLs (http:// or https://)
-const imageSrc = src.startsWith('http') ? src : `${baseUrl}${src}`.replace('//', '/')
+const imageSrc = src.startsWith('http')
+  ? src
+  : `${baseUrl}${src}`.replace('//', '/');
 ---
 
 <img

@@ -15,7 +15,11 @@ const currentPath = Astro.url.pathname;
         href={import.meta.env.BASE_URL}
         class="flex items-center space-x-2 font-bold text-gray-900 dark:text-white"
       >
-        <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="Behivest" class="h-8 w-auto dark:invert" />
+        <img
+          src={`${import.meta.env.BASE_URL}logo.svg`}
+          alt="Behivest"
+          class="h-8 w-auto dark:invert"
+        />
       </a>
     </div>
 
@@ -58,7 +62,8 @@ const currentPath = Astro.url.pathname;
       <a
         href={`${import.meta.env.BASE_URL}blog`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/blog') || currentPath.startsWith(`${import.meta.env.BASE_URL}blog`)
+          currentPath.startsWith('/blog') ||
+          currentPath.startsWith(`${import.meta.env.BASE_URL}blog`)
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -68,7 +73,8 @@ const currentPath = Astro.url.pathname;
       <a
         href={`${import.meta.env.BASE_URL}tools`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/tools') || currentPath.startsWith(`${import.meta.env.BASE_URL}tools`)
+          currentPath.startsWith('/tools') ||
+          currentPath.startsWith(`${import.meta.env.BASE_URL}tools`)
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -78,7 +84,8 @@ const currentPath = Astro.url.pathname;
       <a
         href={`${import.meta.env.BASE_URL}about`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/about' || currentPath === `${import.meta.env.BASE_URL}about`
+          currentPath === '/about' ||
+          currentPath === `${import.meta.env.BASE_URL}about`
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
@@ -88,7 +95,8 @@ const currentPath = Astro.url.pathname;
       <a
         href={`${import.meta.env.BASE_URL}contact`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/contact' || currentPath === `${import.meta.env.BASE_URL}contact`
+          currentPath === '/contact' ||
+          currentPath === `${import.meta.env.BASE_URL}contact`
             ? 'text-primary-600 dark:text-primary-400'
             : 'text-gray-700 dark:text-gray-300'
         }`}
