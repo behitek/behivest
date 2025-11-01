@@ -17,11 +17,12 @@ Hero images in blog post frontmatter work automatically - no base URL needed:
 ```mdx
 ---
 title: 'My Post'
-heroImage: '/blog/my-image.jpg'  # Just use the path as-is
+heroImage: '/blog/my-image.jpg' # Just use the path as-is
 ---
 ```
 
 The blog templates automatically handle prepending the base URL for:
+
 - The hero image display on the post page
 - Open Graph meta tags
 - Blog listing cards
