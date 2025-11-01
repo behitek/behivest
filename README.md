@@ -5,7 +5,7 @@
 
 **Đầu tư dễ hiểu, sinh lời bền vững**
 
-Behivest is a modern, production-ready Vietnamese personal finance blog and affiliate marketing website built with Astro, TailwindCSS, and MDX. The site provides financial education content, interactive financial calculators, and promotes the Fmarket investment app through affiliate marketing.
+Behivest (Behitek + Invest) is a modern, production-ready Vietnamese personal finance blog and affiliate marketing website built with Astro, TailwindCSS, and MDX. The site provides financial education content, interactive financial calculators, and promotes the Fmarket investment app through affiliate marketing.
 
 ## ✨ Features
 
@@ -185,7 +185,7 @@ Write your post content in MDX format...
 
 The slug will be automatically generated from the filename.
 
-### Vietnamese Slugs
+### English Slugs
 
 Use kebab-case English slugs for SEO:
 
@@ -200,7 +200,7 @@ Edit `astro.config.mjs`:
 
 ```js
 export default defineConfig({
-  site: 'https://behivest.github.io',
+  site: 'https://behitek.github.io',
   base: '/behivest', // Change to '/' for custom domain
   // ...
 });
@@ -256,7 +256,7 @@ Files to update:
 4. Edit `src/pages/blog/[...slug].astro`:
 
 ```js
-data-repo="behivest/behivest"
+data-repo="behitek/behivest"
 data-repo-id="YOUR_REPO_ID"
 data-category="Comments"
 data-category-id="YOUR_CATEGORY_ID"
@@ -423,8 +423,8 @@ Contributions, issues, and feature requests are welcome!
 
 ## 📧 Contact
 
-- Website: [https://behivest.com](https://behitek.github.io/behivest)
-- Email: hello@behivest.com
+- Website: [https://behitek.com](https://behitek.com)
+- Email: hello@behitek.com
 
 ## 🙏 Acknowledgments
 
@@ -434,4 +434,4 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-Made with ❤️ by Behivest Team | **Đầu tư dễ hiểu, sinh lời bền vững**
+Made with ❤️ by Behitek Team | **Đầu tư dễ hiểu, sinh lời bền vững**
