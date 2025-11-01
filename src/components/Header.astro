@@ -82,6 +82,17 @@ const currentPath = Astro.url.pathname;
         Công cụ
       </a>
       <a
+        href={`${import.meta.env.BASE_URL}performance`}
+        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+          currentPath === '/performance' ||
+          currentPath === `${import.meta.env.BASE_URL}performance`
+            ? 'text-primary-600 dark:text-primary-400'
+            : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        Hiệu suất quỹ
+      </a>
+      <a
         href={`${import.meta.env.BASE_URL}about`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
           currentPath === '/about' ||
@@ -129,6 +140,12 @@ const currentPath = Astro.url.pathname;
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
         Công cụ
+      </a>
+      <a
+        href={`${import.meta.env.BASE_URL}performance`}
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Hiệu suất quỹ
       </a>
       <a
         href={`${import.meta.env.BASE_URL}about`}
