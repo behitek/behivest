@@ -17,7 +17,7 @@ const BASE_URL = isDev ? '/' : BASE_URL_PROD;
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://behitek.github.io',
+  site: 'https://behitek.com',
   // IMPORTANT: Update 'base' to match your GitHub repository name
   // Example: If repo is github.com/username/behivest, use '/behivest/' (with trailing slash)
   // For custom domain or root deployment, set to '/'
