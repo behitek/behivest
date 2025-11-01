@@ -1,7 +1,7 @@
 # Behivest
 
-![CI](https://github.com/yourusername/behivest/workflows/CI/badge.svg)
-![Deploy](https://github.com/yourusername/behivest/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)
+![CI](https://github.com/behitek/behivest/workflows/CI/badge.svg)
+![Deploy](https://github.com/behitek/behivest/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)
 
 **Đầu tư dễ hiểu, sinh lời bền vững**
 
@@ -94,7 +94,7 @@ behivest/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/behivest.git
+git clone https://github.com/behitek/behivest.git
 cd behivest
 ```
 
@@ -200,7 +200,7 @@ Edit `astro.config.mjs`:
 
 ```js
 export default defineConfig({
-  site: 'https://yourusername.github.io',
+  site: 'https://behivest.github.io',
   base: '/behivest', // Change to '/' for custom domain
   // ...
 });
@@ -209,7 +209,7 @@ export default defineConfig({
 Also update `public/robots.txt`:
 
 ```
-Sitemap: https://yourusername.github.io/behivest/sitemap-index.xml
+Sitemap: https://behivest.github.io/behivest/sitemap-index.xml
 ```
 
 ### 2. Configure Google Analytics
@@ -256,7 +256,7 @@ Files to update:
 4. Edit `src/pages/blog/[...slug].astro`:
 
 ```js
-data-repo="yourusername/behivest"
+data-repo="behivest/behivest"
 data-repo-id="YOUR_REPO_ID"
 data-category="Comments"
 data-category-id="YOUR_CATEGORY_ID"
@@ -320,7 +320,7 @@ git push origin main
 Wait for the GitHub Actions workflow to complete. Your site will be available at:
 
 ```
-https://yourusername.github.io/behivest
+https://behivest.github.io/behivest
 ```
 
 ### Custom Domain
@@ -423,7 +423,7 @@ Contributions, issues, and feature requests are welcome!
 
 ## 📧 Contact
 
-- Website: [https://behivest.com](https://yourusername.github.io/behivest)
+- Website: [https://behivest.com](https://behitek.github.io/behivest)
 - Email: hello@behivest.com
 
 ## 🙏 Acknowledgments

@@ -392,7 +392,7 @@ Before going live:
 
 ## 📞 Need Help?
 
-- GitHub Issues: [github.com/yourusername/behivest/issues](https://github.com/yourusername/behivest/issues)
+- GitHub Issues: [github.com/behitek/behivest/issues](https://github.com/behitek/behivest/issues)
 - Email: hello@behivest.com
 - Documentation: See README.md and TESTING.md
 
