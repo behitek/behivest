@@ -1,0 +1,49 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1F2937"/>
+
+  <!-- Gradient overlay -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F59300" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+
+  <!-- Hexagon/Beehive Logo (centered, larger) -->
+  <g transform="translate(600, 240)">
+    <!-- Outer hexagon -->
+    <path d="M0 -80L69.28 -40V40L0 80L-69.28 40V-40L0 -80Z" fill="#F59300" opacity="0.8"/>
+    <!-- Middle hexagon -->
+    <path d="M0 -48L41.57 -24V24L0 48L-41.57 24V-24L0 -48Z" fill="#F59300"/>
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="16" fill="#FFF"/>
+  </g>
+
+  <!-- Behivest Text -->
+  <text
+    x="600"
+    y="420"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="72"
+    font-weight="700"
+    fill="#FFFFFF"
+    text-anchor="middle"
+  >
+    Behivest
+  </text>
+
+  <!-- Tagline -->
+  <text
+    x="600"
+    y="480"
+    font-family="Inter, system-ui, -apple-system, sans-serif"
+    font-size="28"
+    font-weight="400"
+    fill="#D1D5DB"
+    text-anchor="middle"
+  >
+    Đầu tư thông minh, tài chính bền vững
+  </text>
+</svg>
