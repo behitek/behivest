@@ -4,7 +4,7 @@ dist/
 
 # dependencies
 node_modules/
-
+python/
 # logs
 npm-debug.log*
 yarn-debug.log*
