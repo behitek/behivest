@@ -2,6 +2,11 @@
 import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname;
+const isLearnActive =
+  currentPath.startsWith('/blog') ||
+  currentPath.startsWith(`${import.meta.env.BASE_URL}blog`) ||
+  currentPath === '/faq' ||
+  currentPath === `${import.meta.env.BASE_URL}faq`;
 ---
 
 <header
@@ -59,17 +64,53 @@ const currentPath = Astro.url.pathname;
       >
         Trang chủ
       </a>
-      <a
-        href={`${import.meta.env.BASE_URL}blog`}
-        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/blog') ||
-          currentPath.startsWith(`${import.meta.env.BASE_URL}blog`)
-            ? 'text-primary-600 dark:text-primary-400'
-            : 'text-gray-700 dark:text-gray-300'
-        }`}
-      >
-        Blog
-      </a>
+      <!-- Dropdown: Học đầu tư -->
+      <div class="relative" id="learn-dropdown-wrapper">
+        <button
+          id="learn-dropdown-btn"
+          type="button"
+          class={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+            isLearnActive
+              ? 'text-primary-600 dark:text-primary-400'
+              : 'text-gray-700 dark:text-gray-300'
+          }`}
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          Học đầu tư
+          <svg
+            class="h-4 w-4 transition-transform duration-200"
+            id="learn-chevron"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        <div
+          id="learn-dropdown-menu"
+          class="absolute left-0 top-full z-50 mt-2 hidden w-48 rounded-xl border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-900"
+        >
+          <a
+            href={`${import.meta.env.BASE_URL}blog`}
+            class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-primary-400"
+          >
+            📝 Blog
+          </a>
+          <a
+            href={`${import.meta.env.BASE_URL}faq`}
+            class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-primary-400"
+          >
+            ❓ Từ điển FAQ
+          </a>
+        </div>
+      </div>
       <a
         href={`${import.meta.env.BASE_URL}tools`}
         class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
@@ -133,7 +174,13 @@ const currentPath = Astro.url.pathname;
         href={`${import.meta.env.BASE_URL}blog`}
         class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
       >
-        Blog
+        📝 Blog
+      </a>
+      <a
+        href={`${import.meta.env.BASE_URL}faq`}
+        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        ❓ Từ điển FAQ
       </a>
       <a
         href={`${import.meta.env.BASE_URL}tools`}
@@ -174,5 +221,24 @@ const currentPath = Astro.url.pathname;
     const expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', (!expanded).toString());
     menu?.classList.toggle('hidden');
+  });
+
+  // Dropdown: Học đầu tư
+  const learnBtn = document.getElementById('learn-dropdown-btn');
+  const learnMenu = document.getElementById('learn-dropdown-menu');
+  const learnChevron = document.getElementById('learn-chevron');
+
+  learnBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = learnBtn.getAttribute('aria-expanded') === 'true';
+    learnBtn.setAttribute('aria-expanded', (!isOpen).toString());
+    learnMenu?.classList.toggle('hidden', isOpen);
+    learnChevron?.classList.toggle('rotate-180', !isOpen);
+  });
+
+  document.addEventListener('click', () => {
+    learnBtn?.setAttribute('aria-expanded', 'false');
+    learnMenu?.classList.add('hidden');
+    learnChevron?.classList.remove('rotate-180');
   });
 </script>

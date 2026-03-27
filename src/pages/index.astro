@@ -220,6 +220,61 @@ function formatDate(date: Date): string {
     </div>
   </section>
 
+  <!-- FAQ Preview Section -->
+  <section class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 text-center">
+        <h2
+          class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl"
+        >
+          Từ điển đầu tư quỹ mở
+        </h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-300">
+          Giải đáp từ A–Z những thuật ngữ và câu hỏi bạn cần biết
+        </p>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            { term: 'CCQ', question: 'Chứng chỉ quỹ là gì?' },
+            { term: 'NAV', question: 'Giá trị tài sản ròng tính thế nào?' },
+            { term: 'Phí quản lý', question: 'Mỗi năm mất bao nhiêu %?' },
+            { term: 'DCA', question: 'Đầu tư định kỳ hiệu quả thật sự?' },
+            {
+              term: 'Sharpe Ratio',
+              question: 'Quỹ nào hiệu quả hơn sau rủi ro?',
+            },
+            { term: 'Drawdown', question: 'Mức sụt giảm tối đa là gì?' },
+          ].map(({ term, question }) => (
+            <a
+              href={`${import.meta.env.BASE_URL}faq`}
+              class="card group flex items-start gap-4 transition-all hover:border-primary-300 hover:shadow-md dark:hover:border-primary-700"
+            >
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
+                {term.charAt(0)}
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-400">
+                  {term}
+                </div>
+                <p class="mt-0.5 text-sm font-medium text-gray-800 group-hover:text-primary-600 dark:text-gray-200 dark:group-hover:text-primary-400">
+                  {question}
+                </p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href={`${import.meta.env.BASE_URL}faq`} class="btn-secondary">
+          Xem tất cả từ điển A–Z →
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
   <section class="py-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
