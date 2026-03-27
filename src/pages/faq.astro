@@ -38,50 +38,78 @@ const sortedGroups = allFaq.sort((a, b) => a.data.order - b.data.order);
 
   <!-- Search + Content -->
   <section class="py-12">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-3xl">
-        <!-- Search bar -->
-        <div class="relative mb-8">
-          <div
-            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4"
-          >
-            <svg
-              class="h-5 w-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-start">
+
+        <!-- Left sidebar: sticky search + group nav -->
+        <aside class="lg:w-64 lg:shrink-0">
+          <div class="lg:sticky lg:top-24">
+            <!-- Search bar -->
+            <div class="relative mb-6">
+              <div
+                class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4"
+              >
+                <svg
+                  class="h-5 w-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+              <input
+                id="faq-search"
+                type="text"
+                placeholder="Tìm thuật ngữ..."
+                class="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-sm text-gray-900 shadow-sm transition-all focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-primary-600"
+              />
+            </div>
+
+            <!-- Group quick nav -->
+            <div class="space-y-2">
+              <p class="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Nhóm kiến thức</p>
+              <a href="#group-basic" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-primary-400">
+                <span class="text-base">📗</span> Kiến thức cơ bản
+              </a>
+              <a href="#group-advanced" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-primary-400">
+                <span class="text-base">📘</span> Kiến thức nâng cao
+              </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-6 rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900">
+              <p class="text-xs text-gray-500 dark:text-gray-400">Tổng số mục</p>
+              <p class="mt-1 text-2xl font-bold text-primary-600 dark:text-primary-400">29</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">thuật ngữ &amp; câu hỏi</p>
+            </div>
           </div>
-          <input
-            id="faq-search"
-            type="text"
-            placeholder="Tìm thuật ngữ hoặc câu hỏi..."
-            class="w-full rounded-xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-gray-900 shadow-sm transition-all focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-primary-600"
-          />
-        </div>
+        </aside>
 
-        <!-- No results message -->
-        <div
-          id="faq-no-results"
-          class="hidden py-12 text-center text-gray-500 dark:text-gray-400"
-        >
-          <div class="mb-2 text-4xl">🔍</div>
-          <p>Không tìm thấy kết quả. Thử từ khóa khác nhé.</p>
-        </div>
+        <!-- Right main content -->
+        <div class="flex-1 min-w-0">
 
-        <!-- Groups -->
-        {
-          sortedGroups.map((group, groupIndex) => (
-            <div
-              class="faq-group mb-6 overflow-hidden rounded-xl border border-gray-200 shadow-sm dark:border-gray-700"
-              data-group={group.data.groupSlug}
-            >
+          <!-- No results message -->
+          <div
+            id="faq-no-results"
+            class="hidden py-12 text-center text-gray-500 dark:text-gray-400"
+          >
+            <div class="mb-2 text-4xl">🔍</div>
+            <p>Không tìm thấy kết quả. Thử từ khóa khác nhé.</p>
+          </div>
+
+          <!-- Groups -->
+          {
+            sortedGroups.map((group, groupIndex) => (
+              <div
+                id={groupIndex === 0 ? 'group-basic' : 'group-advanced'}
+                class="faq-group mb-6 overflow-hidden rounded-xl border border-gray-200 shadow-sm dark:border-gray-700"
+                data-group={group.data.groupSlug}
+              >
               <!-- Group header toggle -->
               <button
                 class={`faq-group-toggle w-full px-6 py-4 text-left flex items-center justify-between font-semibold text-white transition-colors ${
@@ -186,9 +214,13 @@ const sortedGroups = allFaq.sort((a, b) => a.data.order - b.data.order);
                   ))}
               </div>
             </div>
-          ))
-        }
+            ))
+          }
+        </div>
+        <!-- end right main content -->
+
       </div>
+      <!-- end flex row -->
     </div>
   </section>
 </Layout>
