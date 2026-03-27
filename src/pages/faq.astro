@@ -1,0 +1,261 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+
+const allFaq = await getCollection('faq');
+const sortedGroups = allFaq.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout
+  title="Từ điển đầu tư quỹ mở A–Z"
+  description="Giải đáp từ A–Z các thuật ngữ và câu hỏi thường gặp về đầu tư quỹ mở tại Việt Nam. Chia theo nhóm cơ bản và nâng cao."
+>
+  <!-- Hero -->
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 py-16 text-white"
+  >
+    <div class="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="mb-4 text-5xl">❓</div>
+        <h1 class="text-4xl font-bold md:text-5xl">Từ điển đầu tư quỹ mở</h1>
+        <p class="mt-4 text-lg text-primary-100">
+          Giải đáp từ A–Z những thuật ngữ và câu hỏi thường gặp khi đầu tư quỹ
+          mở tại Việt Nam
+        </p>
+      </div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute inset-0 overflow-hidden opacity-10">
+      <svg
+        class="absolute left-0 top-0 h-full w-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <polygon points="0,0 100,0 50,100" fill="white"></polygon>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Search + Content -->
+  <section class="py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl">
+        <!-- Search bar -->
+        <div class="relative mb-8">
+          <div
+            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4"
+          >
+            <svg
+              class="h-5 w-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <input
+            id="faq-search"
+            type="text"
+            placeholder="Tìm thuật ngữ hoặc câu hỏi..."
+            class="w-full rounded-xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-gray-900 shadow-sm transition-all focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white dark:focus:border-primary-600"
+          />
+        </div>
+
+        <!-- No results message -->
+        <div
+          id="faq-no-results"
+          class="hidden py-12 text-center text-gray-500 dark:text-gray-400"
+        >
+          <div class="mb-2 text-4xl">🔍</div>
+          <p>Không tìm thấy kết quả. Thử từ khóa khác nhé.</p>
+        </div>
+
+        <!-- Groups -->
+        {
+          sortedGroups.map((group, groupIndex) => (
+            <div
+              class="faq-group mb-6 overflow-hidden rounded-xl border border-gray-200 shadow-sm dark:border-gray-700"
+              data-group={group.data.groupSlug}
+            >
+              <!-- Group header toggle -->
+              <button
+                class={`faq-group-toggle w-full px-6 py-4 text-left flex items-center justify-between font-semibold text-white transition-colors ${
+                  group.data.groupSlug === 'basic'
+                    ? 'bg-primary-500 hover:bg-primary-600'
+                    : 'bg-secondary-600 hover:bg-secondary-700'
+                }`}
+                data-target={`faq-group-body-${groupIndex}`}
+                aria-expanded={groupIndex === 0 ? 'true' : 'false'}
+              >
+                <span class="flex items-center gap-3">
+                  <span class="text-xl">{group.data.icon}</span>
+                  <span>{group.data.group}</span>
+                  <span class="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium">
+                    {group.data.items.length} mục
+                  </span>
+                </span>
+                <svg
+                  class={`faq-chevron h-5 w-5 transition-transform duration-200 ${groupIndex === 0 ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              <!-- Group body -->
+              <div
+                id={`faq-group-body-${groupIndex}`}
+                class={`faq-group-body divide-y divide-gray-100 bg-white dark:divide-gray-800 dark:bg-gray-900 ${groupIndex !== 0 ? 'hidden' : ''}`}
+              >
+                {group.data.items
+                  .sort((a, b) => a.term.localeCompare(b.term, 'vi'))
+                  .map((item, itemIndex) => (
+                    <div
+                      class="faq-item"
+                      data-term={item.term.toLowerCase()}
+                      data-question={item.question.toLowerCase()}
+                      data-answer={item.answer.toLowerCase()}
+                    >
+                      <button
+                        class="faq-item-toggle w-full px-6 py-4 text-left"
+                        data-target={`faq-answer-${groupIndex}-${itemIndex}`}
+                        aria-expanded="false"
+                      >
+                        <div class="flex items-start justify-between gap-4">
+                          <div class="flex items-start gap-3">
+                            <span
+                              class={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ${
+                                group.data.groupSlug === 'basic'
+                                  ? 'bg-primary-500'
+                                  : 'bg-secondary-600'
+                              }`}
+                            >
+                              {item.term.charAt(0).toLocaleUpperCase('vi')}
+                            </span>
+                            <div>
+                              <span
+                                class={`text-xs font-medium ${
+                                  group.data.groupSlug === 'basic'
+                                    ? 'text-primary-600 dark:text-primary-400'
+                                    : 'text-secondary-600 dark:text-secondary-400'
+                                }`}
+                              >
+                                {item.term}
+                              </span>
+                              <p class="mt-0.5 font-medium text-gray-900 dark:text-white">
+                                {item.question}
+                              </p>
+                            </div>
+                          </div>
+                          <svg
+                            class="faq-chevron mt-1 h-4 w-4 shrink-0 text-gray-400 transition-transform duration-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </div>
+                      </button>
+                      <div
+                        id={`faq-answer-${groupIndex}-${itemIndex}`}
+                        class="faq-answer hidden px-6 pb-5 pl-16"
+                      >
+                        <p class="text-gray-600 dark:text-gray-300">
+                          {item.answer}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Group accordion toggle
+  document.querySelectorAll('.faq-group-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = (btn as HTMLElement).dataset.target!;
+      const body = document.getElementById(targetId)!;
+      const chevron = btn.querySelector('.faq-chevron')!;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', (!isOpen).toString());
+      body.classList.toggle('hidden', isOpen);
+      chevron.classList.toggle('rotate-180', !isOpen);
+    });
+  });
+
+  // Item accordion toggle
+  document.querySelectorAll('.faq-item-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = (btn as HTMLElement).dataset.target!;
+      const answer = document.getElementById(targetId)!;
+      const chevron = btn.querySelector('.faq-chevron')!;
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', (!isOpen).toString());
+      answer.classList.toggle('hidden', isOpen);
+      chevron.classList.toggle('rotate-180', !isOpen);
+    });
+  });
+
+  // Client-side search
+  const searchInput = document.getElementById('faq-search') as HTMLInputElement;
+  const noResults = document.getElementById('faq-no-results')!;
+
+  searchInput?.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
+
+    document.querySelectorAll<HTMLElement>('.faq-group').forEach((group) => {
+      const items = group.querySelectorAll<HTMLElement>('.faq-item');
+      let groupVisible = 0;
+
+      items.forEach((item) => {
+        const term = item.dataset.term ?? '';
+        const question = item.dataset.question ?? '';
+        const answer = item.dataset.answer ?? '';
+        const match =
+          !query ||
+          term.includes(query) ||
+          question.includes(query) ||
+          answer.includes(query);
+        item.style.display = match ? '' : 'none';
+        if (match) groupVisible++;
+      });
+
+      group.style.display = groupVisible > 0 ? '' : 'none';
+
+      // Auto-open groups with matches during search
+      if (query && groupVisible > 0) {
+        const body = group.querySelector<HTMLElement>('.faq-group-body');
+        body?.classList.remove('hidden');
+      }
+
+      visibleCount += groupVisible;
+    });
+
+    noResults.classList.toggle('hidden', visibleCount > 0 || !query);
+  });
+</script>
