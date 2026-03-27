@@ -13,4 +13,21 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const faqItem = z.object({
+  term: z.string(),
+  question: z.string(),
+  answer: z.string(),
+});
+
+const faq = defineCollection({
+  type: 'data',
+  schema: z.object({
+    group: z.string(),
+    groupSlug: z.string(),
+    icon: z.string(),
+    order: z.number(),
+    items: z.array(faqItem),
+  }),
+});
+
+export const collections = { blog, faq };
