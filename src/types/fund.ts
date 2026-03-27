@@ -55,4 +55,4 @@ export interface FundApiResponse {
   };
 }
 
-export type FundAssetFilter = 'ALL' | 'STOCK' | 'BOND';
+export type FundAssetFilter = 'ALL' | 'STOCK' | 'BOND' | 'BALANCED';
