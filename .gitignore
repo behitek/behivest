@@ -27,6 +27,9 @@ pnpm-debug.log*
 # Astro
 .astro/
 
+# Docs / internal specs & plans
+docs/
+
 # Test results
 test-results/
 playwright-report/
