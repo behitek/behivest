@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
+import VideoHero from '@components/VideoHero.astro';
+import type { HeroVideo } from '@components/VideoHero.astro';
 
 const allPosts = await getCollection('blog');
 const featuredPosts = allPosts
@@ -14,53 +16,34 @@ function formatDate(date: Date): string {
     day: 'numeric',
   }).format(date);
 }
+
+const heroVideos: HeroVideo[] = [
+  {
+    id: 'meh4h7NzNF0',
+    title: 'VTV',
+    icon: '📺',
+    description: 'Đài truyền hình VTV nói về chứng chỉ quỹ là gì và tại sao bạn nên bắt đầu đầu tư.',
+  },
+  {
+    id: 'SHh__otke6Q',
+    title: 'Chuyên gia',
+    icon: '👨\u200d💼',
+    description: 'Chuyên gia tài chính chia sẻ và phân tích đa chiều về chứng chỉ quỹ dễ hiểu.',
+  },
+  {
+    id: 'ii-QNVIrojI',
+    title: 'AI Insight',
+    icon: '🤖',
+    description: 'AI tóm tắt khách quan: Bản chất, lợi ích và cơ hội sinh lời khi đầu tư quỹ mở.',
+  },
+];
 ---
 
 <Layout
   title="Trang chủ"
   description="Behivest - Đầu tư dễ hiểu, sinh lời bền vững. Kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người Việt."
 >
-  <!-- Hero Section -->
-  <section
-    class="relative overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-600 py-20 text-white"
-  >
-    <div class="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl text-center">
-        <h1 class="text-5xl font-bold md:text-6xl lg:text-7xl">Behivest</h1>
-        <p class="mt-6 text-2xl font-medium text-primary-50 md:text-3xl">
-          Đầu tư dễ hiểu, sinh lời bền vững
-        </p>
-        <p class="mt-4 text-lg text-primary-100">
-          Kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người
-          Việt
-        </p>
-        <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-          <a
-            href={`${import.meta.env.BASE_URL}blog`}
-            class="btn-primary bg-white text-primary-600 hover:bg-gray-100"
-          >
-            Đọc Blog
-          </a>
-          <a
-            href={`${import.meta.env.BASE_URL}tools`}
-            class="btn-secondary border-white text-white hover:bg-white/10"
-          >
-            Khám phá Công cụ
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- Decorative elements -->
-    <div class="absolute inset-0 overflow-hidden opacity-10">
-      <svg
-        class="absolute left-0 top-0 h-full w-full"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <polygon points="0,0 100,0 50,100" fill="white"></polygon>
-      </svg>
-    </div>
-  </section>
+  <VideoHero videos={heroVideos} />
 
   <!-- Featured Posts -->
   <section class="py-16">

@@ -1,0 +1,246 @@
+---
+export interface HeroVideo {
+  id: string;
+  title: string;
+  icon: string;
+  description: string;
+  comingSoon?: boolean;
+}
+
+export interface Props {
+  videos: HeroVideo[];
+}
+
+const { videos } = Astro.props;
+const firstVideo = videos[0];
+const basePath = import.meta.env.BASE_URL;
+---
+
+<section
+  id="video-hero"
+  class="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-900 to-slate-800 px-4 py-16 text-white"
+>
+  <!-- Tagline pill -->
+  <div class="mb-8 rounded-full bg-white/10 px-6 py-2 text-center backdrop-blur-sm shadow-sm ring-1 ring-white/20">
+    <p class="text-sm font-medium text-slate-200 sm:text-base">
+      Chứng chỉ quỹ mở &nbsp;·&nbsp; Kênh đầu tư an toàn cho người bận rộn
+    </p>
+  </div>
+
+  <!-- Video Player -->
+  <div
+    id="video-player-wrapper"
+    class="relative w-full max-w-3xl overflow-hidden rounded-2xl shadow-2xl"
+  >
+    <div
+      id="video-thumbnail-layer"
+      class="relative aspect-video w-full cursor-pointer bg-slate-900"
+    >
+      <img
+        id="video-thumbnail"
+        src={`https://img.youtube.com/vi/${firstVideo.id}/maxresdefault.jpg`}
+        alt={`Xem video: ${firstVideo.title} về chứng chỉ quỹ`}
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-black/20"></div>
+      <button
+        id="video-play-btn"
+        aria-label="Phát video"
+        class="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow-xl transition-transform duration-200 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-white/50"
+      >
+        <svg class="ml-1 h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="video-iframe-layer" class="hidden aspect-video w-full"></div>
+  </div>
+
+  <!-- Tab Switcher -->
+  <div
+    class="mt-6 flex w-full max-w-3xl gap-3 overflow-x-auto pb-1"
+    style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;"
+  >
+    {
+      videos.map((video, index) => (
+        <button
+          data-video-tab
+          data-index={index}
+          data-id={video.id}
+          data-title={video.title}
+          data-description={video.description}
+          data-coming-soon={video.comingSoon ? 'true' : 'false'}
+          disabled={video.comingSoon}
+          style="scroll-snap-align: start;"
+          class:list={[
+            'flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-white/50',
+            index === 0
+              ? 'border-white bg-white text-slate-900'
+              : 'border-white/30 bg-white/10 text-white hover:border-white/60 hover:bg-white/20',
+            video.comingSoon ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+          ]}
+        >
+          <span>{video.icon}</span>
+          <span>{video.title}</span>
+          {video.comingSoon && (
+            <span class="rounded-full bg-amber-400/20 px-2 py-0.5 text-xs text-amber-300">
+              Sắp ra mắt
+            </span>
+          )}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- Active video description -->
+  <p id="video-description" class="mt-3 max-w-xl text-center text-sm text-slate-400">
+    {firstVideo.description}
+  </p>
+
+  <!-- Trust Signals -->
+  <div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-400">
+    <span>🏛️ Minh bạch bởi UBCKNN</span>
+    <span>📺 Đề cập trên VTV</span>
+    <span>👥 100.000+ người dùng Fmarket</span>
+  </div>
+
+  <!-- CTA -->
+  <a
+    id="video-hero-cta"
+    href={`${basePath}blog/fmarket`}
+    class="mt-8 group inline-flex flex-col items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 px-8 py-3.5 shadow-lg shadow-emerald-500/30 transition-all duration-300 hover:scale-105 hover:shadow-emerald-500/50 focus:outline-none focus:ring-4 focus:ring-emerald-500/50"
+  >
+    <div class="flex items-center gap-2 text-base font-bold text-white tracking-wide">
+      Xem hướng dẫn cho người mới bắt đầu
+      <svg class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+      </svg>
+    </div>
+    <div class="text-xs font-medium text-emerald-50">Chi tiết từng bước • Vốn nhỏ từ 100.000đ</div>
+  </a>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-slate-500">
+    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </div>
+</section>
+
+<script>
+  let activeIndex = 0;
+
+  const tabs = document.querySelectorAll('[data-video-tab]');
+  const thumbnail = document.getElementById('video-thumbnail') as HTMLImageElement | null;
+  const thumbnailLayer = document.getElementById('video-thumbnail-layer');
+  const iframeLayer = document.getElementById('video-iframe-layer');
+  const playBtn = document.getElementById('video-play-btn');
+  const descriptionEl = document.getElementById('video-description');
+
+  function getYtThumb(id: string): string {
+    return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+  }
+
+  function getYtEmbed(id: string): string {
+    return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+  }
+
+  function setActiveTab(index: number): void {
+    tabs.forEach((tab, i) => {
+      const el = tab as HTMLElement;
+      if (i === index) {
+        el.classList.add('border-white', 'bg-white', 'text-slate-900');
+        el.classList.remove(
+          'border-white/30',
+          'bg-white/10',
+          'text-white',
+          'hover:border-white/60',
+          'hover:bg-white/20',
+        );
+      } else {
+        el.classList.remove('border-white', 'bg-white', 'text-slate-900');
+        el.classList.add(
+          'border-white/30',
+          'bg-white/10',
+          'text-white',
+          'hover:border-white/60',
+          'hover:bg-white/20',
+        );
+      }
+    });
+  }
+
+  function switchVideo(index: number): void {
+    if (index === activeIndex) return;
+    const tab = tabs[index] as HTMLElement | undefined;
+    if (!tab || tab.dataset['comingSoon'] === 'true') return;
+
+    activeIndex = index;
+    const id = tab.dataset['id'] ?? '';
+    const description = tab.dataset['description'] ?? '';
+
+    if (iframeLayer) {
+      iframeLayer.classList.add('hidden');
+      iframeLayer.innerHTML = '';
+    }
+    if (thumbnailLayer) thumbnailLayer.classList.remove('hidden');
+
+    if (thumbnail) {
+      thumbnail.style.opacity = '0';
+      thumbnail.style.transition = 'opacity 150ms ease';
+      setTimeout(() => {
+        thumbnail.src = getYtThumb(id);
+        thumbnail.alt = `Xem video: ${tab.dataset['title']} về chứng chỉ quỹ`;
+        thumbnail.style.opacity = '1';
+        if (descriptionEl) {
+          descriptionEl.style.opacity = '0';
+          setTimeout(() => {
+            descriptionEl.textContent = description;
+            descriptionEl.style.opacity = '1';
+            descriptionEl.style.transition = 'opacity 150ms ease';
+          }, 75);
+        }
+      }, 75);
+    }
+
+    setActiveTab(index);
+  }
+
+  function playCurrentVideo(): void {
+    const tab = tabs[activeIndex] as HTMLElement | undefined;
+    if (!tab) return;
+    const id = tab.dataset['id'] ?? '';
+    if (!id) return;
+
+    if (thumbnailLayer) thumbnailLayer.classList.add('hidden');
+    if (iframeLayer) {
+      iframeLayer.classList.remove('hidden');
+      iframeLayer.innerHTML = `<iframe class="h-full w-full" src="${getYtEmbed(id)}" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    }
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => switchVideo(index));
+  });
+
+  if (playBtn) playBtn.addEventListener('click', playCurrentVideo);
+  if (thumbnail) thumbnail.addEventListener('click', playCurrentVideo);
+</script>
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': videos
+      .filter((v) => !v.comingSoon && v.id)
+      .map((v) => ({
+        '@type': 'VideoObject',
+        name: `${v.title} — Chứng chỉ quỹ là gì?`,
+        description: v.description,
+        thumbnailUrl: `https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`,
+        embedUrl: `https://www.youtube-nocookie.com/embed/${v.id}`,
+        uploadDate: '2024-01-01',
+      })),
+  })}
+/>
