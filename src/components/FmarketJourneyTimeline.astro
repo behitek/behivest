@@ -99,32 +99,32 @@ const steps = [
   const container = document.querySelector(
     '[data-component="fmarket-journey-timeline"]'
   ) as HTMLElement;
-  if (!container) return;
+  if (container) {
+    const steps = container.querySelectorAll<HTMLElement>('.journey-step');
 
-  const steps = container.querySelectorAll<HTMLElement>('.journey-step');
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          // Fade in container
+          container.style.opacity = '1';
 
-  const io = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        // Fade in container
-        container.style.opacity = '1';
-
-        // Stagger each step with 200ms delay
-        steps.forEach((step, i) => {
-          step.style.transitionDelay = `${i * 200}ms`;
-        });
-        requestAnimationFrame(() => {
-          steps.forEach((step) => {
-            step.classList.remove('opacity-0', 'translate-y-4');
-            step.classList.add('opacity-100', 'translate-y-0');
+          // Stagger each step with 200ms delay
+          steps.forEach((step, i) => {
+            step.style.transitionDelay = `${i * 200}ms`;
           });
-        });
+          requestAnimationFrame(() => {
+            steps.forEach((step) => {
+              step.classList.remove('opacity-0', 'translate-y-4');
+              step.classList.add('opacity-100', 'translate-y-0');
+            });
+          });
 
-        io.disconnect();
-      }
-    },
-    { threshold: 0.2 }
-  );
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
 
-  io.observe(container);
+    io.observe(container);
+  }
 </script>
