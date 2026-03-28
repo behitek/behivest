@@ -1,0 +1,193 @@
+---
+// src/components/RiskReturnChart.astro
+// Interactive risk vs return scatter chart for mutual fund types
+---
+
+<div class="my-8 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+  <h3 class="mb-1 text-center text-base font-semibold text-gray-800 dark:text-gray-100">
+    Rủi ro vs Lợi nhuận — Các loại quỹ mở
+  </h3>
+  <p class="mb-3 text-center text-xs text-gray-500 dark:text-gray-400">
+    Hover/tap điểm để xem chi tiết
+  </p>
+  <div class="relative">
+    <canvas
+      id="riskReturnCanvas"
+      class="w-full"
+      style="max-height: 400px;"
+      aria-label="Biểu đồ rủi ro và lợi nhuận các loại quỹ mở"
+      role="img"
+    ></canvas>
+    <div
+      id="rrTooltip"
+      class="pointer-events-none absolute hidden rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm shadow-lg dark:border-gray-600 dark:bg-gray-800"
+      style="z-index: 10;"
+    ></div>
+  </div>
+</div>
+
+<script>
+  interface Point {
+    label: string;
+    risk: number;
+    ret: number;
+    color: string;
+    highlight?: boolean;
+  }
+
+  const POINTS: Point[] = [
+    { label: 'Tiết kiệm NH', risk: 1.0, ret: 4, color: '#94a3b8' },
+    { label: 'Vàng', risk: 2.2, ret: 6, color: '#f59e0b' },
+    { label: 'Quỹ tiền tệ', risk: 1.3, ret: 5, color: '#60a5fa' },
+    { label: 'Quỹ trái phiếu', risk: 2.1, ret: 7, color: '#34d399' },
+    { label: 'Quỹ cân bằng ⭐', risk: 2.9, ret: 10, color: '#10b981', highlight: true },
+    { label: 'Quỹ cổ phiếu', risk: 4.2, ret: 15, color: '#f97316' },
+  ];
+
+  const canvas = document.getElementById('riskReturnCanvas') as HTMLCanvasElement;
+  const tooltip = document.getElementById('rrTooltip') as HTMLDivElement;
+  if (!canvas) throw new Error('RiskReturnChart canvas not found');
+
+  const ctx = canvas.getContext('2d')!;
+  const PAD = { top: 30, right: 30, bottom: 50, left: 60 };
+  const X_MAX = 5.5;
+  const Y_MAX = 20;
+
+  function resize() {
+    const rect = canvas.parentElement!.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const w = Math.min(rect.width, 600);
+    const h = Math.round(w * 0.6);
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+    draw(w, h);
+  }
+
+  function toCanvas(risk: number, ret: number, w: number, h: number) {
+    const x = PAD.left + ((risk / X_MAX) * (w - PAD.left - PAD.right));
+    const y = h - PAD.bottom - ((ret / Y_MAX) * (h - PAD.top - PAD.bottom));
+    return { x, y };
+  }
+
+  function draw(w: number, h: number) {
+    ctx.clearRect(0, 0, w, h);
+    const isDark = document.documentElement.classList.contains('dark');
+    const gridColor = isDark ? '#374151' : '#e5e7eb';
+    const labelColor = isDark ? '#9ca3af' : '#6b7280';
+    const axisColor = isDark ? '#6b7280' : '#374151';
+
+    // Sweet spot shaded region
+    const cx = toCanvas(2.9, 10, w, h);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx.x, cx.y, 55, 0, Math.PI * 2);
+    ctx.fillStyle = isDark ? 'rgba(16,185,129,0.12)' : 'rgba(16,185,129,0.1)';
+    ctx.fill();
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // Grid lines & axis labels
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    for (let r = 0; r <= Y_MAX; r += 5) {
+      const { y } = toCanvas(0, r, w, h);
+      ctx.beginPath();
+      ctx.moveTo(PAD.left, y);
+      ctx.lineTo(w - PAD.right, y);
+      ctx.stroke();
+      ctx.fillStyle = labelColor;
+      ctx.font = '11px system-ui, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(r + '%', PAD.left - 6, y + 4);
+    }
+
+    // Axes
+    ctx.strokeStyle = axisColor;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(PAD.left, PAD.top);
+    ctx.lineTo(PAD.left, h - PAD.bottom);
+    ctx.lineTo(w - PAD.right, h - PAD.bottom);
+    ctx.stroke();
+
+    // Axis titles
+    ctx.fillStyle = labelColor;
+    ctx.font = '12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Rủi ro →', w / 2, h - 10);
+    ctx.save();
+    ctx.translate(16, h / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('Lợi nhuận/năm →', 0, 0);
+    ctx.restore();
+
+    // Points
+    for (const p of POINTS) {
+      const { x, y } = toCanvas(p.risk, p.ret, w, h);
+      ctx.beginPath();
+      ctx.arc(x, y, p.highlight ? 12 : 8, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+      if (p.highlight) {
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+      ctx.fillStyle = isDark ? '#f9fafb' : '#111827';
+      ctx.font = p.highlight ? 'bold 11px system-ui' : '10px system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText(p.label, x, y - (p.highlight ? 18 : 14));
+    }
+  }
+
+  function getHoveredPoint(mx: number, my: number, w: number, h: number): Point | null {
+    for (const p of POINTS) {
+      const { x, y } = toCanvas(p.risk, p.ret, w, h);
+      const dist = Math.hypot(mx - x, my - y);
+      if (dist < 16) return p;
+    }
+    return null;
+  }
+
+  function onPointerMove(e: MouseEvent | TouchEvent) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
+    const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
+    const mx = (clientX - rect.left) * (canvas.width / dpr / rect.width);
+    const my = (clientY - rect.top) * (canvas.height / dpr / rect.height);
+    const w = canvas.width / dpr;
+    const h = canvas.height / dpr;
+    const hit = getHoveredPoint(mx, my, w, h);
+    if (hit) {
+      tooltip.innerHTML = `<strong>${hit.label}</strong><br/>Lợi nhuận ~${hit.ret}%/năm`;
+      tooltip.classList.remove('hidden');
+      tooltip.style.left = (clientX - rect.left + 12) + 'px';
+      tooltip.style.top = (clientY - rect.top - 40) + 'px';
+    } else {
+      tooltip.classList.add('hidden');
+    }
+  }
+
+  canvas.addEventListener('mousemove', onPointerMove);
+  canvas.addEventListener('touchmove', (e) => { e.preventDefault(); onPointerMove(e); }, { passive: false });
+  canvas.addEventListener('mouseleave', () => tooltip.classList.add('hidden'));
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Re-draw when dark mode toggles
+  const observer = new MutationObserver(() => {
+    const w = canvas.width / (window.devicePixelRatio || 1);
+    const h = canvas.height / (window.devicePixelRatio || 1);
+    draw(w, h);
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>
