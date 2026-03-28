@@ -32,5 +32,3 @@ test-results/
 playwright-report/
 playwright/.cache/
 coverage/
-.agents/
-.skills-lock.json
