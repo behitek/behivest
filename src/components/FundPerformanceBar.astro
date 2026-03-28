@@ -1,0 +1,128 @@
+---
+// src/components/FundPerformanceBar.astro
+// Top-10 mutual funds horizontal bar chart — replaces static fmarket-top-10-funds.png
+---
+
+<div
+  data-component="fund-performance-bar"
+  class="my-8 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+>
+  <h3 class="mb-1 text-center text-base font-semibold text-gray-800 dark:text-gray-100">
+    Top 10 Quỹ Mở Hiệu Suất Cao Nhất Trên Fmarket (1 năm)
+  </h3>
+  <p class="mb-3 text-center text-xs text-gray-500 dark:text-gray-400">
+    ⭐ = Quỹ cân bằng (phù hợp người mới) · Hover/tap để xem chi tiết
+  </p>
+  <canvas
+    id="fpBarCanvas"
+    class="w-full"
+    aria-label="Top 10 quỹ mở hiệu suất cao nhất"
+    role="img"
+  ></canvas>
+</div>
+
+<script>
+  interface Fund {
+    name: string;
+    return1y: number;
+    type: 'stock' | 'balanced' | 'bond';
+  }
+
+  const FUNDS: Fund[] = [
+    { name: 'SSISCA', return1y: 24.1, type: 'stock' },
+    { name: 'VCBF-BCF', return1y: 22.5, type: 'stock' },
+    { name: 'DCBC ⭐', return1y: 21.3, type: 'balanced' },
+    { name: 'BVBF ⭐', return1y: 19.8, type: 'balanced' },
+    { name: 'MAFBAL ⭐', return1y: 18.7, type: 'balanced' },
+    { name: 'VFMVSF', return1y: 17.9, type: 'stock' },
+    { name: 'MBVF ⭐', return1y: 17.2, type: 'balanced' },
+    { name: 'VCBF-TBF', return1y: 15.8, type: 'stock' },
+    { name: 'TCBF', return1y: 14.4, type: 'bond' },
+    { name: 'BVPF', return1y: 13.1, type: 'bond' },
+  ];
+
+  const COLOR: Record<Fund['type'], string> = {
+    balanced: '#10b981',
+    stock: '#f97316',
+    bond: '#60a5fa',
+  };
+
+  const container = document.querySelector('[data-component="fund-performance-bar"]') as HTMLElement;
+  if (!container) throw new Error('FundPerformanceBar container not found');
+  const canvas = container.querySelector('#fpBarCanvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  const BAR_H = 32;
+  const GAP = 8;
+  const PAD = { top: 10, bottom: 30, left: 110, right: 60 };
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = container.getBoundingClientRect().width - 32;
+    const h = PAD.top + FUNDS.length * (BAR_H + GAP) + PAD.bottom;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    draw(w, h);
+  }
+
+  function draw(w: number, h: number) {
+    ctx.clearRect(0, 0, w, h);
+    const isDark = document.documentElement.classList.contains('dark');
+    const labelColor = isDark ? '#d1d5db' : '#374151';
+    const maxRet = Math.max(...FUNDS.map((f) => f.return1y));
+    const barMaxW = w - PAD.left - PAD.right;
+
+    FUNDS.forEach((fund, i) => {
+      const y = PAD.top + i * (BAR_H + GAP);
+      const barW = (fund.return1y / maxRet) * barMaxW;
+
+      // Bar with rounded right corners
+      ctx.beginPath();
+      const r = 6;
+      ctx.moveTo(PAD.left + r, y);
+      ctx.lineTo(PAD.left + barW - r, y);
+      ctx.quadraticCurveTo(PAD.left + barW, y, PAD.left + barW, y + r);
+      ctx.lineTo(PAD.left + barW, y + BAR_H - r);
+      ctx.quadraticCurveTo(PAD.left + barW, y + BAR_H, PAD.left + barW - r, y + BAR_H);
+      ctx.lineTo(PAD.left + r, y + BAR_H);
+      ctx.quadraticCurveTo(PAD.left, y + BAR_H, PAD.left, y + BAR_H - r);
+      ctx.lineTo(PAD.left, y + r);
+      ctx.quadraticCurveTo(PAD.left, y, PAD.left + r, y);
+      ctx.closePath();
+      ctx.fillStyle = COLOR[fund.type];
+      ctx.fill();
+
+      // Fund name label (left of bar)
+      ctx.fillStyle = labelColor;
+      ctx.font = '12px system-ui, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(fund.name, PAD.left - 8, y + BAR_H / 2 + 4);
+
+      // Return value label (right of bar)
+      ctx.fillStyle = isDark ? '#f9fafb' : '#111827';
+      ctx.font = 'bold 12px system-ui';
+      ctx.textAlign = 'left';
+      ctx.fillText(`+${fund.return1y}%`, PAD.left + barW + 6, y + BAR_H / 2 + 4);
+    });
+
+    // X-axis label
+    ctx.fillStyle = labelColor;
+    ctx.font = '11px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('Lợi nhuận 1 năm (%)', w / 2, h - 8);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  const observer = new MutationObserver(() => {
+    const w = parseInt(canvas.style.width);
+    const h = parseInt(canvas.style.height);
+    draw(w, h);
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>
