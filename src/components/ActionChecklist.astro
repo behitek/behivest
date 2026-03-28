@@ -1,0 +1,233 @@
+---
+// src/components/ActionChecklist.astro
+// Interactive action checklist with localStorage persistence and progress bar
+// Replaces static Markdown checkbox blocks in fmarket.mdx
+
+const sections = [
+  {
+    title: 'Tuần này (30 phút)',
+    items: [
+      'Chuẩn bị CCCD/CMND và ảnh selfie chân dung',
+      'Tải app Fmarket, nhập mã giới thiệu 007F349346164 để nhận 50k',
+      'Hoàn tất eKYC và liên kết ngân hàng',
+    ],
+  },
+  {
+    title: 'Tháng đầu tiên',
+    items: [
+      'Nghiên cứu 3-5 quỹ trên Fmarket (xem bản cáo bạch, hiệu suất, phí)',
+      'Bắt đầu với số tiền nhỏ: 500k-1 triệu để "test nước"',
+      'Đầu tư vào 2-3 quỹ khác nhau để đa dạng hóa',
+    ],
+  },
+  {
+    title: 'Dài hạn (3-6 tháng)',
+    items: [
+      'Thiết lập SIP định kỳ (500k-1 triệu/tháng tùy khả năng)',
+      'Đặt reminder 6 tháng để review hiệu suất',
+      'Tham gia cộng đồng đầu tư để học hỏi',
+      'Đọc thêm bài viết về quỹ mở cơ bản để hiểu sâu hơn',
+    ],
+  },
+];
+
+const totalItems = sections.reduce((sum, s) => sum + s.items.length, 0);
+---
+
+<div
+  data-component="action-checklist"
+  class="my-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+>
+  <h3
+    class="mb-4 text-lg font-semibold text-gray-800 dark:text-gray-100"
+  >
+    Kế hoạch hành động của bạn
+  </h3>
+
+  <!-- Progress bar -->
+  <div class="mb-6">
+    <div class="mb-1 flex items-center justify-between text-sm">
+      <span class="font-medium text-gray-600 dark:text-gray-400">Tiến độ</span>
+      <span
+        id="checklistProgress"
+        class="font-semibold text-emerald-600 dark:text-emerald-400"
+      >
+        0 / {totalItems}
+      </span>
+    </div>
+    <div
+      class="h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700"
+    >
+      <div
+        id="checklistBar"
+        class="h-full rounded-full bg-emerald-500 transition-all duration-300 ease-in-out"
+        style="width: 0%"
+      >
+      </div>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <div class="space-y-6">
+    {
+      sections.map((section) => (
+        <div>
+          <h4 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            {section.title}
+          </h4>
+          <ul class="space-y-2">
+            {section.items.map((item) => (
+              <li
+                class="checklist-item flex cursor-pointer select-none items-start gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
+                data-task={item}
+                role="checkbox"
+                aria-checked="false"
+                tabindex="0"
+              >
+                <!-- Checkbox -->
+                <span
+                  class="checklist-box mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 border-gray-300 transition-colors dark:border-gray-600"
+                >
+                  <!-- Checkmark SVG (hidden by default) -->
+                  <svg
+                    class="checklist-check hidden h-3 w-3 text-white"
+                    viewBox="0 0 12 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 5l3.5 3.5L11 1"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <!-- Label -->
+                <span class="checklist-label text-sm text-gray-700 dark:text-gray-300">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'fmarket-checklist-v1';
+
+  const container = document.querySelector(
+    '[data-component="action-checklist"]'
+  ) as HTMLElement;
+  if (!container) {
+    // silent guard
+  } else {
+    const items =
+      container.querySelectorAll<HTMLLIElement>('.checklist-item');
+    const bar = container.querySelector('#checklistBar') as HTMLDivElement;
+    const progress = container.querySelector(
+      '#checklistProgress'
+    ) as HTMLSpanElement;
+
+    const total = items.length;
+
+    // Load saved state from localStorage
+    let saved: Record<string, boolean> = {};
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) saved = JSON.parse(raw) as Record<string, boolean>;
+    } catch {
+      saved = {};
+    }
+
+    function updateProgress() {
+      let checked = 0;
+      items.forEach((item) => {
+        if (item.getAttribute('aria-checked') === 'true') checked++;
+      });
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      bar.style.width = `${pct}%`;
+      progress.textContent = `${checked} / ${total}`;
+    }
+
+    function setChecked(item: HTMLLIElement, isChecked: boolean) {
+      const box = item.querySelector<HTMLSpanElement>('.checklist-box');
+      const check = item.querySelector<SVGElement>('.checklist-check');
+      const label = item.querySelector<HTMLSpanElement>('.checklist-label');
+
+      item.setAttribute('aria-checked', String(isChecked));
+
+      if (isChecked) {
+        box?.classList.remove('border-gray-300', 'dark:border-gray-600');
+        box?.classList.add(
+          'border-emerald-500',
+          'bg-emerald-500',
+          'dark:border-emerald-500',
+          'dark:bg-emerald-500'
+        );
+        check?.classList.remove('hidden');
+        label?.classList.add('line-through', 'text-gray-400', 'dark:text-gray-500');
+        label?.classList.remove('text-gray-700', 'dark:text-gray-300');
+      } else {
+        box?.classList.add('border-gray-300', 'dark:border-gray-600');
+        box?.classList.remove(
+          'border-emerald-500',
+          'bg-emerald-500',
+          'dark:border-emerald-500',
+          'dark:bg-emerald-500'
+        );
+        check?.classList.add('hidden');
+        label?.classList.remove('line-through', 'text-gray-400', 'dark:text-gray-500');
+        label?.classList.add('text-gray-700', 'dark:text-gray-300');
+      }
+    }
+
+    function saveState() {
+      const state: Record<string, boolean> = {};
+      items.forEach((item) => {
+        const task = item.getAttribute('data-task');
+        if (task) {
+          state[task] = item.getAttribute('aria-checked') === 'true';
+        }
+      });
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        // ignore storage errors
+      }
+    }
+
+    function toggleItem(item: HTMLLIElement) {
+      const current = item.getAttribute('aria-checked') === 'true';
+      setChecked(item, !current);
+      saveState();
+      updateProgress();
+    }
+
+    // Restore saved state
+    items.forEach((item) => {
+      const task = item.getAttribute('data-task');
+      if (task && saved[task]) {
+        setChecked(item, true);
+      }
+
+      // Click handler
+      item.addEventListener('click', () => toggleItem(item));
+
+      // Keyboard handler (Space / Enter)
+      item.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          toggleItem(item);
+        }
+      });
+    });
+
+    // Initial progress render
+    updateProgress();
+  }
+</script>
