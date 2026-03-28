@@ -13,12 +13,19 @@
   <p class="mb-3 text-center text-xs text-gray-500 dark:text-gray-400">
     ⭐ = Quỹ cân bằng (phù hợp người mới) · Hover/tap để xem chi tiết
   </p>
-  <canvas
-    id="fpBarCanvas"
-    class="w-full"
-    aria-label="Top 10 quỹ mở hiệu suất cao nhất"
-    role="img"
-  ></canvas>
+  <div class="relative">
+    <canvas
+      id="fpBarCanvas"
+      class="w-full"
+      aria-label="Top 10 quỹ mở hiệu suất cao nhất"
+      role="img"
+    ></canvas>
+    <div
+      id="fpBarTooltip"
+      class="pointer-events-none absolute hidden rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm shadow-lg dark:border-gray-600 dark:bg-gray-800"
+      style="z-index: 10;"
+    ></div>
+  </div>
 </div>
 
 <script>
@@ -50,6 +57,7 @@
   const container = document.querySelector('[data-component="fund-performance-bar"]') as HTMLElement;
   if (!container) throw new Error('FundPerformanceBar container not found');
   const canvas = container.querySelector('#fpBarCanvas') as HTMLCanvasElement;
+  const tooltip = container.querySelector('#fpBarTooltip') as HTMLDivElement;
   const ctx = canvas.getContext('2d')!;
 
   const BAR_H = 32;
@@ -115,6 +123,36 @@
     ctx.textAlign = 'center';
     ctx.fillText('Lợi nhuận 1 năm (%)', w / 2, h - 8);
   }
+
+  function getHoveredFund(my: number): Fund | null {
+    for (let i = 0; i < FUNDS.length; i++) {
+      const barTop = PAD.top + i * (BAR_H + GAP);
+      const barBottom = barTop + BAR_H;
+      if (my >= barTop && my <= barBottom) return FUNDS[i];
+    }
+    return null;
+  }
+
+  function onPointerMove(e: MouseEvent | TouchEvent) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
+    const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
+    const my = (clientY - rect.top) * (canvas.height / dpr / rect.height);
+    const hit = getHoveredFund(my);
+    if (hit) {
+      tooltip.innerHTML = `<strong>${hit.name}</strong><br/>Lợi nhuận 1 năm: +${hit.return1y}%`;
+      tooltip.classList.remove('hidden');
+      tooltip.style.left = clientX - rect.left + 12 + 'px';
+      tooltip.style.top = clientY - rect.top - 48 + 'px';
+    } else {
+      tooltip.classList.add('hidden');
+    }
+  }
+
+  canvas.addEventListener('mousemove', onPointerMove);
+  canvas.addEventListener('touchmove', (e) => { e.preventDefault(); onPointerMove(e); }, { passive: false });
+  canvas.addEventListener('mouseleave', () => tooltip.classList.add('hidden'));
 
   resize();
   window.addEventListener('resize', resize);
