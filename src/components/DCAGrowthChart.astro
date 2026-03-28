@@ -1,0 +1,403 @@
+---
+// src/components/DCAGrowthChart.astro
+// Interactive DCA growth chart with live SIP calculator
+// Replaces static fmarket-dca-10-years.png
+---
+
+<div
+  data-component="dca-growth-chart"
+  class="my-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+>
+  <h3 class="mb-1 text-center text-lg font-semibold text-gray-800 dark:text-gray-100">
+    Mô phỏng DCA — Tự tính kết quả của bạn
+  </h3>
+  <p class="mb-5 text-center text-xs text-gray-500 dark:text-gray-400">
+    Điều chỉnh thông số để xem lợi nhuận ước tính
+  </p>
+
+  <!-- Controls: 3 sliders -->
+  <div class="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
+    <!-- Monthly investment slider -->
+    <div>
+      <div class="mb-1 flex items-center justify-between">
+        <label
+          for="dcaMonthly"
+          class="text-xs font-medium text-gray-600 dark:text-gray-400"
+        >
+          Đầu tư hàng tháng
+        </label>
+        <span
+          id="dcaMonthlyVal"
+          class="text-xs font-semibold text-emerald-600 dark:text-emerald-400"
+        >500.000đ</span>
+      </div>
+      <input
+        id="dcaMonthly"
+        type="range"
+        min="200000"
+        max="5000000"
+        step="100000"
+        value="500000"
+        class="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-emerald-500 dark:bg-gray-700"
+      />
+      <div class="mt-0.5 flex justify-between text-[10px] text-gray-400">
+        <span>200K</span><span>5M</span>
+      </div>
+    </div>
+
+    <!-- Rate slider -->
+    <div>
+      <div class="mb-1 flex items-center justify-between">
+        <label
+          for="dcaRate"
+          class="text-xs font-medium text-gray-600 dark:text-gray-400"
+        >
+          Lợi suất quỹ / năm
+        </label>
+        <span
+          id="dcaRateVal"
+          class="text-xs font-semibold text-emerald-600 dark:text-emerald-400"
+        >8%</span>
+      </div>
+      <input
+        id="dcaRate"
+        type="range"
+        min="4"
+        max="20"
+        step="0.5"
+        value="8"
+        class="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-emerald-500 dark:bg-gray-700"
+      />
+      <div class="mt-0.5 flex justify-between text-[10px] text-gray-400">
+        <span>4%</span><span>20%</span>
+      </div>
+    </div>
+
+    <!-- Years slider -->
+    <div>
+      <div class="mb-1 flex items-center justify-between">
+        <label
+          for="dcaYears"
+          class="text-xs font-medium text-gray-600 dark:text-gray-400"
+        >
+          Thời gian đầu tư
+        </label>
+        <span
+          id="dcaYearsVal"
+          class="text-xs font-semibold text-emerald-600 dark:text-emerald-400"
+        >10 năm</span>
+      </div>
+      <input
+        id="dcaYears"
+        type="range"
+        min="1"
+        max="30"
+        step="1"
+        value="10"
+        class="h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-emerald-500 dark:bg-gray-700"
+      />
+      <div class="mt-0.5 flex justify-between text-[10px] text-gray-400">
+        <span>1 năm</span><span>30 năm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="mb-5 grid grid-cols-3 gap-3">
+    <div class="rounded-xl bg-gray-50 p-3 text-center dark:bg-gray-800">
+      <p class="mb-1 text-[10px] font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+        Vốn bỏ ra
+      </p>
+      <p
+        id="dcaTotalInvested"
+        class="text-sm font-bold text-gray-700 dark:text-gray-200"
+      >60.000.000đ</p>
+    </div>
+    <div class="rounded-xl bg-emerald-50 p-3 text-center dark:bg-emerald-900/30">
+      <p class="mb-1 text-[10px] font-medium uppercase tracking-wide text-emerald-600 dark:text-emerald-400">
+        Quỹ mở
+      </p>
+      <p
+        id="dcaFundResult"
+        class="text-sm font-bold text-emerald-700 dark:text-emerald-300"
+      >—</p>
+    </div>
+    <div class="rounded-xl bg-blue-50 p-3 text-center dark:bg-blue-900/30">
+      <p class="mb-1 text-[10px] font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">
+        Tiết kiệm NH
+      </p>
+      <p
+        id="dcaSavingsResult"
+        class="text-sm font-bold text-blue-700 dark:text-blue-300"
+      >—</p>
+    </div>
+  </div>
+
+  <!-- Chart canvas -->
+  <div class="relative">
+    <canvas
+      id="dcaCanvas"
+      class="w-full"
+      style="max-height: 360px;"
+      aria-label="Biểu đồ tăng trưởng DCA theo thời gian"
+      role="img"
+    ></canvas>
+  </div>
+
+  <p class="mt-3 text-center text-[10px] text-gray-400 dark:text-gray-500">
+    * Mô phỏng dựa trên lợi suất đều đặn, không đảm bảo kết quả thực tế
+  </p>
+</div>
+
+<script>
+  // SIP balance: value of DCA portfolio after `months` months
+  function sipBalance(monthly: number, annualRate: number, months: number): number {
+    const r = annualRate / 100 / 12;
+    if (r === 0) return monthly * months;
+    return monthly * ((Math.pow(1 + r, months) - 1) / r) * (1 + r);
+  }
+
+  function formatVND(v: number): string {
+    if (v >= 1_000_000_000) {
+      return (v / 1_000_000_000).toLocaleString('vi-VN', { maximumFractionDigits: 2 }) + ' tỷ';
+    }
+    if (v >= 1_000_000) {
+      return (v / 1_000_000).toLocaleString('vi-VN', { maximumFractionDigits: 1 }) + ' triệu';
+    }
+    return v.toLocaleString('vi-VN') + 'đ';
+  }
+
+  // --- DOM queries (scoped to container) ---
+  const container = document.querySelector('[data-component="dca-growth-chart"]') as HTMLElement;
+  if (!container) throw new Error('DCAGrowthChart container not found');
+
+  const canvas = container.querySelector('#dcaCanvas') as HTMLCanvasElement;
+  const sliderMonthly = container.querySelector('#dcaMonthly') as HTMLInputElement;
+  const sliderRate = container.querySelector('#dcaRate') as HTMLInputElement;
+  const sliderYears = container.querySelector('#dcaYears') as HTMLInputElement;
+  const valMonthly = container.querySelector('#dcaMonthlyVal') as HTMLSpanElement;
+  const valRate = container.querySelector('#dcaRateVal') as HTMLSpanElement;
+  const valYears = container.querySelector('#dcaYearsVal') as HTMLSpanElement;
+  const cardInvested = container.querySelector('#dcaTotalInvested') as HTMLElement;
+  const cardFund = container.querySelector('#dcaFundResult') as HTMLElement;
+  const cardSavings = container.querySelector('#dcaSavingsResult') as HTMLElement;
+
+  const ctx = canvas.getContext('2d')!;
+  const PAD = { top: 30, right: 20, bottom: 50, left: 70 };
+  const SAVINGS_RATE = 4;
+
+  interface DataPoint {
+    year: number;
+    invested: number;
+    fund: number;
+    savings: number;
+  }
+
+  function buildSeries(monthly: number, rate: number, years: number): DataPoint[] {
+    const points: DataPoint[] = [];
+    for (let y = 0; y <= years; y++) {
+      points.push({
+        year: y,
+        invested: monthly * 12 * y,
+        fund: sipBalance(monthly, rate, y * 12),
+        savings: sipBalance(monthly, SAVINGS_RATE, y * 12),
+      });
+    }
+    return points;
+  }
+
+  function drawChart(w: number, h: number, series: DataPoint[]) {
+    ctx.clearRect(0, 0, w, h);
+    const isDark = document.documentElement.classList.contains('dark');
+    const gridColor = isDark ? '#374151' : '#e5e7eb';
+    const labelColor = isDark ? '#9ca3af' : '#6b7280';
+    const axisColor = isDark ? '#6b7280' : '#374151';
+
+    const chartW = w - PAD.left - PAD.right;
+    const chartH = h - PAD.top - PAD.bottom;
+    const maxVal = Math.max(...series.map((p) => p.fund));
+    const yMax = Math.ceil(maxVal / 1_000_000) * 1_000_000 || 1_000_000;
+    const years = series[series.length - 1]?.year ?? 10;
+
+    function toX(year: number) {
+      return PAD.left + (year / years) * chartW;
+    }
+    function toY(val: number) {
+      return h - PAD.bottom - (val / yMax) * chartH;
+    }
+
+    // --- Grid lines & Y-axis labels ---
+    const ySteps = 5;
+    for (let i = 0; i <= ySteps; i++) {
+      const val = (yMax / ySteps) * i;
+      const y = toY(val);
+      ctx.strokeStyle = gridColor;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(PAD.left, y);
+      ctx.lineTo(w - PAD.right, y);
+      ctx.stroke();
+      ctx.fillStyle = labelColor;
+      ctx.font = '10px system-ui, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(formatVND(val), PAD.left - 6, y + 4);
+    }
+
+    // --- X-axis labels ---
+    const xStep = years <= 10 ? 1 : years <= 20 ? 5 : 10;
+    for (let y = 0; y <= years; y += xStep) {
+      const x = toX(y);
+      ctx.fillStyle = labelColor;
+      ctx.font = '10px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(y + 'n', x, h - PAD.bottom + 16);
+    }
+
+    // --- Axes ---
+    ctx.strokeStyle = axisColor;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(PAD.left, PAD.top);
+    ctx.lineTo(PAD.left, h - PAD.bottom);
+    ctx.lineTo(w - PAD.right, h - PAD.bottom);
+    ctx.stroke();
+
+    // --- Gray filled area: principal (vốn đầu tư) ---
+    ctx.beginPath();
+    ctx.moveTo(toX(series[0].year), toY(series[0].invested));
+    for (const p of series) {
+      ctx.lineTo(toX(p.year), toY(p.invested));
+    }
+    ctx.lineTo(toX(series[series.length - 1].year), h - PAD.bottom);
+    ctx.lineTo(toX(series[0].year), h - PAD.bottom);
+    ctx.closePath();
+    ctx.fillStyle = isDark ? 'rgba(156,163,175,0.18)' : 'rgba(156,163,175,0.28)';
+    ctx.fill();
+
+    // Principal border line (dashed)
+    ctx.beginPath();
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = isDark ? '#6b7280' : '#9ca3af';
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < series.length; i++) {
+      const p = series[i];
+      i === 0
+        ? ctx.moveTo(toX(p.year), toY(p.invested))
+        : ctx.lineTo(toX(p.year), toY(p.invested));
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // --- Blue savings line ---
+    ctx.beginPath();
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < series.length; i++) {
+      const p = series[i];
+      i === 0
+        ? ctx.moveTo(toX(p.year), toY(p.savings))
+        : ctx.lineTo(toX(p.year), toY(p.savings));
+    }
+    ctx.stroke();
+
+    // --- Green fund line ---
+    ctx.beginPath();
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 2.5;
+    for (let i = 0; i < series.length; i++) {
+      const p = series[i];
+      i === 0
+        ? ctx.moveTo(toX(p.year), toY(p.fund))
+        : ctx.lineTo(toX(p.year), toY(p.fund));
+    }
+    ctx.stroke();
+
+    // End dots
+    const last = series[series.length - 1];
+    [
+      { val: last.fund, color: '#10b981' },
+      { val: last.savings, color: '#3b82f6' },
+    ].forEach(({ val, color }) => {
+      ctx.beginPath();
+      ctx.arc(toX(last.year), toY(val), 4, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.strokeStyle = isDark ? '#111827' : '#ffffff';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+
+    // --- Legend ---
+    const legendItems = [
+      { color: isDark ? 'rgba(156,163,175,0.5)' : 'rgba(156,163,175,0.55)', label: 'Vốn đầu tư', dashed: true },
+      { color: '#3b82f6', label: 'Tiết kiệm NH (4%)', dashed: false },
+      { color: '#10b981', label: 'Quỹ mở', dashed: false },
+    ];
+    const legendY = PAD.top - 10;
+    let lx = PAD.left;
+    for (const item of legendItems) {
+      ctx.beginPath();
+      if (item.dashed) ctx.setLineDash([4, 3]);
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = item.dashed ? 1.5 : 2;
+      ctx.moveTo(lx, legendY);
+      ctx.lineTo(lx + 20, legendY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = labelColor;
+      ctx.font = '10px system-ui, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(item.label, lx + 24, legendY + 4);
+      lx += ctx.measureText(item.label).width + 44;
+    }
+  }
+
+  function update() {
+    const monthly = Number(sliderMonthly.value);
+    const rate = Number(sliderRate.value);
+    const years = Number(sliderYears.value);
+
+    // Update display values
+    valMonthly.textContent = (monthly / 1000).toLocaleString('vi-VN') + '.000đ';
+    valRate.textContent = rate + '%';
+    valYears.textContent = years + ' năm';
+
+    const series = buildSeries(monthly, rate, years);
+    const last = series[series.length - 1];
+
+    cardInvested.textContent = formatVND(last.invested);
+    cardFund.textContent = formatVND(Math.round(last.fund));
+    cardSavings.textContent = formatVND(Math.round(last.savings));
+
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.width / dpr;
+    const h = canvas.height / dpr;
+    drawChart(w, h, series);
+  }
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const parentW = canvas.parentElement!.getBoundingClientRect().width;
+    const w = Math.max(parentW - 0, 280);
+    const h = Math.round(Math.min(w * 0.55, 340));
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    update();
+  }
+
+  // Slider event listeners
+  sliderMonthly.addEventListener('input', update);
+  sliderRate.addEventListener('input', update);
+  sliderYears.addEventListener('input', update);
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Re-draw when dark mode toggles
+  const observer = new MutationObserver(update);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>
