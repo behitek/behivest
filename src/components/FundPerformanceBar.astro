@@ -124,11 +124,11 @@
     ctx.fillText('Lợi nhuận 1 năm (%)', w / 2, h - 8);
   }
 
-  function getHoveredFund(my: number): Fund | null {
+  function getHoveredFund(mx: number, my: number, w: number): Fund | null {
+    if (mx < PAD.left || mx > w - PAD.right) return null;
     for (let i = 0; i < FUNDS.length; i++) {
       const barTop = PAD.top + i * (BAR_H + GAP);
-      const barBottom = barTop + BAR_H;
-      if (my >= barTop && my <= barBottom) return FUNDS[i];
+      if (my >= barTop && my <= barTop + BAR_H) return FUNDS[i];
     }
     return null;
   }
@@ -138,8 +138,10 @@
     const dpr = window.devicePixelRatio || 1;
     const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
     const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
+    const mx = (clientX - rect.left) * (canvas.width / dpr / rect.width);
     const my = (clientY - rect.top) * (canvas.height / dpr / rect.height);
-    const hit = getHoveredFund(my);
+    const w = canvas.width / dpr;
+    const hit = getHoveredFund(mx, my, w);
     if (hit) {
       tooltip.innerHTML = `<strong>${hit.name}</strong><br/>Lợi nhuận 1 năm: +${hit.return1y}%`;
       tooltip.classList.remove('hidden');
@@ -158,8 +160,9 @@
   window.addEventListener('resize', resize);
 
   const observer = new MutationObserver(() => {
-    const w = parseInt(canvas.style.width);
-    const h = parseInt(canvas.style.height);
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.width / dpr;
+    const h = canvas.height / dpr;
     draw(w, h);
   });
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
