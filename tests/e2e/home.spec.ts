@@ -9,26 +9,22 @@ test.describe('Home Page', () => {
 
     // Check hero section
     await expect(page.getByRole('heading', { level: 1 })).toContainText(
-      'Behivest'
+      'Nếu bạn là sinh viên IT hoặc dev mới đi làm'
     );
     await expect(
-      page.getByText('Đầu tư dễ hiểu, sinh lời bền vững')
+      page.getByText('Gửi tới độc giả từ luyencode.net')
     ).toBeVisible();
   });
 
-  test('should have CTA link to affiliate', async ({ page }) => {
+  test('should have CTA link to Fmarket landing page', async ({ page }) => {
     await page.goto('/');
 
-    // Find the Fmarket affiliate link
-    const affiliateLink = page.getByRole('link', {
-      name: /Tìm hiểu thêm về Fmarket|Khám phá Fmarket/i,
+    const landingLink = page.getByRole('link', {
+      name: /Xem trang Fmarket mình viết riêng cho người mới/i,
     });
 
-    await expect(affiliateLink).toBeVisible();
-    await expect(affiliateLink).toHaveAttribute(
-      'href',
-      'https://go.behitek.com/fmarket'
-    );
+    await expect(landingLink).toBeVisible();
+    await expect(landingLink).toHaveAttribute('href', '/behivest/fmarket');
   });
 
   test('should display featured blog posts', async ({ page }) => {

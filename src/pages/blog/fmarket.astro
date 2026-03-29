@@ -1,0 +1,48 @@
+---
+const redirectUrl = `${import.meta.env.BASE_URL}fmarket`;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Fmarket | Behivest</title>
+    <meta http-equiv="refresh" content={`0;url=${redirectUrl}`} />
+    <link rel="canonical" href={redirectUrl} />
+  </head>
+  <body
+    style="font-family: sans-serif; margin: 0; background: #f8fafc; color: #0f172a;"
+  >
+    <main
+      style="min-height: 100vh; display: grid; place-items: center; padding: 24px;"
+    >
+      <div
+        style="max-width: 640px; text-align: center; background: white; border-radius: 24px; padding: 32px; box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);"
+      >
+        <p
+          style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.18em; color: #059669;"
+        >
+          Đang chuyển trang
+        </p>
+        <h1 style="margin: 16px 0 0; font-size: 32px; line-height: 1.2;">
+          Nội dung Fmarket đã chuyển sang trang giới thiệu mới.
+        </h1>
+        <p
+          style="margin: 16px 0 0; font-size: 16px; line-height: 1.8; color: #475569;"
+        >
+          Bạn sẽ được chuyển ngay sang <strong>/fmarket</strong>. Nếu trình
+          duyệt không tự chuyển, dùng nút bên dưới.
+        </p>
+        <p style="margin: 24px 0 0;">
+          <a
+            href={redirectUrl}
+            style="display: inline-block; border-radius: 12px; background: #10b981; padding: 12px 20px; font-weight: 700; color: white; text-decoration: none;"
+          >
+            Đi tới trang Fmarket
+          </a>
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

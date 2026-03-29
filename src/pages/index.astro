@@ -22,28 +22,278 @@ const heroVideos: HeroVideo[] = [
     id: 'meh4h7NzNF0',
     title: 'VTV',
     icon: '📺',
-    description: 'Đài truyền hình VTV nói về chứng chỉ quỹ là gì và tại sao bạn nên bắt đầu đầu tư.',
+    description:
+      'Đài truyền hình VTV nói về chứng chỉ quỹ là gì và tại sao bạn nên bắt đầu đầu tư.',
   },
   {
     id: 'SHh__otke6Q',
     title: 'Chuyên gia',
     icon: '👨\u200d💼',
-    description: 'Chuyên gia tài chính chia sẻ và phân tích đa chiều về chứng chỉ quỹ dễ hiểu.',
+    description:
+      'Chuyên gia tài chính chia sẻ và phân tích đa chiều về chứng chỉ quỹ dễ hiểu.',
   },
   {
     id: 'ii-QNVIrojI',
     title: 'AI Insight',
     icon: '🤖',
-    description: 'AI tóm tắt khách quan: Bản chất, lợi ích và cơ hội sinh lời khi đầu tư quỹ mở.',
+    description:
+      'AI tóm tắt khách quan: Bản chất, lợi ích và cơ hội sinh lời khi đầu tư quỹ mở.',
   },
 ];
+
+const basePath = import.meta.env.BASE_URL;
+const referralCode = '007F349346164';
+const referralUrl = 'https://go.behitek.com/fmarket';
 ---
 
 <Layout
   title="Trang chủ"
   description="Behivest - Đầu tư dễ hiểu, sinh lời bền vững. Kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người Việt."
 >
-  <VideoHero videos={heroVideos} />
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-20 dark:from-gray-950 dark:via-gray-950 dark:to-emerald-950/30"
+  >
+    <div
+      class="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.16),_transparent_50%)]"
+    >
+    </div>
+    <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          <div
+            class="inline-flex rounded-full border border-emerald-200 bg-white/90 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800 dark:bg-gray-900/80 dark:text-emerald-300"
+          >
+            Gửi tới độc giả từ luyencode.net
+          </div>
+          <h1
+            class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
+          >
+            Nếu bạn là sinh viên IT hoặc dev mới đi làm và muốn bắt đầu đầu tư,
+            đây là hướng đi mình thấy dễ bắt đầu nhất.
+          </h1>
+          <p
+            class="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300"
+          >
+            Nhiều bạn học lập trình với mình rồi hỏi tiếp chuyện đầu tư, nhưng
+            lại chưa có nhiều vốn và cũng không muốn lao ngay vào chọn cổ phiếu.
+            Mình viết riêng một trang về Fmarket cho đúng nhóm đó: người mới,
+            bận, muốn bắt đầu nhỏ và làm từng bước cho chắc.
+          </p>
+          <p
+            class="mt-4 max-w-3xl text-sm leading-6 text-gray-500 dark:text-gray-400"
+          >
+            Minh bạch luôn từ đầu: nếu bạn đăng ký qua mã giới thiệu của mình,
+            bạn nhận ưu đãi từ chương trình của Fmarket và mình cũng nhận hoa
+            hồng giới thiệu.
+          </p>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href={`${basePath}fmarket`} class="btn-primary text-center">
+              Xem trang Fmarket mình viết riêng cho người mới
+            </a>
+            <a
+              href={`${basePath}blog/mutual-funds`}
+              class="btn-secondary text-center"
+            >
+              Đọc trước về quỹ mở
+            </a>
+          </div>
+          <div
+            class="mt-8 grid gap-3 text-sm text-gray-600 dark:text-gray-300 sm:grid-cols-3"
+          >
+            <div
+              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
+            >
+              Bắt đầu với số tiền nhỏ
+            </div>
+            <div
+              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
+            >
+              Phù hợp cho người mới
+            </div>
+            <div
+              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
+            >
+              Mở tài khoản online
+            </div>
+          </div>
+        </div>
+
+        <aside
+          class="card border-emerald-200/70 bg-white/90 shadow-xl shadow-emerald-100/50 dark:border-emerald-900/60 dark:bg-gray-900/90 dark:shadow-none"
+        >
+          <div
+            class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+          >
+            Gợi ý mình đang dùng để giới thiệu cho người mới
+          </div>
+          <h2 class="mt-5 text-2xl font-bold text-gray-900 dark:text-white">
+            Fmarket cho người muốn bắt đầu gọn, rõ và không phải theo dõi bảng
+            giá mỗi ngày
+          </h2>
+          <p class="mt-4 text-gray-600 dark:text-gray-300">
+            Không phải lời hứa lợi nhuận. Chỉ là một điểm bắt đầu hợp lý nếu bạn
+            muốn tập đầu tư bằng số vốn nhỏ, theo cách đều đặn và dễ duy trì.
+          </p>
+          <div class="mt-6 rounded-2xl bg-gray-50 p-4 dark:bg-gray-950">
+            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+              Mã giới thiệu
+            </div>
+            <div
+              id="homepage-referral-code"
+              class="mt-2 text-2xl font-bold tracking-[0.2em] text-gray-900 dark:text-white"
+            >
+              {referralCode}
+            </div>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+              Mình để mã rõ ở đây để bạn không phải tìm lại khi qua trang hướng
+              dẫn hoặc ra app.
+            </p>
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={referralUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-emerald-600"
+              >
+                Cài app Fmarket
+              </a>
+              <button
+                type="button"
+                data-copy-referral
+                data-copy-text={referralCode}
+                data-copy-status-id="homepage-referral-status"
+                class="inline-flex items-center justify-center rounded-lg border border-emerald-200 px-4 py-2.5 text-sm font-semibold text-emerald-700 transition-all hover:bg-emerald-50 dark:border-emerald-900 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
+              >
+                Copy mã giới thiệu
+              </button>
+            </div>
+            <p
+              id="homepage-referral-status"
+              class="mt-2 text-xs text-gray-500 dark:text-gray-400"
+              aria-live="polite"
+            >
+              Bấm copy để lưu mã trước khi chuyển sang app.
+            </p>
+          </div>
+          <ul class="mt-6 space-y-3 text-sm text-gray-600 dark:text-gray-300">
+            <li class="flex gap-3">
+              <span class="mt-0.5 text-emerald-500">●</span>
+              <span
+                >Dành cho sinh viên, intern, fresher và người mới có 500.000đ
+                tới vài triệu để bắt đầu.</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-0.5 text-emerald-500">●</span>
+              <span>Hợp với người muốn đầu tư định kỳ thay vì lướt sóng.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-0.5 text-emerald-500">●</span>
+              <span
+                >Trang hướng dẫn mới sẽ nói thẳng cả ưu điểm lẫn giới hạn.</span
+              >
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const fallbackCopyText = (text: string): boolean => {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      textarea.style.pointerEvents = 'none';
+
+      document.body.append(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, text.length);
+
+      const copied = document.execCommand('copy');
+      textarea.remove();
+
+      return copied;
+    };
+
+    const copyButtons = document.querySelectorAll('[data-copy-referral]');
+
+    copyButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = button as HTMLButtonElement;
+        const text = target.dataset['copyText'] ?? '';
+        const statusId = target.dataset['copyStatusId'] ?? '';
+        const status = statusId ? document.getElementById(statusId) : null;
+
+        if (!text) return;
+
+        try {
+          let copied = false;
+
+          if (window.isSecureContext && navigator.clipboard?.writeText) {
+            try {
+              await navigator.clipboard.writeText(text);
+              copied = true;
+            } catch (_error) {
+              copied = false;
+            }
+          }
+
+          if (!copied) {
+            copied = fallbackCopyText(text);
+          }
+
+          if (!copied) {
+            throw new Error('Copy failed');
+          }
+
+          if (status) {
+            status.textContent = `Đã copy mã ${text}`;
+          }
+        } catch (_error) {
+          if (status) {
+            status.textContent = `Không copy tự động được. Mã của bạn là ${text}`;
+          }
+        }
+      });
+    });
+  </script>
+
+  <section
+    class="border-y border-gray-200 bg-white py-8 dark:border-gray-800 dark:bg-gray-950"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
+      >
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400"
+          >
+            Nội dung xem thêm
+          </p>
+          <h2 class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">
+            Nếu bạn muốn xem thêm góc nhìn nền tảng trước khi bắt đầu
+          </h2>
+        </div>
+        <p class="max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300">
+          Mình vẫn giữ lại phần video tổng hợp bên dưới để bạn tự xem thêm bối
+          cảnh, nhưng trang Fmarket mới sẽ là nơi mình khuyên bắt đầu hành động.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <VideoHero
+    videos={heroVideos}
+    compact={true}
+    ctaHref={`${basePath}fmarket`}
+    ctaLabel="Xem trang Fmarket dành cho người mới"
+    ctaSubtitle="Có giải thích rõ lý do mình giới thiệu và cách bắt đầu trong 10 phút"
+  />
 
   <!-- Featured Posts -->
   <section class="py-16">
@@ -120,7 +370,7 @@ const heroVideos: HeroVideo[] = [
       </div>
 
       <div class="mt-12 text-center">
-        <a href={`${import.meta.env.BASE_URL}blog`} class="btn-secondary">
+        <a href={`${basePath}blog`} class="btn-secondary">
           Xem tất cả bài viết →
         </a>
       </div>
@@ -196,7 +446,7 @@ const heroVideos: HeroVideo[] = [
       </div>
 
       <div class="mt-12 text-center">
-        <a href={`${import.meta.env.BASE_URL}tools`} class="btn-secondary">
+        <a href={`${basePath}tools`} class="btn-secondary">
           Xem tất cả công cụ →
         </a>
       </div>
@@ -231,7 +481,7 @@ const heroVideos: HeroVideo[] = [
             { term: 'Drawdown', question: 'Mức sụt giảm tối đa là gì?' },
           ].map(({ term, question }) => (
             <a
-              href={`${import.meta.env.BASE_URL}faq`}
+              href={`${basePath}faq`}
               class="card group flex items-start gap-4 transition-all hover:border-primary-300 hover:shadow-md dark:hover:border-primary-700"
             >
               <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
@@ -251,7 +501,7 @@ const heroVideos: HeroVideo[] = [
       </div>
 
       <div class="mt-10 text-center">
-        <a href={`${import.meta.env.BASE_URL}faq`} class="btn-secondary">
+        <a href={`${basePath}faq`} class="btn-secondary">
           Xem tất cả từ điển A–Z →
         </a>
       </div>
@@ -264,20 +514,23 @@ const heroVideos: HeroVideo[] = [
       <div
         class="rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 px-8 py-16 text-center text-white md:px-12"
       >
-        <h2 class="text-3xl font-bold md:text-4xl">Sẵn sàng bắt đầu đầu tư?</h2>
+        <h2 class="text-3xl font-bold md:text-4xl">
+          Muốn xem đúng trang dành cho người mới?
+        </h2>
         <p class="mt-4 text-lg text-primary-50">
-          Tải Fmarket - Ứng dụng đầu tư quỹ mở an toàn, dễ sử dụng nhất Việt Nam
+          Mình gom lại lý do giới thiệu Fmarket, đối tượng phù hợp và các bước
+          bắt đầu ngắn gọn tại một chỗ.
         </p>
         <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
           <a
-            href={`${import.meta.env.BASE_URL}blog/fmarket`}
+            href={`${basePath}fmarket`}
             class="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-primary-600 transition-all hover:bg-gray-100"
           >
-            Tìm hiểu thêm về Fmarket →
+            Xem trang Fmarket →
           </a>
         </div>
         <p class="mt-4 text-sm text-primary-100">
-          Chỉ cần 500.000 đồng để bắt đầu • An toàn • Minh bạch
+          Vốn nhỏ • Minh bạch chuyện referral • Không hứa lợi nhuận
         </p>
       </div>
     </div>

@@ -1,0 +1,588 @@
+---
+import Layout from '@layouts/Layout.astro';
+
+const referralCode = '007F349346164';
+const referralUrl = 'https://go.behitek.com/fmarket';
+---
+
+<Layout
+  title="Fmarket cho người mới bắt đầu"
+  description="Trang giới thiệu Fmarket dành cho độc giả từ luyencode.net, sinh viên IT và dev mới đi làm muốn bắt đầu đầu tư với số vốn nhỏ."
+>
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-20 dark:from-gray-950 dark:via-gray-950 dark:to-emerald-950/30"
+  >
+    <div
+      class="absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_52%)]"
+    >
+    </div>
+    <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+          <div
+            class="inline-flex rounded-full border border-emerald-200 bg-white/90 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800 dark:bg-gray-900/80 dark:text-emerald-300"
+          >
+            Trang mình viết riêng cho độc giả từ luyencode.net
+          </div>
+          <h1
+            class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
+          >
+            Nếu bạn là sinh viên IT, fresher hoặc dev mới đi làm, Fmarket là một
+            trong những cách dễ nhất mình gợi ý để bắt đầu đầu tư.
+          </h1>
+          <p
+            class="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300"
+          >
+            Mình không viết trang này như một bài review chung chung. Đây là
+            trang giới thiệu dành cho nhóm đã biết cách mình dạy và muốn một
+            điểm bắt đầu gọn, rõ, ít áp lực hơn chuyện tự chọn cổ phiếu ngay từ
+            đầu.
+          </p>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href={referralUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary text-center"
+            >
+              Tải app Fmarket và bắt đầu đăng ký
+            </a>
+            <a href="#bat-dau" class="btn-secondary text-center">
+              Xem cách bắt đầu trong 10 phút
+            </a>
+          </div>
+          <div
+            class="mt-6 grid gap-3 text-sm text-gray-600 dark:text-gray-300 sm:grid-cols-3"
+          >
+            <div
+              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
+            >
+              Có thể bắt đầu với vốn nhỏ
+            </div>
+            <div
+              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
+            >
+              Phù hợp cho người bận
+            </div>
+            <div
+              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
+            >
+              Thiết lập online khá nhanh
+            </div>
+          </div>
+          <p
+            class="mt-6 max-w-3xl text-sm leading-6 text-gray-500 dark:text-gray-400"
+          >
+            Disclosure rõ luôn: nếu bạn đăng ký qua mã giới thiệu của mình, bạn
+            nhận ưu đãi từ chương trình referral của Fmarket và mình cũng nhận
+            hoa hồng giới thiệu. Vì có lợi ích thương mại nên mình nói thẳng từ
+            đầu.
+          </p>
+        </div>
+
+        <aside
+          class="card border-emerald-200/70 bg-white/90 shadow-xl shadow-emerald-100/50 dark:border-emerald-900/60 dark:bg-gray-900/90 dark:shadow-none"
+        >
+          <div class="rounded-3xl bg-emerald-500 p-6 text-white">
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-50"
+            >
+              Mã giới thiệu
+            </p>
+            <p
+              id="landing-referral-code"
+              class="mt-3 text-3xl font-bold tracking-[0.22em]"
+            >
+              {referralCode}
+            </p>
+            <p class="mt-3 text-sm leading-6 text-emerald-50">
+              Bạn có thể lưu lại mã này trước rồi bấm sang app. Mình để nó ngay
+              đầu trang để không phải kéo tìm ở cuối bài.
+            </p>
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={referralUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-emerald-700 transition-all hover:bg-emerald-50"
+              >
+                Cài app Fmarket
+              </a>
+              <button
+                type="button"
+                data-copy-referral
+                data-copy-text={referralCode}
+                data-copy-status-id="landing-referral-status"
+                class="inline-flex items-center justify-center rounded-lg border border-white/50 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
+              >
+                Copy mã giới thiệu
+              </button>
+            </div>
+            <p
+              id="landing-referral-status"
+              class="mt-2 text-xs text-emerald-50"
+              aria-live="polite"
+            >
+              Copy mã trước rồi mở app nếu bạn muốn đi nhanh.
+            </p>
+          </div>
+
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl bg-gray-50 p-4 dark:bg-gray-950">
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">
+                Điều mình đang khuyên
+              </div>
+              <p
+                class="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300"
+              >
+                Bắt đầu bằng số tiền bạn thấy thoải mái, ưu tiên thói quen đầu
+                tư định kỳ hơn là cố đoán đúng thời điểm mua bán.
+              </p>
+            </div>
+            <div
+              class="rounded-2xl border border-dashed border-emerald-200 p-4 dark:border-emerald-900"
+            >
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">
+                Điều mình không hứa
+              </div>
+              <p
+                class="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300"
+              >
+                Không có lợi nhuận đảm bảo. Nếu bạn cần kiếm nhanh hoặc thích
+                trading ngắn hạn, đây không phải hướng mình khuyên bắt đầu.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
+          >
+            Vì sao mình viết trang này
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
+            Mình muốn giới thiệu một điểm bắt đầu đủ đơn giản cho đúng nhóm độc
+            giả của mình.
+          </h2>
+        </div>
+        <div
+          class="space-y-4 text-base leading-8 text-gray-600 dark:text-gray-300"
+        >
+          <p>
+            Có nhiều bạn học lập trình với mình xong bắt đầu đi làm, có chút
+            tiền để dành và hỏi tiếp: nên bắt đầu đầu tư từ đâu cho đỡ rối. Mình
+            không muốn trả lời bằng một danh sách dài các sản phẩm tài chính.
+          </p>
+          <p>
+            Với người mới, mình chỉ muốn giới thiệu thứ gì đủ dễ hiểu, đủ thực
+            tế và không đòi hỏi ngồi nhìn thị trường mỗi ngày. Đó là lý do mình
+            gom mọi thứ về Fmarket vào một trang riêng thay vì để nó lẫn như một
+            bài blog bình thường.
+          </p>
+          <p>
+            Và vì đây là một lời giới thiệu có referral, mình công khai chuyện
+            đó ngay đầu trang để bạn tự đánh giá mức độ tin tưởng cho công bằng.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-50 py-16 dark:bg-gray-900">
+    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div class="card">
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
+          >
+            Câu chuyện của mình
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
+            Mình cũng đi từ tâm lý muốn bắt đầu, nhưng chưa muốn lao vào một thứ
+            quá nặng.
+          </h2>
+          <div
+            class="mt-6 space-y-4 text-base leading-8 text-gray-600 dark:text-gray-300"
+          >
+            <p>
+              Giai đoạn đầu khi có tiền để dành, điều khiến mình chần chừ không
+              phải là thiếu hứng thú, mà là cảm giác mọi thứ quá phân mảnh: cổ
+              phiếu, báo cáo tài chính, room chat, tin tức, rồi câu hỏi mua gì
+              trước.
+            </p>
+            <p>
+              Điều mình cần lúc đó không phải một phương án tối ưu tuyệt đối.
+              Mình cần một cách bắt đầu đủ nhẹ để vào guồng, hiểu dần cách tiền
+              của mình vận hành và giữ được thói quen lâu dài.
+            </p>
+            <p>
+              Vì vậy, khi có bạn sinh viên hoặc dev mới đi làm hỏi mình nên bắt
+              đầu ở đâu, mình thường nghiêng về một phương án như Fmarket hơn là
+              bảo các bạn nhảy thẳng vào chọn từng mã cổ phiếu.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
+          >
+            Dành cho ai
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
+            Hợp với người muốn đi đường dài bằng nhịp đều.
+          </h2>
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl bg-emerald-50 p-4 dark:bg-emerald-950/40">
+              <div class="font-semibold text-gray-900 dark:text-white">
+                Phù hợp nếu bạn là:
+              </div>
+              <ul
+                class="mt-3 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-300"
+              >
+                <li>
+                  • Sinh viên có vài trăm nghìn đến vài triệu để thử bắt đầu.
+                </li>
+                <li>
+                  • Người mới đi làm vừa có lương và muốn hình thành thói quen
+                  đầu tư.
+                </li>
+                <li>
+                  • Dev bận, không muốn mỗi ngày nhìn bảng giá hay đọc tin doanh
+                  nghiệp.
+                </li>
+                <li>
+                  • Người muốn bắt đầu từ quỹ trước, rồi học dần thêm các kênh
+                  khác.
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-rose-50 p-4 dark:bg-rose-950/30">
+              <div class="font-semibold text-gray-900 dark:text-white">
+                Không hợp lắm nếu bạn:
+              </div>
+              <ul
+                class="mt-3 space-y-3 text-sm leading-6 text-gray-600 dark:text-gray-300"
+              >
+                <li>
+                  • Muốn trading ngắn hạn hoặc tìm cảm giác vào lệnh liên tục.
+                </li>
+                <li>
+                  • Đang kỳ vọng lợi nhuận chắc chắn, nhanh và không có biến
+                  động.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
+        >
+          Vì sao mình thấy đây là điểm bắt đầu tốt
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
+          Mình nghiêng về Fmarket cho người mới vì nó giải quyết đúng những
+          vướng mắc đầu tiên.
+        </h2>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="card">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Onboarding tương đối đơn giản
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Với người mới, việc thiết lập được tài khoản online mà không phải đi
+            qua quá nhiều bước là rất quan trọng. Rào cản thấp hơn thì khả năng
+            bắt đầu cao hơn.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Không cần vốn lớn mới vào được
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Nếu bạn đang ở giai đoạn tiết kiệm từng tháng, đây là kiểu sản phẩm
+            hợp lý hơn việc chờ đủ nhiều tiền rồi mới nghĩ tới chuyện đầu tư.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Hợp với đầu tư định kỳ
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Mình đánh giá cao những thứ giúp bạn giữ nhịp lâu dài. Với người
+            mới, đều đặn quan trọng hơn việc cố thắng lớn ở vài lần đầu.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Dễ tiếp cận hơn việc chọn cổ phiếu ngay
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Nếu bạn chưa có thời gian học nhiều về doanh nghiệp, định giá hay
+            chu kỳ thị trường, bắt đầu từ quỹ thường ít ma sát hơn và ít khiến
+            bạn bỏ cuộc sớm.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bat-dau" class="bg-gray-50 py-16 dark:bg-gray-900">
+    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
+        >
+          Bắt đầu trong khoảng 10 phút
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
+          Chuẩn bị ít thứ, làm từng bước, nạp số tiền bạn thấy thoải mái.
+        </h2>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        <div class="card">
+          <div
+            class="text-sm font-semibold text-emerald-600 dark:text-emerald-400"
+          >
+            Bước 1
+          </div>
+          <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+            Chuẩn bị CCCD và tài khoản ngân hàng
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Chỉ cần sẵn giấy tờ tùy thân và tài khoản ngân hàng để quá trình xác
+            minh và nạp tiền không bị ngắt quãng.
+          </p>
+        </div>
+        <div class="card">
+          <div
+            class="text-sm font-semibold text-emerald-600 dark:text-emerald-400"
+          >
+            Bước 2
+          </div>
+          <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+            Tải app và đăng ký tài khoản
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Bạn có thể đi qua link referral này:
+            <a
+              href={referralUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-medium text-primary-600 dark:text-primary-400"
+            >
+              go.behitek.com/fmarket
+            </a>. Làm eKYC theo hướng dẫn trong app.
+          </p>
+        </div>
+        <div class="card">
+          <div
+            class="text-sm font-semibold text-emerald-600 dark:text-emerald-400"
+          >
+            Bước 3
+          </div>
+          <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+            Nhập mã giới thiệu đúng chỗ
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Khi app hỏi mã giới thiệu, nhập <span
+              class="font-semibold text-gray-900 dark:text-white"
+              >{referralCode}</span
+            >. Theo chương trình referral hiện tại, bạn có ưu đãi và mình cũng
+            có hoa hồng giới thiệu.
+          </p>
+        </div>
+        <div class="card">
+          <div
+            class="text-sm font-semibold text-emerald-600 dark:text-emerald-400"
+          >
+            Bước 4
+          </div>
+          <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
+            Bắt đầu với số tiền nhỏ, ưu tiên đều đặn
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Nếu bạn mới hoàn toàn, mình nghiêng về việc nạp một khoản vừa phải
+            rồi theo dõi trải nghiệm trước. Điều quan trọng là duy trì được thói
+            quen, không phải ép mình vào một con số quá lớn ngay từ đầu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
+        >
+          FAQ ngắn
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-gray-900 dark:text-white">
+          Mấy câu hỏi mình đoán bạn sẽ hỏi trước khi bấm đăng ký.
+        </h2>
+      </div>
+      <div class="mt-10 space-y-4">
+        <div class="card">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Mình chỉ có ít tiền, bắt đầu có đáng không?
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Có, nếu mục tiêu của bạn là bắt đầu thói quen. Số tiền nhỏ vẫn đủ để
+            bạn làm quen cách nạp tiền, chọn quỹ và theo dõi biến động mà không
+            bị áp lực quá lớn.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Có an toàn tuyệt đối cho người mới không?
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Không có kênh đầu tư nào an toàn tuyệt đối. Điều mình đang nói là
+            đây là một cách tiếp cận dễ hơn và đỡ rối hơn cho người mới so với
+            việc tự chọn cổ phiếu từ đầu.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Nếu cần tiền thì rút lại được không?
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Bạn vẫn có thể bán và rút tiền, nhưng đừng xem đây như tiền tiêu
+            ngay trong ngày. Nếu đó là quỹ dành cho đầu tư, hãy giữ thêm quỹ dự
+            phòng riêng cho nhu cầu khẩn cấp.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+            Bạn giới thiệu vì tin dùng hay vì có hoa hồng?
+          </h3>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            Cả hai. Có hoa hồng giới thiệu, và vì thế mình nói rõ từ đầu. Nhưng
+            nếu mình thấy sản phẩm này không hợp để giới thiệu cho người mới,
+            mình sẽ không đặt nó ở vị trí khuyến nghị công khai như thế này.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-20">
+    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div
+        class="rounded-3xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-8 py-12 text-white md:px-12"
+      >
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-50"
+        >
+          Chốt lại
+        </p>
+        <h2 class="mt-3 text-3xl font-bold md:text-4xl">
+          Nếu bạn muốn bắt đầu đầu tư mà vẫn giữ mọi thứ đơn giản, đây là trang
+          mình muốn gửi bạn đầu tiên.
+        </h2>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-emerald-50">
+          Phù hợp nhất với sinh viên IT, người mới đi làm và dev bận không muốn
+          biến chuyện đầu tư thành một công việc toàn thời gian. Nhớ dùng mã
+          <span class="font-semibold text-white"> {referralCode}</span> nếu bạn đăng
+          ký qua link của mình.
+        </p>
+        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+          <a
+            href={referralUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-emerald-700 transition-all hover:bg-emerald-50"
+          >
+            Mở Fmarket và đăng ký
+          </a>
+          <a
+            href={`${import.meta.env.BASE_URL}blog/mutual-funds`}
+            class="inline-flex items-center justify-center rounded-lg border border-white/60 px-8 py-3 font-semibold text-white transition-all hover:bg-white/10"
+          >
+            Đọc thêm về quỹ mở
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const fallbackCopyText = (text: string): boolean => {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      textarea.style.pointerEvents = 'none';
+
+      document.body.append(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, text.length);
+
+      const copied = document.execCommand('copy');
+      textarea.remove();
+
+      return copied;
+    };
+
+    const copyButtons = document.querySelectorAll('[data-copy-referral]');
+
+    copyButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = button as HTMLButtonElement;
+        const text = target.dataset['copyText'] ?? '';
+        const statusId = target.dataset['copyStatusId'] ?? '';
+        const status = statusId ? document.getElementById(statusId) : null;
+
+        if (!text) return;
+
+        try {
+          let copied = false;
+
+          if (window.isSecureContext && navigator.clipboard?.writeText) {
+            try {
+              await navigator.clipboard.writeText(text);
+              copied = true;
+            } catch (_error) {
+              copied = false;
+            }
+          }
+
+          if (!copied) {
+            copied = fallbackCopyText(text);
+          }
+
+          if (!copied) {
+            throw new Error('Copy failed');
+          }
+
+          if (status) {
+            status.textContent = `Đã copy mã ${text}`;
+          }
+        } catch (_error) {
+          if (status) {
+            status.textContent = `Không copy tự động được. Mã của bạn là ${text}`;
+          }
+        }
+      });
+    });
+  </script>
+</Layout>

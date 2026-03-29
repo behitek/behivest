@@ -12,18 +12,18 @@ test.describe('Blog', () => {
 
     // Check that blog posts are displayed
     const articles = page.locator('article');
-    await expect(articles).toHaveCount(2); // We have 2 sample posts
+    await expect(articles).toHaveCount(3);
   });
 
   test('should display sample blog posts', async ({ page }) => {
     await page.goto('/blog');
 
-    // Check that our sample posts are visible
+    // Check that our current blog posts are visible
     await expect(
       page.getByText(/Quỹ mở là gì\? Cách đầu tư cho người mới bắt đầu/i)
     ).toBeVisible();
     await expect(
-      page.getByText(/Fmarket.*Ứng dụng đầu tư quỹ mở/i)
+      page.getByText(/Lương 10 triệu thì bắt đầu đầu tư như thế nào/i)
     ).toBeVisible();
   });
 
@@ -94,20 +94,17 @@ test.describe('Blog', () => {
     expect(width).not.toBe('0%');
   });
 
-  test('should have CTA to Fmarket in blog post', async ({ page }) => {
-    await page.goto('/blog/fmarket-app-dau-tu-quy-mo');
+  test('should have CTA to Fmarket landing page in blog post', async ({
+    page,
+  }) => {
+    await page.goto('/blog/investing-on-10-million-salary');
 
-    // Check for affiliate links
-    const affiliateLinks = page.getByRole('link', {
-      name: /Fmarket|Tìm hiểu thêm|Tải Fmarket/i,
+    const landingLink = page.getByRole('link', {
+      name: /Xem trang Fmarket cho người mới bắt đầu/i,
     });
 
-    // Should have at least one affiliate link
-    await expect(affiliateLinks.first()).toBeVisible();
-
-    // Check that it points to the affiliate URL
-    const href = await affiliateLinks.first().getAttribute('href');
-    expect(href).toContain('fmarket.vn?ref=affiliate-demo');
+    await expect(landingLink).toBeVisible();
+    await expect(landingLink).toHaveAttribute('href', '/behivest/fmarket');
   });
 
   test('should have comments section placeholder', async ({ page }) => {
