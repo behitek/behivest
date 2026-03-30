@@ -33,6 +33,13 @@ import Layout from '@layouts/Layout.astro';
       <p class="mt-2 text-gray-600 dark:text-gray-300">
         Công cụ giúp bạn phân chia thu nhập một cách khoa học
       </p>
+      <p
+        class="mt-4 max-w-3xl text-sm leading-7 text-gray-500 dark:text-gray-400"
+      >
+        Hãy xem đây như một công cụ kiểm tra mức sẵn sàng. Nó giúp bạn nhìn ra
+        phần tiền có thể dành cho dự phòng và đầu tư, chứ không buộc bạn phải
+        theo tỷ lệ này một cách cứng nhắc.
+      </p>
 
       <div class="mt-12 grid gap-8 lg:grid-cols-2">
         <!-- Input Form -->
@@ -172,6 +179,27 @@ import Layout from '@layouts/Layout.astro';
                 </p>
               </div>
             </div>
+
+            <div
+              id="budget-interpretation"
+              class="rounded-lg border border-dashed border-primary-200 p-4 dark:border-primary-800"
+            >
+            </div>
+
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={`${import.meta.env.BASE_URL}tools/emergency-fund-planner`}
+                class="btn-secondary text-center"
+              >
+                Kiểm tra quỹ khẩn cấp
+              </a>
+              <a
+                href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
+                class="btn-primary text-center"
+              >
+                Xem mức đầu tư định kỳ
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -270,6 +298,18 @@ import Layout from '@layouts/Layout.astro';
 
     const form = document.getElementById('budget-form') as HTMLFormElement;
 
+    const getInterpretation = (savingsAmount: number): string => {
+      if (savingsAmount < 1000000) {
+        return 'Phần dành cho tiết kiệm và đầu tư hiện còn khá mỏng. Giai đoạn này nên ưu tiên tạo lớp đệm tiền mặt trước khi nghĩ tới mức đầu tư lớn hơn.';
+      }
+
+      if (savingsAmount < 3000000) {
+        return 'Bạn đã có một khoảng tiền đủ để vừa bồi quỹ khẩn cấp, vừa cân nhắc bắt đầu đầu tư nhỏ nếu duy trì đều mỗi tháng.';
+      }
+
+      return 'Bạn đang có dư địa tương đối tốt cho cả quỹ dự phòng lẫn đầu tư dài hạn. Điều quan trọng là chọn mức bạn thấy thoải mái duy trì lâu dài.';
+    };
+
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -290,6 +330,12 @@ import Layout from '@layouts/Layout.astro';
         document.getElementById('savings-amount')!.textContent = formatCurrency(
           result.savings
         );
+        document.getElementById('budget-interpretation')!.innerHTML = `
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-600 dark:text-primary-400">Diễn giải nhanh</p>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">${getInterpretation(
+            result.savings
+          )}</p>
+        `;
       } catch {
         alert('Vui lòng kiểm tra lại các giá trị nhập vào');
       }

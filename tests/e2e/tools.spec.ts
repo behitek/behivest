@@ -1,220 +1,199 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
-test.describe('Tools Page', () => {
-  test('should load tools listing page', async ({ page }) => {
+test.describe('Tools Hub', () => {
+  test('should load the beginner-first tools hub', async ({ page }) => {
     await page.goto('/tools');
 
-    // Check page title
-    await expect(page).toHaveTitle(/Công cụ tài chính.*Behivest/);
-
-    // Check heading
+    await expect(page).toHaveTitle(/Công cụ tài chính cho người mới bắt đầu/);
     await expect(
-      page.getByRole('heading', { name: 'Công cụ tài chính' })
+      page.getByRole('heading', {
+        name: /Bắt đầu từ những con số thật của bạn/i,
+      })
     ).toBeVisible();
-
-    // Check that all 4 tools are listed
-    await expect(page.getByText('Tính lãi kép')).toBeVisible();
-    await expect(page.getByText('Tính SIP')).toBeVisible();
-    await expect(page.getByText('Phân bổ ngân sách')).toBeVisible();
-    await expect(page.getByText('So sánh đầu tư')).toBeVisible();
+    await expect(
+      page.getByRole('heading', {
+        name: /Chọn điểm bắt đầu theo đúng điều bạn đang băn khoăn/i,
+      })
+    ).toBeVisible();
+    await expect(
+      page.getByText('Tôi nên ưu tiên quỹ khẩn cấp, tiết kiệm hay đầu tư?')
+    ).toBeVisible();
+    await expect(
+      page.getByText('Tôi có thể bắt đầu với bao nhiêu tiền mỗi tháng?')
+    ).toBeVisible();
+    await expect(
+      page.getByText('Nếu đầu tư đều, sau vài năm có thể thành bao nhiêu?')
+    ).toBeVisible();
   });
 
-  test('should navigate to individual tools', async ({ page }) => {
+  test('should update the monthly starting preview', async ({ page }) => {
     await page.goto('/tools');
 
-    // Click on compound interest tool
-    await page.getByRole('link', { name: /Tính lãi kép/i }).click();
+    const range = page.locator('#starter-range');
+    await expect(range).toContainText('1.200.000');
 
-    // Wait for navigation
-    await page.waitForURL('/tools/compound-interest');
+    await page.locator('#starter-emergency-status').selectOption('none');
 
-    // Check that we're on the compound interest page
+    await expect(page.locator('#starter-priority')).toContainText(
+      'Ưu tiên quỹ khẩn cấp'
+    );
+    await expect(range).toContainText('600.000');
+  });
+
+  test('should update the SIP inline preview with presets', async ({
+    page,
+  }) => {
+    await page.goto('/tools');
+
+    const finalAmount = page.locator('#preview-final-amount');
+    const initialText = (await finalAmount.textContent()) ?? '';
+
+    await page.getByRole('button', { name: '2 triệu' }).click();
+    await page.getByRole('button', { name: '10 năm' }).click();
+
+    await expect(page.locator('#preview-total-invested')).toContainText(
+      '240.000.000'
+    );
+    await expect(finalAmount).not.toHaveText(initialText);
+    await expect(page.locator('#sip-preview-interpretation')).toContainText(
+      'Diễn giải nhanh'
+    );
+  });
+
+  test('should navigate from the hub to a new beginner tool', async ({
+    page,
+  }) => {
+    await page.goto('/tools');
+
+    await page
+      .getByRole('link', { name: /Lập kế hoạch quỹ khẩn cấp/i })
+      .click();
+
+    await page.waitForURL('**/tools/emergency-fund-planner');
     await expect(
-      page.getByRole('heading', { name: /Tính lãi kép/i })
+      page.getByRole('heading', {
+        name: /Quỹ khẩn cấp của bạn đang ở đâu trên lộ trình an toàn/i,
+      })
     ).toBeVisible();
   });
 });
 
-test.describe('Compound Interest Calculator', () => {
-  test('should perform calculation with default values', async ({ page }) => {
-    await page.goto('/tools/compound-interest');
+test.describe('Emergency Fund Planner', () => {
+  test('should calculate emergency fund progress on load', async ({ page }) => {
+    await page.goto('/tools/emergency-fund-planner');
 
-    // Check that form exists
-    const form = page.locator('#compound-form');
-    await expect(form).toBeVisible();
-
-    // Submit form (should auto-calculate on load)
-    await page.waitForTimeout(500);
-
-    // Check that results are displayed and not zero
-    const finalAmount = page.locator('#final-amount');
-    const text = await finalAmount.textContent();
-    expect(text).not.toBe('0 ₫');
-    expect(text).toContain('₫');
-  });
-
-  test('should update results when inputs change', async ({ page }) => {
-    await page.goto('/tools/compound-interest');
-
-    // Get initial result
-    await page.waitForTimeout(300);
-    const initialResult = await page.locator('#final-amount').textContent();
-
-    // Change principal amount
-    await page.locator('#principal').fill('20000000');
-
-    // Submit form
-    await page.locator('button[type="submit"]').click();
-
-    // Wait for calculation
-    await page.waitForTimeout(300);
-
-    // Check that result changed
-    const newResult = await page.locator('#final-amount').textContent();
-    expect(newResult).not.toBe(initialResult);
-  });
-
-  test('should display yearly breakdown', async ({ page }) => {
-    await page.goto('/tools/compound-interest');
-
-    await page.waitForTimeout(500);
-
-    // Check that breakdown section exists
-    await expect(page.getByText(/Chi tiết theo năm/i)).toBeVisible();
-
-    // Check that breakdown items are displayed
-    const breakdownItems = page.locator('#breakdown-list > div');
-    await expect(breakdownItems.first()).toBeVisible();
+    await expect(page.locator('#emergency-target-amount')).toContainText(
+      '48.000.000'
+    );
+    await expect(page.locator('#emergency-progress-percent')).toContainText(
+      '21%'
+    );
+    await expect(page.locator('#emergency-guidance')).toContainText(
+      'Ưu tiên tiền mặt trước'
+    );
   });
 });
 
-test.describe('SIP Calculator', () => {
-  test('should perform SIP calculation', async ({ page }) => {
+test.describe('Goal-Based Contribution Calculator', () => {
+  test('should calculate monthly contribution from a target amount', async ({
+    page,
+  }) => {
+    await page.goto('/tools/goal-based-contribution');
+
+    await expect(page.locator('#goal-required-monthly')).not.toContainText(
+      '0 ₫'
+    );
+    await expect(page.locator('#goal-interpretation')).toContainText(
+      'Diễn giải nhanh'
+    );
+
+    await page.locator('#goal-target-amount').fill('120000000');
+    await page.locator('#goal-return-rate').fill('0');
+    await page.locator('#goal-years').fill('5');
+    await page.locator('button[type="submit"]').click();
+
+    await expect(page.locator('#goal-required-monthly')).toContainText(
+      '2.000.000'
+    );
+  });
+});
+
+test.describe('Existing Tools', () => {
+  test('should keep the SIP calculator presets and interpretation working', async ({
+    page,
+  }) => {
     await page.goto('/tools/sip-calculator');
 
-    // Wait for auto-calculation
-    await page.waitForTimeout(500);
+    await page.getByRole('button', { name: '3 triệu' }).click();
+    await page.getByRole('button', { name: '10 năm' }).click();
 
-    // Check results are displayed
-    const finalAmount = page.locator('#sip-final-amount');
-    const text = await finalAmount.textContent();
-    expect(text).not.toBe('0 ₫');
-
-    // Check that total invested is shown
-    const totalInvested = page.locator('#sip-total-invested');
-    const investedText = await totalInvested.textContent();
-    expect(investedText).not.toBe('0 ₫');
+    await expect(page.locator('#sip-total-invested')).toContainText(
+      '360.000.000'
+    );
+    await expect(page.locator('#sip-interpretation')).toContainText(
+      'Diễn giải nhanh'
+    );
   });
 
-  test('should show ratio bar', async ({ page }) => {
-    await page.goto('/tools/sip-calculator');
-
-    await page.waitForTimeout(500);
-
-    // Check that ratio bar exists and has width
-    const ratioBar = page.locator('#sip-ratio-bar');
-    const width = await ratioBar.evaluate((el) => el.style.width);
-    expect(width).not.toBe('0%');
-  });
-});
-
-test.describe('Budget Allocator', () => {
-  test('should allocate budget using 50/30/20 rule', async ({ page }) => {
+  test('should keep the budget allocator as a readiness tool', async ({
+    page,
+  }) => {
     await page.goto('/tools/budget-allocator');
 
-    // Input monthly income
-    await page.locator('#monthly-income').fill('20000000');
-
-    // Submit
+    await page.locator('#monthly-income').fill('15000000');
     await page.locator('button[type="submit"]').click();
 
-    await page.waitForTimeout(300);
-
-    // Check results
-    const needs = await page.locator('#needs-amount').textContent();
-    const wants = await page.locator('#wants-amount').textContent();
-    const savings = await page.locator('#savings-amount').textContent();
-
-    // Should show 50%, 30%, 20% of 20M = 10M, 6M, 4M
-    expect(needs).toContain('10.000.000');
-    expect(wants).toContain('6.000.000');
-    expect(savings).toContain('4.000.000');
+    await expect(page.locator('#savings-amount')).toContainText('3.000.000');
+    await expect(page.locator('#budget-interpretation')).toContainText(
+      'Diễn giải nhanh'
+    );
   });
 
-  test('should display visual allocation chart', async ({ page }) => {
-    await page.goto('/tools/budget-allocator');
-
-    // Check that visual chart exists
-    await expect(page.getByText(/Biểu đồ phân bổ/i)).toBeVisible();
-  });
-});
-
-test.describe('Investment Comparison', () => {
-  test('should compare investment vs savings', async ({ page }) => {
+  test('should frame investment comparison as a role comparison', async ({
+    page,
+  }) => {
     await page.goto('/tools/investment-comparison');
 
-    // Wait for auto-calculation
-    await page.waitForTimeout(500);
-
-    // Check that results are displayed
-    const investmentFinal = await page
-      .locator('#investment-final')
-      .textContent();
-    const savingsFinal = await page.locator('#savings-final').textContent();
-    const difference = await page.locator('#difference-amount').textContent();
-
-    expect(investmentFinal).not.toBe('0 ₫');
-    expect(savingsFinal).not.toBe('0 ₫');
-    expect(difference).not.toBe('0 ₫');
-  });
-
-  test('should show investment outperforms savings', async ({ page }) => {
-    await page.goto('/tools/investment-comparison');
-
-    // Input values where investment clearly wins
-    await page.locator('#initial-amount').fill('50000000');
-    await page.locator('#investment-rate').fill('12');
-    await page.locator('#savings-rate').fill('5');
-    await page.locator('#comparison-years').fill('10');
-
-    // Submit
-    await page.locator('button[type="submit"]').click();
-
-    await page.waitForTimeout(300);
-
-    // Get difference percentage
-    const diffPercent = await page.locator('#difference-percent').textContent();
-
-    // Difference should be positive
-    expect(diffPercent).toContain('%');
-    const percentValue = parseFloat(diffPercent?.replace('%', '') || '0');
-    expect(percentValue).toBeGreaterThan(0);
+    await expect(page.locator('#comparison-interpretation')).toContainText(
+      'Diễn giải nhanh'
+    );
+    await expect(page.getByText('Tiết kiệm phù hợp hơn khi')).toBeVisible();
+    await expect(page.getByText('Đầu tư phù hợp hơn khi')).toBeVisible();
   });
 });
 
 test.describe('Tools Navigation', () => {
-  test('should have back to tools link on each tool page', async ({ page }) => {
+  test('should keep back links to the tools hub on every tool page', async ({
+    page,
+  }) => {
     const tools = [
       '/tools/compound-interest',
       '/tools/sip-calculator',
       '/tools/budget-allocator',
       '/tools/investment-comparison',
+      '/tools/emergency-fund-planner',
+      '/tools/goal-based-contribution',
     ];
 
     for (const tool of tools) {
       await page.goto(tool);
 
-      // Check for back link
-      const backLink = page.getByRole('link', { name: /Quay lại công cụ/i });
+      const backLink = page.getByRole('link', {
+        name: /Quay lại (trung tâm )?công cụ/i,
+      });
       await expect(backLink).toBeVisible();
       await expect(backLink).toHaveAttribute('href', '/tools');
     }
   });
 
-  test('should have informational content on each tool', async ({ page }) => {
-    await page.goto('/tools/compound-interest');
+  test('should remain usable on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/tools');
 
-    // Check for explanation section
-    await expect(page.getByText(/Lãi kép là gì\?/i)).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: /Bắt đầu với công cụ nhanh/i })
+    ).toBeVisible();
+    await expect(page.locator('#starter-range')).toBeVisible();
+    await expect(page.locator('#preview-final-amount')).toBeVisible();
   });
 });

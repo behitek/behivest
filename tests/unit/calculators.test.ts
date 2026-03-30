@@ -4,6 +4,9 @@ import {
   calculateSIP,
   calculateBudgetAllocation,
   compareInvestmentVsSavings,
+  calculateEmergencyFundPlan,
+  calculateGoalBasedContribution,
+  calculateStarterInvestmentRange,
   formatCurrency,
   formatNumber,
 } from '../../src/utils/calculators';
@@ -209,6 +212,119 @@ describe('compareInvestmentVsSavings', () => {
 
     // Difference should be significant
     expect(result.difference).toBeGreaterThan(70000000);
+  });
+});
+
+describe('calculateEmergencyFundPlan', () => {
+  it('should calculate target, progress, and remaining amount', () => {
+    const result = calculateEmergencyFundPlan(8000000, 12000000, 3);
+
+    expect(result.targetAmount).toBe(24000000);
+    expect(result.currentProgress).toBe(12000000);
+    expect(result.remainingAmount).toBe(12000000);
+    expect(result.progressPercent).toBe(50);
+    expect(result.readinessStage).toBe('split-between-cash-and-investing');
+  });
+
+  it('should mark users ready when their emergency fund is complete', () => {
+    const result = calculateEmergencyFundPlan(8000000, 30000000, 3);
+
+    expect(result.targetAmount).toBe(24000000);
+    expect(result.currentProgress).toBe(24000000);
+    expect(result.remainingAmount).toBe(0);
+    expect(result.progressPercent).toBe(100);
+    expect(result.readinessStage).toBe('ready-to-invest');
+  });
+
+  it('should handle zero target fund', () => {
+    const result = calculateEmergencyFundPlan(0, 0, 0);
+
+    expect(result.targetAmount).toBe(0);
+    expect(result.currentProgress).toBe(0);
+    expect(result.remainingAmount).toBe(0);
+    expect(result.progressPercent).toBe(100);
+  });
+
+  it('should throw error for negative values', () => {
+    expect(() => calculateEmergencyFundPlan(-8000000, 12000000, 3)).toThrow();
+    expect(() => calculateEmergencyFundPlan(8000000, -12000000, 3)).toThrow();
+    expect(() => calculateEmergencyFundPlan(8000000, 12000000, -3)).toThrow();
+  });
+});
+
+describe('calculateGoalBasedContribution', () => {
+  it('should calculate monthly contribution for a zero-return target', () => {
+    const result = calculateGoalBasedContribution(120000000, 0, 5);
+
+    expect(result.requiredMonthlyContribution).toBe(2000000);
+    expect(result.totalContributed).toBe(120000000);
+    expect(result.estimatedGrowth).toBe(0);
+  });
+
+  it('should calculate lower contributions when growth is available', () => {
+    const result = calculateGoalBasedContribution(100000000, 10, 5);
+
+    expect(result.requiredMonthlyContribution).toBeGreaterThan(0);
+    expect(result.requiredMonthlyContribution).toBeLessThan(1666667);
+    expect(result.totalContributed).toBeLessThan(100000000);
+    expect(result.estimatedGrowth).toBeGreaterThan(0);
+  });
+
+  it('should handle zero target amount', () => {
+    const result = calculateGoalBasedContribution(0, 10, 5);
+
+    expect(result.requiredMonthlyContribution).toBe(0);
+    expect(result.totalContributed).toBe(0);
+    expect(result.estimatedGrowth).toBe(0);
+  });
+
+  it('should throw error for invalid inputs', () => {
+    expect(() => calculateGoalBasedContribution(-100000000, 10, 5)).toThrow();
+    expect(() => calculateGoalBasedContribution(100000000, -10, 5)).toThrow();
+    expect(() => calculateGoalBasedContribution(100000000, 10, 0)).toThrow();
+  });
+});
+
+describe('calculateStarterInvestmentRange', () => {
+  it('should recommend a minimal trial range when no emergency fund exists', () => {
+    const result = calculateStarterInvestmentRange(4000000, 'none');
+
+    expect(result.suggestedMonthlyAmountMin).toBe(0);
+    expect(result.suggestedMonthlyAmountMax).toBe(600000);
+    expect(result.readinessStage).toBe('focus-emergency-fund');
+  });
+
+  it('should recommend a split range while the emergency fund is being built', () => {
+    const result = calculateStarterInvestmentRange(4000000, 'building');
+
+    expect(result.suggestedMonthlyAmountMin).toBe(400000);
+    expect(result.suggestedMonthlyAmountMax).toBe(1200000);
+    expect(result.readinessStage).toBe('split-between-cash-and-investing');
+  });
+
+  it('should recommend a stronger starting range once the buffer is ready', () => {
+    const result = calculateStarterInvestmentRange(4000000, 'ready');
+
+    expect(result.suggestedMonthlyAmountMin).toBe(800000);
+    expect(result.suggestedMonthlyAmountMax).toBe(2000000);
+    expect(result.readinessStage).toBe('ready-to-invest');
+  });
+
+  it('should handle zero available amount', () => {
+    const result = calculateStarterInvestmentRange(0, 'none');
+
+    expect(result.suggestedMonthlyAmountMin).toBe(0);
+    expect(result.suggestedMonthlyAmountMax).toBe(0);
+  });
+
+  it('should throw error for invalid inputs', () => {
+    expect(() => calculateStarterInvestmentRange(-1, 'none')).toThrow();
+    expect(() =>
+      calculateStarterInvestmentRange(
+        1000000,
+        'in-progress' as 'none' | 'building' | 'ready'
+      )
+    ).toThrow();
   });
 });
 

@@ -45,6 +45,37 @@ export interface InvestmentComparison {
   savingsInterest: number;
 }
 
+export type BeginnerReadinessStage =
+  | 'focus-emergency-fund'
+  | 'split-between-cash-and-investing'
+  | 'ready-to-invest';
+
+export type EmergencyFundStatus = 'none' | 'building' | 'ready';
+
+export interface EmergencyFundPlan {
+  targetAmount: number;
+  currentProgress: number;
+  progressPercent: number;
+  remainingAmount: number;
+  readinessStage: BeginnerReadinessStage;
+}
+
+export interface GoalBasedContributionResult {
+  requiredMonthlyContribution: number;
+  totalContributed: number;
+  estimatedGrowth: number;
+}
+
+export interface StarterInvestmentRange {
+  suggestedMonthlyAmountMin: number;
+  suggestedMonthlyAmountMax: number;
+  readinessStage: BeginnerReadinessStage;
+}
+
+function roundToNearestStep(value: number, step: number = 50_000): number {
+  return Math.max(0, Math.round(value / step) * step);
+}
+
 /**
  * Calculate compound interest with optional monthly contributions
  * @param principal - Initial investment amount
@@ -214,6 +245,163 @@ export function compareInvestmentVsSavings(
     difference: investmentFinalAmount - savingsFinalAmount,
     investmentReturns,
     savingsInterest,
+  };
+}
+
+/**
+ * Calculate a beginner emergency fund target and readiness stage
+ * @param monthlyEssentialExpenses - Essential monthly expenses
+ * @param currentSavings - Current emergency savings balance
+ * @param targetMonths - Emergency fund target in months
+ * @returns EmergencyFundPlan
+ */
+export function calculateEmergencyFundPlan(
+  monthlyEssentialExpenses: number,
+  currentSavings: number,
+  targetMonths: number
+): EmergencyFundPlan {
+  if (monthlyEssentialExpenses < 0 || currentSavings < 0 || targetMonths < 0) {
+    throw new Error('All values must be non-negative');
+  }
+
+  const targetAmount = Math.round(monthlyEssentialExpenses * targetMonths);
+  const currentProgress = Math.min(Math.round(currentSavings), targetAmount);
+  const remainingAmount = Math.max(
+    targetAmount - Math.round(currentSavings),
+    0
+  );
+  const progressPercent =
+    targetAmount === 0
+      ? 100
+      : Math.min(
+          100,
+          Math.round((Math.round(currentSavings) / targetAmount) * 100)
+        );
+
+  let readinessStage: BeginnerReadinessStage = 'focus-emergency-fund';
+
+  if (progressPercent >= 100) {
+    readinessStage = 'ready-to-invest';
+  } else if (progressPercent >= 50) {
+    readinessStage = 'split-between-cash-and-investing';
+  }
+
+  return {
+    targetAmount,
+    currentProgress,
+    progressPercent,
+    remainingAmount,
+    readinessStage,
+  };
+}
+
+/**
+ * Calculate the monthly contribution needed to reach a target amount
+ * @param targetAmount - Target future value
+ * @param annualReturnRate - Expected annual return rate (as percentage)
+ * @param years - Saving or investing duration in years
+ * @returns GoalBasedContributionResult
+ */
+export function calculateGoalBasedContribution(
+  targetAmount: number,
+  annualReturnRate: number,
+  years: number
+): GoalBasedContributionResult {
+  if (targetAmount < 0 || annualReturnRate < 0) {
+    throw new Error('All values must be non-negative');
+  }
+
+  if (years <= 0) {
+    throw new Error('Years must be greater than zero');
+  }
+
+  if (targetAmount === 0) {
+    return {
+      requiredMonthlyContribution: 0,
+      totalContributed: 0,
+      estimatedGrowth: 0,
+    };
+  }
+
+  const months = years * 12;
+  const monthlyRate = annualReturnRate / 100 / 12;
+
+  const requiredMonthlyContribution =
+    monthlyRate === 0
+      ? Math.round(targetAmount / months)
+      : Math.round(
+          (targetAmount * monthlyRate) / (Math.pow(1 + monthlyRate, months) - 1)
+        );
+
+  const totalContributed = requiredMonthlyContribution * months;
+
+  return {
+    requiredMonthlyContribution,
+    totalContributed,
+    estimatedGrowth: Math.max(targetAmount - totalContributed, 0),
+  };
+}
+
+/**
+ * Suggest a low-pressure beginner investment range based on monthly slack
+ * @param monthlyAvailableAmount - Money available after essential expenses
+ * @param emergencyFundStatus - Current emergency fund status
+ * @returns StarterInvestmentRange
+ */
+export function calculateStarterInvestmentRange(
+  monthlyAvailableAmount: number,
+  emergencyFundStatus: EmergencyFundStatus
+): StarterInvestmentRange {
+  if (monthlyAvailableAmount < 0) {
+    throw new Error('Monthly available amount must be non-negative');
+  }
+
+  if (!['none', 'building', 'ready'].includes(emergencyFundStatus)) {
+    throw new Error('Emergency fund status is invalid');
+  }
+
+  if (monthlyAvailableAmount === 0) {
+    return {
+      suggestedMonthlyAmountMin: 0,
+      suggestedMonthlyAmountMax: 0,
+      readinessStage: 'focus-emergency-fund',
+    };
+  }
+
+  const stageConfig = {
+    none: {
+      minRatio: 0,
+      maxRatio: 0.15,
+      readinessStage: 'focus-emergency-fund' as const,
+    },
+    building: {
+      minRatio: 0.1,
+      maxRatio: 0.3,
+      readinessStage: 'split-between-cash-and-investing' as const,
+    },
+    ready: {
+      minRatio: 0.2,
+      maxRatio: 0.5,
+      readinessStage: 'ready-to-invest' as const,
+    },
+  };
+
+  const config = stageConfig[emergencyFundStatus];
+  const suggestedMonthlyAmountMin = roundToNearestStep(
+    monthlyAvailableAmount * config.minRatio
+  );
+  const suggestedMonthlyAmountMax = Math.min(
+    roundToNearestStep(monthlyAvailableAmount * config.maxRatio),
+    monthlyAvailableAmount
+  );
+
+  return {
+    suggestedMonthlyAmountMin,
+    suggestedMonthlyAmountMax: Math.max(
+      suggestedMonthlyAmountMin,
+      suggestedMonthlyAmountMax
+    ),
+    readinessStage: config.readinessStage,
   };
 }
 

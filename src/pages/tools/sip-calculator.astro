@@ -33,6 +33,12 @@ import Layout from '@layouts/Layout.astro';
       <p class="mt-2 text-gray-600 dark:text-gray-300">
         Ước tính giá trị đầu tư định kỳ hàng tháng vào quỹ mở
       </p>
+      <p
+        class="mt-4 max-w-3xl text-sm leading-7 text-gray-500 dark:text-gray-400"
+      >
+        Kết quả là ước tính từ mức đóng góp đều và giả định tăng trưởng bạn
+        chọn. Nó hữu ích để nhìn dài hạn, không phải lời hứa lợi nhuận.
+      </p>
 
       <div class="mt-8 grid gap-8 lg:grid-cols-2">
         <!-- Input Form -->
@@ -58,6 +64,40 @@ import Layout from '@layouts/Layout.astro';
                 required
                 class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               />
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="500000"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  500k
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="1000000"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  1 triệu
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="2000000"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  2 triệu
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="3000000"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  3 triệu
+                </button>
+              </div>
             </div>
 
             <div>
@@ -78,6 +118,32 @@ import Layout from '@layouts/Layout.astro';
                 required
                 class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               />
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-fill-target="sip-years"
+                  data-fill-value="3"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  3 năm
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="sip-years"
+                  data-fill-value="5"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  5 năm
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="sip-years"
+                  data-fill-value="10"
+                  class="dark:hover:bg-primary-950/40 rounded-full border border-primary-200 px-3 py-1 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-50 dark:border-primary-900 dark:text-primary-300"
+                >
+                  10 năm
+                </button>
+              </div>
             </div>
 
             <div>
@@ -173,6 +239,27 @@ import Layout from '@layouts/Layout.astro';
                 >
               </div>
             </div>
+
+            <div
+              id="sip-interpretation"
+              class="rounded-lg border border-dashed border-primary-200 p-4 dark:border-primary-800"
+            >
+            </div>
+
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={`${import.meta.env.BASE_URL}tools/goal-based-contribution`}
+                class="btn-secondary text-center"
+              >
+                Đổi sang lập kế hoạch theo mục tiêu
+              </a>
+              <a
+                href={`${import.meta.env.BASE_URL}blog/mutual-funds`}
+                class="btn-primary text-center"
+              >
+                Đọc thêm về quỹ mở
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -219,6 +306,22 @@ import Layout from '@layouts/Layout.astro';
 
     const form = document.getElementById('sip-form') as HTMLFormElement;
 
+    const getInterpretation = (
+      years: number,
+      totalInvested: number,
+      totalReturns: number
+    ): string => {
+      if (years < 5) {
+        return 'Khung thời gian ngắn giúp bạn kiểm tra mức góp có bền hay không. Với người mới, giai đoạn này thường quan trọng ở thói quen hơn là phần lãi nổi bật.';
+      }
+
+      if (totalReturns < totalInvested * 0.3) {
+        return 'Kết quả cho thấy phần lớn giá trị cuối kỳ vẫn đến từ khoản bạn tự góp. Điều đó hoàn toàn bình thường ở giai đoạn đầu của một kế hoạch dài hạn.';
+      }
+
+      return 'Thời gian đang bắt đầu làm việc có lợi cho bạn: phần tăng trưởng ước tính trở nên đáng kể hơn so với tổng số tiền tự góp.';
+    };
+
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -245,14 +348,38 @@ import Layout from '@layouts/Layout.astro';
           formatCurrency(result.totalReturns);
 
         // Update ratio
-        const ratio = (result.totalReturns / result.totalInvested) * 100;
+        const ratio =
+          result.totalInvested === 0
+            ? 0
+            : (result.totalReturns / result.totalInvested) * 100;
         document.getElementById('sip-ratio-bar')!.style.width =
           `${Math.min(ratio, 100)}%`;
         document.getElementById('sip-ratio-text')!.textContent =
           `${ratio.toFixed(1)}%`;
+        document.getElementById('sip-interpretation')!.innerHTML = `
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-600 dark:text-primary-400">Diễn giải nhanh</p>
+          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">${getInterpretation(
+            years,
+            result.totalInvested,
+            result.totalReturns
+          )}</p>
+        `;
       } catch {
         alert('Vui lòng kiểm tra lại các giá trị nhập vào');
       }
+    });
+
+    document.querySelectorAll('[data-fill-target]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.getAttribute('data-fill-target');
+        const value = button.getAttribute('data-fill-value');
+        const input = target ? document.getElementById(target) : null;
+
+        if (!input || !value) return;
+
+        (input as HTMLInputElement).value = value;
+        form?.dispatchEvent(new Event('submit'));
+      });
     });
 
     // Initial calculation
