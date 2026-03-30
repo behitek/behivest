@@ -1,0 +1,29 @@
+{
+  "group": "Mua, bán, và rút tiền",
+  "description": "Các câu hỏi thực tế liên quan đến dòng tiền và quyết định rút vốn.",
+  "groupSlug": "mua-ban-va-rut-tien",
+  "icon": "04",
+  "order": 4,
+  "items": [
+    {
+      "term": "Giao dịch",
+      "question": "Mua và bán quỹ mở diễn ra như thế nào?",
+      "answer": "Thông thường bạn đặt lệnh mua hoặc bán qua nền tảng phân phối hoặc đơn vị quản lý quỹ, rồi chờ lệnh được xử lý theo ngày giao dịch. Đây không phải kiểu mua bán tức thời như lướt cổ phiếu trong ngày."
+    },
+    {
+      "term": "Rút tiền",
+      "question": "Bán quỹ rồi bao lâu mới nhận được tiền?",
+      "answer": "Tùy quỹ và nền tảng, bạn thường nhận tiền sau vài ngày làm việc. Vì có độ trễ này, đừng dùng quỹ mở như nơi cất khoản tiền mà bạn có thể phải rút ngay ngày mai."
+    },
+    {
+      "term": "Khi nào bán",
+      "question": "Khi nào nên bán quỹ mở?",
+      "answer": "Lý do tốt để bán thường là bạn đạt mục tiêu, cần tái phân bổ kế hoạch tài chính, hoặc khoản đầu tư không còn phù hợp với thời gian và mức chịu rủi ro của bạn. Bán chỉ vì hoảng sau vài phiên giảm thường không phải quyết định tốt."
+    },
+    {
+      "term": "All in",
+      "question": "Có nên bỏ hết tiền nhàn rỗi vào quỹ không?",
+      "answer": "Không nên. Người mới nên tách rõ quỹ dự phòng, tiền cho mục tiêu gần, và tiền đầu tư dài hơn. Quỹ mở phù hợp với phần vốn bạn có thể để yên theo kế hoạch, không phải toàn bộ số tiền đang có."
+    }
+  ]
+}

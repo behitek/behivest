@@ -1,0 +1,29 @@
+{
+  "group": "Chi phí và lợi nhuận",
+  "description": "Những khái niệm cơ bản ảnh hưởng trực tiếp đến cảm nhận lời lỗ của người mới.",
+  "groupSlug": "chi-phi-va-loi-nhuan",
+  "icon": "03",
+  "order": 3,
+  "items": [
+    {
+      "term": "NAV",
+      "question": "NAV là gì?",
+      "answer": "Bạn có thể xem NAV như giá của một chứng chỉ quỹ tại một thời điểm. Khi NAV tăng, giá trị phần quỹ bạn đang nắm giữ tăng lên; khi NAV giảm, giá trị đó giảm xuống."
+    },
+    {
+      "term": "Phí",
+      "question": "Phí quản lý và phí mua bán là gì?",
+      "answer": "Phí quản lý là chi phí vận hành quỹ và thường đã phản ánh vào kết quả quỹ. Một số quỹ còn có phí mua hoặc phí bán tùy thời gian nắm giữ. Trước khi đầu tư, nên đọc kỹ biểu phí thay vì chỉ nhìn lợi nhuận quá khứ."
+    },
+    {
+      "term": "Cam kết",
+      "question": "Lợi nhuận của quỹ có được đảm bảo không?",
+      "answer": "Không. Nếu ai đó nói quỹ mở chắc chắn lãi đều hoặc không thể lỗ, bạn nên cẩn trọng. Quỹ tốt là quỹ được giải thích rõ rủi ro, phù hợp mục tiêu và có cách vận hành minh bạch."
+    },
+    {
+      "term": "DCA",
+      "question": "DCA là gì và vì sao người mới hay dùng?",
+      "answer": "DCA là cách đầu tư một khoản cố định theo nhịp đều, ví dụ mỗi tháng 500.000 hoặc 1 triệu đồng. Cách này giúp người mới bớt áp lực phải canh đúng thời điểm và dễ xây thói quen hơn."
+    }
+  ]
+}

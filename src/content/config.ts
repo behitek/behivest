@@ -23,6 +23,7 @@ const faq = defineCollection({
   type: 'data',
   schema: z.object({
     group: z.string(),
+    description: z.string().optional(),
     groupSlug: z.string(),
     icon: z.string(),
     order: z.number(),

@@ -1,0 +1,29 @@
+{
+  "group": "Rủi ro và kỳ vọng",
+  "description": "Những điều người mới thường hiểu chưa đủ trước khi bỏ tiền vào quỹ.",
+  "groupSlug": "rui-ro-va-ky-vong",
+  "icon": "02",
+  "order": 2,
+  "items": [
+    {
+      "term": "Có lỗ không",
+      "question": "Đầu tư quỹ mở có thể lỗ không?",
+      "answer": "Có. Quỹ mở không phải sản phẩm có lãi cố định. Nếu thị trường giảm, NAV của quỹ cũng có thể giảm và bạn có thể thấy tài khoản âm trong một giai đoạn nào đó."
+    },
+    {
+      "term": "Giữ bao lâu",
+      "question": "Nên giữ quỹ mở trong bao lâu?",
+      "answer": "Thường nên nhìn theo năm chứ không theo vài tuần. Quỹ cổ phiếu hợp với mục tiêu dài hơn, quỹ trái phiếu hợp với thời gian ngắn hơn. Càng đi ngắn, biến động ngắn hạn càng dễ làm bạn ra quyết định vội."
+    },
+    {
+      "term": "Theo dõi",
+      "question": "Có cần theo dõi mỗi ngày không?",
+      "answer": "Không nhất thiết. Với người mới, theo dõi quá thường xuyên thường làm tăng lo lắng hơn là giúp ra quyết định tốt hơn. Quan trọng hơn là bạn hiểu mình đang đầu tư cho mục tiêu nào và có giữ được nhịp đều hay không."
+    },
+    {
+      "term": "Tiền gấp",
+      "question": "Nếu đang đầu tư mà cần tiền gấp thì sao?",
+      "answer": "Bạn có thể bán chứng chỉ quỹ, nhưng thường cần vài ngày làm việc mới nhận được tiền. Vì vậy quỹ mở không phù hợp cho khoản tiền bạn có thể cần rất gấp trong thời gian ngắn."
+    }
+  ]
+}

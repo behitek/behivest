@@ -1,0 +1,29 @@
+{
+  "group": "Bắt đầu",
+  "description": "Những câu hỏi nền tảng để hiểu quỹ mở là gì và có thể bắt đầu từ đâu.",
+  "groupSlug": "bat-dau",
+  "icon": "01",
+  "order": 1,
+  "items": [
+    {
+      "term": "Quỹ mở",
+      "question": "Quỹ mở là gì, nói đơn giản?",
+      "answer": "Quỹ mở là nơi nhiều người góp tiền lại để một đội ngũ chuyên nghiệp đầu tư thay. Khi bạn mua chứng chỉ quỹ, bạn đang sở hữu một phần nhỏ của cả danh mục đó, thay vì phải tự chọn từng cổ phiếu hay trái phiếu."
+    },
+    {
+      "term": "So sánh",
+      "question": "Quỹ mở khác gửi tiết kiệm ở đâu?",
+      "answer": "Gửi tiết kiệm ưu tiên ổn định và biết trước mức lãi. Quỹ mở không cam kết lợi nhuận, giá trị có thể tăng hoặc giảm theo thị trường, nhưng đổi lại có cơ hội tăng trưởng tốt hơn nếu bạn đi đủ dài."
+    },
+    {
+      "term": "Số tiền",
+      "question": "Người mới cần bao nhiêu tiền để bắt đầu?",
+      "answer": "Nhiều quỹ cho phép bắt đầu với vài trăm nghìn đồng một lần mua. Điều quan trọng hơn không phải là vào thật lớn ngay từ đầu, mà là dùng số tiền nhỏ bạn thấy thoải mái và có thể duy trì đều."
+    },
+    {
+      "term": "CCQ",
+      "question": "CCQ là gì?",
+      "answer": "CCQ là viết tắt của chứng chỉ quỹ. Bạn có thể hiểu đơn giản đây là phần sở hữu của bạn trong quỹ. Mua thêm CCQ nghĩa là tăng phần vốn của bạn trong danh mục quỹ đó."
+    }
+  ]
+}

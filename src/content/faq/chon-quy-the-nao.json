@@ -1,0 +1,29 @@
+{
+  "group": "Chọn quỹ thế nào",
+  "description": "Khung suy nghĩ đủ dùng để chọn loại quỹ phù hợp với người mới bắt đầu.",
+  "groupSlug": "chon-quy-the-nao",
+  "icon": "05",
+  "order": 5,
+  "items": [
+    {
+      "term": "Loại quỹ",
+      "question": "Người mới nên bắt đầu với loại quỹ nào?",
+      "answer": "Điểm bắt đầu hợp lý thường phụ thuộc vào thời gian bạn có thể giữ tiền và mức chịu biến động của bạn. Nếu bạn còn rất mới, chưa quen cảm giác tài khoản dao động, những quỹ ít biến động hơn thường dễ giữ kỷ luật hơn."
+    },
+    {
+      "term": "Phân loại",
+      "question": "Quỹ cổ phiếu, quỹ trái phiếu và quỹ cân bằng khác nhau thế nào?",
+      "answer": "Quỹ cổ phiếu biến động mạnh hơn nhưng có thể tăng trưởng tốt hơn nếu đi dài. Quỹ trái phiếu thường ổn định hơn nhưng mức tăng kỳ vọng thấp hơn. Quỹ cân bằng nằm ở giữa, phù hợp với nhiều người mới muốn vừa học vừa làm quen nhịp biến động."
+    },
+    {
+      "term": "Không nên đầu tư",
+      "question": "Khi nào không nên đầu tư quỹ mở?",
+      "answer": "Nếu bạn chưa có quỹ dự phòng cơ bản, đang cần tiền cho mục tiêu rất gần, hoặc vẫn kỳ vọng lợi nhuận chắc chắn trong ngắn hạn, thì chưa nên vội đầu tư quỹ mở. Khi nền tài chính cá nhân chưa ổn, áp lực rút tiền sớm rất dễ xảy ra."
+    },
+    {
+      "term": "Tiêu chí chọn",
+      "question": "Nên chọn quỹ theo tiêu chí nào trước tiên?",
+      "answer": "Với người mới, ba câu hỏi quan trọng nhất là: bạn giữ bao lâu, bạn chịu được mức giảm nào mà vẫn ngủ ngon, và quỹ đó đang đầu tư vào nhóm tài sản nào. Hãy chọn theo mức phù hợp trước, rồi mới nhìn sâu hơn vào lịch sử hoạt động và chi phí."
+    }
+  ]
+}
