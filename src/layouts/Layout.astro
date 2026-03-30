@@ -12,10 +12,20 @@ export interface Props {
   article?: boolean;
   publishedTime?: string;
   modifiedTime?: string;
+  canonical?: string;
+  robots?: string;
 }
 
-const { title, description, image, article, publishedTime, modifiedTime } =
-  Astro.props;
+const {
+  title,
+  description,
+  image,
+  article,
+  publishedTime,
+  modifiedTime,
+  canonical,
+  robots,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -30,6 +40,8 @@ const { title, description, image, article, publishedTime, modifiedTime } =
       article={article}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
+      canonical={canonical}
+      robots={robots}
     />
     <GoogleAnalytics />
   </head>

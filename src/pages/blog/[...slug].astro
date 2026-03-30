@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
+import { normalizePathWithBase } from '@utils/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -27,16 +28,18 @@ function formatDate(date: Date): string {
 const shareUrl = Astro.url.toString();
 const shareTitle = post.data.title;
 
-// Prepend BASE_URL to heroImage for proper meta tags
-const heroImageWithBase = post.data.heroImage
-  ? `${import.meta.env.BASE_URL}${post.data.heroImage}`.replace('//', '/')
+const heroImageSrc = post.data.heroImage
+  ? normalizePathWithBase({
+      path: post.data.heroImage,
+      basePath: import.meta.env.BASE_URL,
+    })
   : undefined;
 ---
 
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={heroImageWithBase}
+  image={post.data.heroImage}
   article={true}
   publishedTime={post.data.pubDate.toISOString()}
   modifiedTime={post.data.updatedDate?.toISOString()}
@@ -71,10 +74,10 @@ const heroImageWithBase = post.data.heroImage
 
       <!-- Hero Image -->
       {
-        heroImageWithBase && (
+        heroImageSrc && (
           <div class="mb-8 overflow-hidden rounded-2xl">
             <img
-              src={heroImageWithBase}
+              src={heroImageSrc}
               alt={post.data.title}
               class="h-auto w-full object-cover"
               style="max-height: 500px"

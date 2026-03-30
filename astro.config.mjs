@@ -24,7 +24,9 @@ export default defineConfig({
   base: BASE_URL,
   integrations: [
     mdx(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/blog/fmarket/'),
+    }),
     tailwind({
       applyBaseStyles: false,
     }),
