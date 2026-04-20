@@ -1,29 +1,39 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
-
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+
 const isLearnActive =
   currentPath.startsWith('/blog') ||
-  currentPath.startsWith(`${import.meta.env.BASE_URL}blog`) ||
+  currentPath.startsWith(`${base}blog`) ||
   currentPath === '/faq' ||
-  currentPath === `${import.meta.env.BASE_URL}faq`;
+  currentPath === `${base}faq`;
+
+const isActive = (path: string) =>
+  currentPath === path || currentPath === `${base}${path.replace(/^\//, '')}`;
+
+const isPathActive = (prefix: string) =>
+  currentPath.startsWith(prefix) || currentPath.startsWith(`${base}${prefix.replace(/^\//, '')}`);
 ---
 
 <header
-  class="sticky top-0 z-40 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-950/80"
+  id="site-header"
+  class="fixed left-0 right-0 top-0 z-40 w-full transition-all duration-300"
+  style="border-bottom: 1px solid transparent;"
 >
   <nav
-    class="container mx-auto flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+    class="mx-auto flex items-center justify-between px-4 py-0 sm:px-6 lg:px-8"
+    style="max-width: 1080px; height: 64px;"
   >
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center">
       <a
-        href={import.meta.env.BASE_URL}
-        class="flex items-center space-x-2 font-bold text-gray-900 dark:text-white"
+        href={base}
+        class="flex items-center space-x-2 font-bold"
+        style="color: var(--text); font-size: 20px; letter-spacing: -0.02em;"
       >
         <img
-          src={`${import.meta.env.BASE_URL}logo.svg`}
+          src={`${base}logo.svg`}
           alt="Behivest"
-          class="h-8 w-auto dark:invert"
+          class="h-8 w-auto"
         />
       </a>
     </div>
@@ -32,197 +42,160 @@ const isLearnActive =
     <button
       id="mobile-menu-button"
       type="button"
-      class="inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+      class="inline-flex items-center rounded-lg p-2 text-sm hover:bg-gray-100 focus:outline-none md:hidden"
+      style="color: var(--text-muted);"
       aria-controls="mobile-menu"
       aria-expanded="false"
     >
       <span class="sr-only">Mở menu</span>
-      <svg
-        class="h-6 w-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"></path>
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
 
     <!-- Desktop menu -->
-    <div class="hidden md:flex md:items-center md:space-x-6">
+    <div class="hidden md:flex md:items-center md:gap-6">
       <a
-        href={import.meta.env.BASE_URL}
-        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/' || currentPath === import.meta.env.BASE_URL
-            ? 'text-primary-600 dark:text-primary-400'
-            : 'text-gray-700 dark:text-gray-300'
-        }`}
+        href={base}
+        class="text-sm font-medium transition-colors"
+        style={`color: ${isActive('/') ? 'var(--accent)' : 'var(--text)'};`}
       >
         Trang chủ
       </a>
+
       <!-- Dropdown: Học đầu tư -->
       <div class="relative" id="learn-dropdown-wrapper">
         <button
           id="learn-dropdown-btn"
           type="button"
-          class={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-            isLearnActive
-              ? 'text-primary-600 dark:text-primary-400'
-              : 'text-gray-700 dark:text-gray-300'
-          }`}
+          class="flex items-center gap-1 text-sm font-medium transition-colors"
+          style={`color: ${isLearnActive ? 'var(--accent)' : 'var(--text-secondary)'};`}
           aria-expanded="false"
           aria-haspopup="true"
         >
           Học đầu tư
-          <svg
-            class="h-4 w-4 transition-transform duration-200"
-            id="learn-chevron"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"></path>
+          <svg class="h-4 w-4 transition-transform duration-200" id="learn-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
         <div
           id="learn-dropdown-menu"
-          class="absolute left-0 top-full z-50 mt-2 hidden w-48 rounded-xl border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-900"
+          class="absolute left-0 top-full z-50 mt-2 hidden w-48 py-1"
+          style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 8px 24px rgba(0,0,0,0.08);"
         >
           <a
-            href={`${import.meta.env.BASE_URL}blog`}
-            class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-primary-400"
+            href={`${base}blog`}
+            class="flex items-center gap-2 px-4 py-2.5 text-sm transition-colors"
+            style="color: var(--text-secondary);"
+            onmouseover="this.style.color='var(--accent)';this.style.background='var(--accent-light)';"
+            onmouseout="this.style.color='var(--text-secondary)';this.style.background='transparent';"
           >
             📝 Blog
           </a>
           <a
-            href={`${import.meta.env.BASE_URL}faq`}
-            class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 transition-colors hover:bg-primary-50 hover:text-primary-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-primary-400"
+            href={`${base}faq`}
+            class="flex items-center gap-2 px-4 py-2.5 text-sm transition-colors"
+            style="color: var(--text-secondary);"
+            onmouseover="this.style.color='var(--accent)';this.style.background='var(--accent-light)';"
+            onmouseout="this.style.color='var(--text-secondary)';this.style.background='transparent';"
           >
             ❓ FAQ người mới
           </a>
         </div>
       </div>
+
       <a
-        href={`${import.meta.env.BASE_URL}tools`}
-        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath.startsWith('/tools') ||
-          currentPath.startsWith(`${import.meta.env.BASE_URL}tools`)
-            ? 'text-primary-600 dark:text-primary-400'
-            : 'text-gray-700 dark:text-gray-300'
-        }`}
+        href={`${base}tools`}
+        class="text-sm font-medium transition-colors"
+        style={`color: ${isPathActive('/tools') ? 'var(--accent)' : 'var(--text-secondary)'};`}
       >
         Công cụ
       </a>
       <a
-        href={`${import.meta.env.BASE_URL}performance`}
-        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/performance' ||
-          currentPath === `${import.meta.env.BASE_URL}performance`
-            ? 'text-primary-600 dark:text-primary-400'
-            : 'text-gray-700 dark:text-gray-300'
-        }`}
+        href={`${base}performance`}
+        class="text-sm font-medium transition-colors"
+        style={`color: ${isActive('/performance') ? 'var(--accent)' : 'var(--text-secondary)'};`}
       >
         Hiệu suất quỹ
       </a>
       <a
-        href={`${import.meta.env.BASE_URL}about`}
-        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/about' ||
-          currentPath === `${import.meta.env.BASE_URL}about`
-            ? 'text-primary-600 dark:text-primary-400'
-            : 'text-gray-700 dark:text-gray-300'
-        }`}
+        href={`${base}about`}
+        class="text-sm font-medium transition-colors"
+        style={`color: ${isActive('/about') ? 'var(--accent)' : 'var(--text-secondary)'};`}
       >
         Giới thiệu
       </a>
       <a
-        href={`${import.meta.env.BASE_URL}contact`}
-        class={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
-          currentPath === '/contact' ||
-          currentPath === `${import.meta.env.BASE_URL}contact`
-            ? 'text-primary-600 dark:text-primary-400'
-            : 'text-gray-700 dark:text-gray-300'
-        }`}
+        href={`${base}contact`}
+        class="text-sm font-medium transition-colors"
+        style={`color: ${isActive('/contact') ? 'var(--accent)' : 'var(--text-secondary)'};`}
       >
         Liên hệ
       </a>
-      <ThemeToggle />
+      <a
+        href="https://go.behitek.com/fmarket"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-lg px-5 py-2 text-sm font-semibold text-white transition-all hover:opacity-90"
+        style="background: var(--accent);"
+      >
+        Mở tài khoản
+      </a>
     </div>
   </nav>
 
   <!-- Mobile menu -->
   <div class="hidden md:hidden" id="mobile-menu">
-    <div
-      class="space-y-1 border-t border-gray-200 px-4 pb-3 pt-2 dark:border-gray-800"
-    >
+    <div class="space-y-1 border-t px-4 pb-3 pt-2" style="border-color: var(--border);">
+      <a href={base} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text);">Trang chủ</a>
+      <a href={`${base}blog`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">📝 Blog</a>
+      <a href={`${base}faq`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">❓ FAQ người mới</a>
+      <a href={`${base}tools`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Công cụ</a>
+      <a href={`${base}performance`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Hiệu suất quỹ</a>
+      <a href={`${base}about`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Giới thiệu</a>
+      <a href={`${base}contact`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Liên hệ</a>
       <a
-        href={import.meta.env.BASE_URL}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+        href="https://go.behitek.com/fmarket"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block rounded-lg px-3 py-2 text-base font-semibold text-white"
+        style="background: var(--accent);"
       >
-        Trang chủ
+        Mở tài khoản
       </a>
-      <a
-        href={`${import.meta.env.BASE_URL}blog`}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-      >
-        📝 Blog
-      </a>
-      <a
-        href={`${import.meta.env.BASE_URL}faq`}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-      >
-        ❓ FAQ người mới
-      </a>
-      <a
-        href={`${import.meta.env.BASE_URL}tools`}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-      >
-        Công cụ
-      </a>
-      <a
-        href={`${import.meta.env.BASE_URL}performance`}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-      >
-        Hiệu suất quỹ
-      </a>
-      <a
-        href={`${import.meta.env.BASE_URL}about`}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-      >
-        Giới thiệu
-      </a>
-      <a
-        href={`${import.meta.env.BASE_URL}contact`}
-        class="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-      >
-        Liên hệ
-      </a>
-      <div class="px-3 py-2">
-        <ThemeToggle />
-      </div>
     </div>
   </div>
 </header>
 
 <script>
-  const button = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
+  const header = document.getElementById('site-header') as HTMLElement | null;
 
-  button?.addEventListener('click', () => {
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', (!expanded).toString());
-    menu?.classList.toggle('hidden');
+  // Scroll: transparent → frosted glass
+  const handleScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 20) {
+      header.style.background = 'rgba(250,250,248,0.92)';
+      header.style.backdropFilter = 'blur(12px)';
+      header.style.borderBottomColor = 'var(--border)';
+    } else {
+      header.style.background = 'transparent';
+      header.style.backdropFilter = 'none';
+      header.style.borderBottomColor = 'transparent';
+    }
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileBtn?.addEventListener('click', () => {
+    const expanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+    mobileBtn.setAttribute('aria-expanded', (!expanded).toString());
+    mobileMenu?.classList.toggle('hidden');
   });
 
-  // Dropdown: Học đầu tư
+  // "Học đầu tư" dropdown
   const learnBtn = document.getElementById('learn-dropdown-btn');
   const learnMenu = document.getElementById('learn-dropdown-menu');
   const learnChevron = document.getElementById('learn-chevron');
