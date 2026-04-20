@@ -1,596 +1,115 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
-import VideoHero from '@components/VideoHero.astro';
-import type { HeroVideo } from '@components/VideoHero.astro';
-
-const allPosts = await getCollection('blog');
-const featuredPosts = allPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
-
-function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('vi-VN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(date);
-}
-
-const heroVideos: HeroVideo[] = [
-  {
-    id: 'meh4h7NzNF0',
-    title: 'VTV',
-    icon: '📺',
-    description:
-      'Đài truyền hình VTV nói về chứng chỉ quỹ là gì và tại sao bạn nên bắt đầu đầu tư.',
-  },
-  {
-    id: 'SHh__otke6Q',
-    title: 'Chuyên gia',
-    icon: '👨\u200d💼',
-    description:
-      'Chuyên gia tài chính chia sẻ và phân tích đa chiều về chứng chỉ quỹ dễ hiểu.',
-  },
-  {
-    id: 'ii-QNVIrojI',
-    title: 'AI Insight',
-    icon: '🤖',
-    description:
-      'AI tóm tắt khách quan: Bản chất, lợi ích và cơ hội sinh lời khi đầu tư quỹ mở.',
-  },
-];
 
 const basePath = import.meta.env.BASE_URL;
-const referralCode = '007F349346164';
 const referralUrl = 'https://go.behitek.com/fmarket';
 ---
 
 <Layout
   title="Trang chủ"
-  description="Behivest - Đầu tư dễ hiểu, sinh lời bền vững. Kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người Việt."
+  description="Behivest - Đầu tư dễ hiểu cho người Việt mới bắt đầu. Hướng dẫn bắt đầu đầu tư với số tiền nhỏ, không cần kinh nghiệm."
 >
-  <section
-    class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-20 dark:from-gray-950 dark:via-gray-950 dark:to-emerald-950/30"
-  >
-    <div
-      class="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.16),_transparent_50%)]"
-    >
+  <!-- Hero -->
+  <section style="min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 100px 24px 60px;">
+    <div style="max-width: 720px; text-align: center;">
+      <div style="margin-bottom: 24px;">
+        <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 600;">
+          Dành cho sinh viên IT &amp; dev mới đi làm
+        </span>
+      </div>
+      <h1 style="font-size: clamp(32px, 5.5vw, 52px); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 24px; text-wrap: balance;">
+        Bắt đầu đầu tư với <span style="color: var(--accent);">500k/tháng</span>, không cần kinh nghiệm
+      </h1>
+      <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin: 0 auto 40px; text-wrap: pretty;">
+        Mình là tác giả luyencode.net. Sau nhiều lần được hỏi "nên bắt đầu đầu tư từ đâu?", mình gom lại câu trả lời ở đây — rõ ràng, không hứa hẹn, và có hướng dẫn cụ thể.
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href={`${basePath}fmarket`} class="btn-primary">Mở Fmarket miễn phí →</a>
+        <a href="#why" class="btn-secondary">Vì sao mình giới thiệu?</a>
+      </div>
+      <p style="font-size: 13px; color: var(--accent); font-weight: 600; margin-top: 20px; background: var(--accent-light); display: inline-block; padding: 6px 16px; border-radius: 20px;">
+        🎁 Đăng ký qua link nhận ngay 50.000đ quà tặng
+      </p>
     </div>
-    <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-        <div>
-          <div
-            class="inline-flex rounded-full border border-emerald-200 bg-white/90 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm dark:border-emerald-800 dark:bg-gray-900/80 dark:text-emerald-300"
-          >
-            Gửi tới độc giả từ luyencode.net
-          </div>
-          <h1
-            class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
-          >
-            Nếu bạn là sinh viên IT hoặc dev mới đi làm và muốn bắt đầu đầu tư,
-            đây là hướng đi mình thấy dễ bắt đầu nhất.
-          </h1>
-          <p
-            class="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300"
-          >
-            Nhiều bạn học lập trình với mình rồi hỏi tiếp chuyện đầu tư, nhưng
-            lại chưa có nhiều vốn và cũng không muốn lao ngay vào chọn cổ phiếu.
-            Mình viết riêng một trang về Fmarket cho đúng nhóm đó: người mới,
-            bận, muốn bắt đầu nhỏ và làm từng bước cho chắc.
-          </p>
-          <p
-            class="mt-4 max-w-3xl text-sm leading-6 text-gray-500 dark:text-gray-400"
-          >
-            Minh bạch luôn từ đầu: nếu bạn đăng ký qua mã giới thiệu của mình,
-            bạn nhận ưu đãi từ chương trình của Fmarket và mình cũng nhận hoa
-            hồng giới thiệu.
-          </p>
-          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
-            <a href={`${basePath}fmarket`} class="btn-primary text-center">
-              Xem trang Fmarket mình viết riêng cho người mới
-            </a>
-            <a
-              href={`${basePath}blog/mutual-funds`}
-              class="btn-secondary text-center"
-            >
-              Đọc trước về quỹ mở
-            </a>
-          </div>
-          <div
-            class="mt-8 grid gap-3 text-sm text-gray-600 dark:text-gray-300 sm:grid-cols-3"
-          >
-            <div
-              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
-            >
-              Bắt đầu với số tiền nhỏ
-            </div>
-            <div
-              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
-            >
-              Phù hợp cho người mới
-            </div>
-            <div
-              class="rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-gray-900/80"
-            >
-              Mở tài khoản online
-            </div>
-          </div>
-        </div>
+  </section>
 
-        <aside
-          class="card border-emerald-200/70 bg-white/90 shadow-xl shadow-emerald-100/50 dark:border-emerald-900/60 dark:bg-gray-900/90 dark:shadow-none"
-        >
-          <div
-            class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
-          >
-            Gợi ý mình đang dùng để giới thiệu cho người mới
-          </div>
-          <h2 class="mt-5 text-2xl font-bold text-gray-900 dark:text-white">
-            Fmarket cho người muốn bắt đầu gọn, rõ và không phải theo dõi bảng
-            giá mỗi ngày
-          </h2>
-          <p class="mt-4 text-gray-600 dark:text-gray-300">
-            Không phải lời hứa lợi nhuận. Chỉ là một điểm bắt đầu hợp lý nếu bạn
-            muốn tập đầu tư bằng số vốn nhỏ, theo cách đều đặn và dễ duy trì.
-          </p>
-          <div class="mt-6 rounded-2xl bg-gray-50 p-4 dark:bg-gray-950">
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              Mã giới thiệu
-            </div>
-            <div
-              id="homepage-referral-code"
-              class="mt-2 text-2xl font-bold tracking-[0.2em] text-gray-900 dark:text-white"
-            >
-              {referralCode}
-            </div>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-              Mình để mã rõ ở đây để bạn không phải tìm lại khi qua trang hướng
-              dẫn hoặc ra app.
-            </p>
-            <div class="mt-4 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={referralUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-emerald-600"
-              >
-                Cài app Fmarket
-              </a>
-              <button
-                type="button"
-                data-copy-referral
-                data-copy-text={referralCode}
-                data-copy-status-id="homepage-referral-status"
-                class="inline-flex items-center justify-center rounded-lg border border-emerald-200 px-4 py-2.5 text-sm font-semibold text-emerald-700 transition-all hover:bg-emerald-50 dark:border-emerald-900 dark:text-emerald-300 dark:hover:bg-emerald-950/40"
-              >
-                Copy mã giới thiệu
-              </button>
-            </div>
-            <p
-              id="homepage-referral-status"
-              class="mt-2 text-xs text-gray-500 dark:text-gray-400"
-              aria-live="polite"
-            >
-              Bấm copy để lưu mã trước khi chuyển sang app.
-            </p>
-          </div>
-          <ul class="mt-6 space-y-3 text-sm text-gray-600 dark:text-gray-300">
-            <li class="flex gap-3">
-              <span class="mt-0.5 text-emerald-500">●</span>
-              <span
-                >Dành cho sinh viên, intern, fresher và người mới có 500.000đ
-                tới vài triệu để bắt đầu.</span
-              >
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-0.5 text-emerald-500">●</span>
-              <span>Hợp với người muốn đầu tư định kỳ thay vì lướt sóng.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-0.5 text-emerald-500">●</span>
-              <span
-                >Trang hướng dẫn mới sẽ nói thẳng cả ưu điểm lẫn giới hạn.</span
-              >
-            </li>
-          </ul>
-        </aside>
+  <!-- Social proof bar -->
+  <section style="background: var(--bg-warm); padding: 48px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; text-align: center;">
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;">500k</div>
+        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Số tiền tối thiểu để bắt đầu</div>
+      </div>
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;">~10 phút</div>
+        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Thời gian mở tài khoản</div>
+      </div>
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;">100%</div>
+        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Online, không cần gặp mặt</div>
       </div>
     </div>
   </section>
 
-  <script>
-    const fallbackCopyText = (text: string): boolean => {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.setAttribute('readonly', '');
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      textarea.style.pointerEvents = 'none';
-
-      document.body.append(textarea);
-      textarea.focus();
-      textarea.select();
-      textarea.setSelectionRange(0, text.length);
-
-      const copied = document.execCommand('copy');
-      textarea.remove();
-
-      return copied;
-    };
-
-    const copyButtons = document.querySelectorAll('[data-copy-referral]');
-
-    copyButtons.forEach((button) => {
-      button.addEventListener('click', async () => {
-        const target = button as HTMLButtonElement;
-        const text = target.dataset['copyText'] ?? '';
-        const statusId = target.dataset['copyStatusId'] ?? '';
-        const status = statusId ? document.getElementById(statusId) : null;
-
-        if (!text) return;
-
-        try {
-          let copied = false;
-
-          if (window.isSecureContext && navigator.clipboard?.writeText) {
-            try {
-              await navigator.clipboard.writeText(text);
-              copied = true;
-            } catch (_error) {
-              copied = false;
-            }
-          }
-
-          if (!copied) {
-            copied = fallbackCopyText(text);
-          }
-
-          if (!copied) {
-            throw new Error('Copy failed');
-          }
-
-          if (status) {
-            status.textContent = `Đã copy mã ${text}`;
-          }
-        } catch (_error) {
-          if (status) {
-            status.textContent = `Không copy tự động được. Mã của bạn là ${text}`;
-          }
-        }
-      });
-    });
-  </script>
-
-  <section
-    class="border-y border-gray-200 bg-white py-8 dark:border-gray-800 dark:bg-gray-950"
-  >
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div
-        class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
-      >
-        <div>
-          <p
-            class="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400"
-          >
-            Nội dung xem thêm
-          </p>
-          <h2 class="mt-2 text-2xl font-bold text-gray-900 dark:text-white">
-            Nếu bạn muốn xem thêm góc nhìn nền tảng trước khi bắt đầu
-          </h2>
-        </div>
-        <p class="max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300">
-          Mình vẫn giữ lại phần video tổng hợp bên dưới để bạn tự xem thêm bối
-          cảnh, nhưng trang Fmarket mới sẽ là nơi mình khuyên bắt đầu hành động.
-        </p>
+  <!-- Why section -->
+  <section id="why" style="padding: 80px 24px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="margin-bottom: 48px;">
+        <div style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">Vì sao mình giới thiệu Fmarket</div>
+        <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 16px;">Đơn giản vì nó giải quyết đúng vấn đề của người mới.</h2>
+        <p style="font-size: 17px; color: var(--text-secondary); line-height: 1.7; max-width: 600px;">Không phải vì nó hoàn hảo. Mà vì nó đủ dễ để bạn thực sự bắt đầu thay vì chỉ đọc và suy nghĩ.</p>
       </div>
-    </div>
-  </section>
-
-  <VideoHero
-    videos={heroVideos}
-    compact={true}
-    ctaHref={`${basePath}fmarket`}
-    ctaLabel="Xem trang Fmarket dành cho người mới"
-    ctaSubtitle="Có giải thích rõ lý do mình giới thiệu và cách bắt đầu trong 10 phút"
-  />
-
-  <!-- Featured Posts -->
-  <section class="py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-12 text-center">
-        <h2
-          class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl"
-        >
-          Bài viết nổi bật
-        </h2>
-        <p class="mt-4 text-gray-600 dark:text-gray-300">
-          Kiến thức mới nhất về đầu tư và tài chính cá nhân
-        </p>
-      </div>
-
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {
-          featuredPosts.map((post) => (
-            <article class="card group overflow-hidden transition-all hover:shadow-lg">
-              {post.data.heroImage && (
-                <div class="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${post.data.heroImage}`.replace(
-                      '//',
-                      '/'
-                    )}
-                    alt={post.data.title}
-                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              )}
-              <div class="p-6">
-                <time
-                  datetime={post.data.pubDate.toISOString()}
-                  class="text-sm text-gray-500 dark:text-gray-400"
-                >
-                  {formatDate(post.data.pubDate)}
-                </time>
-                <h3 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">
-                  <a
-                    href={`${import.meta.env.BASE_URL}blog/${post.slug}`}
-                    class="hover:text-primary-600 dark:hover:text-primary-400"
-                  >
-                    {post.data.title}
-                  </a>
-                </h3>
-                <p class="mt-2 text-gray-600 dark:text-gray-300">
-                  {post.data.description}
-                </p>
-                <a
-                  href={`${import.meta.env.BASE_URL}blog/${post.slug}`}
-                  class="mt-4 inline-flex items-center text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
-                >
-                  Đọc tiếp
-                  <svg
-                    class="ml-1 h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href={`${basePath}blog`} class="btn-secondary">
-          Xem tất cả bài viết →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tools Section -->
-  <section class="bg-gray-50 py-16 dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-12 text-center">
-        <h2
-          class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl"
-        >
-          Công cụ tài chính miễn phí
-        </h2>
-        <p class="mt-4 text-gray-600 dark:text-gray-300">
-          Tính toán và lập kế hoạch tài chính dễ dàng
-        </p>
-      </div>
-
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <a
-          href={`${import.meta.env.BASE_URL}tools/compound-interest`}
-          class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
-        >
-          <div class="text-5xl">📈</div>
-          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
-            Tính lãi kép
-          </h3>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            Dự đoán lợi nhuận đầu tư
-          </p>
-        </a>
-
-        <a
-          href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
-          class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
-        >
-          <div class="text-5xl">💰</div>
-          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
-            Tính SIP
-          </h3>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            Đầu tư định kỳ hàng tháng
-          </p>
-        </a>
-
-        <a
-          href={`${import.meta.env.BASE_URL}tools/budget-allocator`}
-          class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
-        >
-          <div class="text-5xl">🎯</div>
-          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
-            Phân bổ ngân sách
-          </h3>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            Quy tắc 50/30/20
-          </p>
-        </a>
-
-        <a
-          href={`${import.meta.env.BASE_URL}tools/investment-comparison`}
-          class="card group text-center transition-all hover:border-primary-300 hover:shadow-lg dark:hover:border-primary-700"
-        >
-          <div class="text-5xl">⚖️</div>
-          <h3 class="mt-4 font-semibold text-gray-900 dark:text-white">
-            So sánh đầu tư
-          </h3>
-          <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            Đầu tư vs Tiết kiệm
-          </p>
-        </a>
-      </div>
-
-      <div class="mt-12 text-center">
-        <a href={`${basePath}tools`} class="btn-secondary">
-          Xem tất cả công cụ →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Preview Section -->
-  <section class="py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-10 text-center">
-        <h2
-          class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl"
-        >
-          Từ điển đầu tư quỹ mở
-        </h2>
-        <p class="mt-4 text-gray-600 dark:text-gray-300">
-          Giải đáp từ A–Z những thuật ngữ và câu hỏi bạn cần biết
-        </p>
-      </div>
-
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          [
-            { term: 'CCQ', question: 'Chứng chỉ quỹ là gì?' },
-            { term: 'NAV', question: 'Giá trị tài sản ròng tính thế nào?' },
-            { term: 'Phí quản lý', question: 'Mỗi năm mất bao nhiêu %?' },
-            { term: 'DCA', question: 'Đầu tư định kỳ hiệu quả thật sự?' },
-            {
-              term: 'Sharpe Ratio',
-              question: 'Quỹ nào hiệu quả hơn sau rủi ro?',
-            },
-            { term: 'Drawdown', question: 'Mức sụt giảm tối đa là gì?' },
-          ].map(({ term, question }) => (
-            <a
-              href={`${basePath}faq`}
-              class="card group flex items-start gap-4 transition-all hover:border-primary-300 hover:shadow-md dark:hover:border-primary-700"
-            >
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
-                {term.charAt(0)}
-              </div>
-              <div>
-                <div class="text-xs font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-400">
-                  {term}
-                </div>
-                <p class="mt-0.5 text-sm font-medium text-gray-800 group-hover:text-primary-600 dark:text-gray-200 dark:group-hover:text-primary-400">
-                  {question}
-                </p>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-
-      <div class="mt-10 text-center">
-        <a href={`${basePath}faq`} class="btn-secondary">
-          Xem tất cả từ điển A–Z →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div
-        class="rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 px-8 py-16 text-center text-white md:px-12"
-      >
-        <h2 class="text-3xl font-bold md:text-4xl">
-          Muốn xem đúng trang dành cho người mới?
-        </h2>
-        <p class="mt-4 text-lg text-primary-50">
-          Mình gom lại lý do giới thiệu Fmarket, đối tượng phù hợp và các bước
-          bắt đầu ngắn gọn tại một chỗ.
-        </p>
-        <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a
-            href={`${basePath}fmarket`}
-            class="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 font-semibold text-primary-600 transition-all hover:bg-gray-100"
-          >
-            Xem trang Fmarket →
-          </a>
-        </div>
-        <p class="mt-4 text-sm text-primary-100">
-          Vốn nhỏ • Minh bạch chuyện referral • Không hứa lợi nhuận
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Behivest -->
-  <section class="bg-gray-50 py-16 dark:bg-gray-900">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-12 text-center">
-        <h2
-          class="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl"
-        >
-          Tại sao chọn Behivest?
-        </h2>
-      </div>
-
-      <div class="grid gap-8 md:grid-cols-3">
-        <div class="card text-center">
-          <div
-            class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-3xl dark:bg-primary-900/30"
-          >
-            📚
+      <div style="display: grid; gap: 16px;">
+        {[
+          { title: 'Không cần vốn lớn', desc: 'Bạn có thể bắt đầu với vài trăm nghìn. Quan trọng là tập thói quen, không phải số tiền ban đầu.' },
+          { title: 'Không cần chọn cổ phiếu', desc: 'Quỹ mở giúp bạn đầu tư vào nhiều cổ phiếu cùng lúc, do chuyên gia quản lý. Bạn không cần tự phân tích.' },
+          { title: 'Phù hợp với người bận', desc: 'Thiết lập đầu tư định kỳ xong, mỗi tháng tiền tự động được đầu tư. Không cần nhìn bảng giá mỗi ngày.' },
+          { title: 'Mở tài khoản online', desc: 'eKYC trên app, không cần đến quầy. Từ tải app đến sẵn sàng mua quỹ khoảng 10 phút.' },
+        ].map((item) => (
+          <div class="card">
+            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">{item.title}</h3>
+            <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.65;">{item.desc}</p>
           </div>
-          <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
-            Kiến thức dễ hiểu
-          </h3>
-          <p class="mt-2 text-gray-600 dark:text-gray-300">
-            Nội dung được viết bằng ngôn ngữ đơn giản, phù hợp với người Việt
-            mới bắt đầu đầu tư
-          </p>
-        </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-        <div class="card text-center">
-          <div
-            class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-secondary-100 text-3xl dark:bg-secondary-900/30"
-          >
-            🧮
-          </div>
-          <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
-            Công cụ miễn phí
-          </h3>
-          <p class="mt-2 text-gray-600 dark:text-gray-300">
-            Bộ công cụ tính toán giúp bạn đưa ra quyết định tài chính thông minh
-          </p>
+  <!-- Honesty section -->
+  <section style="padding: 80px 24px; background: var(--bg-warm);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: clamp(32px, 5vw, 48px); border: 1px solid var(--border);">
+        <div style="margin-bottom: 48px;">
+          <div style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">Minh bạch</div>
+          <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em;">Mình nói thẳng những gì đây KHÔNG phải.</h2>
         </div>
-
-        <div class="card text-center">
-          <div
-            class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-orange-100 text-3xl dark:bg-orange-900/30"
-          >
-            🎯
-          </div>
-          <h3 class="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
-            Hành động thực tế
-          </h3>
-          <p class="mt-2 text-gray-600 dark:text-gray-300">
-            Không chỉ lý thuyết, mà còn hướng dẫn cụ thể để bạn bắt đầu ngay
-          </p>
+        <div style="display: grid; gap: 20px;">
+          {[
+            { icon: '✗', positive: false, text: 'Không phải lời hứa lợi nhuận. Đầu tư luôn có rủi ro.' },
+            { icon: '✗', positive: false, text: 'Không hợp nếu bạn muốn kiếm nhanh hay trading ngắn hạn.' },
+            { icon: '✗', positive: false, text: 'Không phải cách duy nhất để đầu tư — chỉ là một điểm bắt đầu.' },
+            { icon: '✓', positive: true, text: 'Đăng ký qua link của mình, bạn nhận 50.000đ quà tặng từ Fmarket.' },
+          ].map((item) => (
+            <div style="display: flex; gap: 14px; align-items: flex-start;">
+              <span style={`width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: ${item.positive ? 'var(--accent-light)' : '#FEF2F2'}; color: ${item.positive ? 'var(--accent)' : '#B91C1C'}; font-size: 13px; font-weight: 700;`}>
+                {item.icon}
+              </span>
+              <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; padding-top: 3px;">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section style="padding: 80px 24px;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px 0;">
+      <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px;">Sẵn sàng bắt đầu?</h2>
+      <p style="font-size: 17px; color: var(--text-secondary); margin: 0 auto 32px; max-width: 480px;">
+        Xem trang hướng dẫn chi tiết mình viết riêng cho người mới — có đủ lý do, bước làm, và câu hỏi thường gặp.
+      </p>
+      <a href={`${basePath}fmarket`} class="btn-primary">Xem trang Fmarket cho người mới →</a>
     </div>
   </section>
 </Layout>
