@@ -1,0 +1,217 @@
+---
+// No props — all state is managed by client-side JS.
+// Default: monthly = 1_000_000, years = 10
+---
+
+<div style="background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: clamp(24px, 4vw, 40px); overflow: hidden;">
+  <!-- Controls -->
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 32px;">
+    <div style="flex: 1 1 200px;">
+      <label style="font-size: 13px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">Góp mỗi tháng</label>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        {[
+          { value: 500000, label: '0.5tr/th' },
+          { value: 1000000, label: '1tr/th' },
+          { value: 2000000, label: '2tr/th' },
+          { value: 5000000, label: '5tr/th' },
+        ].map(({ value, label }) => (
+          <button
+            data-monthly={value}
+            type="button"
+            style={`padding: 8px 16px; border-radius: 8px; border: 1.5px solid; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border-color: ${value === 1000000 ? 'var(--accent)' : 'var(--border)'}; background: ${value === 1000000 ? 'var(--accent-light)' : 'var(--bg)'}; color: ${value === 1000000 ? 'var(--accent)' : 'var(--text-secondary)'};`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+    <div style="flex: 1 1 200px;">
+      <label style="font-size: 13px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">
+        Thời gian: <span id="years-label">10</span> năm
+      </label>
+      <input
+        id="years-slider"
+        type="range"
+        min="3"
+        max="25"
+        value="10"
+        style="width: 100%; accent-color: var(--accent);"
+      />
+      <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted);">
+        <span>3 năm</span>
+        <span>25 năm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SVG Chart -->
+  <div style="overflow-x: auto; margin-bottom: 24px;">
+    <svg id="growth-svg" viewBox="0 0 600 220" style="width: 100%; max-width: 600px; height: auto; display: block;"></svg>
+  </div>
+
+  <!-- Legend cards -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px;">
+    <div style="padding: 16px 20px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border);">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <div style="width: 12px; height: 12px; border-radius: 3px; background: #9CA3AF;"></div>
+        <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Gửi ngân hàng (5%/năm)</span>
+      </div>
+      <div id="chart-bank-total" style="font-size: 22px; font-weight: 800; color: var(--text);">—</div>
+    </div>
+    <div style="padding: 16px 20px; border-radius: 10px; background: var(--accent-light); border: 1px solid var(--accent);">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <div style="width: 12px; height: 12px; border-radius: 3px; background: var(--accent);"></div>
+        <span style="font-size: 12px; font-weight: 600; color: var(--accent);">Quỹ mở (≈12%/năm)</span>
+      </div>
+      <div id="chart-fund-total" style="font-size: 22px; font-weight: 800; color: var(--accent);">—</div>
+    </div>
+    <div style="padding: 16px 20px; border-radius: 10px; background: var(--bg); border: 1px dashed var(--border);">
+      <div style="font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px;">Tổng đã góp</div>
+      <div id="chart-dep-total" style="font-size: 22px; font-weight: 800; color: var(--text-secondary);">—</div>
+    </div>
+  </div>
+
+  <!-- Difference callout -->
+  <div style="margin-top: 20px; padding: 14px 20px; border-radius: 10px; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+    <span id="chart-diff-label" style="font-size: 14px; font-weight: 500;">Chênh lệch sau 10 năm:</span>
+    <span id="chart-diff-amount" style="font-size: 20px; font-weight: 800;">—</span>
+  </div>
+
+  <p style="font-size: 12px; color: var(--text-muted); margin-top: 16px; line-height: 1.6;">
+    * Lãi suất ngân hàng 5%/năm, quỹ cổ phiếu ≈12%/năm là mức trung bình tham khảo. Thực tế có thể cao hoặc thấp hơn. Đầu tư luôn có rủi ro.
+  </p>
+</div>
+
+<script>
+  let monthly = 1_000_000;
+  let years = 10;
+  const BANK_RATE = 0.05;
+  const FUND_RATE = 0.12;
+
+  function calcGrowth(rate: number, y: number): number {
+    let total = 0;
+    const mr = rate / 12;
+    for (let m = 0; m < y * 12; m++) {
+      total = (total + monthly) * (1 + mr);
+    }
+    return total;
+  }
+
+  function fmt(n: number): string {
+    if (n >= 1e9) return (n / 1e9).toFixed(1).replace('.0', '') + ' tỷ';
+    if (n >= 1e6) return (n / 1e6).toFixed(1).replace('.0', '') + ' triệu';
+    return Math.round(n).toLocaleString('vi-VN');
+  }
+
+  interface Point {
+    y: number;
+    bank: number;
+    fund: number;
+    dep: number;
+  }
+
+  function render(): void {
+    const deposited = monthly * years * 12;
+    const bankTotal = calcGrowth(BANK_RATE, years);
+    const fundTotal = calcGrowth(FUND_RATE, years);
+    const diff = fundTotal - bankTotal;
+
+    const chartW = 600,
+      chartH = 220,
+      padL = 60,
+      padB = 30,
+      padT = 10,
+      padR = 20;
+    const plotW = chartW - padL - padR;
+    const plotH = chartH - padB - padT;
+    const yMax = fundTotal * 1.1;
+
+    const points: Point[] = [];
+    for (let y = 0; y <= years; y++) {
+      points.push({
+        y,
+        bank: y === 0 ? 0 : calcGrowth(BANK_RATE, y),
+        fund: y === 0 ? 0 : calcGrowth(FUND_RATE, y),
+        dep: monthly * y * 12,
+      });
+    }
+
+    const toX = (i: number) => padL + (i / years) * plotW;
+    const toY = (v: number) => padT + plotH - (v / yMax) * plotH;
+    const makePath = (key: keyof Omit<Point, 'y'>) =>
+      points
+        .map((p, i) => `${i === 0 ? 'M' : 'L'}${toX(p.y).toFixed(1)},${toY(p[key]).toFixed(1)}`)
+        .join(' ');
+
+    const gridLines = [0, 0.25, 0.5, 0.75, 1]
+      .map((frac) => {
+        const yPos = padT + plotH - frac * plotH;
+        return `
+        <line x1="${padL}" x2="${chartW - padR}" y1="${yPos.toFixed(1)}" y2="${yPos.toFixed(1)}" stroke="var(--border)" stroke-width="1"/>
+        <text x="${(padL - 8).toFixed(1)}" y="${(yPos + 4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--text-muted)">${fmt(frac * yMax)}</text>
+      `;
+      })
+      .join('');
+
+    const step = Math.max(1, Math.floor(years / 6));
+    const xLabels = points
+      .filter((_p, i) => i % step === 0 || i === years)
+      .map(
+        (p) =>
+          `<text x="${toX(p.y).toFixed(1)}" y="${(chartH - 4).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--text-muted)">Năm ${p.y}</text>`
+      )
+      .join('');
+
+    const svg = document.getElementById('growth-svg');
+    if (svg) {
+      svg.innerHTML = `
+        ${gridLines}
+        <path d="${makePath('dep')} L${toX(years).toFixed(1)},${toY(0).toFixed(1)} L${toX(0).toFixed(1)},${toY(0).toFixed(1)} Z" fill="var(--border)" opacity="0.3"/>
+        <path d="${makePath('dep')}" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="${makePath('bank')}" fill="none" stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="${makePath('fund')} L${toX(years).toFixed(1)},${toY(0).toFixed(1)} L${toX(0).toFixed(1)},${toY(0).toFixed(1)} Z" fill="var(--accent-light)" opacity="0.4"/>
+        <path d="${makePath('fund')}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${toX(years).toFixed(1)}" cy="${toY(bankTotal).toFixed(1)}" r="5" fill="#9CA3AF"/>
+        <circle cx="${toX(years).toFixed(1)}" cy="${toY(fundTotal).toFixed(1)}" r="6" fill="var(--accent)" stroke="var(--bg-card)" stroke-width="2"/>
+        ${xLabels}
+      `;
+    }
+
+    const bankEl = document.getElementById('chart-bank-total');
+    const fundEl = document.getElementById('chart-fund-total');
+    const depEl = document.getElementById('chart-dep-total');
+    const diffEl = document.getElementById('chart-diff-amount');
+    const diffLabel = document.getElementById('chart-diff-label');
+
+    if (bankEl) bankEl.textContent = fmt(bankTotal) + 'đ';
+    if (fundEl) fundEl.textContent = fmt(fundTotal) + 'đ';
+    if (depEl) depEl.textContent = fmt(deposited) + 'đ';
+    if (diffEl) diffEl.textContent = '+' + fmt(diff) + 'đ';
+    if (diffLabel) diffLabel.textContent = `Chênh lệch sau ${years} năm:`;
+  }
+
+  // Monthly buttons
+  document.querySelectorAll<HTMLButtonElement>('[data-monthly]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      monthly = Number(btn.dataset['monthly']);
+      document.querySelectorAll<HTMLButtonElement>('[data-monthly]').forEach((b) => {
+        const active = Number(b.dataset['monthly']) === monthly;
+        b.style.borderColor = active ? 'var(--accent)' : 'var(--border)';
+        b.style.background = active ? 'var(--accent-light)' : 'var(--bg)';
+        b.style.color = active ? 'var(--accent)' : 'var(--text-secondary)';
+      });
+      render();
+    });
+  });
+
+  // Years slider
+  const slider = document.getElementById('years-slider') as HTMLInputElement | null;
+  const yearsLabel = document.getElementById('years-label');
+  slider?.addEventListener('input', () => {
+    years = Number(slider.value);
+    if (yearsLabel) yearsLabel.textContent = String(years);
+    render();
+  });
+
+  render();
+</script>
