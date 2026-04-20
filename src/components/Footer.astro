@@ -1,143 +1,84 @@
 ---
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 ---
 
-<footer
-  class="border-t border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900"
->
-  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+<footer style="border-top: 1px solid var(--border); background: var(--bg-warm);">
+  <div class="mx-auto px-4 py-12 sm:px-6 lg:px-8" style="max-width: 1080px;">
     <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
       <!-- Brand -->
       <div class="col-span-1 md:col-span-2">
-        <a href={import.meta.env.BASE_URL} class="flex items-center space-x-2">
-          <img
-            src={`${import.meta.env.BASE_URL}logo.svg`}
-            alt="Behivest"
-            class="h-8 w-auto dark:invert"
-          />
+        <a href={base} class="flex items-center space-x-2">
+          <img src={`${base}logo.svg`} alt="Behivest" class="h-8 w-auto" />
         </a>
-        <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-4 text-sm" style="color: var(--text-secondary);">
           Đầu tư dễ hiểu, sinh lời bền vững
         </p>
-        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-          Behivest cung cấp kiến thức tài chính cá nhân và hướng dẫn đầu tư
-          thông minh cho người Việt.
+        <p class="mt-2 text-sm" style="color: var(--text-muted);">
+          Behivest cung cấp kiến thức tài chính cá nhân và hướng dẫn đầu tư thông minh cho người Việt.
         </p>
       </div>
 
       <!-- Quick Links -->
       <div>
-        <h3
-          class="mb-4 text-sm font-semibold uppercase text-gray-900 dark:text-white"
-        >
+        <h3 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">
           Liên kết
         </h3>
         <ul class="space-y-2 text-sm">
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}blog`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Blog
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}faq`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Từ điển FAQ
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Công cụ
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}about`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Giới thiệu
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}contact`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Liên hệ
-            </a>
-          </li>
+          {[
+            { href: `${base}blog`, label: 'Blog' },
+            { href: `${base}faq`, label: 'Từ điển FAQ' },
+            { href: `${base}tools`, label: 'Công cụ' },
+            { href: `${base}about`, label: 'Giới thiệu' },
+            { href: `${base}contact`, label: 'Liên hệ' },
+          ].map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="transition-colors"
+                style="color: var(--text-secondary);"
+                onmouseover="this.style.color='var(--accent)';"
+                onmouseout="this.style.color='var(--text-secondary)';"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
       <!-- Tools -->
       <div>
-        <h3
-          class="mb-4 text-sm font-semibold uppercase text-gray-900 dark:text-white"
-        >
+        <h3 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">
           Công cụ
         </h3>
         <ul class="space-y-2 text-sm">
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools/compound-interest`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Tính lãi kép
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Tính SIP
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools/budget-allocator`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Phân bổ ngân sách
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools/emergency-fund-planner`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Quỹ khẩn cấp
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools/goal-based-contribution`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              Mức góp theo mục tiêu
-            </a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}tools/investment-comparison`}
-              class="text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
-            >
-              So sánh đầu tư
-            </a>
-          </li>
+          {[
+            { href: `${base}tools/compound-interest`, label: 'Tính lãi kép' },
+            { href: `${base}tools/sip-calculator`, label: 'Tính SIP' },
+            { href: `${base}tools/budget-allocator`, label: 'Phân bổ ngân sách' },
+            { href: `${base}tools/emergency-fund-planner`, label: 'Quỹ khẩn cấp' },
+            { href: `${base}tools/goal-based-contribution`, label: 'Mức góp theo mục tiêu' },
+            { href: `${base}tools/investment-comparison`, label: 'So sánh đầu tư' },
+          ].map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="transition-colors"
+                style="color: var(--text-secondary);"
+                onmouseover="this.style.color='var(--accent)';"
+                onmouseout="this.style.color='var(--text-secondary)';"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
 
-    <div class="mt-8 border-t border-gray-200 pt-8 dark:border-gray-800">
-      <p class="text-center text-sm text-gray-600 dark:text-gray-400">
+    <div class="mt-8 border-t pt-8" style="border-color: var(--border);">
+      <p class="text-center text-sm" style="color: var(--text-muted);">
         © {currentYear} Behivest. Tất cả quyền được bảo lưu.
       </p>
     </div>
