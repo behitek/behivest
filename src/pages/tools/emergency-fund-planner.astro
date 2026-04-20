@@ -1,333 +1,333 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import Layout from'@layouts/Layout.astro';
 ---
 
 <Layout
-  title="Công cụ lập kế hoạch quỹ khẩn cấp"
-  description="Tính quy mô quỹ khẩn cấp theo số tháng chi phí thiết yếu và xem bạn còn thiếu bao nhiêu trước khi đầu tư."
+ title="Công cụ lập kế hoạch quỹ khẩn cấp"
+ description="Tính quy mô quỹ khẩn cấp theo số tháng chi phí thiết yếu và xem bạn còn thiếu bao nhiêu trước khi đầu tư."
 >
-  <section
-    class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-16 dark:from-gray-950 dark:via-gray-950 dark:to-emerald-950/30"
-  >
-    <div
-      class="absolute inset-x-0 top-0 h-44 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_52%)]"
-    >
-    </div>
-    <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-5xl">
-        <a
-          href={`${import.meta.env.BASE_URL}tools`}
-          class="inline-flex items-center text-sm font-medium text-emerald-700 hover:text-emerald-800 dark:text-emerald-300"
-        >
-          <svg
-            class="mr-2 h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"></path>
-          </svg>
-          Quay lại trung tâm công cụ
-        </a>
+ <section
+ class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-16"
+ >
+ <div
+ class="absolute inset-x-0 top-0 h-44 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_52%)]"
+ >
+ </div>
+ <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
+ <div class="mx-auto max-w-5xl">
+ <a
+ href={`${import.meta.env.BASE_URL}tools`}
+ class="inline-flex items-center text-sm font-medium text-emerald-700 hover:text-emerald-800"
+ >
+ <svg
+ class="mr-2 h-4 w-4"
+ fill="none"
+ stroke="currentColor"
+ viewBox="0 0 24 24"
+ >
+ <path
+ stroke-linecap="round"
+ stroke-linejoin="round"
+ stroke-width="2"
+ d="M15 19l-7-7 7-7"></path>
+ </svg>
+ Quay lại trung tâm công cụ
+ </a>
 
-        <div
-          class="mt-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
-        >
-          <div>
-            <p
-              class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400"
-            >
-              Công cụ bắt đầu
-            </p>
-            <h1
-              class="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl"
-            >
-              Quỹ khẩn cấp của bạn đang ở đâu trên lộ trình an toàn?
-            </h1>
-            <p class="mt-5 text-lg leading-8 text-gray-600 dark:text-gray-300">
-              Trước khi nghĩ tới lợi nhuận, người mới thường cần biết một chuyện
-              đơn giản hơn: nếu mất việc hoặc có việc gấp, mình đang có bao
-              nhiêu tháng chi phí thiết yếu để xoay xở.
-            </p>
-            <div class="mt-8 grid gap-3 sm:grid-cols-3">
-              <div
-                class="rounded-2xl border border-white/70 bg-white/85 px-4 py-3 text-sm text-gray-700 shadow-sm dark:border-gray-800 dark:bg-gray-900/80 dark:text-gray-200"
-              >
-                Giúp định lượng mục tiêu 3, 6 hoặc 9 tháng
-              </div>
-              <div
-                class="rounded-2xl border border-white/70 bg-white/85 px-4 py-3 text-sm text-gray-700 shadow-sm dark:border-gray-800 dark:bg-gray-900/80 dark:text-gray-200"
-              >
-                Cho bạn biết còn thiếu bao nhiêu để đủ vùng an toàn
-              </div>
-              <div
-                class="rounded-2xl border border-white/70 bg-white/85 px-4 py-3 text-sm text-gray-700 shadow-sm dark:border-gray-800 dark:bg-gray-900/80 dark:text-gray-200"
-              >
-                Nhắc rõ khi nào nên để tiền mặt đi trước đầu tư
-              </div>
-            </div>
-          </div>
+ <div
+ class="mt-6 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
+ >
+ <div>
+ <p
+ class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+ >
+ Công cụ bắt đầu
+ </p>
+ <h1
+ class="mt-3 text-4xl font-bold tracking-tight text-[var(--text)] md:text-5xl"
+ >
+ Quỹ khẩn cấp của bạn đang ở đâu trên lộ trình an toàn?
+ </h1>
+ <p class="mt-5 text-lg leading-8 text-[var(--text-secondary)]">
+ Trước khi nghĩ tới lợi nhuận, người mới thường cần biết một chuyện
+ đơn giản hơn: nếu mất việc hoặc có việc gấp, mình đang có bao
+ nhiêu tháng chi phí thiết yếu để xoay xở.
+ </p>
+ <div class="mt-8 grid gap-3 sm:grid-cols-3">
+ <div
+ class="rounded-2xl border border-white/70 bg-[var(--bg-card)]/85 px-4 py-3 text-sm text-[var(--text-secondary)] shadow-sm"
+ >
+ Giúp định lượng mục tiêu 3, 6 hoặc 9 tháng
+ </div>
+ <div
+ class="rounded-2xl border border-white/70 bg-[var(--bg-card)]/85 px-4 py-3 text-sm text-[var(--text-secondary)] shadow-sm"
+ >
+ Cho bạn biết còn thiếu bao nhiêu để đủ vùng an toàn
+ </div>
+ <div
+ class="rounded-2xl border border-white/70 bg-[var(--bg-card)]/85 px-4 py-3 text-sm text-[var(--text-secondary)] shadow-sm"
+ >
+ Nhắc rõ khi nào nên để tiền mặt đi trước đầu tư
+ </div>
+ </div>
+ </div>
 
-          <aside
-            class="rounded-3xl border border-emerald-200/70 bg-white/90 p-6 shadow-xl shadow-emerald-100/60 dark:border-emerald-900/60 dark:bg-gray-900/90 dark:shadow-none"
-          >
-            <p
-              class="text-sm font-semibold text-emerald-700 dark:text-emerald-300"
-            >
-              Mẹo dùng công cụ này
-            </p>
-            <ul
-              class="mt-4 space-y-3 text-sm leading-7 text-gray-600 dark:text-gray-300"
-            >
-              <li>Ưu tiên nhập chi phí thật sự bắt buộc mỗi tháng.</li>
-              <li>
-                Chọn 3 tháng nếu bạn có thu nhập ổn định, 6-9 tháng nếu muốn
-                biên an toàn rộng hơn.
-              </li>
-              <li>
-                Kết quả chỉ là khung tham khảo để bạn ra quyết định bình tĩnh
-                hơn.
-              </li>
-            </ul>
-          </aside>
-        </div>
-      </div>
-    </div>
-  </section>
+ <aside
+ class="rounded-3xl border border-emerald-200/70 bg-[var(--bg-card)]/90 p-6 shadow-xl shadow-emerald-100/60"
+ >
+ <p
+ class="text-sm font-semibold text-emerald-700"
+ >
+ Mẹo dùng công cụ này
+ </p>
+ <ul
+ class="mt-4 space-y-3 text-sm leading-7 text-[var(--text-secondary)]"
+ >
+ <li>Ưu tiên nhập chi phí thật sự bắt buộc mỗi tháng.</li>
+ <li>
+ Chọn 3 tháng nếu bạn có thu nhập ổn định, 6-9 tháng nếu muốn
+ biên an toàn rộng hơn.
+ </li>
+ <li>
+ Kết quả chỉ là khung tham khảo để bạn ra quyết định bình tĩnh
+ hơn.
+ </li>
+ </ul>
+ </aside>
+ </div>
+ </div>
+ </div>
+ </section>
 
-  <section class="py-16">
-    <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-8 lg:grid-cols-[0.96fr_1.04fr]">
-        <div class="card">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
-            Tính quy mô quỹ khẩn cấp
-          </h2>
-          <form id="emergency-fund-form" class="mt-6 space-y-6">
-            <div>
-              <label
-                for="monthly-expenses"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Chi phí thiết yếu mỗi tháng (VNĐ)
-              </label>
-              <input
-                type="number"
-                id="monthly-expenses"
-                name="monthly-expenses"
-                value="8000000"
-                min="0"
-                step="100000"
-                required
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+ <section class="py-16">
+ <div class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+ <div class="grid gap-8 lg:grid-cols-[0.96fr_1.04fr]">
+ <div class="card">
+ <h2 class="text-2xl font-semibold text-[var(--text)]">
+ Tính quy mô quỹ khẩn cấp
+ </h2>
+ <form id="emergency-fund-form" class="mt-6 space-y-6">
+ <div>
+ <label
+ for="monthly-expenses"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Chi phí thiết yếu mỗi tháng (VNĐ)
+ </label>
+ <input
+ type="number"
+ id="monthly-expenses"
+ name="monthly-expenses"
+ value="8000000"
+ min="0"
+ step="100000"
+ required
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+ />
+ </div>
 
-            <div>
-              <label
-                for="current-savings"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Số tiền bạn đang để dành sẵn (VNĐ)
-              </label>
-              <input
-                type="number"
-                id="current-savings"
-                name="current-savings"
-                value="10000000"
-                min="0"
-                step="100000"
-                required
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+ <div>
+ <label
+ for="current-savings"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Số tiền bạn đang để dành sẵn (VNĐ)
+ </label>
+ <input
+ type="number"
+ id="current-savings"
+ name="current-savings"
+ value="10000000"
+ min="0"
+ step="100000"
+ required
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+ />
+ </div>
 
-            <div>
-              <label
-                for="target-months"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Mục tiêu quỹ khẩn cấp
-              </label>
-              <select
-                id="target-months"
-                name="target-months"
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              >
-                <option value="3">3 tháng chi phí</option>
-                <option value="6" selected>6 tháng chi phí</option>
-                <option value="9">9 tháng chi phí</option>
-              </select>
-            </div>
+ <div>
+ <label
+ for="target-months"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Mục tiêu quỹ khẩn cấp
+ </label>
+ <select
+ id="target-months"
+ name="target-months"
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+ >
+ <option value="3">3 tháng chi phí</option>
+ <option value="6" selected>6 tháng chi phí</option>
+ <option value="9">9 tháng chi phí</option>
+ </select>
+ </div>
 
-            <button type="submit" class="btn-primary w-full">
-              Xem mức độ sẵn sàng
-            </button>
-          </form>
-        </div>
+ <button type="submit" class="btn-primary w-full">
+ Xem mức độ sẵn sàng
+ </button>
+ </form>
+ </div>
 
-        <div class="card">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
-            Kết quả
-          </h2>
-          <div class="mt-6 space-y-5">
-            <div class="rounded-3xl bg-emerald-50 p-5 dark:bg-emerald-950/30">
-              <p class="text-sm text-emerald-800 dark:text-emerald-300">
-                Quy mô quỹ khẩn cấp mục tiêu
-              </p>
-              <p
-                id="emergency-target-amount"
-                class="mt-2 text-3xl font-bold text-emerald-700 dark:text-emerald-300"
-              >
-                0 ₫
-              </p>
-            </div>
+ <div class="card">
+ <h2 class="text-2xl font-semibold text-[var(--text)]">
+ Kết quả
+ </h2>
+ <div class="mt-6 space-y-5">
+ <div class="rounded-3xl bg-emerald-50 p-5">
+ <p class="text-sm text-emerald-800">
+ Quy mô quỹ khẩn cấp mục tiêu
+ </p>
+ <p
+ id="emergency-target-amount"
+ class="mt-2 text-3xl font-bold text-emerald-700"
+ >
+ 0 ₫
+ </p>
+ </div>
 
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div class="rounded-2xl bg-gray-50 p-4 dark:bg-gray-950">
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Đã tích lũy
-                </p>
-                <p
-                  id="emergency-current-progress"
-                  class="mt-2 text-2xl font-semibold text-gray-900 dark:text-white"
-                >
-                  0 ₫
-                </p>
-              </div>
-              <div class="rounded-2xl bg-gray-50 p-4 dark:bg-gray-950">
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Còn thiếu
-                </p>
-                <p
-                  id="emergency-remaining-amount"
-                  class="mt-2 text-2xl font-semibold text-gray-900 dark:text-white"
-                >
-                  0 ₫
-                </p>
-              </div>
-            </div>
+ <div class="grid gap-4 sm:grid-cols-2">
+ <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+ <p class="text-sm text-[var(--text-muted)]">
+ Đã tích lũy
+ </p>
+ <p
+ id="emergency-current-progress"
+ class="mt-2 text-2xl font-semibold text-[var(--text)]"
+ >
+ 0 ₫
+ </p>
+ </div>
+ <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+ <p class="text-sm text-[var(--text-muted)]">
+ Còn thiếu
+ </p>
+ <p
+ id="emergency-remaining-amount"
+ class="mt-2 text-2xl font-semibold text-[var(--text)]"
+ >
+ 0 ₫
+ </p>
+ </div>
+ </div>
 
-            <div
-              class="rounded-2xl border border-gray-200 p-4 dark:border-gray-800"
-            >
-              <div class="flex items-center justify-between gap-3">
-                <p class="text-sm text-gray-600 dark:text-gray-300">
-                  Tiến độ hiện tại
-                </p>
-                <p
-                  id="emergency-progress-percent"
-                  class="text-sm font-semibold text-gray-900 dark:text-white"
-                >
-                  0%
-                </p>
-              </div>
-              <div
-                class="mt-3 h-3 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800"
-              >
-                <div
-                  id="emergency-progress-bar"
-                  class="h-full rounded-full bg-emerald-500 transition-all duration-500"
-                  style="width: 0%"
-                >
-                </div>
-              </div>
-            </div>
+ <div
+ class="rounded-2xl border border-[var(--border)] p-4"
+ >
+ <div class="flex items-center justify-between gap-3">
+ <p class="text-sm text-[var(--text-secondary)]">
+ Tiến độ hiện tại
+ </p>
+ <p
+ id="emergency-progress-percent"
+ class="text-sm font-semibold text-[var(--text)]"
+ >
+ 0%
+ </p>
+ </div>
+ <div
+ class="mt-3 h-3 overflow-hidden rounded-full bg-gray-200"
+ >
+ <div
+ id="emergency-progress-bar"
+ class="h-full rounded-full bg-emerald-500 transition-all duration-500"
+ style="width: 0%"
+ >
+ </div>
+ </div>
+ </div>
 
-            <div
-              id="emergency-guidance"
-              class="rounded-3xl border border-dashed border-emerald-200 bg-white p-5 dark:border-emerald-900 dark:bg-gray-950"
-            >
-            </div>
+ <div
+ id="emergency-guidance"
+ class="rounded-3xl border border-dashed border-emerald-200 bg-[var(--bg-card)] p-5"
+ >
+ </div>
 
-            <div class="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={`${import.meta.env.BASE_URL}tools/budget-allocator`}
-                class="btn-secondary text-center"
-              >
-                Xem công cụ phân bổ ngân sách
-              </a>
-              <a
-                href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
-                class="btn-primary text-center"
-              >
-                Khi đã sẵn sàng, xem công cụ SIP
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ <div class="flex flex-col gap-3 sm:flex-row">
+ <a
+ href={`${import.meta.env.BASE_URL}tools/budget-allocator`}
+ class="btn-secondary text-center"
+ >
+ Xem công cụ phân bổ ngân sách
+ </a>
+ <a
+ href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
+ class="btn-primary text-center"
+ >
+ Khi đã sẵn sàng, xem công cụ SIP
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
 
-  <script>
-    import {
-      calculateEmergencyFundPlan,
-      formatCurrency,
-    } from '@/utils/calculators';
+ <script>
+ import {
+ calculateEmergencyFundPlan,
+ formatCurrency,
+ } from'@/utils/calculators';
 
-    const form = document.getElementById(
-      'emergency-fund-form'
-    ) as HTMLFormElement | null;
+ const form = document.getElementById(
+'emergency-fund-form'
+ ) as HTMLFormElement | null;
 
-    const guidanceCopy = {
-      'focus-emergency-fund': {
-        title: 'Ưu tiên tiền mặt trước',
-        body: 'Bạn vẫn nên dồn lực cho quỹ khẩn cấp trước. Nếu muốn tập thói quen đầu tư, chỉ nên giữ khoản thử nghiệm thật nhỏ để không làm chậm vùng an toàn.',
-      },
-      'split-between-cash-and-investing': {
-        title: 'Có thể đi song song nhưng vẫn nghiêng về quỹ dự phòng',
-        body: 'Bạn đã đi được một đoạn tốt. Hãy để phần lớn dòng tiền tiếp tục bù quỹ khẩn cấp, và chỉ tách một phần nhỏ sang đầu tư dài hạn nếu bạn duy trì được đều.',
-      },
-      'ready-to-invest': {
-        title: 'Quỹ khẩn cấp đã tương đối ổn',
-        body: 'Bạn đã có lớp đệm cơ bản cho các tình huống gấp. Từ đây có thể tách riêng quỹ khẩn cấp và dùng phần tiền dài hạn cho các kế hoạch đầu tư đều đặn hơn.',
-      },
-    } as const;
+ const guidanceCopy = {
+'focus-emergency-fund': {
+ title:'Ưu tiên tiền mặt trước',
+ body:'Bạn vẫn nên dồn lực cho quỹ khẩn cấp trước. Nếu muốn tập thói quen đầu tư, chỉ nên giữ khoản thử nghiệm thật nhỏ để không làm chậm vùng an toàn.',
+ },
+'split-between-cash-and-investing': {
+ title:'Có thể đi song song nhưng vẫn nghiêng về quỹ dự phòng',
+ body:'Bạn đã đi được một đoạn tốt. Hãy để phần lớn dòng tiền tiếp tục bù quỹ khẩn cấp, và chỉ tách một phần nhỏ sang đầu tư dài hạn nếu bạn duy trì được đều.',
+ },
+'ready-to-invest': {
+ title:'Quỹ khẩn cấp đã tương đối ổn',
+ body:'Bạn đã có lớp đệm cơ bản cho các tình huống gấp. Từ đây có thể tách riêng quỹ khẩn cấp và dùng phần tiền dài hạn cho các kế hoạch đầu tư đều đặn hơn.',
+ },
+ } as const;
 
-    form?.addEventListener('submit', (event) => {
-      event.preventDefault();
+ form?.addEventListener('submit', (event) => {
+ event.preventDefault();
 
-      const monthlyExpenses = Number(
-        (document.getElementById('monthly-expenses') as HTMLInputElement).value
-      );
-      const currentSavings = Number(
-        (document.getElementById('current-savings') as HTMLInputElement).value
-      );
-      const targetMonths = Number(
-        (document.getElementById('target-months') as HTMLSelectElement).value
-      );
+ const monthlyExpenses = Number(
+ (document.getElementById('monthly-expenses') as HTMLInputElement).value
+ );
+ const currentSavings = Number(
+ (document.getElementById('current-savings') as HTMLInputElement).value
+ );
+ const targetMonths = Number(
+ (document.getElementById('target-months') as HTMLSelectElement).value
+ );
 
-      try {
-        const result = calculateEmergencyFundPlan(
-          monthlyExpenses,
-          currentSavings,
-          targetMonths
-        );
-        const copy = guidanceCopy[result.readinessStage];
+ try {
+ const result = calculateEmergencyFundPlan(
+ monthlyExpenses,
+ currentSavings,
+ targetMonths
+ );
+ const copy = guidanceCopy[result.readinessStage];
 
-        document.getElementById('emergency-target-amount')!.textContent =
-          formatCurrency(result.targetAmount);
-        document.getElementById('emergency-current-progress')!.textContent =
-          formatCurrency(result.currentProgress);
-        document.getElementById('emergency-remaining-amount')!.textContent =
-          formatCurrency(result.remainingAmount);
-        document.getElementById('emergency-progress-percent')!.textContent =
-          `${result.progressPercent}%`;
-        document.getElementById('emergency-progress-bar')!.style.width =
-          `${result.progressPercent}%`;
-        document.getElementById('emergency-guidance')!.innerHTML = `
-          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600 dark:text-emerald-400">${copy.title}</p>
-          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">${copy.body}</p>
-        `;
-      } catch {
-        alert('Vui lòng kiểm tra lại các giá trị nhập vào.');
-      }
-    });
+ document.getElementById('emergency-target-amount')!.textContent =
+ formatCurrency(result.targetAmount);
+ document.getElementById('emergency-current-progress')!.textContent =
+ formatCurrency(result.currentProgress);
+ document.getElementById('emergency-remaining-amount')!.textContent =
+ formatCurrency(result.remainingAmount);
+ document.getElementById('emergency-progress-percent')!.textContent =
+ `${result.progressPercent}%`;
+ document.getElementById('emergency-progress-bar')!.style.width =
+ `${result.progressPercent}%`;
+ document.getElementById('emergency-guidance')!.innerHTML = `
+ <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600">${copy.title}</p>
+ <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">${copy.body}</p>
+ `;
+ } catch {
+ alert('Vui lòng kiểm tra lại các giá trị nhập vào.');
+ }
+ });
 
-    form?.dispatchEvent(new Event('submit'));
-  </script>
+ form?.dispatchEvent(new Event('submit'));
+ </script>
 </Layout>

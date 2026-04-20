@@ -1,383 +1,383 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import Layout from'@layouts/Layout.astro';
 ---
 
 <Layout
-  title="Công cụ so sánh đầu tư và gửi tiết kiệm"
-  description="So sánh giá trị tương lai giữa đầu tư quỹ mở và gửi tiết kiệm ngân hàng theo cùng số tiền, lãi suất và thời gian."
+ title="Công cụ so sánh đầu tư và gửi tiết kiệm"
+ description="So sánh giá trị tương lai giữa đầu tư quỹ mở và gửi tiết kiệm ngân hàng theo cùng số tiền, lãi suất và thời gian."
 >
-  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-4xl">
-      <a
-        href={`${import.meta.env.BASE_URL}tools`}
-        class="inline-flex items-center text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400"
-      >
-        <svg
-          class="mr-1 h-4 w-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"></path>
-        </svg>
-        Quay lại công cụ
-      </a>
+ <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+ <div class="mx-auto max-w-4xl">
+ <a
+ href={`${import.meta.env.BASE_URL}tools`}
+ class="inline-flex items-center text-sm text-[var(--accent)] hover:text-[var(--accent)]"
+ >
+ <svg
+ class="mr-1 h-4 w-4"
+ fill="none"
+ stroke="currentColor"
+ viewBox="0 0 24 24"
+ >
+ <path
+ stroke-linecap="round"
+ stroke-linejoin="round"
+ stroke-width="2"
+ d="M15 19l-7-7 7-7"></path>
+ </svg>
+ Quay lại công cụ
+ </a>
 
-      <h1 class="mt-4 text-4xl font-bold text-gray-900 dark:text-white">
-        So sánh đầu tư vs tiết kiệm
-      </h1>
-      <p class="mt-2 text-gray-600 dark:text-gray-300">
-        Xem sự khác biệt giữa đầu tư quỹ mở và gửi tiết kiệm ngân hàng
-      </p>
-      <p
-        class="mt-4 max-w-3xl text-sm leading-7 text-gray-500 dark:text-gray-400"
-      >
-        Mục tiêu của công cụ này là đặt mỗi lựa chọn vào đúng vai trò của nó.
-        Tiết kiệm không phải “kém hơn” trong mọi tình huống, và đầu tư cũng
-        không phù hợp với mọi khoản tiền.
-      </p>
+ <h1 class="mt-4 text-4xl font-bold text-[var(--text)]">
+ So sánh đầu tư vs tiết kiệm
+ </h1>
+ <p class="mt-2 text-[var(--text-secondary)]">
+ Xem sự khác biệt giữa đầu tư quỹ mở và gửi tiết kiệm ngân hàng
+ </p>
+ <p
+ class="mt-4 max-w-3xl text-sm leading-7 text-[var(--text-muted)]"
+ >
+ Mục tiêu của công cụ này là đặt mỗi lựa chọn vào đúng vai trò của nó.
+ Tiết kiệm không phải “kém hơn” trong mọi tình huống, và đầu tư cũng
+ không phù hợp với mọi khoản tiền.
+ </p>
 
-      <div class="mt-8 grid gap-8 lg:grid-cols-2">
-        <!-- Input Form -->
-        <div class="card">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-            Thông tin so sánh
-          </h2>
-          <form id="comparison-form" class="mt-6 space-y-6">
-            <div>
-              <label
-                for="initial-amount"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Số tiền ban đầu (VNĐ)
-              </label>
-              <input
-                type="number"
-                id="initial-amount"
-                name="initial-amount"
-                value="50000000"
-                min="0"
-                step="1000000"
-                required
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+ <div class="mt-8 grid gap-8 lg:grid-cols-2">
+ <!-- Input Form -->
+ <div class="card">
+ <h2 class="text-xl font-semibold text-[var(--text)]">
+ Thông tin so sánh
+ </h2>
+ <form id="comparison-form" class="mt-6 space-y-6">
+ <div>
+ <label
+ for="initial-amount"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Số tiền ban đầu (VNĐ)
+ </label>
+ <input
+ type="number"
+ id="initial-amount"
+ name="initial-amount"
+ value="50000000"
+ min="0"
+ step="1000000"
+ required
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+ />
+ </div>
 
-            <div>
-              <label
-                for="investment-rate"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Lợi nhuận đầu tư kỳ vọng (%/năm)
-              </label>
-              <input
-                type="number"
-                id="investment-rate"
-                name="investment-rate"
-                value="12"
-                min="0"
-                max="100"
-                step="0.1"
-                required
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+ <div>
+ <label
+ for="investment-rate"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Lợi nhuận đầu tư kỳ vọng (%/năm)
+ </label>
+ <input
+ type="number"
+ id="investment-rate"
+ name="investment-rate"
+ value="12"
+ min="0"
+ max="100"
+ step="0.1"
+ required
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+ />
+ </div>
 
-            <div>
-              <label
-                for="savings-rate"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Lãi suất tiết kiệm (%/năm)
-              </label>
-              <input
-                type="number"
-                id="savings-rate"
-                name="savings-rate"
-                value="5"
-                min="0"
-                max="100"
-                step="0.1"
-                required
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+ <div>
+ <label
+ for="savings-rate"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Lãi suất tiết kiệm (%/năm)
+ </label>
+ <input
+ type="number"
+ id="savings-rate"
+ name="savings-rate"
+ value="5"
+ min="0"
+ max="100"
+ step="0.1"
+ required
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+ />
+ </div>
 
-            <div>
-              <label
-                for="comparison-years"
-                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Thời gian (năm)
-              </label>
-              <input
-                type="number"
-                id="comparison-years"
-                name="comparison-years"
-                value="10"
-                min="1"
-                max="50"
-                required
-                class="mt-1 block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              />
-            </div>
+ <div>
+ <label
+ for="comparison-years"
+ class="block text-sm font-medium text-[var(--text-secondary)]"
+ >
+ Thời gian (năm)
+ </label>
+ <input
+ type="number"
+ id="comparison-years"
+ name="comparison-years"
+ value="10"
+ min="1"
+ max="50"
+ required
+ class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+ />
+ </div>
 
-            <button type="submit" class="btn-primary w-full"> So sánh </button>
-          </form>
-        </div>
+ <button type="submit" class="btn-primary w-full"> So sánh </button>
+ </form>
+ </div>
 
-        <!-- Results -->
-        <div class="card">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-            Kết quả so sánh
-          </h2>
-          <div id="comparison-results" class="mt-6 space-y-6">
-            <!-- Investment -->
-            <div
-              class="rounded-lg border-2 border-primary-200 bg-primary-50 p-4 dark:border-primary-800 dark:bg-primary-900/20"
-            >
-              <div class="flex items-center justify-between">
-                <div>
-                  <p
-                    class="text-sm font-medium text-primary-900 dark:text-primary-300"
-                  >
-                    Đầu tư quỹ mở
-                  </p>
-                  <p
-                    id="investment-final"
-                    class="mt-2 text-3xl font-bold text-primary-600 dark:text-primary-400"
-                  >
-                    0 ₫
-                  </p>
-                  <p
-                    class="mt-1 text-sm text-primary-700 dark:text-primary-400"
-                  >
-                    Lợi nhuận: <span
-                      id="investment-returns"
-                      class="font-semibold">0 ₫</span
-                    >
-                  </p>
-                </div>
-                <div class="text-4xl">📈</div>
-              </div>
-            </div>
+ <!-- Results -->
+ <div class="card">
+ <h2 class="text-xl font-semibold text-[var(--text)]">
+ Kết quả so sánh
+ </h2>
+ <div id="comparison-results" class="mt-6 space-y-6">
+ <!-- Investment -->
+ <div
+ class="rounded-lg border-2 border-[var(--accent)] bg-[var(--accent-light)] p-4"
+ >
+ <div class="flex items-center justify-between">
+ <div>
+ <p
+ class="text-sm font-medium text-[var(--accent)]"
+ >
+ Đầu tư quỹ mở
+ </p>
+ <p
+ id="investment-final"
+ class="mt-2 text-3xl font-bold text-[var(--accent)]"
+ >
+ 0 ₫
+ </p>
+ <p
+ class="mt-1 text-sm text-[var(--accent)]"
+ >
+ Lợi nhuận: <span
+ id="investment-returns"
+ class="font-semibold">0 ₫</span
+ >
+ </p>
+ </div>
+ <div class="text-4xl">📈</div>
+ </div>
+ </div>
 
-            <!-- Savings -->
-            <div
-              class="rounded-lg border-2 border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
-            >
-              <div class="flex items-center justify-between">
-                <div>
-                  <p
-                    class="text-sm font-medium text-gray-900 dark:text-gray-300"
-                  >
-                    Tiết kiệm ngân hàng
-                  </p>
-                  <p
-                    id="savings-final"
-                    class="mt-2 text-3xl font-bold text-gray-700 dark:text-gray-300"
-                  >
-                    0 ₫
-                  </p>
-                  <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Lãi: <span id="savings-interest" class="font-semibold"
-                      >0 ₫</span
-                    >
-                  </p>
-                </div>
-                <div class="text-4xl">🏦</div>
-              </div>
-            </div>
+ <!-- Savings -->
+ <div
+ class="rounded-lg border-2 border-[var(--border)] bg-[var(--bg-warm)] p-4"
+ >
+ <div class="flex items-center justify-between">
+ <div>
+ <p
+ class="text-sm font-medium text-[var(--text)]"
+ >
+ Tiết kiệm ngân hàng
+ </p>
+ <p
+ id="savings-final"
+ class="mt-2 text-3xl font-bold text-[var(--text-secondary)]"
+ >
+ 0 ₫
+ </p>
+ <p class="mt-1 text-sm text-[var(--text-secondary)]">
+ Lãi: <span id="savings-interest" class="font-semibold"
+ >0 ₫</span
+ >
+ </p>
+ </div>
+ <div class="text-4xl">🏦</div>
+ </div>
+ </div>
 
-            <!-- Difference -->
-            <div
-              class="rounded-lg border-2 border-secondary-200 bg-secondary-50 p-4 dark:border-secondary-800 dark:bg-secondary-900/20"
-            >
-              <p
-                class="text-sm font-medium text-secondary-900 dark:text-secondary-300"
-              >
-                Chênh lệch
-              </p>
-              <p
-                id="difference-amount"
-                class="mt-2 text-3xl font-bold text-secondary-600 dark:text-secondary-400"
-              >
-                0 ₫
-              </p>
-              <p
-                class="mt-2 text-sm text-secondary-700 dark:text-secondary-400"
-              >
-                Đầu tư mang lại nhiều hơn <span
-                  id="difference-percent"
-                  class="font-semibold">0%</span
-                >
-              </p>
-            </div>
+ <!-- Difference -->
+ <div
+ class="rounded-lg border-2 border-[var(--accent)] bg-[var(--accent-light)] p-4"
+ >
+ <p
+ class="text-sm font-medium text-[var(--accent)]"
+ >
+ Chênh lệch
+ </p>
+ <p
+ id="difference-amount"
+ class="mt-2 text-3xl font-bold text-[var(--accent)]"
+ >
+ 0 ₫
+ </p>
+ <p
+ class="mt-2 text-sm text-[var(--accent)]"
+ >
+ Đầu tư mang lại nhiều hơn <span
+ id="difference-percent"
+ class="font-semibold">0%</span
+ >
+ </p>
+ </div>
 
-            <div
-              id="comparison-interpretation"
-              class="rounded-lg border border-dashed border-primary-200 p-4 dark:border-primary-800"
-            >
-            </div>
+ <div
+ id="comparison-interpretation"
+ class="rounded-lg border border-dashed border-[var(--accent)] p-4"
+ >
+ </div>
 
-            <div class="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={`${import.meta.env.BASE_URL}tools/emergency-fund-planner`}
-                class="btn-secondary text-center"
-              >
-                Nếu còn phân vân, kiểm tra quỹ khẩn cấp
-              </a>
-              <a
-                href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
-                class="btn-primary text-center"
-              >
-                Khi đã sẵn sàng, xem mô phỏng SIP
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+ <div class="flex flex-col gap-3 sm:flex-row">
+ <a
+ href={`${import.meta.env.BASE_URL}tools/emergency-fund-planner`}
+ class="btn-secondary text-center"
+ >
+ Nếu còn phân vân, kiểm tra quỹ khẩn cấp
+ </a>
+ <a
+ href={`${import.meta.env.BASE_URL}tools/sip-calculator`}
+ class="btn-primary text-center"
+ >
+ Khi đã sẵn sàng, xem mô phỏng SIP
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
 
-      <!-- Info Section -->
-      <div class="card mt-12">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
-          Nên chọn đầu tư hay tiết kiệm?
-        </h2>
-        <p class="mt-4 text-gray-600 dark:text-gray-300">
-          Cả hai đều quan trọng và có vai trò riêng trong quản lý tài chính cá
-          nhân:
-        </p>
+ <!-- Info Section -->
+ <div class="card mt-12">
+ <h2 class="text-2xl font-semibold text-[var(--text)]">
+ Nên chọn đầu tư hay tiết kiệm?
+ </h2>
+ <p class="mt-4 text-[var(--text-secondary)]">
+ Cả hai đều quan trọng và có vai trò riêng trong quản lý tài chính cá
+ nhân:
+ </p>
 
-        <div class="mt-6 grid gap-6 md:grid-cols-2">
-          <div
-            class="rounded-lg border border-primary-200 bg-primary-50 p-6 dark:border-primary-800 dark:bg-primary-900/20"
-          >
-            <h3 class="font-semibold text-primary-900 dark:text-primary-300">
-              Đầu tư phù hợp hơn khi
-            </h3>
-            <ul
-              class="mt-3 space-y-2 text-sm text-primary-800 dark:text-primary-300"
-            >
-              <li>Bạn đang nhắm tới mục tiêu từ 5 năm trở lên.</li>
-              <li>
-                Bạn chấp nhận biến động ngắn hạn để đổi lấy kỳ vọng cao hơn.
-              </li>
-              <li>Bạn đã có quỹ khẩn cấp cơ bản riêng.</li>
-              <li>Bạn muốn chống lạm phát tốt hơn trong dài hạn.</li>
-            </ul>
-          </div>
+ <div class="mt-6 grid gap-6 md:grid-cols-2">
+ <div
+ class="rounded-lg border border-[var(--accent)] bg-[var(--accent-light)] p-6"
+ >
+ <h3 class="font-semibold text-[var(--accent)]">
+ Đầu tư phù hợp hơn khi
+ </h3>
+ <ul
+ class="mt-3 space-y-2 text-sm text-[var(--accent)]"
+ >
+ <li>Bạn đang nhắm tới mục tiêu từ 5 năm trở lên.</li>
+ <li>
+ Bạn chấp nhận biến động ngắn hạn để đổi lấy kỳ vọng cao hơn.
+ </li>
+ <li>Bạn đã có quỹ khẩn cấp cơ bản riêng.</li>
+ <li>Bạn muốn chống lạm phát tốt hơn trong dài hạn.</li>
+ </ul>
+ </div>
 
-          <div
-            class="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800"
-          >
-            <h3 class="font-semibold text-gray-900 dark:text-gray-300">
-              Tiết kiệm phù hợp hơn khi
-            </h3>
-            <ul class="mt-3 space-y-2 text-sm text-gray-700 dark:text-gray-400">
-              <li>Bạn cần sự ổn định và khả năng rút tiền tương đối nhanh.</li>
-              <li>
-                Khoản tiền này là quỹ khẩn cấp hoặc sẽ dùng trong ngắn hạn.
-              </li>
-              <li>Bạn chưa muốn chịu biến động giá trị theo thị trường.</li>
-              <li>Bạn đang ưu tiên an toàn hơn tăng trưởng.</li>
-            </ul>
-          </div>
-        </div>
+ <div
+ class="rounded-lg border border-[var(--border)] bg-[var(--bg-warm)] p-6"
+ >
+ <h3 class="font-semibold text-[var(--text)]">
+ Tiết kiệm phù hợp hơn khi
+ </h3>
+ <ul class="mt-3 space-y-2 text-sm text-[var(--text-secondary)]">
+ <li>Bạn cần sự ổn định và khả năng rút tiền tương đối nhanh.</li>
+ <li>
+ Khoản tiền này là quỹ khẩn cấp hoặc sẽ dùng trong ngắn hạn.
+ </li>
+ <li>Bạn chưa muốn chịu biến động giá trị theo thị trường.</li>
+ <li>Bạn đang ưu tiên an toàn hơn tăng trưởng.</li>
+ </ul>
+ </div>
+ </div>
 
-        <div class="mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
-          <p class="font-medium text-blue-900 dark:text-blue-300">
-            Gợi ý thực tế: kết hợp cả hai theo đúng vai trò
-          </p>
-          <p class="mt-2 text-sm text-blue-800 dark:text-blue-300">
-            Giữ 3-6 tháng chi phí sinh hoạt ở vùng an toàn trước, sau đó mới để
-            phần tiền dành cho mục tiêu dài hạn làm việc trong các kênh đầu tư
-            phù hợp.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="mt-6 rounded-lg bg-blue-50 p-4">
+ <p class="font-medium text-blue-900">
+ Gợi ý thực tế: kết hợp cả hai theo đúng vai trò
+ </p>
+ <p class="mt-2 text-sm text-blue-800">
+ Giữ 3-6 tháng chi phí sinh hoạt ở vùng an toàn trước, sau đó mới để
+ phần tiền dành cho mục tiêu dài hạn làm việc trong các kênh đầu tư
+ phù hợp.
+ </p>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <script>
-    import {
-      compareInvestmentVsSavings,
-      formatCurrency,
-    } from '@/utils/calculators';
+ <script>
+ import {
+ compareInvestmentVsSavings,
+ formatCurrency,
+ } from'@/utils/calculators';
 
-    const form = document.getElementById('comparison-form') as HTMLFormElement;
+ const form = document.getElementById('comparison-form') as HTMLFormElement;
 
-    const getInterpretation = (difference: number, years: number): string => {
-      if (years < 5) {
-        return 'Với thời gian ngắn, chênh lệch giữa đầu tư và tiết kiệm thường chưa đủ để bạn bỏ qua yếu tố an toàn và khả năng rút tiền. Hãy nhìn cả mục tiêu sử dụng tiền, không chỉ nhìn con số cuối kỳ.';
-      }
+ const getInterpretation = (difference: number, years: number): string => {
+ if (years < 5) {
+ return'Với thời gian ngắn, chênh lệch giữa đầu tư và tiết kiệm thường chưa đủ để bạn bỏ qua yếu tố an toàn và khả năng rút tiền. Hãy nhìn cả mục tiêu sử dụng tiền, không chỉ nhìn con số cuối kỳ.';
+ }
 
-      if (difference <= 0) {
-        return 'Theo giả định hiện tại, đầu tư không vượt lên rõ rệt. Điều này nhắc rằng kết quả luôn phụ thuộc vào kỳ vọng lợi nhuận và thời gian nắm giữ, chứ không có lựa chọn nào đúng trong mọi hoàn cảnh.';
-      }
+ if (difference <= 0) {
+ return'Theo giả định hiện tại, đầu tư không vượt lên rõ rệt. Điều này nhắc rằng kết quả luôn phụ thuộc vào kỳ vọng lợi nhuận và thời gian nắm giữ, chứ không có lựa chọn nào đúng trong mọi hoàn cảnh.';
+ }
 
-      return 'Mô phỏng cho thấy đầu tư có thể vượt lên trong dài hạn, nhưng điều đó chỉ thực sự phù hợp với phần tiền bạn không cần dùng trong ngắn hạn và đã tách khỏi quỹ dự phòng.';
-    };
+ return'Mô phỏng cho thấy đầu tư có thể vượt lên trong dài hạn, nhưng điều đó chỉ thực sự phù hợp với phần tiền bạn không cần dùng trong ngắn hạn và đã tách khỏi quỹ dự phòng.';
+ };
 
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
+ form?.addEventListener('submit', (e) => {
+ e.preventDefault();
 
-      const initialAmount = parseFloat(
-        (document.getElementById('initial-amount') as HTMLInputElement).value
-      );
-      const investmentRate = parseFloat(
-        (document.getElementById('investment-rate') as HTMLInputElement).value
-      );
-      const savingsRate = parseFloat(
-        (document.getElementById('savings-rate') as HTMLInputElement).value
-      );
-      const years = parseInt(
-        (document.getElementById('comparison-years') as HTMLInputElement).value
-      );
+ const initialAmount = parseFloat(
+ (document.getElementById('initial-amount') as HTMLInputElement).value
+ );
+ const investmentRate = parseFloat(
+ (document.getElementById('investment-rate') as HTMLInputElement).value
+ );
+ const savingsRate = parseFloat(
+ (document.getElementById('savings-rate') as HTMLInputElement).value
+ );
+ const years = parseInt(
+ (document.getElementById('comparison-years') as HTMLInputElement).value
+ );
 
-      try {
-        const result = compareInvestmentVsSavings(
-          initialAmount,
-          investmentRate,
-          savingsRate,
-          years
-        );
+ try {
+ const result = compareInvestmentVsSavings(
+ initialAmount,
+ investmentRate,
+ savingsRate,
+ years
+ );
 
-        // Update results
-        document.getElementById('investment-final')!.textContent =
-          formatCurrency(result.investmentFinalAmount);
-        document.getElementById('investment-returns')!.textContent =
-          formatCurrency(result.investmentReturns);
+ // Update results
+ document.getElementById('investment-final')!.textContent =
+ formatCurrency(result.investmentFinalAmount);
+ document.getElementById('investment-returns')!.textContent =
+ formatCurrency(result.investmentReturns);
 
-        document.getElementById('savings-final')!.textContent = formatCurrency(
-          result.savingsFinalAmount
-        );
-        document.getElementById('savings-interest')!.textContent =
-          formatCurrency(result.savingsInterest);
+ document.getElementById('savings-final')!.textContent = formatCurrency(
+ result.savingsFinalAmount
+ );
+ document.getElementById('savings-interest')!.textContent =
+ formatCurrency(result.savingsInterest);
 
-        document.getElementById('difference-amount')!.textContent =
-          formatCurrency(result.difference);
+ document.getElementById('difference-amount')!.textContent =
+ formatCurrency(result.difference);
 
-        const diffPercent =
-          (result.difference / result.savingsFinalAmount) * 100;
-        document.getElementById('difference-percent')!.textContent =
-          diffPercent.toFixed(1) + '%';
-        document.getElementById('comparison-interpretation')!.innerHTML = `
-          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-600 dark:text-primary-400">Diễn giải nhanh</p>
-          <p class="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">${getInterpretation(
-            result.difference,
-            years
-          )}</p>
-        `;
-      } catch {
-        alert('Vui lòng kiểm tra lại các giá trị nhập vào');
-      }
-    });
+ const diffPercent =
+ (result.difference / result.savingsFinalAmount) * 100;
+ document.getElementById('difference-percent')!.textContent =
+ diffPercent.toFixed(1) +'%';
+ document.getElementById('comparison-interpretation')!.innerHTML = `
+ <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Diễn giải nhanh</p>
+ <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">${getInterpretation(
+ result.difference,
+ years
+ )}</p>
+ `;
+ } catch {
+ alert('Vui lòng kiểm tra lại các giá trị nhập vào');
+ }
+ });
 
-    // Initial calculation
-    form?.dispatchEvent(new Event('submit'));
-  </script>
+ // Initial calculation
+ form?.dispatchEvent(new Event('submit'));
+ </script>
 </Layout>
