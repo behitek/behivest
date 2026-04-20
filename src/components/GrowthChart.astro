@@ -1,4 +1,5 @@
 ---
+const basePath = import.meta.env.BASE_URL;
 // No props — all state is managed by client-side JS.
 // Default: monthly = 1_000_000, years = 10
 ---
@@ -80,6 +81,19 @@
   <p style="font-size: 12px; color: var(--text-muted); margin-top: 16px; line-height: 1.6;">
     * Lãi suất ngân hàng 5%/năm, quỹ cổ phiếu ≈12%/năm là mức trung bình tham khảo. Thực tế có thể cao hoặc thấp hơn. Đầu tư luôn có rủi ro.
   </p>
+
+  <!-- Contextual links -->
+  <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+    <a href={`${basePath}performance`} style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--accent); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+      Xem hiệu suất quỹ thực tế →
+    </a>
+    <a href={`${basePath}tools/compound-interest`} style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+      Tự tính lãi kép →
+    </a>
+    <a href={`${basePath}blog`} style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+      Đọc bài viết cho người mới →
+    </a>
+  </div>
 </div>
 
 <script>
@@ -99,7 +113,7 @@
 
   function fmt(n: number): string {
     if (n >= 1e9) return (n / 1e9).toFixed(1).replace('.0', '') + ' tỷ';
-    if (n >= 1e6) return (n / 1e6).toFixed(1).replace('.0', '') + ' triệu';
+    if (n >= 1e6) return (n / 1e6).toFixed(1).replace('.0', '') + ' tr';
     return Math.round(n).toLocaleString('vi-VN');
   }
 
@@ -183,10 +197,10 @@
     const diffEl = document.getElementById('chart-diff-amount');
     const diffLabel = document.getElementById('chart-diff-label');
 
-    if (bankEl) bankEl.textContent = fmt(bankTotal) + 'đ';
-    if (fundEl) fundEl.textContent = fmt(fundTotal) + 'đ';
-    if (depEl) depEl.textContent = fmt(deposited) + 'đ';
-    if (diffEl) diffEl.textContent = '+' + fmt(diff) + 'đ';
+    if (bankEl) bankEl.textContent = fmt(bankTotal) + ' VNĐ';
+    if (fundEl) fundEl.textContent = fmt(fundTotal) + ' VNĐ';
+    if (depEl) depEl.textContent = fmt(deposited) + ' VNĐ';
+    if (diffEl) diffEl.textContent = '+' + fmt(diff) + ' VNĐ';
     if (diffLabel) diffLabel.textContent = `Chênh lệch sau ${years} năm:`;
   }
 
