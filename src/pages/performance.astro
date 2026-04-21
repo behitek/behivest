@@ -1,221 +1,214 @@
 ---
-import Layout from'../layouts/Layout.astro';
-import FundPerformance from'../components/FundPerformance.astro';
+import Layout from '../layouts/Layout.astro';
+import FundPerformance from '../components/FundPerformance.astro';
 
-const title ='Hiệu suất quỹ mở - Theo dõi và so sánh hiệu suất các quỹ đầu tư';
+const title = 'Hiệu suất quỹ mở - Theo dõi và so sánh hiệu suất các quỹ đầu tư';
 const description =
-'Theo dõi và so sánh hiệu suất của các quỹ mở tại Việt Nam. Cập nhật NAV mới nhất, lợi nhuận 1 tháng, 1 năm, 3 năm của quỹ cổ phiếu và quỹ trái phiếu.';
+  'Theo dõi và so sánh hiệu suất của các quỹ mở tại Việt Nam. Cập nhật NAV mới nhất, lợi nhuận 1 tháng, 1 năm, 3 năm của quỹ cổ phiếu và quỹ trái phiếu.';
+const referralUrl = 'https://go.behitek.com/fmarket';
 ---
 
 <Layout title={title} description={description} image="/performance-hero.jpg">
- <!-- Hero Section -->
- <section
- class="relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 py-20"
- >
- <div
- class="absolute inset-0 bg-[url('https://fmarket.vn/_next/image?url=%2Fimages%2Ffund-performance-bg.jpg&w=1920&q=75')] bg-cover bg-center opacity-10"
- >
- </div>
+  <!-- Hero Section -->
+  <section
+    style="min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 100px 24px 60px;"
+  >
+    <div style="max-width: 720px; text-align: center;">
+      <div style="margin-bottom: 24px;">
+        <span
+          style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 600;"
+        >
+          Cập nhật dữ liệu tự động
+        </span>
+      </div>
+      <h1
+        style="font-size: clamp(32px, 5.5vw, 52px); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 24px; text-wrap: balance;"
+      >
+        Hiệu suất quỹ mở chứng khoán
+      </h1>
+      <p
+        style="font-size: 18px; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin: 0 auto 40px; text-wrap: pretty;"
+      >
+        Theo dõi và so sánh hiệu suất thực tế của các quỹ đầu tư tại Việt Nam.
+        Tính trực tiếp NAV real-time giúp bạn ra quyết định đầu tư chính xác.
+      </p>
+      <div
+        style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;"
+      >
+        <a href="#ranking" class="btn-primary">Xem bảng xếp hạng ↓</a>
+        <a href="#concepts" class="btn-secondary">Tìm hiểu khái niệm</a>
+      </div>
+    </div>
+  </section>
 
- <div class="container relative mx-auto px-4">
- <div class="mx-auto max-w-4xl text-center">
- <h1 class="mb-6 text-4xl font-bold text-white md:text-5xl lg:text-6xl">
- Hiệu suất quỹ mở
- </h1>
- <p class="mb-8 text-lg text-blue-100 md:text-xl">
- Theo dõi và so sánh hiệu suất của các quỹ đầu tư tại Việt Nam
- </p>
+  <!-- Social proof bar -->
+  <section
+    style="background: var(--bg-warm); padding: 48px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);"
+  >
+    <div
+      style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; text-align: center;"
+    >
+      <div>
+        <div
+          style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;"
+        >
+          30+
+        </div>
+        <div
+          style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;"
+        >
+          Hạng mục quỹ mở
+        </div>
+      </div>
+      <div>
+        <div
+          style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;"
+        >
+          Real-time
+        </div>
+        <div
+          style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;"
+        >
+          Dữ liệu NAV cập nhật liên tục
+        </div>
+      </div>
+      <div>
+        <div
+          style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;"
+        >
+          2% - 15%
+        </div>
+        <div
+          style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;"
+        >
+          Biến động mục tiêu từng quỹ
+        </div>
+      </div>
+    </div>
+  </section>
 
- <!-- Stats Cards -->
- <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
- <div class="rounded-lg bg-[var(--bg-card)]/10 p-6 backdrop-blur-sm">
- <div class="text-3xl font-bold text-white">20+</div>
- <div class="mt-2 text-sm text-blue-100">Quỹ đầu tư</div>
- </div>
- <div class="rounded-lg bg-[var(--bg-card)]/10 p-6 backdrop-blur-sm">
- <div class="text-3xl font-bold text-white">Real-time</div>
- <div class="mt-2 text-sm text-blue-100">Dữ liệu cập nhật</div>
- </div>
- <div
- class="rounded-lg bg-[var(--bg-card)]/10 p-6 backdrop-blur-sm sm:col-span-2 lg:col-span-1"
- >
- <div class="text-3xl font-bold text-white">2 loại</div>
- <div class="mt-2 text-sm text-blue-100">Cổ phiếu & Trái phiếu</div>
- </div>
- </div>
- </div>
- </div>
- </section>
+  <!-- Explanation & Concepts Section -->
+  <section id="concepts" style="padding: 80px 24px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="margin-bottom: 48px;">
+        <div
+          style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;"
+        >
+          Khái niệm cần biết
+        </div>
+        <h2
+          style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 16px;"
+        >
+          Hiểu rõ trước khi đọc biểu đồ.
+        </h2>
+        <p
+          style="font-size: 17px; color: var(--text-secondary); line-height: 1.7; max-width: 600px;"
+        >
+          Hiệu suất quỹ là yếu tố đánh giá chất lượng người quản lý và tiềm năng
+          sinh lời. Hãy ghi nhớ vài khái niệm sau.
+        </p>
+      </div>
 
- <!-- Main Content -->
- <section class="py-12">
- <div class="container mx-auto px-4">
- <!-- Introduction -->
- <div class="mb-12 rounded-lg bg-blue-50 p-6">
- <h2 class="mb-4 text-2xl font-bold text-[var(--text)]">
- Tại sao nên theo dõi hiệu suất quỹ?
- </h2>
- <div class="prose max-w-none">
- <p class="text-[var(--text-secondary)]">
- Hiệu suất quỹ là yếu tố quan trọng giúp bạn đánh giá chất lượng quản
- lý và tiềm năng sinh lời của quỹ đầu tư. Tại đây, bạn có thể so sánh
- hiệu suất của các quỹ cổ phiếu và quỹ trái phiếu qua các khoảng thời
- gian khác nhau để đưa ra quyết định đầu tư sáng suốt.
- </p>
- </div>
- </div>
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;"
+      >
+        {
+          [
+            {
+              title: 'NAV (Net Asset Value)',
+              eng: 'Giá trị tài ròng',
+              desc: 'Giá trị tài sản ròng mỗi chứng chỉ quỹ. Đây là mức giá bạn mua hoặc bán chứng chỉ quỹ vào cuối mỗi phiên giao dịch.',
+            },
+            {
+              title: 'Quỹ cổ phiếu',
+              eng: 'Rủi ro cao - Lợi nhuận cao',
+              desc: 'Đầu tư chủ yếu vào cổ phiếu. Tiềm năng sinh lời cao hơn nhưng biến động lớn hơn — phù hợp mục tiêu dài hạn 5+ năm.',
+            },
+            {
+              title: 'Quỹ trái phiếu',
+              eng: 'Rủi ro thấp - Ổn định',
+              desc: 'Đầu tư chủ yếu vào trái phiếu. Ổn định hơn, thu nhập cố định, ít biến động — phù hợp ngắn đến trung hạn 1-3 năm.',
+            },
+            {
+              title: 'Hiệu suất (%)',
+              eng: 'Tăng trưởng giá',
+              desc: 'Phần trăm thay đổi NAV theo kỳ (1 tháng, 1 năm, 3 năm). Số dương = sinh lời, số âm = thua lỗ so với điểm đánh giá.',
+            },
+          ].map((item, i) => (
+            <div class="card" style="padding: 28px;">
+              <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <span style="font-size: 18px; font-weight: 800; color: var(--accent);">
+                  {i + 1}
+                </span>
+              </div>
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">
+                {item.title}
+              </h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px; font-weight: 600;">
+                {item.eng}
+              </p>
+              <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+                {item.desc}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
- <!-- Concepts Grid -->
- <div class="mb-12">
- <div class="mb-6 flex items-center gap-2">
- <span class="text-orange-500 font-bold text-xl">//</span>
- <h2 class="text-xl font-bold text-[var(--text)]">Khái niệm cần biết</h2>
- </div>
- 
- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
- <!-- Card 1: NAV -->
- <div class="rounded-xl border border-[var(--border)] bg-[var(--bg-warm)] p-5 transition-colors hover:border-orange-500/50">
- <div class="mb-4 flex items-center gap-3">
- <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
- <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
- </div>
- <div>
- <h3 class="font-bold text-[var(--text)]">NAV</h3>
- <p class="text-xs text-[var(--text-muted)]">Net Asset Value</p>
- </div>
- </div>
- <p class="text-sm text-[var(--text-secondary)]">
- Giá trị tài sản ròng mỗi chứng chỉ quỹ. Đây là mức giá bạn mua hoặc bán chứng chỉ quỹ vào cuối mỗi phiên giao dịch.
- </p>
- </div>
+  <!-- Fund Performance Tracker Area -->
+  <section id="ranking" style="padding: 80px 24px; background: var(--bg-warm);">
+    <div style="max-width: 1080px; margin: 0 auto;">
+      <div style="margin-bottom: 48px; text-align: center;">
+        <h2
+          style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em;"
+        >
+          Bảng xếp hạng hiệu suất
+        </h2>
+        <p
+          style="font-size: 16px; color: var(--text-secondary); margin-top: 12px;"
+        >
+          So sánh các quỹ với nhau tuỳ thuộc theo mong muốn đầu tư.
+        </p>
+      </div>
 
- <!-- Card 2: Quỹ cổ phiếu -->
- <div class="rounded-xl border border-[var(--border)] bg-[var(--bg-warm)] p-5 transition-colors hover:border-orange-500/50">
- <div class="mb-4 flex items-center gap-3">
- <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600">
- <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
- </div>
- <div>
- <h3 class="font-bold text-[var(--text)]">Quỹ cổ phiếu</h3>
- <p class="text-xs text-[var(--text-muted)]">Stock Fund</p>
- </div>
- </div>
- <p class="text-sm text-[var(--text-secondary)]">
- Đầu tư chủ yếu vào cổ phiếu. Tiềm năng sinh lời cao hơn nhưng biến động lớn hơn — phù hợp mục tiêu dài hạn 5+ năm.
- </p>
- </div>
+      <!-- React Component Mount Point (No explicit dark modes left, purely inherits layout CSS) -->
+      <FundPerformance
+        initialFilter="ALL"
+        pageSize={999}
+        showFilters={true}
+        showActionCol={false}
+      />
+    </div>
+  </section>
 
- <!-- Card 3: Quỹ trái phiếu -->
- <div class="rounded-xl border border-[var(--border)] bg-[var(--bg-warm)] p-5 transition-colors hover:border-orange-500/50">
- <div class="mb-4 flex items-center gap-3">
- <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-100 text-orange-600">
- <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.95 11.95 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
- </div>
- <div>
- <h3 class="font-bold text-[var(--text)]">Quỹ trái phiếu</h3>
- <p class="text-xs text-[var(--text-muted)]">Bond Fund</p>
- </div>
- </div>
- <p class="text-sm text-[var(--text-secondary)]">
- Đầu tư chủ yếu vào trái phiếu. Ổn định hơn, ít biến động — phù hợp mục tiêu ngắn đến trung hạn 1-3 năm.
- </p>
- </div>
-
- <!-- Card 4: Quỹ cân bằng -->
- <div class="rounded-xl border border-[var(--border)] bg-[var(--bg-warm)] p-5 transition-colors hover:border-orange-500/50">
- <div class="mb-4 flex items-center gap-3">
- <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-100 text-yellow-600">
- <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
- </div>
- <div>
- <h3 class="font-bold text-[var(--text)]">Quỹ cân bằng</h3>
- <p class="text-xs text-[var(--text-muted)]">Balanced Fund</p>
- </div>
- </div>
- <p class="text-sm text-[var(--text-secondary)]">
- Phân bổ vốn vào cả cổ phiếu lẫn trái phiếu để cân bằng rủi ro và lợi nhuận — phù hợp nhà đầu tư trung dung.
- </p>
- </div>
-
- <!-- Card 5: Hiệu suất (%) -->
- <div class="rounded-xl border border-[var(--border)] bg-[var(--bg-warm)] p-5 transition-colors hover:border-orange-500/50">
- <div class="mb-4 flex items-center gap-3">
- <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-600">
- <span class="font-bold text-lg">%</span>
- </div>
- <div>
- <h3 class="font-bold text-[var(--text)]">Hiệu suất (%)</h3>
- <p class="text-xs text-[var(--text-muted)]">Performance</p>
- </div>
- </div>
- <p class="text-sm text-[var(--text-secondary)]">
- Phần trăm thay đổi NAV theo kỳ (1 tháng, 1 năm, 3 năm). Số dương = sinh lời, số âm = thua lỗ so với thời điểm ban đầu.
- </p>
- </div>
-
- <!-- Card 6: Công ty quản lý quỹ -->
- <div class="rounded-xl border border-[var(--border)] bg-[var(--bg-warm)] p-5 transition-colors hover:border-orange-500/50">
- <div class="mb-4 flex items-center gap-3">
- <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-rose-100 text-rose-600">
- <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
- </div>
- <div>
- <h3 class="font-bold text-[var(--text)]">Công ty quản lý quỹ</h3>
- <p class="text-xs text-[var(--text-muted)]">Fund Management Company</p>
- </div>
- </div>
- <p class="text-sm text-[var(--text-secondary)]">
- Tổ chức chuyên nghiệp quản lý danh mục đầu tư của quỹ. Uy tín và kinh nghiệm của công ty là yếu tố quan trọng khi chọn quỹ.
- </p>
- </div>
- </div>
- </div>
-
- <!-- Fund Performance Component -->
- <div class="mb-12">
- <h2 class="mb-6 text-3xl font-bold text-[var(--text)]">
- Bảng xếp hạng hiệu suất
- </h2>
- <FundPerformance
- initialFilter="ALL"
- pageSize={999}
- showFilters={true}
- showActionCol={false}
- />
- </div>
-
- <!-- CTA Section -->
- <div
- class="mt-12 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 p-8 text-center"
- >
- <h2 class="mb-4 text-3xl font-bold text-white">
- Sẵn sàng bắt đầu đầu tư?
- </h2>
- <p class="mb-6 text-lg text-orange-100">
- Khám phá các quỹ đầu tư và bắt đầu hành trình tài chính của bạn ngay
- hôm nay
- </p>
- <a
- href="https://go.behitek.com/fmarket"
- target="_blank"
- rel="noopener noreferrer"
- class="inline-flex items-center rounded-lg bg-[var(--bg-card)] px-8 py-3 text-lg font-semibold text-orange-600 transition-transform hover:scale-105"
- >
- Mở tài khoản miễn phí
- <svg
- class="ml-2 h-5 w-5"
- fill="none"
- stroke="currentColor"
- viewBox="0 0 24 24"
- >
- <path
- stroke-linecap="round"
- stroke-linejoin="round"
- stroke-width="2"
- d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
- </svg>
- </a>
- </div>
- </div>
- </section>
+  <!-- Final CTA Banner -->
+  <section
+    style="padding: 80px 24px; background: var(--accent); text-align: center;"
+  >
+    <div style="max-width: 560px; margin: 0 auto;">
+      <h2
+        style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; color: #fff; letter-spacing: -0.02em; margin-bottom: 16px; text-wrap: balance;"
+      >
+        Sẵn sàng bắt đầu đầu tư?
+      </h2>
+      <p
+        style="font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 32px; line-height: 1.6;"
+      >
+        Bắt đầu hành trình tài chính của bạn ngay hôm nay với mức rủi ro kiểm
+        soát thông qua các quỹ nội địa.
+      </p>
+      <a
+        href={referralUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--accent); padding: 16px 36px; border-radius: 10px; font-size: 17px; font-weight: 700; transition: all 0.25s; text-decoration: none;"
+        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+      >
+        Mở tài khoản Fmarket miễn phí →
+      </a>
+    </div>
+  </section>
 </Layout>

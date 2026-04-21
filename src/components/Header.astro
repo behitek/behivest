@@ -12,7 +12,8 @@ const isActive = (path: string) =>
   currentPath === path || currentPath === `${base}${path.replace(/^\//, '')}`;
 
 const isPathActive = (prefix: string) =>
-  currentPath.startsWith(prefix) || currentPath.startsWith(`${base}${prefix.replace(/^\//, '')}`);
+  currentPath.startsWith(prefix) ||
+  currentPath.startsWith(`${base}${prefix.replace(/^\//, '')}`);
 ---
 
 <header
@@ -30,11 +31,7 @@ const isPathActive = (prefix: string) =>
         class="flex items-center space-x-2 font-bold"
         style="color: var(--text); font-size: 20px; letter-spacing: -0.02em;"
       >
-        <img
-          src={`${base}logo.svg`}
-          alt="Behivest"
-          class="h-8 w-auto"
-        />
+        <img src={`${base}logo.svg`} alt="Behivest" class="h-8 w-auto" />
       </a>
     </div>
 
@@ -48,8 +45,17 @@ const isPathActive = (prefix: string) =>
       aria-expanded="false"
     >
       <span class="sr-only">Mở menu</span>
-      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
 
@@ -74,8 +80,18 @@ const isPathActive = (prefix: string) =>
           aria-haspopup="true"
         >
           Học đầu tư
-          <svg class="h-4 w-4 transition-transform duration-200" id="learn-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          <svg
+            class="h-4 w-4 transition-transform duration-200"
+            id="learn-chevron"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
         <div
@@ -118,54 +134,55 @@ const isPathActive = (prefix: string) =>
       >
         Hiệu suất quỹ
       </a>
-      <a
-        href={`${base}about`}
-        class="text-sm font-medium transition-colors"
-        style={`color: ${isActive('/about') ? 'var(--accent)' : 'var(--text-secondary)'};`}
-      >
-        Giới thiệu
-      </a>
-      <a
-        href={`${base}contact`}
-        class="text-sm font-medium transition-colors"
-        style={`color: ${isActive('/contact') ? 'var(--accent)' : 'var(--text-secondary)'};`}
-      >
-        Liên hệ
-      </a>
-      <a
-        href="https://go.behitek.com/fmarket"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="rounded-lg px-5 py-2 text-sm font-semibold text-white transition-all hover:opacity-90"
-        style="background: var(--accent);"
-      >
-        Mở tài khoản
-      </a>
     </div>
+    target="_blank" rel="noopener noreferrer" class="rounded-lg px-5 py-2 text-sm
+    font-semibold text-white transition-all hover:opacity-90" style="background:
+    var(--accent);" > Mở tài khoản
   </nav>
-
-  <!-- Mobile menu -->
-  <div class="hidden md:hidden" id="mobile-menu">
-    <div class="space-y-1 border-t px-4 pb-3 pt-2" style="border-color: var(--border);">
-      <a href={base} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text);">Trang chủ</a>
-      <a href={`${base}blog`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">📝 Blog</a>
-      <a href={`${base}faq`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">❓ FAQ người mới</a>
-      <a href={`${base}tools`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Công cụ</a>
-      <a href={`${base}performance`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Hiệu suất quỹ</a>
-      <a href={`${base}about`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Giới thiệu</a>
-      <a href={`${base}contact`} class="block rounded-lg px-3 py-2 text-base font-medium" style="color: var(--text-secondary);">Liên hệ</a>
-      <a
-        href="https://go.behitek.com/fmarket"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="block rounded-lg px-3 py-2 text-base font-semibold text-white"
-        style="background: var(--accent);"
-      >
-        Mở tài khoản
-      </a>
-    </div>
-  </div>
 </header>
+
+<!-- Mobile menu -->
+<div class="hidden md:hidden" id="mobile-menu">
+  <div
+    class="space-y-1 border-t px-4 pb-3 pt-2"
+    style="border-color: var(--border);"
+  >
+    <a
+      href={base}
+      class="block rounded-lg px-3 py-2 text-base font-medium"
+      style="color: var(--text);">Trang chủ</a
+    >
+    <a
+      href={`${base}blog`}
+      class="block rounded-lg px-3 py-2 text-base font-medium"
+      style="color: var(--text-secondary);">📝 Blog</a
+    >
+    <a
+      href={`${base}faq`}
+      class="block rounded-lg px-3 py-2 text-base font-medium"
+      style="color: var(--text-secondary);">❓ FAQ người mới</a
+    >
+    <a
+      href={`${base}tools`}
+      class="block rounded-lg px-3 py-2 text-base font-medium"
+      style="color: var(--text-secondary);">Công cụ</a
+    >
+    <a
+      href={`${base}performance`}
+      class="block rounded-lg px-3 py-2 text-base font-medium"
+      style="color: var(--text-secondary);">Hiệu suất quỹ</a
+    >
+    <a
+      href="https://go.behitek.com/fmarket"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block rounded-lg px-3 py-2 text-base font-semibold text-white"
+      style="background: var(--accent);"
+    >
+      Mở tài khoản
+    </a>
+  </div>
+</div>
 
 <script>
   const header = document.getElementById('site-header') as HTMLElement | null;
