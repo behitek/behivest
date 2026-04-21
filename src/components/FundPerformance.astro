@@ -22,31 +22,30 @@ const {
   data-page-size={pageSize}
   data-show-action-col={String(showActionCol)}
 >
-
   {
     showFilters && (
       <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div class="flex flex-wrap gap-2 sm:gap-3">
           <button
-            class="filter-btn rounded-lg px-4 py-2 sm:px-6 font-medium transition-all duration-200"
+            class="filter-btn rounded-lg px-4 py-2 font-medium transition-all duration-200 sm:px-6"
             data-filter="ALL"
           >
             Tất cả
           </button>
           <button
-            class="filter-btn rounded-lg px-4 py-2 sm:px-6 font-medium transition-all duration-200"
+            class="filter-btn rounded-lg px-4 py-2 font-medium transition-all duration-200 sm:px-6"
             data-filter="STOCK"
           >
             Cổ phiếu
           </button>
           <button
-            class="filter-btn rounded-lg px-4 py-2 sm:px-6 font-medium transition-all duration-200"
+            class="filter-btn rounded-lg px-4 py-2 font-medium transition-all duration-200 sm:px-6"
             data-filter="BOND"
           >
             Trái phiếu
           </button>
           <button
-            class="filter-btn rounded-lg px-4 py-2 sm:px-6 font-medium transition-all duration-200"
+            class="filter-btn rounded-lg px-4 py-2 font-medium transition-all duration-200 sm:px-6"
             data-filter="BALANCED"
           >
             Cân bằng
@@ -54,8 +53,18 @@ const {
         </div>
         <div class="relative w-full sm:w-64">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            <svg
+              class="h-4 w-4 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
           </div>
           <input
@@ -304,7 +313,9 @@ const {
       // Setup search
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-          searchQuery = (e.target as HTMLInputElement).value.toLowerCase().trim();
+          searchQuery = (e.target as HTMLInputElement).value
+            .toLowerCase()
+            .trim();
           renderFunds();
         });
       }
@@ -430,12 +441,14 @@ const {
             const shortName = fund.shortName?.toLowerCase() || '';
             const ownerName = fund.owner?.name?.toLowerCase() || '';
             const ownerShortName = fund.owner?.shortName?.toLowerCase() || '';
-            
-            return code.includes(searchQuery) ||
-                   name.includes(searchQuery) ||
-                   shortName.includes(searchQuery) ||
-                   ownerName.includes(searchQuery) ||
-                   ownerShortName.includes(searchQuery);
+
+            return (
+              code.includes(searchQuery) ||
+              name.includes(searchQuery) ||
+              shortName.includes(searchQuery) ||
+              ownerName.includes(searchQuery) ||
+              ownerShortName.includes(searchQuery)
+            );
           });
         }
 

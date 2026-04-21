@@ -1,388 +1,373 @@
 ---
-import Layout from'@layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
 ---
 
 <Layout
- title="Công cụ tính SIP (đầu tư định kỳ)"
- description="Tính giá trị đầu tư định kỳ hàng tháng theo số tiền góp, lợi nhuận kỳ vọng và thời gian đầu tư."
+  title="Công cụ tính SIP (đầu tư định kỳ)"
+  description="Tính giá trị đầu tư định kỳ hàng tháng theo số tiền góp, lợi nhuận kỳ vọng và thời gian đầu tư."
 >
- <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
- <div class="mx-auto max-w-4xl">
- <a
- href={`${import.meta.env.BASE_URL}tools`}
- class="inline-flex items-center text-sm text-[var(--accent)] hover:text-[var(--accent)]"
- >
- <svg
- class="mr-1 h-4 w-4"
- fill="none"
- stroke="currentColor"
- viewBox="0 0 24 24"
- >
- <path
- stroke-linecap="round"
- stroke-linejoin="round"
- stroke-width="2"
- d="M15 19l-7-7 7-7"></path>
- </svg>
- Quay lại công cụ
- </a>
+  <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <a
+        href={`${import.meta.env.BASE_URL}tools`}
+        class="inline-flex items-center text-sm text-[var(--accent)] hover:text-[var(--accent)]"
+      >
+        <svg
+          class="mr-1 h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Quay lại công cụ
+      </a>
 
- <h1 class="mt-4 text-4xl font-bold text-[var(--text)]">
- Tính SIP (Đầu tư định kỳ)
- </h1>
- <p class="mt-2 text-[var(--text-secondary)]">
- Ước tính giá trị đầu tư định kỳ hàng tháng vào quỹ mở
- </p>
- <p
- class="mt-4 max-w-3xl text-sm leading-7 text-[var(--text-muted)]"
- >
- Kết quả là ước tính từ mức đóng góp đều và giả định tăng trưởng bạn
- chọn. Nó hữu ích để nhìn dài hạn, không phải lời hứa lợi nhuận.
- </p>
+      <h1 class="mt-4 text-4xl font-bold text-[var(--text)]">
+        Tính SIP (Đầu tư định kỳ)
+      </h1>
+      <p class="mt-2 text-[var(--text-secondary)]">
+        Ước tính giá trị đầu tư định kỳ hàng tháng vào quỹ mở
+      </p>
+      <p class="mt-4 max-w-3xl text-sm leading-7 text-[var(--text-muted)]">
+        Kết quả là ước tính từ mức đóng góp đều và giả định tăng trưởng bạn
+        chọn. Nó hữu ích để nhìn dài hạn, không phải lời hứa lợi nhuận.
+      </p>
 
- <div class="mt-8 grid gap-8 lg:grid-cols-2">
- <!-- Input Form -->
- <div class="card">
- <h2 class="text-xl font-semibold text-[var(--text)]">
- Thông tin đầu vào
- </h2>
- <form id="sip-form" class="mt-6 space-y-6">
- <div>
- <label
- for="monthly-investment"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Số tiền đầu tư hàng tháng (VNĐ)
- </label>
- <input
- type="number"
- id="monthly-investment"
- name="monthly-investment"
- value="1000000"
- min="100000"
- step="100000"
- required
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
- />
- <div class="mt-3 flex flex-wrap gap-2">
- <button
- type="button"
- data-fill-target="monthly-investment"
- data-fill-value="500000"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 500k
- </button>
- <button
- type="button"
- data-fill-target="monthly-investment"
- data-fill-value="1000000"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 1 triệu
- </button>
- <button
- type="button"
- data-fill-target="monthly-investment"
- data-fill-value="2000000"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 2 triệu
- </button>
- <button
- type="button"
- data-fill-target="monthly-investment"
- data-fill-value="3000000"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 3 triệu
- </button>
- </div>
- </div>
+      <div class="mt-8 grid gap-8 lg:grid-cols-2">
+        <!-- Input Form -->
+        <div class="card">
+          <h2 class="text-xl font-semibold text-[var(--text)]">
+            Thông tin đầu vào
+          </h2>
+          <form id="sip-form" class="mt-6 space-y-6">
+            <div>
+              <label
+                for="monthly-investment"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Số tiền đầu tư hàng tháng (VNĐ)
+              </label>
+              <input
+                type="number"
+                id="monthly-investment"
+                name="monthly-investment"
+                value="1000000"
+                min="100000"
+                step="100000"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+              />
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="500000"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  500k
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="1000000"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  1 triệu
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="2000000"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  2 triệu
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="monthly-investment"
+                  data-fill-value="3000000"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  3 triệu
+                </button>
+              </div>
+            </div>
 
- <div>
- <label
- for="return-rate"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Lợi nhuận kỳ vọng hàng năm (%)
- </label>
- <input
- type="number"
- id="return-rate"
- name="return-rate"
- value="12"
- min="0"
- max="100"
- step="0.1"
- required
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
- />
- <div class="mt-3 flex flex-wrap gap-2">
- <button
- type="button"
- data-fill-target="sip-years"
- data-fill-value="3"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 3 năm
- </button>
- <button
- type="button"
- data-fill-target="sip-years"
- data-fill-value="5"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 5 năm
- </button>
- <button
- type="button"
- data-fill-target="sip-years"
- data-fill-value="10"
- class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
- >
- 10 năm
- </button>
- </div>
- </div>
+            <div>
+              <label
+                for="return-rate"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Lợi nhuận kỳ vọng hàng năm (%)
+              </label>
+              <input
+                type="number"
+                id="return-rate"
+                name="return-rate"
+                value="12"
+                min="0"
+                max="100"
+                step="0.1"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+              />
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-fill-target="sip-years"
+                  data-fill-value="3"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  3 năm
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="sip-years"
+                  data-fill-value="5"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  5 năm
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="sip-years"
+                  data-fill-value="10"
+                  class="rounded-full border border-[var(--accent)] px-3 py-1 text-sm font-medium text-[var(--accent)] transition-colors hover:bg-[var(--accent-light)]"
+                >
+                  10 năm
+                </button>
+              </div>
+            </div>
 
- <div>
- <label
- for="sip-years"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Thời gian đầu tư (năm)
- </label>
- <input
- type="number"
- id="sip-years"
- name="sip-years"
- value="10"
- min="1"
- max="50"
- required
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
- />
- </div>
+            <div>
+              <label
+                for="sip-years"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Thời gian đầu tư (năm)
+              </label>
+              <input
+                type="number"
+                id="sip-years"
+                name="sip-years"
+                value="10"
+                min="1"
+                max="50"
+                required
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-[var(--accent)] focus:ring-[var(--accent)]"
+              />
+            </div>
 
- <button type="submit" class="btn-primary w-full">
- Tính toán
- </button>
- </form>
- </div>
+            <button type="submit" class="btn-primary w-full">
+              Tính toán
+            </button>
+          </form>
+        </div>
 
- <!-- Results -->
- <div class="card">
- <h2 class="text-xl font-semibold text-[var(--text)]">
- Kết quả
- </h2>
- <div id="sip-results" class="mt-6 space-y-4">
- <div class="rounded-lg bg-[var(--accent-light)] p-4">
- <p class="text-sm text-[var(--text-secondary)]">
- Tổng giá trị cuối kỳ
- </p>
- <p
- id="sip-final-amount"
- class="mt-1 text-3xl font-bold text-[var(--accent)]"
- >
- 0 ₫
- </p>
- </div>
+        <!-- Results -->
+        <div class="card">
+          <h2 class="text-xl font-semibold text-[var(--text)]">Kết quả</h2>
+          <div id="sip-results" class="mt-6 space-y-4">
+            <div class="rounded-lg bg-[var(--accent-light)] p-4">
+              <p class="text-sm text-[var(--text-secondary)]">
+                Tổng giá trị cuối kỳ
+              </p>
+              <p
+                id="sip-final-amount"
+                class="mt-1 text-3xl font-bold text-[var(--accent)]"
+              >
+                0 ₫
+              </p>
+            </div>
 
- <div class="grid grid-cols-2 gap-4">
- <div class="rounded-lg bg-[var(--bg-warm)] p-4">
- <p class="text-sm text-[var(--text-secondary)]">
- Tổng đầu tư
- </p>
- <p
- id="sip-total-invested"
- class="mt-1 text-xl font-semibold text-[var(--text)]"
- >
- 0 ₫
- </p>
- </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-lg bg-[var(--bg-warm)] p-4">
+                <p class="text-sm text-[var(--text-secondary)]">Tổng đầu tư</p>
+                <p
+                  id="sip-total-invested"
+                  class="mt-1 text-xl font-semibold text-[var(--text)]"
+                >
+                  0 ₫
+                </p>
+              </div>
 
- <div class="rounded-lg bg-[var(--bg-warm)] p-4">
- <p class="text-sm text-[var(--text-secondary)]">
- Lợi nhuận
- </p>
- <p
- id="sip-total-returns"
- class="mt-1 text-xl font-semibold text-[var(--accent)]"
- >
- 0 ₫
- </p>
- </div>
- </div>
+              <div class="rounded-lg bg-[var(--bg-warm)] p-4">
+                <p class="text-sm text-[var(--text-secondary)]">Lợi nhuận</p>
+                <p
+                  id="sip-total-returns"
+                  class="mt-1 text-xl font-semibold text-[var(--accent)]"
+                >
+                  0 ₫
+                </p>
+              </div>
+            </div>
 
- <div
- class="rounded-lg border border-[var(--border)] p-4"
- >
- <p class="text-sm text-[var(--text-secondary)]">
- Tỷ lệ lợi nhuận / vốn
- </p>
- <div class="mt-2 flex items-center space-x-2">
- <div
- class="h-4 flex-1 overflow-hidden rounded-full bg-gray-200"
- >
- <div
- id="sip-ratio-bar"
- class="h-full bg-[var(--accent-light)]0 transition-all duration-500"
- style="width: 0%"
- >
- </div>
- </div>
- <span
- id="sip-ratio-text"
- class="text-sm font-medium text-[var(--text)]"
- >0%</span
- >
- </div>
- </div>
+            <div class="rounded-lg border border-[var(--border)] p-4">
+              <p class="text-sm text-[var(--text-secondary)]">
+                Tỷ lệ lợi nhuận / vốn
+              </p>
+              <div class="mt-2 flex items-center space-x-2">
+                <div
+                  class="h-4 flex-1 overflow-hidden rounded-full bg-gray-200"
+                >
+                  <div
+                    id="sip-ratio-bar"
+                    class="bg-[var(--accent-light)]0 h-full transition-all duration-500"
+                    style="width: 0%"
+                  >
+                  </div>
+                </div>
+                <span
+                  id="sip-ratio-text"
+                  class="text-sm font-medium text-[var(--text)]">0%</span
+                >
+              </div>
+            </div>
 
- <div
- id="sip-interpretation"
- class="rounded-lg border border-dashed border-[var(--accent)] p-4"
- >
- </div>
+            <div
+              id="sip-interpretation"
+              class="rounded-lg border border-dashed border-[var(--accent)] p-4"
+            >
+            </div>
 
- <div class="flex flex-col gap-3 sm:flex-row">
- <a
- href={`${import.meta.env.BASE_URL}tools/goal-based-contribution`}
- class="btn-secondary text-center"
- >
- Đổi sang lập kế hoạch theo mục tiêu
- </a>
- <a
- href={`${import.meta.env.BASE_URL}blog/mutual-funds`}
- class="btn-primary text-center"
- >
- Đọc thêm về quỹ mở
- </a>
- </div>
- </div>
- </div>
- </div>
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={`${import.meta.env.BASE_URL}tools/goal-based-contribution`}
+                class="btn-secondary text-center"
+              >
+                Đổi sang lập kế hoạch theo mục tiêu
+              </a>
+              <a
+                href={`${import.meta.env.BASE_URL}blog/mutual-funds`}
+                class="btn-primary text-center"
+              >
+                Đọc thêm về quỹ mở
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
- <!-- Info Section -->
- <div class="card mt-12">
- <h2 class="text-2xl font-semibold text-[var(--text)]">
- SIP là gì?
- </h2>
- <p class="mt-4 text-[var(--text-secondary)]">
- <strong>SIP (Systematic Investment Plan)</strong> là phương pháp đầu tư
- định kỳ một khoản tiền cố định vào quỹ đầu tư. Thay vì bỏ ra một khoản
- lớn một lần, bạn đầu tư đều đặn hàng tháng.
- </p>
- <h3 class="mt-4 font-semibold text-[var(--text)]">
- Lợi ích của SIP:
- </h3>
- <ul
- class="mt-2 list-inside list-disc space-y-2 text-[var(--text-secondary)]"
- >
- <li>
- <strong>Kỷ luật đầu tư:</strong> Tự động đầu tư định kỳ giúp bạn xây
- dựng thói quen tốt
- </li>
- <li>
- <strong>Giảm rủi ro thời điểm:</strong> Không cần lo lắng thời điểm thị
- trường tốt hay xấu
- </li>
- <li>
- <strong>Vốn nhỏ:</strong> Bắt đầu với số tiền nhỏ, phù hợp với người
- mới
- </li>
- <li>
- <strong>Hiệu ứng lãi kép:</strong> Lợi nhuận được tái đầu tư, tăng trưởng
- theo cấp số nhân
- </li>
- </ul>
- </div>
- </div>
- </div>
+      <!-- Info Section -->
+      <div class="card mt-12">
+        <h2 class="text-2xl font-semibold text-[var(--text)]">SIP là gì?</h2>
+        <p class="mt-4 text-[var(--text-secondary)]">
+          <strong>SIP (Systematic Investment Plan)</strong> là phương pháp đầu tư
+          định kỳ một khoản tiền cố định vào quỹ đầu tư. Thay vì bỏ ra một khoản
+          lớn một lần, bạn đầu tư đều đặn hàng tháng.
+        </p>
+        <h3 class="mt-4 font-semibold text-[var(--text)]">Lợi ích của SIP:</h3>
+        <ul
+          class="mt-2 list-inside list-disc space-y-2 text-[var(--text-secondary)]"
+        >
+          <li>
+            <strong>Kỷ luật đầu tư:</strong> Tự động đầu tư định kỳ giúp bạn xây
+            dựng thói quen tốt
+          </li>
+          <li>
+            <strong>Giảm rủi ro thời điểm:</strong> Không cần lo lắng thời điểm thị
+            trường tốt hay xấu
+          </li>
+          <li>
+            <strong>Vốn nhỏ:</strong> Bắt đầu với số tiền nhỏ, phù hợp với người
+            mới
+          </li>
+          <li>
+            <strong>Hiệu ứng lãi kép:</strong> Lợi nhuận được tái đầu tư, tăng trưởng
+            theo cấp số nhân
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
- <script>
- import { calculateSIP, formatCurrency } from'@/utils/calculators';
+  <script>
+    import { calculateSIP, formatCurrency } from '@/utils/calculators';
 
- const form = document.getElementById('sip-form') as HTMLFormElement;
+    const form = document.getElementById('sip-form') as HTMLFormElement;
 
- const getInterpretation = (
- years: number,
- totalInvested: number,
- totalReturns: number
- ): string => {
- if (years < 5) {
- return'Khung thời gian ngắn giúp bạn kiểm tra mức góp có bền hay không. Với người mới, giai đoạn này thường quan trọng ở thói quen hơn là phần lãi nổi bật.';
- }
+    const getInterpretation = (
+      years: number,
+      totalInvested: number,
+      totalReturns: number
+    ): string => {
+      if (years < 5) {
+        return 'Khung thời gian ngắn giúp bạn kiểm tra mức góp có bền hay không. Với người mới, giai đoạn này thường quan trọng ở thói quen hơn là phần lãi nổi bật.';
+      }
 
- if (totalReturns < totalInvested * 0.3) {
- return'Kết quả cho thấy phần lớn giá trị cuối kỳ vẫn đến từ khoản bạn tự góp. Điều đó hoàn toàn bình thường ở giai đoạn đầu của một kế hoạch dài hạn.';
- }
+      if (totalReturns < totalInvested * 0.3) {
+        return 'Kết quả cho thấy phần lớn giá trị cuối kỳ vẫn đến từ khoản bạn tự góp. Điều đó hoàn toàn bình thường ở giai đoạn đầu của một kế hoạch dài hạn.';
+      }
 
- return'Thời gian đang bắt đầu làm việc có lợi cho bạn: phần tăng trưởng ước tính trở nên đáng kể hơn so với tổng số tiền tự góp.';
- };
+      return 'Thời gian đang bắt đầu làm việc có lợi cho bạn: phần tăng trưởng ước tính trở nên đáng kể hơn so với tổng số tiền tự góp.';
+    };
 
- form?.addEventListener('submit', (e) => {
- e.preventDefault();
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
 
- const monthlyInvestment = parseFloat(
- (document.getElementById('monthly-investment') as HTMLInputElement)
- .value
- );
- const returnRate = parseFloat(
- (document.getElementById('return-rate') as HTMLInputElement).value
- );
- const years = parseInt(
- (document.getElementById('sip-years') as HTMLInputElement).value
- );
+      const monthlyInvestment = parseFloat(
+        (document.getElementById('monthly-investment') as HTMLInputElement)
+          .value
+      );
+      const returnRate = parseFloat(
+        (document.getElementById('return-rate') as HTMLInputElement).value
+      );
+      const years = parseInt(
+        (document.getElementById('sip-years') as HTMLInputElement).value
+      );
 
- try {
- const result = calculateSIP(monthlyInvestment, returnRate, years);
+      try {
+        const result = calculateSIP(monthlyInvestment, returnRate, years);
 
- // Update results
- document.getElementById('sip-final-amount')!.textContent =
- formatCurrency(result.finalAmount);
- document.getElementById('sip-total-invested')!.textContent =
- formatCurrency(result.totalInvested);
- document.getElementById('sip-total-returns')!.textContent =
- formatCurrency(result.totalReturns);
+        // Update results
+        document.getElementById('sip-final-amount')!.textContent =
+          formatCurrency(result.finalAmount);
+        document.getElementById('sip-total-invested')!.textContent =
+          formatCurrency(result.totalInvested);
+        document.getElementById('sip-total-returns')!.textContent =
+          formatCurrency(result.totalReturns);
 
- // Update ratio
- const ratio =
- result.totalInvested === 0
- ? 0
- : (result.totalReturns / result.totalInvested) * 100;
- document.getElementById('sip-ratio-bar')!.style.width =
- `${Math.min(ratio, 100)}%`;
- document.getElementById('sip-ratio-text')!.textContent =
- `${ratio.toFixed(1)}%`;
- document.getElementById('sip-interpretation')!.innerHTML = `
+        // Update ratio
+        const ratio =
+          result.totalInvested === 0
+            ? 0
+            : (result.totalReturns / result.totalInvested) * 100;
+        document.getElementById('sip-ratio-bar')!.style.width =
+          `${Math.min(ratio, 100)}%`;
+        document.getElementById('sip-ratio-text')!.textContent =
+          `${ratio.toFixed(1)}%`;
+        document.getElementById('sip-interpretation')!.innerHTML = `
  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Diễn giải nhanh</p>
  <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">${getInterpretation(
- years,
- result.totalInvested,
- result.totalReturns
+   years,
+   result.totalInvested,
+   result.totalReturns
  )}</p>
  `;
- } catch {
- alert('Vui lòng kiểm tra lại các giá trị nhập vào');
- }
- });
+      } catch {
+        alert('Vui lòng kiểm tra lại các giá trị nhập vào');
+      }
+    });
 
- document.querySelectorAll('[data-fill-target]').forEach((button) => {
- button.addEventListener('click', () => {
- const target = button.getAttribute('data-fill-target');
- const value = button.getAttribute('data-fill-value');
- const input = target ? document.getElementById(target) : null;
+    document.querySelectorAll('[data-fill-target]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.getAttribute('data-fill-target');
+        const value = button.getAttribute('data-fill-value');
+        const input = target ? document.getElementById(target) : null;
 
- if (!input || !value) return;
+        if (!input || !value) return;
 
- (input as HTMLInputElement).value = value;
- form?.dispatchEvent(new Event('submit'));
- });
- });
+        (input as HTMLInputElement).value = value;
+        form?.dispatchEvent(new Event('submit'));
+      });
+    });
 
- // Initial calculation
- form?.dispatchEvent(new Event('submit'));
- </script>
+    // Initial calculation
+    form?.dispatchEvent(new Event('submit'));
+  </script>
 </Layout>

@@ -1,919 +1,902 @@
 ---
-import Layout from'@layouts/Layout.astro';
-import QuestionCard from'@components/tools/QuestionCard.astro';
-import ToolCard from'@components/tools/ToolCard.astro';
+import Layout from '@layouts/Layout.astro';
+import QuestionCard from '@components/tools/QuestionCard.astro';
+import ToolCard from '@components/tools/ToolCard.astro';
 
 const basePath = import.meta.env.BASE_URL;
 
 const beginnerQuestions = [
- {
- eyebrow:'Câu hỏi 01',
- question:'Tôi nên ưu tiên quỹ khẩn cấp, tiết kiệm hay đầu tư?',
- description:
-'Bắt đầu từ phần tiền đang để dành và mức độ an toàn hiện tại, thay vì nhảy thẳng sang sản phẩm đầu tư.',
- href:'#monthly-starting-preview',
- },
- {
- eyebrow:'Câu hỏi 02',
- question:'Tôi có thể bắt đầu với bao nhiêu tiền mỗi tháng?',
- description:
-'Ước tính một khoảng bắt đầu đủ nhẹ để duy trì, rồi mới mở công cụ đầy đủ nếu bạn cần chi tiết hơn.',
- href:'#monthly-starting-preview',
- },
- {
- eyebrow:'Câu hỏi 03',
- question:'Nếu đầu tư đều, sau vài năm có thể thành bao nhiêu?',
- description:
-'Xem nhanh tăng trưởng ước tính để biết mục tiêu dài hạn có đang hợp lý với nhịp đóng góp của bạn không.',
- href:'#sip-preview',
- },
+  {
+    eyebrow: 'Câu hỏi 01',
+    question: 'Tôi nên ưu tiên quỹ khẩn cấp, tiết kiệm hay đầu tư?',
+    description:
+      'Bắt đầu từ phần tiền đang để dành và mức độ an toàn hiện tại, thay vì nhảy thẳng sang sản phẩm đầu tư.',
+    href: '#monthly-starting-preview',
+  },
+  {
+    eyebrow: 'Câu hỏi 02',
+    question: 'Tôi có thể bắt đầu với bao nhiêu tiền mỗi tháng?',
+    description:
+      'Ước tính một khoảng bắt đầu đủ nhẹ để duy trì, rồi mới mở công cụ đầy đủ nếu bạn cần chi tiết hơn.',
+    href: '#monthly-starting-preview',
+  },
+  {
+    eyebrow: 'Câu hỏi 03',
+    question: 'Nếu đầu tư đều, sau vài năm có thể thành bao nhiêu?',
+    description:
+      'Xem nhanh tăng trưởng ước tính để biết mục tiêu dài hạn có đang hợp lý với nhịp đóng góp của bạn không.',
+    href: '#sip-preview',
+  },
 ];
 
 const toolGroups = [
- {
- title:'Bắt đầu và lập kế hoạch',
- description:
-'Dành cho lúc bạn còn đang sắp xếp nền móng: dòng tiền, quỹ khẩn cấp và mức góp phù hợp.',
- tools: [
- {
- title:'Phân bổ ngân sách',
- description:
-'Ước tính phần tiền có thể dành cho quỹ dự phòng, đầu tư hoặc trả nợ sau khi đã lo chi phí thiết yếu.',
- whenToUse:
-'Khi bạn muốn biết mình còn dư bao nhiêu mỗi tháng trước khi quyết định tiết kiệm hay đầu tư.',
- href: `${basePath}tools/budget-allocator`,
- },
- {
- title:'Lập kế hoạch quỹ khẩn cấp',
- description:
-'Tính mục tiêu quỹ dự phòng theo số tháng chi phí và xem bạn đang thiếu bao nhiêu để đủ vùng an toàn.',
- whenToUse:
-'Khi bạn chưa chắc có nên ưu tiên tiền mặt trước khi đầu tư dài hạn.',
- href: `${basePath}tools/emergency-fund-planner`,
- },
- {
- title:'Tính mức góp theo mục tiêu',
- description:
-'Đi từ số tiền đích tới mức đóng góp hàng tháng cần thiết để kiểm tra mục tiêu có vừa sức không.',
- whenToUse:
-'Khi bạn đã có mục tiêu tiền cụ thể và muốn đổi nó thành một kế hoạch đều đặn.',
- href: `${basePath}tools/goal-based-contribution`,
- },
- ],
- },
- {
- title:'Mô phỏng tăng trưởng',
- description:
-'Dành cho lúc bạn muốn nhìn dài hạn hơn và hiểu khoảng cách giữa tiền tự góp với phần tăng trưởng ước tính.',
- tools: [
- {
- title:'Tính SIP',
- description:
-'Mô phỏng đầu tư định kỳ hàng tháng để xem sau 3, 5 hoặc 10 năm khoản đều đặn của bạn có thể đi tới đâu.',
- whenToUse:
-'Khi bạn muốn bắt đầu bằng số tiền nhỏ nhưng duy trì lâu dài.',
- href: `${basePath}tools/sip-calculator`,
- },
- {
- title:'Tính lãi kép',
- description:
-'Dùng cho các kịch bản đã có sẵn vốn ban đầu hoặc muốn kết hợp vốn hiện có với khoản góp hằng tháng.',
- whenToUse:
-'Khi bạn đang so thêm các tình huống tăng trưởng ngoài mô hình SIP cơ bản.',
- href: `${basePath}tools/compound-interest`,
- },
- ],
- },
- {
- title:'So sánh lựa chọn',
- description:
-'Dành cho lúc bạn cần hiểu vai trò của từng lựa chọn tài chính, không phải để ép mình phải đầu tư bằng mọi giá.',
- tools: [
- {
- title:'So sánh đầu tư và tiết kiệm',
- description:
-'Đặt đầu tư và tiết kiệm vào đúng vai trò của chúng để hiểu khi nào mỗi lựa chọn phù hợp hơn.',
- whenToUse:
-'Khi bạn đang phân vân giữa giữ tiền an toàn, xây quỹ dự phòng hay bắt đầu đầu tư dài hạn.',
- href: `${basePath}tools/investment-comparison`,
- },
- ],
- },
+  {
+    title: 'Bắt đầu và lập kế hoạch',
+    description:
+      'Dành cho lúc bạn còn đang sắp xếp nền móng: dòng tiền, quỹ khẩn cấp và mức góp phù hợp.',
+    tools: [
+      {
+        title: 'Phân bổ ngân sách',
+        description:
+          'Ước tính phần tiền có thể dành cho quỹ dự phòng, đầu tư hoặc trả nợ sau khi đã lo chi phí thiết yếu.',
+        whenToUse:
+          'Khi bạn muốn biết mình còn dư bao nhiêu mỗi tháng trước khi quyết định tiết kiệm hay đầu tư.',
+        href: `${basePath}tools/budget-allocator`,
+      },
+      {
+        title: 'Lập kế hoạch quỹ khẩn cấp',
+        description:
+          'Tính mục tiêu quỹ dự phòng theo số tháng chi phí và xem bạn đang thiếu bao nhiêu để đủ vùng an toàn.',
+        whenToUse:
+          'Khi bạn chưa chắc có nên ưu tiên tiền mặt trước khi đầu tư dài hạn.',
+        href: `${basePath}tools/emergency-fund-planner`,
+      },
+      {
+        title: 'Tính mức góp theo mục tiêu',
+        description:
+          'Đi từ số tiền đích tới mức đóng góp hàng tháng cần thiết để kiểm tra mục tiêu có vừa sức không.',
+        whenToUse:
+          'Khi bạn đã có mục tiêu tiền cụ thể và muốn đổi nó thành một kế hoạch đều đặn.',
+        href: `${basePath}tools/goal-based-contribution`,
+      },
+    ],
+  },
+  {
+    title: 'Mô phỏng tăng trưởng',
+    description:
+      'Dành cho lúc bạn muốn nhìn dài hạn hơn và hiểu khoảng cách giữa tiền tự góp với phần tăng trưởng ước tính.',
+    tools: [
+      {
+        title: 'Tính SIP',
+        description:
+          'Mô phỏng đầu tư định kỳ hàng tháng để xem sau 3, 5 hoặc 10 năm khoản đều đặn của bạn có thể đi tới đâu.',
+        whenToUse:
+          'Khi bạn muốn bắt đầu bằng số tiền nhỏ nhưng duy trì lâu dài.',
+        href: `${basePath}tools/sip-calculator`,
+      },
+      {
+        title: 'Tính lãi kép',
+        description:
+          'Dùng cho các kịch bản đã có sẵn vốn ban đầu hoặc muốn kết hợp vốn hiện có với khoản góp hằng tháng.',
+        whenToUse:
+          'Khi bạn đang so thêm các tình huống tăng trưởng ngoài mô hình SIP cơ bản.',
+        href: `${basePath}tools/compound-interest`,
+      },
+    ],
+  },
+  {
+    title: 'So sánh lựa chọn',
+    description:
+      'Dành cho lúc bạn cần hiểu vai trò của từng lựa chọn tài chính, không phải để ép mình phải đầu tư bằng mọi giá.',
+    tools: [
+      {
+        title: 'So sánh đầu tư và tiết kiệm',
+        description:
+          'Đặt đầu tư và tiết kiệm vào đúng vai trò của chúng để hiểu khi nào mỗi lựa chọn phù hợp hơn.',
+        whenToUse:
+          'Khi bạn đang phân vân giữa giữ tiền an toàn, xây quỹ dự phòng hay bắt đầu đầu tư dài hạn.',
+        href: `${basePath}tools/investment-comparison`,
+      },
+    ],
+  },
 ];
 
 const guidanceSteps = [
-'Giữ một lớp đệm tiền mặt đủ cho các tình huống gấp trước khi nâng mức đầu tư.',
-'Chọn một số tiền bạn có thể duy trì đều hàng tháng thay vì cố quá trong vài tháng đầu.',
-'Dùng mô phỏng dài hạn để hiểu kỳ vọng tăng trưởng, không dùng nó như lời hứa lợi nhuận.',
-'Chỉ khi đã có nền tảng và nhịp đều, mới bắt đầu so nền tảng hoặc sản phẩm phù hợp.',
+  'Giữ một lớp đệm tiền mặt đủ cho các tình huống gấp trước khi nâng mức đầu tư.',
+  'Chọn một số tiền bạn có thể duy trì đều hàng tháng thay vì cố quá trong vài tháng đầu.',
+  'Dùng mô phỏng dài hạn để hiểu kỳ vọng tăng trưởng, không dùng nó như lời hứa lợi nhuận.',
+  'Chỉ khi đã có nền tảng và nhịp đều, mới bắt đầu so nền tảng hoặc sản phẩm phù hợp.',
 ];
 
 const relatedReading = [
- {
- title:'Quỹ mở là gì và vì sao nhiều người mới bắt đầu từ đây',
- description:
-'Bài nhập môn nếu bạn muốn hiểu bản chất quỹ mở trước khi quyết định đầu tư đều.',
- href: `${basePath}blog/mutual-funds`,
- },
- {
- title:'Đầu tư với lương 10 triệu nên bắt đầu từ đâu',
- description:
-'Góc nhìn thực tế cho người mới đi làm, cần cân đối giữa sinh hoạt, dự phòng và đầu tư.',
- href: `${basePath}blog/investing-on-10-million-salary`,
- },
- {
- title:'Vì sao nên bắt đầu đầu tư từ sớm',
- description:
-'Giải thích vì sao nhịp đều và thời gian thường quan trọng hơn chuyện cố đoán đúng thời điểm.',
- href: `${basePath}blog/tai-sao-sinh-vien-it-nen-bat-dau-dau-tu-tu-nam-20-tuoi`,
- },
+  {
+    title: 'Quỹ mở là gì và vì sao nhiều người mới bắt đầu từ đây',
+    description:
+      'Bài nhập môn nếu bạn muốn hiểu bản chất quỹ mở trước khi quyết định đầu tư đều.',
+    href: `${basePath}blog/mutual-funds`,
+  },
+  {
+    title: 'Đầu tư với lương 10 triệu nên bắt đầu từ đâu',
+    description:
+      'Góc nhìn thực tế cho người mới đi làm, cần cân đối giữa sinh hoạt, dự phòng và đầu tư.',
+    href: `${basePath}blog/investing-on-10-million-salary`,
+  },
+  {
+    title: 'Vì sao nên bắt đầu đầu tư từ sớm',
+    description:
+      'Giải thích vì sao nhịp đều và thời gian thường quan trọng hơn chuyện cố đoán đúng thời điểm.',
+    href: `${basePath}blog/tai-sao-sinh-vien-it-nen-bat-dau-dau-tu-tu-nam-20-tuoi`,
+  },
 ];
 
 function getToolGridClass(toolCount: number): string {
- const baseClass ='mt-6 grid gap-6';
+  const baseClass = 'mt-6 grid gap-6';
 
- if (toolCount === 1) {
- return `${baseClass} max-w-2xl lg:grid-cols-1`;
- }
+  if (toolCount === 1) {
+    return `${baseClass} max-w-2xl lg:grid-cols-1`;
+  }
 
- if (toolCount === 2) {
- return `${baseClass} lg:grid-cols-2`;
- }
+  if (toolCount === 2) {
+    return `${baseClass} lg:grid-cols-2`;
+  }
 
- return `${baseClass} lg:grid-cols-3`;
+  return `${baseClass} lg:grid-cols-3`;
 }
 ---
 
 <Layout
- title="Công cụ tài chính cho người mới bắt đầu"
- description="Trung tâm công cụ tài chính của Behivest: giúp bạn bắt đầu từ câu hỏi cơ bản, xem ước tính nhanh ngay trên trang và đi tiếp bằng các công cụ đầy đủ khi cần."
+  title="Công cụ tài chính cho người mới bắt đầu"
+  description="Trung tâm công cụ tài chính của Behivest: giúp bạn bắt đầu từ câu hỏi cơ bản, xem ước tính nhanh ngay trên trang và đi tiếp bằng các công cụ đầy đủ khi cần."
 >
- <section
- class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-20"
- >
- <div
- class="absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.2),_transparent_52%)]"
- >
- </div>
- <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
- <div class="grid gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
- <div>
- <div
- class="inline-flex rounded-full border border-emerald-200 bg-[var(--bg-card)]/90 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm"
- >
- Trung tâm công cụ cho người mới muốn hiểu số của mình trước
- </div>
- <h1
- class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-[var(--text)] md:text-5xl lg:text-6xl"
- >
- Bắt đầu từ những con số thật của bạn, rồi mới nghĩ tới quyết định
- tài chính lớn hơn.
- </h1>
- <p
- class="mt-6 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]"
- >
- Trang này không cố bán một lối đi duy nhất. Mục tiêu của nó đơn giản
- hơn: giúp bạn biết mình nên ưu tiên quỹ khẩn cấp, mức bắt đầu hợp lý
- mỗi tháng là bao nhiêu, và nếu đi đều thì tương lai ước tính trông
- ra sao.
- </p>
- <div class="mt-8 flex flex-col gap-4 sm:flex-row">
- <a href="#monthly-starting-preview" class="btn-primary text-center">
- Bắt đầu với công cụ nhanh
- </a>
- <a href="#tool-library" class="btn-secondary text-center">
- Xem toàn bộ thư viện công cụ
- </a>
- </div>
- <div
- class="mt-8 grid gap-3 text-sm text-[var(--text-secondary)] sm:grid-cols-3"
- >
- <div
- class="rounded-2xl border border-white/70 bg-[var(--bg-card)]/85 px-4 py-3 shadow-sm"
- >
- Ước tính nhanh ngay trên trang
- </div>
- <div
- class="rounded-2xl border border-white/70 bg-[var(--bg-card)]/85 px-4 py-3 shadow-sm"
- >
- Nhắc rõ khi nào chưa nên vội đầu tư
- </div>
- <div
- class="rounded-2xl border border-white/70 bg-[var(--bg-card)]/85 px-4 py-3 shadow-sm"
- >
- Đi tiếp bằng công cụ đầy đủ khi cần
- </div>
- </div>
- </div>
+  <section
+    class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-cyan-50 py-20"
+  >
+    <div
+      class="absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.2),_transparent_52%)]"
+    >
+    </div>
+    <div class="container relative mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
+        <div>
+          <div
+            class="bg-[var(--bg-card)]/90 inline-flex rounded-full border border-emerald-200 px-4 py-2 text-sm font-medium text-emerald-700 shadow-sm"
+          >
+            Trung tâm công cụ cho người mới muốn hiểu số của mình trước
+          </div>
+          <h1
+            class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-[var(--text)] md:text-5xl lg:text-6xl"
+          >
+            Bắt đầu từ những con số thật của bạn, rồi mới nghĩ tới quyết định
+            tài chính lớn hơn.
+          </h1>
+          <p
+            class="mt-6 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]"
+          >
+            Trang này không cố bán một lối đi duy nhất. Mục tiêu của nó đơn giản
+            hơn: giúp bạn biết mình nên ưu tiên quỹ khẩn cấp, mức bắt đầu hợp lý
+            mỗi tháng là bao nhiêu, và nếu đi đều thì tương lai ước tính trông
+            ra sao.
+          </p>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="#monthly-starting-preview" class="btn-primary text-center">
+              Bắt đầu với công cụ nhanh
+            </a>
+            <a href="#tool-library" class="btn-secondary text-center">
+              Xem toàn bộ thư viện công cụ
+            </a>
+          </div>
+          <div
+            class="mt-8 grid gap-3 text-sm text-[var(--text-secondary)] sm:grid-cols-3"
+          >
+            <div
+              class="bg-[var(--bg-card)]/85 rounded-2xl border border-white/70 px-4 py-3 shadow-sm"
+            >
+              Ước tính nhanh ngay trên trang
+            </div>
+            <div
+              class="bg-[var(--bg-card)]/85 rounded-2xl border border-white/70 px-4 py-3 shadow-sm"
+            >
+              Nhắc rõ khi nào chưa nên vội đầu tư
+            </div>
+            <div
+              class="bg-[var(--bg-card)]/85 rounded-2xl border border-white/70 px-4 py-3 shadow-sm"
+            >
+              Đi tiếp bằng công cụ đầy đủ khi cần
+            </div>
+          </div>
+        </div>
 
- <aside
- class="rounded-[2rem] border border-emerald-200/70 bg-[var(--bg-card)]/90 p-7 shadow-xl shadow-emerald-100/60"
- >
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Ở đây bạn sẽ nhận được gì
- </p>
- <div class="mt-6 space-y-4">
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="font-semibold text-[var(--text)]">
- 1. Hỏi đúng câu hỏi đầu tiên
- </p>
- <p
- class="mt-2 text-sm leading-7 text-[var(--text-secondary)]"
- >
- Không bắt đầu từ tên công cụ, mà bắt đầu từ chuyện bạn đang phân
- vân ngay lúc này.
- </p>
- </div>
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="font-semibold text-[var(--text)]">
- 2. Xem ước tính nhẹ trước
- </p>
- <p
- class="mt-2 text-sm leading-7 text-[var(--text-secondary)]"
- >
- Hai mô phỏng nhanh bên dưới đủ để bạn có cảm giác ban đầu mà
- chưa phải rời trang.
- </p>
- </div>
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="font-semibold text-[var(--text)]">
- 3. Chỉ đi sâu khi đã có ngữ cảnh
- </p>
- <p
- class="mt-2 text-sm leading-7 text-[var(--text-secondary)]"
- >
- Công cụ đầy đủ, bài viết liên quan và trang Fmarket đều được đặt
- sau khi bạn đã thấy giá trị trước.
- </p>
- </div>
- </div>
- </aside>
- </div>
- </div>
- </section>
+        <aside
+          class="bg-[var(--bg-card)]/90 rounded-[2rem] border border-emerald-200/70 p-7 shadow-xl shadow-emerald-100/60"
+        >
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+          >
+            Ở đây bạn sẽ nhận được gì
+          </p>
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+              <p class="font-semibold text-[var(--text)]">
+                1. Hỏi đúng câu hỏi đầu tiên
+              </p>
+              <p class="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
+                Không bắt đầu từ tên công cụ, mà bắt đầu từ chuyện bạn đang phân
+                vân ngay lúc này.
+              </p>
+            </div>
+            <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+              <p class="font-semibold text-[var(--text)]">
+                2. Xem ước tính nhẹ trước
+              </p>
+              <p class="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
+                Hai mô phỏng nhanh bên dưới đủ để bạn có cảm giác ban đầu mà
+                chưa phải rời trang.
+              </p>
+            </div>
+            <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+              <p class="font-semibold text-[var(--text)]">
+                3. Chỉ đi sâu khi đã có ngữ cảnh
+              </p>
+              <p class="mt-2 text-sm leading-7 text-[var(--text-secondary)]">
+                Công cụ đầy đủ, bài viết liên quan và trang Fmarket đều được đặt
+                sau khi bạn đã thấy giá trị trước.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
 
- <section class="py-16">
- <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- <div class="max-w-3xl">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Câu hỏi người mới thường hỏi trước
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Chọn điểm bắt đầu theo đúng điều bạn đang băn khoăn.
- </h2>
- </div>
+  <section class="py-16">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+        >
+          Câu hỏi người mới thường hỏi trước
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+          Chọn điểm bắt đầu theo đúng điều bạn đang băn khoăn.
+        </h2>
+      </div>
 
- <div class="mt-8 grid gap-6 lg:grid-cols-3">
- {
- beginnerQuestions.map((item) => (
- <QuestionCard
- eyebrow={item.eyebrow}
- question={item.question}
- description={item.description}
- href={item.href}
- />
- ))
- }
- </div>
- </div>
- </section>
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        {
+          beginnerQuestions.map((item) => (
+            <QuestionCard
+              eyebrow={item.eyebrow}
+              question={item.question}
+              description={item.description}
+              href={item.href}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
- <section
- id="monthly-starting-preview"
- class="bg-[var(--bg-warm)] py-16"
- >
- <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
- <div>
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Công cụ nhanh 01
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Tôi có thể bắt đầu với bao nhiêu tiền mỗi tháng mà vẫn giữ nhịp
- được?
- </h2>
- <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
- Hãy nhập khoản tiền còn lại sau chi phí thiết yếu. Kết quả dưới đây
- không phải chỉ để đẩy bạn sang đầu tư, mà để giúp bạn thấy khoảng
- bắt đầu nào có vẻ đủ nhẹ và phù hợp với mức độ sẵn sàng hiện tại.
- </p>
- <form id="starter-preview-form" class="card mt-8 space-y-6">
- <div>
- <label
- for="starter-available-amount"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Khoản tiền còn lại sau chi phí thiết yếu mỗi tháng (VNĐ)
- </label>
- <input
- type="number"
- id="starter-available-amount"
- name="starter-available-amount"
- value="4000000"
- min="0"
- step="100000"
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
- />
- </div>
- <div>
- <label
- for="starter-emergency-status"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Tình trạng quỹ khẩn cấp hiện tại
- </label>
- <select
- id="starter-emergency-status"
- name="starter-emergency-status"
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
- >
- <option value="none">Chưa có quỹ khẩn cấp rõ ràng</option>
- <option value="building" selected
- >Đang xây dần quỹ khẩn cấp</option
- >
- <option value="ready">Đã có quỹ khẩn cấp cơ bản</option>
- </select>
- </div>
- <p class="text-sm leading-7 text-[var(--text-muted)]">
- Đây là bản xem nhanh. Nếu bạn muốn tính cụ thể hơn cho quỹ dự
- phòng hoặc phân bổ ngân sách, dùng các công cụ đầy đủ ngay bên
- dưới kết quả.
- </p>
- </form>
- </div>
+  <section id="monthly-starting-preview" class="bg-[var(--bg-warm)] py-16">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+          >
+            Công cụ nhanh 01
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+            Tôi có thể bắt đầu với bao nhiêu tiền mỗi tháng mà vẫn giữ nhịp
+            được?
+          </h2>
+          <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
+            Hãy nhập khoản tiền còn lại sau chi phí thiết yếu. Kết quả dưới đây
+            không phải chỉ để đẩy bạn sang đầu tư, mà để giúp bạn thấy khoảng
+            bắt đầu nào có vẻ đủ nhẹ và phù hợp với mức độ sẵn sàng hiện tại.
+          </p>
+          <form id="starter-preview-form" class="card mt-8 space-y-6">
+            <div>
+              <label
+                for="starter-available-amount"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Khoản tiền còn lại sau chi phí thiết yếu mỗi tháng (VNĐ)
+              </label>
+              <input
+                type="number"
+                id="starter-available-amount"
+                name="starter-available-amount"
+                value="4000000"
+                min="0"
+                step="100000"
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+              />
+            </div>
+            <div>
+              <label
+                for="starter-emergency-status"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Tình trạng quỹ khẩn cấp hiện tại
+              </label>
+              <select
+                id="starter-emergency-status"
+                name="starter-emergency-status"
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+              >
+                <option value="none">Chưa có quỹ khẩn cấp rõ ràng</option>
+                <option value="building" selected
+                  >Đang xây dần quỹ khẩn cấp</option
+                >
+                <option value="ready">Đã có quỹ khẩn cấp cơ bản</option>
+              </select>
+            </div>
+            <p class="text-sm leading-7 text-[var(--text-muted)]">
+              Đây là bản xem nhanh. Nếu bạn muốn tính cụ thể hơn cho quỹ dự
+              phòng hoặc phân bổ ngân sách, dùng các công cụ đầy đủ ngay bên
+              dưới kết quả.
+            </p>
+          </form>
+        </div>
 
- <div class="card flex flex-col justify-between">
- <div>
- <div class="rounded-3xl bg-emerald-50 p-5">
- <p class="text-sm text-emerald-800">
- Khoảng bắt đầu gợi ý
- </p>
- <p
- id="starter-range"
- class="mt-2 text-3xl font-bold text-emerald-700"
- >
- 0 ₫ - 0 ₫
- </p>
- </div>
+        <div class="card flex flex-col justify-between">
+          <div>
+            <div class="rounded-3xl bg-emerald-50 p-5">
+              <p class="text-sm text-emerald-800">Khoảng bắt đầu gợi ý</p>
+              <p
+                id="starter-range"
+                class="mt-2 text-3xl font-bold text-emerald-700"
+              >
+                0 ₫ - 0 ₫
+              </p>
+            </div>
 
- <div class="mt-5 grid gap-4 sm:grid-cols-2">
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="text-sm text-[var(--text-muted)]">
- Trọng tâm hiện tại
- </p>
- <p
- id="starter-priority"
- class="mt-2 text-xl font-semibold text-[var(--text)]"
- >
- Chưa có dữ liệu
- </p>
- </div>
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="text-sm text-[var(--text-muted)]">
- Nhắc nhanh
- </p>
- <p
- id="starter-note"
- class="mt-2 text-sm leading-7 text-[var(--text-secondary)]"
- >
- Kết quả sẽ thay đổi theo mức sẵn sàng của quỹ khẩn cấp.
- </p>
- </div>
- </div>
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+                <p class="text-sm text-[var(--text-muted)]">
+                  Trọng tâm hiện tại
+                </p>
+                <p
+                  id="starter-priority"
+                  class="mt-2 text-xl font-semibold text-[var(--text)]"
+                >
+                  Chưa có dữ liệu
+                </p>
+              </div>
+              <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+                <p class="text-sm text-[var(--text-muted)]">Nhắc nhanh</p>
+                <p
+                  id="starter-note"
+                  class="mt-2 text-sm leading-7 text-[var(--text-secondary)]"
+                >
+                  Kết quả sẽ thay đổi theo mức sẵn sàng của quỹ khẩn cấp.
+                </p>
+              </div>
+            </div>
 
- <div
- id="starter-guidance"
- class="mt-5 rounded-3xl border border-dashed border-emerald-200 bg-[var(--bg-card)] p-5"
- >
- </div>
- </div>
+            <div
+              id="starter-guidance"
+              class="mt-5 rounded-3xl border border-dashed border-emerald-200 bg-[var(--bg-card)] p-5"
+            >
+            </div>
+          </div>
 
- <div class="mt-6 flex flex-col gap-3 sm:flex-row">
- <a
- href={`${basePath}tools/budget-allocator`}
- class="btn-secondary text-center"
- >
- Xem phân bổ ngân sách đầy đủ
- </a>
- <a
- href={`${basePath}tools/emergency-fund-planner`}
- class="btn-primary text-center"
- >
- Tính quỹ khẩn cấp chi tiết
- </a>
- </div>
- </div>
- </div>
- </div>
- </section>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={`${basePath}tools/budget-allocator`}
+              class="btn-secondary text-center"
+            >
+              Xem phân bổ ngân sách đầy đủ
+            </a>
+            <a
+              href={`${basePath}tools/emergency-fund-planner`}
+              class="btn-primary text-center"
+            >
+              Tính quỹ khẩn cấp chi tiết
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section id="sip-preview" class="py-16">
- <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
- <div>
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Công cụ nhanh 02
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Nếu đầu tư đều, sau vài năm khoản tiền đó có thể đi tới đâu?
- </h2>
- <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
- Đây là mô phỏng nhẹ cho câu hỏi hấp dẫn nhất với người mới. Kết quả
- là ước tính từ giả định tăng trưởng bạn chọn, nên hãy dùng nó để
- hiểu biên độ dài hạn chứ không xem như cam kết lợi nhuận.
- </p>
+  <section id="sip-preview" class="py-16">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+          >
+            Công cụ nhanh 02
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+            Nếu đầu tư đều, sau vài năm khoản tiền đó có thể đi tới đâu?
+          </h2>
+          <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
+            Đây là mô phỏng nhẹ cho câu hỏi hấp dẫn nhất với người mới. Kết quả
+            là ước tính từ giả định tăng trưởng bạn chọn, nên hãy dùng nó để
+            hiểu biên độ dài hạn chứ không xem như cam kết lợi nhuận.
+          </p>
 
- <form id="sip-preview-form" class="card mt-8 space-y-6">
- <div>
- <label
- for="preview-monthly-investment"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Mức đầu tư hàng tháng (VNĐ)
- </label>
- <input
- type="number"
- id="preview-monthly-investment"
- name="preview-monthly-investment"
- value="1000000"
- min="0"
- step="100000"
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
- />
- <div class="mt-3 flex flex-wrap gap-2">
- <button
- type="button"
- data-fill-target="preview-monthly-investment"
- data-fill-value="500000"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 500k
- </button>
- <button
- type="button"
- data-fill-target="preview-monthly-investment"
- data-fill-value="1000000"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 1 triệu
- </button>
- <button
- type="button"
- data-fill-target="preview-monthly-investment"
- data-fill-value="2000000"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 2 triệu
- </button>
- <button
- type="button"
- data-fill-target="preview-monthly-investment"
- data-fill-value="3000000"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 3 triệu
- </button>
- </div>
- </div>
+          <form id="sip-preview-form" class="card mt-8 space-y-6">
+            <div>
+              <label
+                for="preview-monthly-investment"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Mức đầu tư hàng tháng (VNĐ)
+              </label>
+              <input
+                type="number"
+                id="preview-monthly-investment"
+                name="preview-monthly-investment"
+                value="1000000"
+                min="0"
+                step="100000"
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+              />
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-fill-target="preview-monthly-investment"
+                  data-fill-value="500000"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  500k
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="preview-monthly-investment"
+                  data-fill-value="1000000"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  1 triệu
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="preview-monthly-investment"
+                  data-fill-value="2000000"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  2 triệu
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="preview-monthly-investment"
+                  data-fill-value="3000000"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  3 triệu
+                </button>
+              </div>
+            </div>
 
- <div>
- <label
- for="preview-years"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Số năm duy trì
- </label>
- <input
- type="number"
- id="preview-years"
- name="preview-years"
- value="5"
- min="1"
- max="40"
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
- />
- <div class="mt-3 flex flex-wrap gap-2">
- <button
- type="button"
- data-fill-target="preview-years"
- data-fill-value="3"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 3 năm
- </button>
- <button
- type="button"
- data-fill-target="preview-years"
- data-fill-value="5"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 5 năm
- </button>
- <button
- type="button"
- data-fill-target="preview-years"
- data-fill-value="10"
- class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
- >
- 10 năm
- </button>
- </div>
- </div>
+            <div>
+              <label
+                for="preview-years"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Số năm duy trì
+              </label>
+              <input
+                type="number"
+                id="preview-years"
+                name="preview-years"
+                value="5"
+                min="1"
+                max="40"
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+              />
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  data-fill-target="preview-years"
+                  data-fill-value="3"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  3 năm
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="preview-years"
+                  data-fill-value="5"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  5 năm
+                </button>
+                <button
+                  type="button"
+                  data-fill-target="preview-years"
+                  data-fill-value="10"
+                  class="rounded-full border border-emerald-200 px-3 py-1 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-50"
+                >
+                  10 năm
+                </button>
+              </div>
+            </div>
 
- <div>
- <label
- for="preview-return-rate"
- class="block text-sm font-medium text-[var(--text-secondary)]"
- >
- Giả định tăng trưởng hằng năm (%)
- </label>
- <select
- id="preview-return-rate"
- name="preview-return-rate"
- class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
- >
- <option value="8">8% một năm</option>
- <option value="10" selected>10% một năm</option>
- <option value="12">12% một năm</option>
- </select>
- </div>
- </form>
- </div>
+            <div>
+              <label
+                for="preview-return-rate"
+                class="block text-sm font-medium text-[var(--text-secondary)]"
+              >
+                Giả định tăng trưởng hằng năm (%)
+              </label>
+              <select
+                id="preview-return-rate"
+                name="preview-return-rate"
+                class="mt-1 block w-full rounded-lg border border-gray-300 bg-[var(--bg-card)] px-4 py-2 text-[var(--text)] focus:border-emerald-500 focus:ring-emerald-500"
+              >
+                <option value="8">8% một năm</option>
+                <option value="10" selected>10% một năm</option>
+                <option value="12">12% một năm</option>
+              </select>
+            </div>
+          </form>
+        </div>
 
- <div class="card flex flex-col justify-between">
- <div>
- <div class="rounded-3xl bg-emerald-50 p-5">
- <p class="text-sm text-emerald-800">
- Giá trị ước tính cuối kỳ
- </p>
- <p
- id="preview-final-amount"
- class="mt-2 text-3xl font-bold text-emerald-700"
- >
- 0 ₫
- </p>
- </div>
+        <div class="card flex flex-col justify-between">
+          <div>
+            <div class="rounded-3xl bg-emerald-50 p-5">
+              <p class="text-sm text-emerald-800">Giá trị ước tính cuối kỳ</p>
+              <p
+                id="preview-final-amount"
+                class="mt-2 text-3xl font-bold text-emerald-700"
+              >
+                0 ₫
+              </p>
+            </div>
 
- <div class="mt-5 grid gap-4 sm:grid-cols-2">
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="text-sm text-[var(--text-muted)]">
- Tổng phần tự góp
- </p>
- <p
- id="preview-total-invested"
- class="mt-2 text-2xl font-semibold text-[var(--text)]"
- >
- 0 ₫
- </p>
- </div>
- <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
- <p class="text-sm text-[var(--text-muted)]">
- Phần tăng trưởng ước tính
- </p>
- <p
- id="preview-total-returns"
- class="mt-2 text-2xl font-semibold text-[var(--text)]"
- >
- 0 ₫
- </p>
- </div>
- </div>
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+                <p class="text-sm text-[var(--text-muted)]">Tổng phần tự góp</p>
+                <p
+                  id="preview-total-invested"
+                  class="mt-2 text-2xl font-semibold text-[var(--text)]"
+                >
+                  0 ₫
+                </p>
+              </div>
+              <div class="rounded-2xl bg-[var(--bg-warm)] p-4">
+                <p class="text-sm text-[var(--text-muted)]">
+                  Phần tăng trưởng ước tính
+                </p>
+                <p
+                  id="preview-total-returns"
+                  class="mt-2 text-2xl font-semibold text-[var(--text)]"
+                >
+                  0 ₫
+                </p>
+              </div>
+            </div>
 
- <div
- id="sip-preview-interpretation"
- class="mt-5 rounded-3xl border border-dashed border-emerald-200 bg-[var(--bg-card)] p-5"
- >
- </div>
- </div>
+            <div
+              id="sip-preview-interpretation"
+              class="mt-5 rounded-3xl border border-dashed border-emerald-200 bg-[var(--bg-card)] p-5"
+            >
+            </div>
+          </div>
 
- <div class="mt-6 flex flex-col gap-3 sm:flex-row">
- <a
- href={`${basePath}tools/sip-calculator`}
- class="btn-primary text-center"
- >
- Xem công cụ SIP đầy đủ
- </a>
- <a
- href={`${basePath}tools/compound-interest`}
- class="btn-secondary text-center"
- >
- Mô phỏng thêm với lãi kép
- </a>
- </div>
- </div>
- </div>
- </div>
- </section>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={`${basePath}tools/sip-calculator`}
+              class="btn-primary text-center"
+            >
+              Xem công cụ SIP đầy đủ
+            </a>
+            <a
+              href={`${basePath}tools/compound-interest`}
+              class="btn-secondary text-center"
+            >
+              Mô phỏng thêm với lãi kép
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section id="tool-library" class="bg-[var(--bg-warm)] py-16">
- <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- <div class="max-w-3xl">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Thư viện công cụ đầy đủ
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Đi tiếp bằng đúng nhóm công cụ bạn đang cần.
- </h2>
- <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
- Nếu phần xem nhanh ở trên đã giúp bạn định hình vấn đề, đây là nơi để
- đào sâu hơn bằng các công cụ đầy đủ.
- </p>
- </div>
+  <section id="tool-library" class="bg-[var(--bg-warm)] py-16">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+        >
+          Thư viện công cụ đầy đủ
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+          Đi tiếp bằng đúng nhóm công cụ bạn đang cần.
+        </h2>
+        <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
+          Nếu phần xem nhanh ở trên đã giúp bạn định hình vấn đề, đây là nơi để
+          đào sâu hơn bằng các công cụ đầy đủ.
+        </p>
+      </div>
 
- <div class="mt-10 space-y-12">
- {
- toolGroups.map((group) => (
- <section>
- <div class="max-w-3xl">
- <h3 class="text-2xl font-bold text-[var(--text)]">
- {group.title}
- </h3>
- <p class="mt-3 text-base leading-8 text-[var(--text-secondary)]">
- {group.description}
- </p>
- </div>
- <div class={getToolGridClass(group.tools.length)}>
- {group.tools.map((tool) => (
- <ToolCard {...tool} />
- ))}
- </div>
- </section>
- ))
- }
- </div>
- </div>
- </section>
+      <div class="mt-10 space-y-12">
+        {
+          toolGroups.map((group) => (
+            <section>
+              <div class="max-w-3xl">
+                <h3 class="text-2xl font-bold text-[var(--text)]">
+                  {group.title}
+                </h3>
+                <p class="mt-3 text-base leading-8 text-[var(--text-secondary)]">
+                  {group.description}
+                </p>
+              </div>
+              <div class={getToolGridClass(group.tools.length)}>
+                {group.tools.map((tool) => (
+                  <ToolCard {...tool} />
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
- <section class="py-16">
- <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- <div
- class="rounded-[2rem] border border-emerald-200 bg-emerald-50/70 p-8 md:p-10"
- >
- <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
- <div>
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Cách đi từng bước
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Một thứ tự đơn giản để người mới đỡ rối hơn.
- </h2>
- </div>
- <ol class="grid gap-4 md:grid-cols-2">
- {
- guidanceSteps.map((step, index) => (
- <li class="rounded-3xl bg-[var(--bg-card)]/90 p-5 shadow-sm">
- <p class="text-sm font-semibold text-emerald-700">
- Bước {index + 1}
- </p>
- <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
- {step}
- </p>
- </li>
- ))
- }
- </ol>
- </div>
- </div>
- </div>
- </section>
+  <section class="py-16">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div
+        class="rounded-[2rem] border border-emerald-200 bg-emerald-50/70 p-8 md:p-10"
+      >
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+            >
+              Cách đi từng bước
+            </p>
+            <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+              Một thứ tự đơn giản để người mới đỡ rối hơn.
+            </h2>
+          </div>
+          <ol class="grid gap-4 md:grid-cols-2">
+            {
+              guidanceSteps.map((step, index) => (
+                <li class="bg-[var(--bg-card)]/90 rounded-3xl p-5 shadow-sm">
+                  <p class="text-sm font-semibold text-emerald-700">
+                    Bước {index + 1}
+                  </p>
+                  <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
+                    {step}
+                  </p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section class="border-t border-[var(--border)] py-16">
- <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
- <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
- <div>
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Đọc thêm nếu bạn muốn hiểu kỹ hơn
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Bài viết liên quan cho bước tiếp theo.
- </h2>
- <div class="mt-8 grid gap-5">
- {
- relatedReading.map((item) => (
- <a
- href={item.href}
- class="rounded-3xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-100"
- >
- <h3 class="text-xl font-semibold text-[var(--text)]">
- {item.title}
- </h3>
- <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
- {item.description}
- </p>
- <span class="mt-5 inline-flex items-center text-sm font-semibold text-emerald-700">
- Đọc thêm
- <svg
- class="ml-2 h-4 w-4"
- fill="none"
- stroke="currentColor"
- viewBox="0 0 24 24"
- >
- <path
- stroke-linecap="round"
- stroke-linejoin="round"
- stroke-width="2"
- d="M9 5l7 7-7 7"
- />
- </svg>
- </span>
- </a>
- ))
- }
- </div>
- </div>
+  <section class="border-t border-[var(--border)] py-16">
+    <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+          >
+            Đọc thêm nếu bạn muốn hiểu kỹ hơn
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+            Bài viết liên quan cho bước tiếp theo.
+          </h2>
+          <div class="mt-8 grid gap-5">
+            {
+              relatedReading.map((item) => (
+                <a
+                  href={item.href}
+                  class="rounded-3xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-100"
+                >
+                  <h3 class="text-xl font-semibold text-[var(--text)]">
+                    {item.title}
+                  </h3>
+                  <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
+                    {item.description}
+                  </p>
+                  <span class="mt-5 inline-flex items-center text-sm font-semibold text-emerald-700">
+                    Đọc thêm
+                    <svg
+                      class="ml-2 h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+        </div>
 
- <aside class="card border-emerald-200/70">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
- >
- Khi bạn đã có nền tảng hơn
- </p>
- <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
- Nếu đã có quỹ dự phòng cơ bản và muốn bắt đầu đều đặn, lúc đó mới
- nên tìm hiểu nền tảng phù hợp.
- </h2>
- <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
- Trang Fmarket của mình dành cho đúng nhóm đã đi qua bước chuẩn bị và
- muốn một điểm bắt đầu gọn, rõ, không cần nhìn bảng giá mỗi ngày.
- </p>
- <p class="mt-4 text-sm leading-7 text-[var(--text-muted)]">
- Đây là bước tiếp theo tùy ngữ cảnh, không phải việc bạn phải làm
- ngay sau khi dùng công cụ.
- </p>
- <div class="mt-6 flex flex-col gap-3 sm:flex-row">
- <a href={`${basePath}fmarket`} class="btn-primary text-center">
- Nếu phù hợp, tìm hiểu cách bắt đầu
- </a>
- <a
- href={`${basePath}blog/mutual-funds`}
- class="btn-secondary text-center"
- >
- Đọc trước về quỹ mở
- </a>
- </div>
- </aside>
- </div>
- </div>
- </section>
+        <aside class="card border-emerald-200/70">
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600"
+          >
+            Khi bạn đã có nền tảng hơn
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-[var(--text)]">
+            Nếu đã có quỹ dự phòng cơ bản và muốn bắt đầu đều đặn, lúc đó mới
+            nên tìm hiểu nền tảng phù hợp.
+          </h2>
+          <p class="mt-4 text-base leading-8 text-[var(--text-secondary)]">
+            Trang Fmarket của mình dành cho đúng nhóm đã đi qua bước chuẩn bị và
+            muốn một điểm bắt đầu gọn, rõ, không cần nhìn bảng giá mỗi ngày.
+          </p>
+          <p class="mt-4 text-sm leading-7 text-[var(--text-muted)]">
+            Đây là bước tiếp theo tùy ngữ cảnh, không phải việc bạn phải làm
+            ngay sau khi dùng công cụ.
+          </p>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a href={`${basePath}fmarket`} class="btn-primary text-center">
+              Nếu phù hợp, tìm hiểu cách bắt đầu
+            </a>
+            <a
+              href={`${basePath}blog/mutual-funds`}
+              class="btn-secondary text-center"
+            >
+              Đọc trước về quỹ mở
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
 
- <script>
- import {
- calculateSIP,
- calculateStarterInvestmentRange,
- formatCurrency,
- } from'@/utils/calculators';
+  <script>
+    import {
+      calculateSIP,
+      calculateStarterInvestmentRange,
+      formatCurrency,
+    } from '@/utils/calculators';
 
- const starterForm = document.getElementById(
-'starter-preview-form'
- ) as HTMLFormElement | null;
- const sipPreviewForm = document.getElementById(
-'sip-preview-form'
- ) as HTMLFormElement | null;
+    const starterForm = document.getElementById(
+      'starter-preview-form'
+    ) as HTMLFormElement | null;
+    const sipPreviewForm = document.getElementById(
+      'sip-preview-form'
+    ) as HTMLFormElement | null;
 
- const starterCopy = {
-'focus-emergency-fund': {
- priority:'Ưu tiên quỹ khẩn cấp',
- note:'Nếu vẫn muốn bắt đầu để tạo thói quen, hãy giữ nó thật nhỏ.',
- body:'Bạn đang ở giai đoạn nên để phần lớn tiền dư đi vào vùng an toàn trước. Khoảng gợi ý ở trên chỉ nên xem như mức thử nghiệm rất nhẹ nếu bạn thực sự muốn bắt đầu song song.',
- },
-'split-between-cash-and-investing': {
- priority:'Chia nhỏ giữa dự phòng và đầu tư',
- note:'Phần lớn dòng tiền vẫn nên tiếp tục bồi quỹ khẩn cấp.',
- body:'Bạn đã có một phần nền tảng nên có thể tách ra một khoản nhỏ, đều đặn để tập thói quen đầu tư. Mục tiêu ở đây là giữ được nhịp dài hạn, không phải ép tối đa hóa số tiền ngay lập tức.',
- },
-'ready-to-invest': {
- priority:'Có thể đầu tư đều đặn hơn',
- note:'Chọn mức bạn có thể giữ ít nhất 6-12 tháng liên tục.',
- body:'Khi quỹ khẩn cấp đã cơ bản ổn, bạn có thể dành một phần rõ ràng hơn cho đầu tư dài hạn. Dù vậy, vẫn nên giữ biên an toàn cho các khoản chi bất ngờ thay vì dồn hết tiền dư sang đầu tư.',
- },
- } as const;
+    const starterCopy = {
+      'focus-emergency-fund': {
+        priority: 'Ưu tiên quỹ khẩn cấp',
+        note: 'Nếu vẫn muốn bắt đầu để tạo thói quen, hãy giữ nó thật nhỏ.',
+        body: 'Bạn đang ở giai đoạn nên để phần lớn tiền dư đi vào vùng an toàn trước. Khoảng gợi ý ở trên chỉ nên xem như mức thử nghiệm rất nhẹ nếu bạn thực sự muốn bắt đầu song song.',
+      },
+      'split-between-cash-and-investing': {
+        priority: 'Chia nhỏ giữa dự phòng và đầu tư',
+        note: 'Phần lớn dòng tiền vẫn nên tiếp tục bồi quỹ khẩn cấp.',
+        body: 'Bạn đã có một phần nền tảng nên có thể tách ra một khoản nhỏ, đều đặn để tập thói quen đầu tư. Mục tiêu ở đây là giữ được nhịp dài hạn, không phải ép tối đa hóa số tiền ngay lập tức.',
+      },
+      'ready-to-invest': {
+        priority: 'Có thể đầu tư đều đặn hơn',
+        note: 'Chọn mức bạn có thể giữ ít nhất 6-12 tháng liên tục.',
+        body: 'Khi quỹ khẩn cấp đã cơ bản ổn, bạn có thể dành một phần rõ ràng hơn cho đầu tư dài hạn. Dù vậy, vẫn nên giữ biên an toàn cho các khoản chi bất ngờ thay vì dồn hết tiền dư sang đầu tư.',
+      },
+    } as const;
 
- const updateStarterPreview = () => {
- if (!starterForm) return;
+    const updateStarterPreview = () => {
+      if (!starterForm) return;
 
- const monthlyAvailableAmount = Number(
- (
- document.getElementById(
-'starter-available-amount'
- ) as HTMLInputElement
- ).value
- );
- const emergencyFundStatus = (
- document.getElementById('starter-emergency-status') as HTMLSelectElement
- ).value as'none'|'building'|'ready';
+      const monthlyAvailableAmount = Number(
+        (
+          document.getElementById(
+            'starter-available-amount'
+          ) as HTMLInputElement
+        ).value
+      );
+      const emergencyFundStatus = (
+        document.getElementById('starter-emergency-status') as HTMLSelectElement
+      ).value as 'none' | 'building' | 'ready';
 
- try {
- const result = calculateStarterInvestmentRange(
- monthlyAvailableAmount,
- emergencyFundStatus
- );
- const copy = starterCopy[result.readinessStage];
+      try {
+        const result = calculateStarterInvestmentRange(
+          monthlyAvailableAmount,
+          emergencyFundStatus
+        );
+        const copy = starterCopy[result.readinessStage];
 
- document.getElementById('starter-range')!.textContent =
- `${formatCurrency(result.suggestedMonthlyAmountMin)} - ${formatCurrency(result.suggestedMonthlyAmountMax)}`;
- document.getElementById('starter-priority')!.textContent =
- copy.priority;
- document.getElementById('starter-note')!.textContent = copy.note;
- document.getElementById('starter-guidance')!.innerHTML = `
+        document.getElementById('starter-range')!.textContent =
+          `${formatCurrency(result.suggestedMonthlyAmountMin)} - ${formatCurrency(result.suggestedMonthlyAmountMax)}`;
+        document.getElementById('starter-priority')!.textContent =
+          copy.priority;
+        document.getElementById('starter-note')!.textContent = copy.note;
+        document.getElementById('starter-guidance')!.innerHTML = `
  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600">Diễn giải nhanh</p>
  <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">${copy.body}</p>
  `;
- } catch {
- document.getElementById('starter-range')!.textContent ='0 ₫ - 0 ₫';
- }
- };
+      } catch {
+        document.getElementById('starter-range')!.textContent = '0 ₫ - 0 ₫';
+      }
+    };
 
- const getSipPreviewInterpretation = (
- monthlyInvestment: number,
- years: number,
- totalInvested: number,
- totalReturns: number
- ): string => {
- if (monthlyInvestment === 0) {
- return'Khi mức đóng góp là 0, công cụ chỉ cho bạn thấy rằng nhịp đều mới là đầu vào quan trọng nhất của mô phỏng này.';
- }
+    const getSipPreviewInterpretation = (
+      monthlyInvestment: number,
+      years: number,
+      totalInvested: number,
+      totalReturns: number
+    ): string => {
+      if (monthlyInvestment === 0) {
+        return 'Khi mức đóng góp là 0, công cụ chỉ cho bạn thấy rằng nhịp đều mới là đầu vào quan trọng nhất của mô phỏng này.';
+      }
 
- if (years < 5) {
- return'Khung thời gian ngắn hơn thường chưa làm phần tăng trưởng nổi bật. Giai đoạn này chủ yếu giúp bạn luyện thói quen và kiểm tra xem mức góp có bền với dòng tiền hằng tháng không.';
- }
+      if (years < 5) {
+        return 'Khung thời gian ngắn hơn thường chưa làm phần tăng trưởng nổi bật. Giai đoạn này chủ yếu giúp bạn luyện thói quen và kiểm tra xem mức góp có bền với dòng tiền hằng tháng không.';
+      }
 
- if (totalReturns < totalInvested * 0.3) {
- return'Kết quả đang cho thấy phần lớn giá trị cuối kỳ vẫn đến từ khoản bạn tự góp. Điều đó không xấu: với người mới, nhịp đều quan trọng hơn kỳ vọng lợi nhuận cao ngay lập tức.';
- }
+      if (totalReturns < totalInvested * 0.3) {
+        return 'Kết quả đang cho thấy phần lớn giá trị cuối kỳ vẫn đến từ khoản bạn tự góp. Điều đó không xấu: với người mới, nhịp đều quan trọng hơn kỳ vọng lợi nhuận cao ngay lập tức.';
+      }
 
- return'Khi thời gian đủ dài, mô phỏng bắt đầu cho thấy phần tăng trưởng có thể hỗ trợ đáng kể cho số tiền bạn tự góp. Dù vậy, đây vẫn chỉ là ước tính theo giả định lợi nhuận cố định.';
- };
+      return 'Khi thời gian đủ dài, mô phỏng bắt đầu cho thấy phần tăng trưởng có thể hỗ trợ đáng kể cho số tiền bạn tự góp. Dù vậy, đây vẫn chỉ là ước tính theo giả định lợi nhuận cố định.';
+    };
 
- const updateSipPreview = () => {
- if (!sipPreviewForm) return;
+    const updateSipPreview = () => {
+      if (!sipPreviewForm) return;
 
- const monthlyInvestment = Number(
- (
- document.getElementById(
-'preview-monthly-investment'
- ) as HTMLInputElement
- ).value
- );
- const years = Number(
- (document.getElementById('preview-years') as HTMLInputElement).value
- );
- const returnRate = Number(
- (document.getElementById('preview-return-rate') as HTMLSelectElement)
- .value
- );
+      const monthlyInvestment = Number(
+        (
+          document.getElementById(
+            'preview-monthly-investment'
+          ) as HTMLInputElement
+        ).value
+      );
+      const years = Number(
+        (document.getElementById('preview-years') as HTMLInputElement).value
+      );
+      const returnRate = Number(
+        (document.getElementById('preview-return-rate') as HTMLSelectElement)
+          .value
+      );
 
- try {
- const result = calculateSIP(monthlyInvestment, returnRate, years);
+      try {
+        const result = calculateSIP(monthlyInvestment, returnRate, years);
 
- document.getElementById('preview-final-amount')!.textContent =
- formatCurrency(result.finalAmount);
- document.getElementById('preview-total-invested')!.textContent =
- formatCurrency(result.totalInvested);
- document.getElementById('preview-total-returns')!.textContent =
- formatCurrency(result.totalReturns);
- document.getElementById('sip-preview-interpretation')!.innerHTML = `
+        document.getElementById('preview-final-amount')!.textContent =
+          formatCurrency(result.finalAmount);
+        document.getElementById('preview-total-invested')!.textContent =
+          formatCurrency(result.totalInvested);
+        document.getElementById('preview-total-returns')!.textContent =
+          formatCurrency(result.totalReturns);
+        document.getElementById('sip-preview-interpretation')!.innerHTML = `
  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-emerald-600">Diễn giải nhanh</p>
  <p class="mt-3 text-sm leading-7 text-[var(--text-secondary)]">${getSipPreviewInterpretation(monthlyInvestment, years, result.totalInvested, result.totalReturns)}</p>
  `;
- } catch {
- document.getElementById('preview-final-amount')!.textContent ='0 ₫';
- }
- };
+      } catch {
+        document.getElementById('preview-final-amount')!.textContent = '0 ₫';
+      }
+    };
 
- starterForm?.addEventListener('input', updateStarterPreview);
- starterForm?.addEventListener('change', updateStarterPreview);
+    starterForm?.addEventListener('input', updateStarterPreview);
+    starterForm?.addEventListener('change', updateStarterPreview);
 
- sipPreviewForm?.addEventListener('input', updateSipPreview);
- sipPreviewForm?.addEventListener('change', updateSipPreview);
+    sipPreviewForm?.addEventListener('input', updateSipPreview);
+    sipPreviewForm?.addEventListener('change', updateSipPreview);
 
- document.querySelectorAll('[data-fill-target]').forEach((button) => {
- button.addEventListener('click', () => {
- const target = button.getAttribute('data-fill-target');
- const value = button.getAttribute('data-fill-value');
- const input = target ? document.getElementById(target) : null;
+    document.querySelectorAll('[data-fill-target]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.getAttribute('data-fill-target');
+        const value = button.getAttribute('data-fill-value');
+        const input = target ? document.getElementById(target) : null;
 
- if (!input || !value) return;
+        if (!input || !value) return;
 
- (input as HTMLInputElement).value = value;
- updateSipPreview();
- });
- });
+        (input as HTMLInputElement).value = value;
+        updateSipPreview();
+      });
+    });
 
- updateStarterPreview();
- updateSipPreview();
- </script>
+    updateStarterPreview();
+    updateSipPreview();
+  </script>
 </Layout>

@@ -1,947 +1,901 @@
 ---
-import { getCollection } from'astro:content';
-import Layout from'@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
 
 export interface SectionLink {
- href: string;
- label: string;
+  href: string;
+  label: string;
 }
 
 export interface LearningOutcome {
- title: string;
- description: string;
+  title: string;
+  description: string;
 }
 
 export interface ComparisonCard {
- title: string;
- description: string;
- bullets: string[];
- accentClass: string;
+  title: string;
+  description: string;
+  bullets: string[];
+  accentClass: string;
 }
 
 export interface FitCard {
- title: string;
- intro: string;
- items: string[];
- toneClass: string;
+  title: string;
+  intro: string;
+  items: string[];
+  toneClass: string;
 }
 
 export interface RiskCard {
- title: string;
- description: string;
+  title: string;
+  description: string;
 }
 
 export interface StartStep {
- step: string;
- title: string;
- description: string;
+  step: string;
+  title: string;
+  description: string;
 }
 
 export interface NextStepLink {
- title: string;
- description: string;
- href: string;
- label: string;
- eyebrow: string;
- subtle?: boolean;
+  title: string;
+  description: string;
+  href: string;
+  label: string;
+  eyebrow: string;
+  subtle?: boolean;
 }
 
 const faqGroups = (await getCollection('faq')).sort(
- (a, b) => a.data.order - b.data.order
+  (a, b) => a.data.order - b.data.order
 );
 const faqCount = faqGroups.reduce(
- (count, group) => count + group.data.items.length,
- 0
+  (count, group) => count + group.data.items.length,
+  0
 );
 const baseUrl = import.meta.env.BASE_URL;
 
 const sectionLinks: SectionLink[] = [
- { href:'#lo-trinh', label:'Bạn sẽ hiểu gì'},
- { href:'#quy-mo-la-gi', label:'Quỹ mở là gì'},
- { href:'#co-hop-khong', label:'Có hợp với bạn'},
- { href:'#dieu-can-hieu', label:'Điều cần hiểu trước'},
- { href:'#bat-dau-an-toan', label:'Bắt đầu an toàn'},
- { href:'#faq-theo-cum', label:'FAQ theo cụm'},
+  { href: '#lo-trinh', label: 'Bạn sẽ hiểu gì' },
+  { href: '#quy-mo-la-gi', label: 'Quỹ mở là gì' },
+  { href: '#co-hop-khong', label: 'Có hợp với bạn' },
+  { href: '#dieu-can-hieu', label: 'Điều cần hiểu trước' },
+  { href: '#bat-dau-an-toan', label: 'Bắt đầu an toàn' },
+  { href: '#faq-theo-cum', label: 'FAQ theo cụm' },
 ];
 
 const learningOutcomes: LearningOutcome[] = [
- {
- title:'Hiểu quỹ mở hoạt động ra sao',
- description:
-'Nắm được mô hình gộp vốn, vì sao nó khác gửi tiết kiệm và vì sao không giống tự chọn cổ phiếu.',
- },
- {
- title:'Biết nó có hợp với mình không',
- description:
-'Tự đánh giá theo mục tiêu thời gian, mức chịu biến động và tình trạng quỹ dự phòng của bạn.',
- },
- {
- title:'Biết cách bắt đầu an toàn hơn',
- description:
-'Đi từ số tiền nhỏ, nhịp đều và chọn loại quỹ phù hợp thay vì lao vào quá sớm.',
- },
+  {
+    title: 'Hiểu quỹ mở hoạt động ra sao',
+    description:
+      'Nắm được mô hình gộp vốn, vì sao nó khác gửi tiết kiệm và vì sao không giống tự chọn cổ phiếu.',
+  },
+  {
+    title: 'Biết nó có hợp với mình không',
+    description:
+      'Tự đánh giá theo mục tiêu thời gian, mức chịu biến động và tình trạng quỹ dự phòng của bạn.',
+  },
+  {
+    title: 'Biết cách bắt đầu an toàn hơn',
+    description:
+      'Đi từ số tiền nhỏ, nhịp đều và chọn loại quỹ phù hợp thay vì lao vào quá sớm.',
+  },
 ];
 
 const comparisonCards: ComparisonCard[] = [
- {
- title:'Gửi tiết kiệm',
- description:'Ưu tiên ổn định và dễ hình dung kết quả hơn.',
- bullets: [
-'Phù hợp cho tiền cần an toàn cao',
-'Lãi suất biết trước rõ hơn',
-'Ít phù hợp nếu bạn kỳ vọng tăng trưởng dài hạn hơn',
- ],
- accentClass:
-'border-stone-300 bg-[var(--bg-card)]',
- },
- {
- title:'Quỹ mở',
- description:
-'Ở giữa hai cực: không tự chọn từng mã, nhưng cũng không phải gửi tiền nhận lãi cố định.',
- bullets: [
-'Có đội ngũ quản lý quỹ đầu tư thay',
-'Giá trị có thể tăng giảm theo thị trường',
-'Phù hợp với người muốn đi đường dài bằng nhịp đều',
- ],
- accentClass:
-'border-[var(--accent)] bg-[var(--accent-light)]/70',
- },
- {
- title:'Tự chọn cổ phiếu',
- description:
-'Đòi hỏi nhiều thời gian theo dõi, ra quyết định và chịu trách nhiệm trực tiếp cho từng mã.',
- bullets: [
-'Tự nghiên cứu và tự đặt lệnh',
-'Biến động tâm lý mạnh hơn với người mới',
-'Không phải điểm bắt đầu dễ nhất cho đa số người lần đầu đầu tư',
- ],
- accentClass:
-'border-secondary-200 bg-secondary-50/60',
- },
+  {
+    title: 'Gửi tiết kiệm',
+    description: 'Ưu tiên ổn định và dễ hình dung kết quả hơn.',
+    bullets: [
+      'Phù hợp cho tiền cần an toàn cao',
+      'Lãi suất biết trước rõ hơn',
+      'Ít phù hợp nếu bạn kỳ vọng tăng trưởng dài hạn hơn',
+    ],
+    accentClass: 'border-stone-300 bg-[var(--bg-card)]',
+  },
+  {
+    title: 'Quỹ mở',
+    description:
+      'Ở giữa hai cực: không tự chọn từng mã, nhưng cũng không phải gửi tiền nhận lãi cố định.',
+    bullets: [
+      'Có đội ngũ quản lý quỹ đầu tư thay',
+      'Giá trị có thể tăng giảm theo thị trường',
+      'Phù hợp với người muốn đi đường dài bằng nhịp đều',
+    ],
+    accentClass: 'border-[var(--accent)] bg-[var(--accent-light)]/70',
+  },
+  {
+    title: 'Tự chọn cổ phiếu',
+    description:
+      'Đòi hỏi nhiều thời gian theo dõi, ra quyết định và chịu trách nhiệm trực tiếp cho từng mã.',
+    bullets: [
+      'Tự nghiên cứu và tự đặt lệnh',
+      'Biến động tâm lý mạnh hơn với người mới',
+      'Không phải điểm bắt đầu dễ nhất cho đa số người lần đầu đầu tư',
+    ],
+    accentClass: 'border-secondary-200 bg-secondary-50/60',
+  },
 ];
 
 const fitCards: FitCard[] = [
- {
- title:'Phù hợp nếu...',
- intro:'Bạn muốn học đầu tư theo cách ít áp lực hơn và chấp nhận đi chậm.',
- items: [
-'Muốn bắt đầu với số tiền nhỏ.',
-'Không muốn tự chọn cổ phiếu ngay.',
-'Muốn đầu tư đều đặn theo tháng.',
-'Chấp nhận biến động ngắn hạn để đi đường dài hơn.',
- ],
- toneClass:
-'border-secondary-200 bg-secondary-50/70',
- },
- {
- title:'Không phù hợp nếu...',
- intro:
-'Bạn đang cần một sản phẩm chắc chắn, rút nhanh và không muốn thấy giá trị giảm.',
- items: [
-'Cần tiền dùng trong tương lai rất gần.',
-'Muốn lợi nhuận chắc chắn từng tháng.',
-'Muốn giao dịch ngắn hạn thường xuyên.',
-'Chưa có quỹ dự phòng cơ bản.',
- ],
- toneClass:
-'border-rose-200 bg-rose-50/70',
- },
+  {
+    title: 'Phù hợp nếu...',
+    intro: 'Bạn muốn học đầu tư theo cách ít áp lực hơn và chấp nhận đi chậm.',
+    items: [
+      'Muốn bắt đầu với số tiền nhỏ.',
+      'Không muốn tự chọn cổ phiếu ngay.',
+      'Muốn đầu tư đều đặn theo tháng.',
+      'Chấp nhận biến động ngắn hạn để đi đường dài hơn.',
+    ],
+    toneClass: 'border-secondary-200 bg-secondary-50/70',
+  },
+  {
+    title: 'Không phù hợp nếu...',
+    intro:
+      'Bạn đang cần một sản phẩm chắc chắn, rút nhanh và không muốn thấy giá trị giảm.',
+    items: [
+      'Cần tiền dùng trong tương lai rất gần.',
+      'Muốn lợi nhuận chắc chắn từng tháng.',
+      'Muốn giao dịch ngắn hạn thường xuyên.',
+      'Chưa có quỹ dự phòng cơ bản.',
+    ],
+    toneClass: 'border-rose-200 bg-rose-50/70',
+  },
 ];
 
 const riskCards: RiskCard[] = [
- {
- title:'Lợi nhuận không được đảm bảo',
- description:
-'Quỹ mở không phải sổ tiết kiệm. Nếu thị trường xấu, tài khoản của bạn có thể giảm trong một giai đoạn nào đó.',
- },
- {
- title:'NAV có thể tăng và giảm',
- description:
-'Giá trị quỹ đi lên đi xuống theo tài sản bên trong quỹ. Điều này là bình thường, không phải dấu hiệu hỏng kế hoạch ngay lập tức.',
- },
- {
- title:'Thời gian nắm giữ quan trọng hơn cảm xúc vài ngày',
- description:
-'Người mới thường dễ bị vài nhịp giảm ngắn hạn làm lung lay. Nếu mục tiêu là dài hạn, vài phiên đỏ không phải trọng tâm.',
- },
- {
- title:'Quỹ mở không thay thế quỹ dự phòng',
- description:
-'Khoản tiền để xử lý việc khẩn cấp nên ở nơi linh hoạt và ổn định hơn. Đừng trộn tiền cần gấp với tiền đầu tư.',
- },
+  {
+    title: 'Lợi nhuận không được đảm bảo',
+    description:
+      'Quỹ mở không phải sổ tiết kiệm. Nếu thị trường xấu, tài khoản của bạn có thể giảm trong một giai đoạn nào đó.',
+  },
+  {
+    title: 'NAV có thể tăng và giảm',
+    description:
+      'Giá trị quỹ đi lên đi xuống theo tài sản bên trong quỹ. Điều này là bình thường, không phải dấu hiệu hỏng kế hoạch ngay lập tức.',
+  },
+  {
+    title: 'Thời gian nắm giữ quan trọng hơn cảm xúc vài ngày',
+    description:
+      'Người mới thường dễ bị vài nhịp giảm ngắn hạn làm lung lay. Nếu mục tiêu là dài hạn, vài phiên đỏ không phải trọng tâm.',
+  },
+  {
+    title: 'Quỹ mở không thay thế quỹ dự phòng',
+    description:
+      'Khoản tiền để xử lý việc khẩn cấp nên ở nơi linh hoạt và ổn định hơn. Đừng trộn tiền cần gấp với tiền đầu tư.',
+  },
 ];
 
 const startSteps: StartStep[] = [
- {
- step:'Bước 1',
- title:'Chuẩn bị quỹ dự phòng trước',
- description:
-'Nếu bạn chưa có khoản tiền cho việc khẩn cấp, hãy ưu tiên phần đó trước. Việc này giúp bạn đỡ phải bán quỹ đúng lúc không mong muốn.',
- },
- {
- step:'Bước 2',
- title:'Bắt đầu với số tiền nhỏ và nhịp đều',
- description:
-'Một khoản vừa sức mỗi tháng thường tốt hơn việc cố vào lớn ngay lần đầu. Mục tiêu đầu tiên là giữ được thói quen, không phải tối ưu tuyệt đối.',
- },
- {
- step:'Bước 3',
- title:'Chọn loại quỹ theo thời gian và mức chịu rủi ro',
- description:
-'Điều quan trọng nhất không phải tên quỹ nghe hay, mà là nó có khớp với thời gian bạn có thể giữ tiền và biên độ dao động bạn chịu được hay không.',
- },
+  {
+    step: 'Bước 1',
+    title: 'Chuẩn bị quỹ dự phòng trước',
+    description:
+      'Nếu bạn chưa có khoản tiền cho việc khẩn cấp, hãy ưu tiên phần đó trước. Việc này giúp bạn đỡ phải bán quỹ đúng lúc không mong muốn.',
+  },
+  {
+    step: 'Bước 2',
+    title: 'Bắt đầu với số tiền nhỏ và nhịp đều',
+    description:
+      'Một khoản vừa sức mỗi tháng thường tốt hơn việc cố vào lớn ngay lần đầu. Mục tiêu đầu tiên là giữ được thói quen, không phải tối ưu tuyệt đối.',
+  },
+  {
+    step: 'Bước 3',
+    title: 'Chọn loại quỹ theo thời gian và mức chịu rủi ro',
+    description:
+      'Điều quan trọng nhất không phải tên quỹ nghe hay, mà là nó có khớp với thời gian bạn có thể giữ tiền và biên độ dao động bạn chịu được hay không.',
+  },
 ];
 
 const nextSteps: NextStepLink[] = [
- {
- eyebrow:'Đọc tiếp',
- title:'Bài viết nền tảng về quỹ mở',
- description:
-'Nếu bạn muốn xem một bài giải thích dài hơn về quỹ mở, đây là điểm đọc tiếp tự nhiên nhất sau trang này.',
- href: `${baseUrl}blog/mutual-funds`,
- label:'Đọc bài viết',
- },
- {
- eyebrow:'Công cụ',
- title:'Tính thử nhịp đầu tư đều',
- description:
-'Dùng công cụ SIP để hình dung nếu bạn góp một khoản nhỏ hàng tháng thì kế hoạch dài hạn có thể trông như thế nào.',
- href: `${baseUrl}tools/sip-calculator`,
- label:'Mở công cụ SIP',
- },
- {
- eyebrow:'Tuỳ chọn',
- title:'Nếu bạn cần hướng dẫn nền tảng cụ thể',
- description:
-'Trang này vẫn giữ vai trò giáo dục trung lập. Nếu bạn muốn xem riêng một hướng dẫn nền tảng, đó là nội dung tách biệt ở trang khác.',
- href: `${baseUrl}fmarket`,
- label:'Xem hướng dẫn nền tảng',
- subtle: true,
- },
+  {
+    eyebrow: 'Đọc tiếp',
+    title: 'Bài viết nền tảng về quỹ mở',
+    description:
+      'Nếu bạn muốn xem một bài giải thích dài hơn về quỹ mở, đây là điểm đọc tiếp tự nhiên nhất sau trang này.',
+    href: `${baseUrl}blog/mutual-funds`,
+    label: 'Đọc bài viết',
+  },
+  {
+    eyebrow: 'Công cụ',
+    title: 'Tính thử nhịp đầu tư đều',
+    description:
+      'Dùng công cụ SIP để hình dung nếu bạn góp một khoản nhỏ hàng tháng thì kế hoạch dài hạn có thể trông như thế nào.',
+    href: `${baseUrl}tools/sip-calculator`,
+    label: 'Mở công cụ SIP',
+  },
+  {
+    eyebrow: 'Tuỳ chọn',
+    title: 'Nếu bạn cần hướng dẫn nền tảng cụ thể',
+    description:
+      'Trang này vẫn giữ vai trò giáo dục trung lập. Nếu bạn muốn xem riêng một hướng dẫn nền tảng, đó là nội dung tách biệt ở trang khác.',
+    href: `${baseUrl}fmarket`,
+    label: 'Xem hướng dẫn nền tảng',
+    subtle: true,
+  },
 ];
 ---
 
 <Layout
- title="Hướng dẫn quỹ mở cho người mới bắt đầu"
- description="Cẩm nang nhập môn quỹ mở cho người mới: hiểu quỹ mở là gì, biết nó có hợp với mình không, nắm rủi ro chính và cách bắt đầu an toàn hơn."
+  title="Hướng dẫn quỹ mở cho người mới bắt đầu"
+  description="Cẩm nang nhập môn quỹ mở cho người mới: hiểu quỹ mở là gì, biết nó có hợp với mình không, nắm rủi ro chính và cách bắt đầu an toàn hơn."
 >
- <section
- class="relative overflow-hidden border-b border-stone-200 bg-[linear-gradient(180deg,_#f8f4ec_0%,_#fffdf8_58%,_#ffffff_100%)]"
- >
- <div
- class="absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_top_left,_rgba(245,147,0,0.14),_transparent_54%)]"
- >
- </div>
- <div
- class="absolute right-0 top-16 hidden h-80 w-80 rounded-full bg-[radial-gradient(circle,_rgba(20,83,45,0.12),_transparent_70%)] lg:block"
- >
- </div>
+  <section
+    class="relative overflow-hidden border-b border-stone-200 bg-[linear-gradient(180deg,_#f8f4ec_0%,_#fffdf8_58%,_#ffffff_100%)]"
+  >
+    <div
+      class="absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_top_left,_rgba(245,147,0,0.14),_transparent_54%)]"
+    >
+    </div>
+    <div
+      class="absolute right-0 top-16 hidden h-80 w-80 rounded-full bg-[radial-gradient(circle,_rgba(20,83,45,0.12),_transparent_70%)] lg:block"
+    >
+    </div>
 
- <div class="container relative mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
- <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
- <div>
- <div
- class="inline-flex items-center rounded-full border border-stone-300 bg-[var(--bg-card)]/80 px-4 py-2 text-sm font-medium tracking-[0.12em] text-stone-700 shadow-sm backdrop-blur"
- >
- CẨM NANG NHẬP MÔN
- </div>
- <h1
- class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
- >
- Hướng dẫn quỹ mở cho người mới bắt đầu
- </h1>
- <p
- class="mt-6 max-w-3xl text-lg leading-8 text-stone-700"
- >
- Trang này giúp bạn hiểu quỹ mở hoạt động ra sao, biết nó có hợp với
- mình không, và biết cách bắt đầu an toàn hơn mà không bị cuốn vào
- một lời giới thiệu sản phẩm quá sớm.
- </p>
+    <div class="container relative mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div>
+          <div
+            class="bg-[var(--bg-card)]/80 inline-flex items-center rounded-full border border-stone-300 px-4 py-2 text-sm font-medium tracking-[0.12em] text-stone-700 shadow-sm backdrop-blur"
+          >
+            CẨM NANG NHẬP MÔN
+          </div>
+          <h1
+            class="mt-6 max-w-4xl text-4xl font-bold tracking-tight text-stone-900 md:text-5xl lg:text-6xl"
+          >
+            Hướng dẫn quỹ mở cho người mới bắt đầu
+          </h1>
+          <p class="mt-6 max-w-3xl text-lg leading-8 text-stone-700">
+            Trang này giúp bạn hiểu quỹ mở hoạt động ra sao, biết nó có hợp với
+            mình không, và biết cách bắt đầu an toàn hơn mà không bị cuốn vào
+            một lời giới thiệu sản phẩm quá sớm.
+          </p>
 
- <div class="mt-8 flex flex-col gap-4 sm:flex-row">
- <a href="#lo-trinh" class="btn-primary text-center">
- Xem lộ trình đọc
- </a>
- <a href="#faq-theo-cum" class="btn-secondary text-center">
- Đi thẳng tới FAQ
- </a>
- </div>
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="#lo-trinh" class="btn-primary text-center">
+              Xem lộ trình đọc
+            </a>
+            <a href="#faq-theo-cum" class="btn-secondary text-center">
+              Đi thẳng tới FAQ
+            </a>
+          </div>
 
- <div
- class="mt-8 flex flex-wrap gap-3 text-sm text-stone-600"
- >
- <span
- class="rounded-full border border-stone-300 bg-[var(--bg-card)]/80 px-3 py-1.5"
- >
- Đọc khoảng 10 phút
- </span>
- <span
- class="rounded-full border border-stone-300 bg-[var(--bg-card)]/80 px-3 py-1.5"
- >
- Viết cho người mới hoàn toàn
- </span>
- <span
- class="rounded-full border border-stone-300 bg-[var(--bg-card)]/80 px-3 py-1.5"
- >
- Trung lập trong phần nội dung chính
- </span>
- </div>
- </div>
+          <div class="mt-8 flex flex-wrap gap-3 text-sm text-stone-600">
+            <span
+              class="bg-[var(--bg-card)]/80 rounded-full border border-stone-300 px-3 py-1.5"
+            >
+              Đọc khoảng 10 phút
+            </span>
+            <span
+              class="bg-[var(--bg-card)]/80 rounded-full border border-stone-300 px-3 py-1.5"
+            >
+              Viết cho người mới hoàn toàn
+            </span>
+            <span
+              class="bg-[var(--bg-card)]/80 rounded-full border border-stone-300 px-3 py-1.5"
+            >
+              Trung lập trong phần nội dung chính
+            </span>
+          </div>
+        </div>
 
- <aside
- class="rounded-[2rem] border border-stone-300 bg-[var(--bg-card)]/85 p-8 shadow-[0_24px_70px_-40px_rgba(68,64,60,0.55)] backdrop-blur"
- >
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Trang này dành cho ai
- </p>
- <h2 class="mt-4 text-3xl font-bold text-stone-900">
- Dành cho người còn ít bối cảnh và muốn hiểu trước khi làm.
- </h2>
- <div
- class="mt-6 space-y-4 text-sm leading-7 text-stone-700"
- >
- <p>
- Bạn không cần biết nhiều thuật ngữ đầu tư để đọc trang này. Mục
- tiêu ở đây là giúp bạn đặt đúng câu hỏi đầu tiên, không phải biến
- bạn thành người phân tích quỹ chuyên sâu trong một buổi.
- </p>
- <div
- class="rounded-3xl border border-stone-200 bg-stone-50 px-5 py-4"
- >
- <p class="font-semibold text-stone-900">
- Sau khi đọc xong, bạn nên trả lời được 3 câu:
- </p>
- <ul class="mt-3 space-y-2">
- <li>Quỹ mở là gì và nó khác gửi tiết kiệm ở đâu?</li>
- <li>Với tình hình của mình, có nên bắt đầu chưa?</li>
- <li>Nếu bắt đầu, nhịp nào là an toàn hơn cho người mới?</li>
- </ul>
- </div>
- </div>
- </aside>
- </div>
- </div>
- </section>
+        <aside
+          class="bg-[var(--bg-card)]/85 rounded-[2rem] border border-stone-300 p-8 shadow-[0_24px_70px_-40px_rgba(68,64,60,0.55)] backdrop-blur"
+        >
+          <p
+            class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+          >
+            Trang này dành cho ai
+          </p>
+          <h2 class="mt-4 text-3xl font-bold text-stone-900">
+            Dành cho người còn ít bối cảnh và muốn hiểu trước khi làm.
+          </h2>
+          <div class="mt-6 space-y-4 text-sm leading-7 text-stone-700">
+            <p>
+              Bạn không cần biết nhiều thuật ngữ đầu tư để đọc trang này. Mục
+              tiêu ở đây là giúp bạn đặt đúng câu hỏi đầu tiên, không phải biến
+              bạn thành người phân tích quỹ chuyên sâu trong một buổi.
+            </p>
+            <div
+              class="rounded-3xl border border-stone-200 bg-stone-50 px-5 py-4"
+            >
+              <p class="font-semibold text-stone-900">
+                Sau khi đọc xong, bạn nên trả lời được 3 câu:
+              </p>
+              <ul class="mt-3 space-y-2">
+                <li>Quỹ mở là gì và nó khác gửi tiết kiệm ở đâu?</li>
+                <li>Với tình hình của mình, có nên bắt đầu chưa?</li>
+                <li>Nếu bắt đầu, nhịp nào là an toàn hơn cho người mới?</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
 
- <section
- class="sticky top-[72px] z-30 border-b border-stone-200 bg-[var(--bg-card)]/90 backdrop-blur"
- >
- <div class="container mx-auto overflow-x-auto px-4 sm:px-6 lg:px-8">
- <nav class="flex min-w-max gap-3 py-4" aria-label="Điều hướng nội dung">
- {
- sectionLinks.map((link) => (
- <a
- href={link.href}
- class="rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-colors hover:border-[var(--accent)] hover:text-primary-700"
- >
- {link.label}
- </a>
- ))
- }
- </nav>
- </div>
- </section>
+  <section
+    class="bg-[var(--bg-card)]/90 sticky top-[72px] z-30 border-b border-stone-200 backdrop-blur"
+  >
+    <div class="container mx-auto overflow-x-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex min-w-max gap-3 py-4" aria-label="Điều hướng nội dung">
+        {
+          sectionLinks.map((link) => (
+            <a
+              href={link.href}
+              class="hover:text-primary-700 rounded-full border border-stone-300 px-4 py-2 text-sm font-medium text-stone-700 transition-colors hover:border-[var(--accent)]"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </section>
 
- <section id="lo-trinh" class="bg-[var(--bg-card)] py-16 sm:py-20">
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="max-w-3xl">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Lộ trình đọc
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- Bạn sẽ hiểu gì sau trang này?
- </h2>
- <p class="mt-4 text-base leading-8 text-stone-600">
- Đây không phải một danh sách thuật ngữ để đọc ngắt quãng. Hãy xem nó
- như một bản đồ ngắn giúp bạn đi từ “mình chưa hiểu gì” sang “mình biết
- điều gì cần quan tâm trước”.
- </p>
- </div>
+  <section id="lo-trinh" class="bg-[var(--bg-card)] py-16 sm:py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+        >
+          Lộ trình đọc
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+          Bạn sẽ hiểu gì sau trang này?
+        </h2>
+        <p class="mt-4 text-base leading-8 text-stone-600">
+          Đây không phải một danh sách thuật ngữ để đọc ngắt quãng. Hãy xem nó
+          như một bản đồ ngắn giúp bạn đi từ “mình chưa hiểu gì” sang “mình biết
+          điều gì cần quan tâm trước”.
+        </p>
+      </div>
 
- <div class="mt-10 grid gap-5 lg:grid-cols-3">
- {
- learningOutcomes.map((outcome, index) => (
- <article class="rounded-[1.75rem] border border-stone-200 bg-stone-50/70 p-6">
- <div class="text-sm font-semibold uppercase tracking-[0.24em] text-stone-500">
- 0{index + 1}
- </div>
- <h3 class="mt-4 text-xl font-semibold text-stone-900">
- {outcome.title}
- </h3>
- <p class="mt-3 text-sm leading-7 text-stone-600">
- {outcome.description}
- </p>
- </article>
- ))
- }
- </div>
- </div>
- </section>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          learningOutcomes.map((outcome, index) => (
+            <article class="rounded-[1.75rem] border border-stone-200 bg-stone-50/70 p-6">
+              <div class="text-sm font-semibold uppercase tracking-[0.24em] text-stone-500">
+                0{index + 1}
+              </div>
+              <h3 class="mt-4 text-xl font-semibold text-stone-900">
+                {outcome.title}
+              </h3>
+              <p class="mt-3 text-sm leading-7 text-stone-600">
+                {outcome.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
- <section
- id="quy-mo-la-gi"
- class="border-y border-stone-200 bg-stone-50/60 py-16 sm:py-20"
- >
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
- <div>
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Phần 1
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- Quỹ mở là gì, nói đơn giản?
- </h2>
- <div
- class="mt-6 space-y-4 text-base leading-8 text-stone-700"
- >
- <p>
- Hiểu gọn nhất: quỹ mở là cách nhiều người góp tiền lại để một đội
- ngũ chuyên nghiệp đầu tư thay. Bạn không cần tự chọn từng mã cổ
- phiếu hay trái phiếu, nhưng vẫn cần hiểu rằng tiền của mình đang
- đi vào một danh mục có thể lên xuống.
- </p>
- <p>
- Vì vậy, quỹ mở thường phù hợp với người muốn bắt đầu nhẹ hơn là tự
- giao dịch từng mã, nhưng vẫn chấp nhận rằng đây là đầu tư chứ
- không phải gửi tiền lấy lãi cố định.
- </p>
- </div>
+  <section
+    id="quy-mo-la-gi"
+    class="border-y border-stone-200 bg-stone-50/60 py-16 sm:py-20"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+        <div>
+          <p
+            class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+          >
+            Phần 1
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+            Quỹ mở là gì, nói đơn giản?
+          </h2>
+          <div class="mt-6 space-y-4 text-base leading-8 text-stone-700">
+            <p>
+              Hiểu gọn nhất: quỹ mở là cách nhiều người góp tiền lại để một đội
+              ngũ chuyên nghiệp đầu tư thay. Bạn không cần tự chọn từng mã cổ
+              phiếu hay trái phiếu, nhưng vẫn cần hiểu rằng tiền của mình đang
+              đi vào một danh mục có thể lên xuống.
+            </p>
+            <p>
+              Vì vậy, quỹ mở thường phù hợp với người muốn bắt đầu nhẹ hơn là tự
+              giao dịch từng mã, nhưng vẫn chấp nhận rằng đây là đầu tư chứ
+              không phải gửi tiền lấy lãi cố định.
+            </p>
+          </div>
 
- <div
- class="mt-8 rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)] p-6 shadow-sm"
- >
- <p
- class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500"
- >
- Một cách đặt nó trong đầu
- </p>
- <p
- class="mt-3 text-base leading-8 text-stone-700"
- >
- Quỹ mở nằm ở giữa hai cực quen thuộc với người mới: an toàn hơn về
- mặt thao tác so với tự chọn cổ phiếu, nhưng ít chắc chắn hơn gửi
- tiết kiệm vì giá trị vẫn dao động theo thị trường.
- </p>
- </div>
- </div>
+          <div
+            class="mt-8 rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)] p-6 shadow-sm"
+          >
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500"
+            >
+              Một cách đặt nó trong đầu
+            </p>
+            <p class="mt-3 text-base leading-8 text-stone-700">
+              Quỹ mở nằm ở giữa hai cực quen thuộc với người mới: an toàn hơn về
+              mặt thao tác so với tự chọn cổ phiếu, nhưng ít chắc chắn hơn gửi
+              tiết kiệm vì giá trị vẫn dao động theo thị trường.
+            </p>
+          </div>
+        </div>
 
- <div class="grid gap-4">
- {
- comparisonCards.map((card) => (
- <article
- class={`rounded-[1.75rem] border p-6 ${card.accentClass}`}
- >
- <h3 class="text-xl font-semibold text-stone-900">
- {card.title}
- </h3>
- <p class="mt-2 text-sm leading-7 text-stone-600">
- {card.description}
- </p>
- <ul class="mt-4 space-y-2 text-sm leading-7 text-stone-700">
- {card.bullets.map((bullet) => (
- <li>{bullet}</li>
- ))}
- </ul>
- </article>
- ))
- }
- </div>
- </div>
- </div>
- </section>
+        <div class="grid gap-4">
+          {
+            comparisonCards.map((card) => (
+              <article
+                class={`rounded-[1.75rem] border p-6 ${card.accentClass}`}
+              >
+                <h3 class="text-xl font-semibold text-stone-900">
+                  {card.title}
+                </h3>
+                <p class="mt-2 text-sm leading-7 text-stone-600">
+                  {card.description}
+                </p>
+                <ul class="mt-4 space-y-2 text-sm leading-7 text-stone-700">
+                  {card.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section id="co-hop-khong" class="bg-[var(--bg-card)] py-16 sm:py-20">
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="max-w-3xl">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Phần 2
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- Quỹ mở có hợp với bạn không?
- </h2>
- <p class="mt-4 text-base leading-8 text-stone-600">
- Đây là chỗ quan trọng để tránh “nghe hay nên vào thử”. Một lựa chọn
- đầu tư chỉ tốt khi nó khớp với hoàn cảnh thật của bạn.
- </p>
- </div>
+  <section id="co-hop-khong" class="bg-[var(--bg-card)] py-16 sm:py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+        >
+          Phần 2
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+          Quỹ mở có hợp với bạn không?
+        </h2>
+        <p class="mt-4 text-base leading-8 text-stone-600">
+          Đây là chỗ quan trọng để tránh “nghe hay nên vào thử”. Một lựa chọn
+          đầu tư chỉ tốt khi nó khớp với hoàn cảnh thật của bạn.
+        </p>
+      </div>
 
- <div class="mt-10 grid gap-6 lg:grid-cols-2">
- {
- fitCards.map((card) => (
- <article class={`rounded-[2rem] border p-7 ${card.toneClass}`}>
- <h3 class="text-2xl font-semibold text-stone-900">
- {card.title}
- </h3>
- <p class="mt-3 text-sm leading-7 text-stone-700">
- {card.intro}
- </p>
- <ul class="mt-5 space-y-3 text-sm leading-7 text-stone-700">
- {card.items.map((item) => (
- <li>{item}</li>
- ))}
- </ul>
- </article>
- ))
- }
- </div>
- </div>
- </section>
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        {
+          fitCards.map((card) => (
+            <article class={`rounded-[2rem] border p-7 ${card.toneClass}`}>
+              <h3 class="text-2xl font-semibold text-stone-900">
+                {card.title}
+              </h3>
+              <p class="mt-3 text-sm leading-7 text-stone-700">{card.intro}</p>
+              <ul class="mt-5 space-y-3 text-sm leading-7 text-stone-700">
+                {card.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
- <section
- id="dieu-can-hieu"
- class="border-y border-stone-200 bg-[linear-gradient(180deg,_#fffaf0_0%,_#ffffff_100%)] py-16 sm:py-20"
- >
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="max-w-3xl">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Phần 3
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- Điều người mới cần hiểu trước khi bỏ tiền vào
- </h2>
- <p class="mt-4 text-base leading-8 text-stone-700">
- Nếu chỉ nhớ một phần của trang này, hãy nhớ phần này. Sự rõ ràng về
- rủi ro thường giúp bạn đi được lâu hơn bất kỳ lời hứa lợi nhuận nào.
- </p>
- </div>
+  <section
+    id="dieu-can-hieu"
+    class="border-y border-stone-200 bg-[linear-gradient(180deg,_#fffaf0_0%,_#ffffff_100%)] py-16 sm:py-20"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+        >
+          Phần 3
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+          Điều người mới cần hiểu trước khi bỏ tiền vào
+        </h2>
+        <p class="mt-4 text-base leading-8 text-stone-700">
+          Nếu chỉ nhớ một phần của trang này, hãy nhớ phần này. Sự rõ ràng về
+          rủi ro thường giúp bạn đi được lâu hơn bất kỳ lời hứa lợi nhuận nào.
+        </p>
+      </div>
 
- <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
- {
- riskCards.map((risk) => (
- <article class="rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)]/90 p-6 shadow-sm">
- <h3 class="text-lg font-semibold text-stone-900">
- {risk.title}
- </h3>
- <p class="mt-3 text-sm leading-7 text-stone-600">
- {risk.description}
- </p>
- </article>
- ))
- }
- </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        {
+          riskCards.map((risk) => (
+            <article class="bg-[var(--bg-card)]/90 rounded-[1.75rem] border border-stone-300 p-6 shadow-sm">
+              <h3 class="text-lg font-semibold text-stone-900">{risk.title}</h3>
+              <p class="mt-3 text-sm leading-7 text-stone-600">
+                {risk.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
 
- <div
- class="mt-8 rounded-[1.75rem] border border-amber-300 bg-amber-50/80 p-6"
- >
- <p
- class="text-sm font-semibold uppercase tracking-[0.22em] text-amber-800"
- >
- Ghi nhớ nhanh
- </p>
- <p class="mt-3 text-base leading-8 text-amber-950">
- Nếu bạn cần khoản tiền đó trong tương lai rất gần, hoặc bạn sẽ mất ngủ
- khi thấy nó giảm vài phần trăm, thì chưa phải lúc tốt để đẩy tiền vào
- quỹ mở.
- </p>
- </div>
- </div>
- </section>
+      <div
+        class="mt-8 rounded-[1.75rem] border border-amber-300 bg-amber-50/80 p-6"
+      >
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.22em] text-amber-800"
+        >
+          Ghi nhớ nhanh
+        </p>
+        <p class="mt-3 text-base leading-8 text-amber-950">
+          Nếu bạn cần khoản tiền đó trong tương lai rất gần, hoặc bạn sẽ mất ngủ
+          khi thấy nó giảm vài phần trăm, thì chưa phải lúc tốt để đẩy tiền vào
+          quỹ mở.
+        </p>
+      </div>
+    </div>
+  </section>
 
- <section
- id="bat-dau-an-toan"
- class="bg-[var(--bg-card)] py-16 sm:py-20"
- >
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
- <div>
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Phần 4
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- Bắt đầu thế nào cho an toàn?
- </h2>
- <p class="mt-4 text-base leading-8 text-stone-600">
- Phần này chỉ giữ ở mức nguyên tắc. Nó giúp bạn có khung hành động cơ
- bản mà không biến trang này thành một hướng dẫn đăng ký nền tảng.
- </p>
+  <section id="bat-dau-an-toan" class="bg-[var(--bg-card)] py-16 sm:py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div>
+          <p
+            class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+          >
+            Phần 4
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+            Bắt đầu thế nào cho an toàn?
+          </h2>
+          <p class="mt-4 text-base leading-8 text-stone-600">
+            Phần này chỉ giữ ở mức nguyên tắc. Nó giúp bạn có khung hành động cơ
+            bản mà không biến trang này thành một hướng dẫn đăng ký nền tảng.
+          </p>
 
- <div
- class="mt-8 rounded-[1.75rem] border border-stone-300 bg-stone-50 p-6"
- >
- <p
- class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500"
- >
- Nhịp an toàn cho người mới
- </p>
- <p
- class="mt-3 text-base leading-8 text-stone-700"
- >
- Nếu bạn còn đang dò cảm giác, hãy ưu tiên số tiền nhỏ nhưng đều.
- Bài toán đầu tiên không phải thắng lớn, mà là giữ được sự bình
- tĩnh và hiểu mình đang làm gì.
- </p>
- </div>
- </div>
+          <div
+            class="mt-8 rounded-[1.75rem] border border-stone-300 bg-stone-50 p-6"
+          >
+            <p
+              class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500"
+            >
+              Nhịp an toàn cho người mới
+            </p>
+            <p class="mt-3 text-base leading-8 text-stone-700">
+              Nếu bạn còn đang dò cảm giác, hãy ưu tiên số tiền nhỏ nhưng đều.
+              Bài toán đầu tiên không phải thắng lớn, mà là giữ được sự bình
+              tĩnh và hiểu mình đang làm gì.
+            </p>
+          </div>
+        </div>
 
- <div class="space-y-4">
- {
- startSteps.map((step) => (
- <article class="rounded-[1.75rem] border border-stone-200 bg-stone-50/70 p-6">
- <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
- <div class="w-fit rounded-full bg-[var(--accent)] px-4 py-1.5 text-sm font-semibold text-white">
- {step.step}
- </div>
- <div>
- <h3 class="text-xl font-semibold text-stone-900">
- {step.title}
- </h3>
- <p class="mt-3 text-sm leading-7 text-stone-600">
- {step.description}
- </p>
- </div>
- </div>
- </article>
- ))
- }
- </div>
- </div>
- </div>
- </section>
+        <div class="space-y-4">
+          {
+            startSteps.map((step) => (
+              <article class="rounded-[1.75rem] border border-stone-200 bg-stone-50/70 p-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+                  <div class="w-fit rounded-full bg-[var(--accent)] px-4 py-1.5 text-sm font-semibold text-white">
+                    {step.step}
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-semibold text-stone-900">
+                      {step.title}
+                    </h3>
+                    <p class="mt-3 text-sm leading-7 text-stone-600">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section
- id="faq-theo-cum"
- class="border-y border-stone-200 bg-stone-50/70 py-16 sm:py-20"
- >
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="grid gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
- <aside class="lg:sticky lg:top-28">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Phần 5
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- FAQ theo cụm câu hỏi
- </h2>
- <p class="mt-4 text-base leading-8 text-stone-600">
- Khi bạn đã có khung hiểu cơ bản, phần này giúp tra nhanh những câu
- hỏi cụ thể hơn mà người mới thường vướng.
- </p>
+  <section
+    id="faq-theo-cum"
+    class="border-y border-stone-200 bg-stone-50/70 py-16 sm:py-20"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
+        <aside class="lg:sticky lg:top-28">
+          <p
+            class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+          >
+            Phần 5
+          </p>
+          <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+            FAQ theo cụm câu hỏi
+          </h2>
+          <p class="mt-4 text-base leading-8 text-stone-600">
+            Khi bạn đã có khung hiểu cơ bản, phần này giúp tra nhanh những câu
+            hỏi cụ thể hơn mà người mới thường vướng.
+          </p>
 
- <div
- class="mt-6 rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)] p-5 shadow-sm"
- >
- <p
- class="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500"
- >
- Quy mô hiện tại
- </p>
- <p
- class="mt-3 text-3xl font-semibold text-stone-900"
- >
- {faqCount}
- </p>
- <p class="mt-1 text-sm text-stone-600">
- câu hỏi dành cho người mới, chia thành {faqGroups.length} cụm.
- </p>
- </div>
- </aside>
+          <div
+            class="mt-6 rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)] p-5 shadow-sm"
+          >
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500"
+            >
+              Quy mô hiện tại
+            </p>
+            <p class="mt-3 text-3xl font-semibold text-stone-900">
+              {faqCount}
+            </p>
+            <p class="mt-1 text-sm text-stone-600">
+              câu hỏi dành cho người mới, chia thành {faqGroups.length} cụm.
+            </p>
+          </div>
+        </aside>
 
- <div>
- <div
- class="rounded-[2rem] border border-stone-300 bg-[var(--bg-card)] p-5 shadow-sm"
- >
- <label
- for="faq-search"
- class="text-sm font-medium text-stone-700"
- >
- Tìm theo câu hỏi, khái niệm hoặc tình huống
- </label>
- <div class="relative mt-3">
- <div
- class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400"
- >
- <svg
- class="h-5 w-5"
- fill="none"
- stroke="currentColor"
- viewBox="0 0 24 24"
- >
- <path
- stroke-linecap="round"
- stroke-linejoin="round"
- stroke-width="2"
- d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
- </svg>
- </div>
- <input
- id="faq-search"
- type="text"
- placeholder="Ví dụ: có lỗ không, NAV, cần tiền gấp..."
- class="w-full rounded-2xl border border-stone-300 bg-stone-50 py-3 pl-11 pr-4 text-sm text-stone-900 transition-all focus:border-[var(--accent)] focus:outline-none focus:ring-2 focus:ring-primary-200"
- />
- </div>
- <p
- id="faq-result-count"
- class="mt-3 text-sm text-stone-600"
- >
- {faqCount} câu hỏi cho người mới
- </p>
- </div>
+        <div>
+          <div
+            class="rounded-[2rem] border border-stone-300 bg-[var(--bg-card)] p-5 shadow-sm"
+          >
+            <label for="faq-search" class="text-sm font-medium text-stone-700">
+              Tìm theo câu hỏi, khái niệm hoặc tình huống
+            </label>
+            <div class="relative mt-3">
+              <div
+                class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-400"
+              >
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+              <input
+                id="faq-search"
+                type="text"
+                placeholder="Ví dụ: có lỗ không, NAV, cần tiền gấp..."
+                class="focus:ring-primary-200 w-full rounded-2xl border border-stone-300 bg-stone-50 py-3 pl-11 pr-4 text-sm text-stone-900 transition-all focus:border-[var(--accent)] focus:outline-none focus:ring-2"
+              />
+            </div>
+            <p id="faq-result-count" class="mt-3 text-sm text-stone-600">
+              {faqCount} câu hỏi cho người mới
+            </p>
+          </div>
 
- <div
- id="faq-no-results"
- class="mt-6 hidden rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)] px-6 py-10 text-center text-stone-600 shadow-sm"
- >
- <p class="text-lg font-semibold text-stone-900">
- Không tìm thấy câu hỏi phù hợp.
- </p>
- <p class="mt-2 text-sm">
- Thử lại với từ khóa ngắn hơn như “NAV”, “lỗ”, hoặc “rút tiền”.
- </p>
- </div>
+          <div
+            id="faq-no-results"
+            class="mt-6 hidden rounded-[1.75rem] border border-stone-300 bg-[var(--bg-card)] px-6 py-10 text-center text-stone-600 shadow-sm"
+          >
+            <p class="text-lg font-semibold text-stone-900">
+              Không tìm thấy câu hỏi phù hợp.
+            </p>
+            <p class="mt-2 text-sm">
+              Thử lại với từ khóa ngắn hơn như “NAV”, “lỗ”, hoặc “rút tiền”.
+            </p>
+          </div>
 
- <div class="mt-6 space-y-5">
- {
- faqGroups.map((group, groupIndex) => (
- <section
- class="rounded-[2rem] border border-stone-300 bg-[var(--bg-card)] shadow-sm"
- data-faq-group
- >
- <div class="border-b border-stone-200 px-6 py-5">
- <div class="flex items-start gap-4">
- <div class="rounded-full bg-[var(--accent)] px-3 py-1 text-sm font-semibold text-white">
- {group.data.icon}
- </div>
- <div>
- <h3 class="text-xl font-semibold text-stone-900">
- {group.data.group}
- </h3>
- {group.data.description && (
- <p class="mt-2 text-sm leading-7 text-stone-600">
- {group.data.description}
- </p>
- )}
- </div>
- </div>
- </div>
+          <div class="mt-6 space-y-5">
+            {
+              faqGroups.map((group, groupIndex) => (
+                <section
+                  class="rounded-[2rem] border border-stone-300 bg-[var(--bg-card)] shadow-sm"
+                  data-faq-group
+                >
+                  <div class="border-b border-stone-200 px-6 py-5">
+                    <div class="flex items-start gap-4">
+                      <div class="rounded-full bg-[var(--accent)] px-3 py-1 text-sm font-semibold text-white">
+                        {group.data.icon}
+                      </div>
+                      <div>
+                        <h3 class="text-xl font-semibold text-stone-900">
+                          {group.data.group}
+                        </h3>
+                        {group.data.description && (
+                          <p class="mt-2 text-sm leading-7 text-stone-600">
+                            {group.data.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
 
- <div class="divide-y divide-stone-200">
- {group.data.items.map((item, itemIndex) => (
- <article
- class="faq-item"
- data-term={item.term.toLowerCase()}
- data-question={item.question.toLowerCase()}
- data-answer={item.answer.toLowerCase()}
- >
- <button
- type="button"
- class="faq-item-toggle w-full px-6 py-5 text-left"
- data-target={`faq-answer-${groupIndex}-${itemIndex}`}
- aria-expanded="false"
- >
- <div class="flex items-start justify-between gap-4">
- <div>
- <p class="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
- {item.term}
- </p>
- <p class="mt-2 text-base font-medium leading-7 text-stone-900">
- {item.question}
- </p>
- </div>
- <svg
- class="faq-chevron mt-1 h-5 w-5 shrink-0 text-stone-400 transition-transform duration-200"
- fill="none"
- stroke="currentColor"
- viewBox="0 0 24 24"
- >
- <path
- stroke-linecap="round"
- stroke-linejoin="round"
- stroke-width="2"
- d="M19 9l-7 7-7-7"
- />
- </svg>
- </div>
- </button>
+                  <div class="divide-y divide-stone-200">
+                    {group.data.items.map((item, itemIndex) => (
+                      <article
+                        class="faq-item"
+                        data-term={item.term.toLowerCase()}
+                        data-question={item.question.toLowerCase()}
+                        data-answer={item.answer.toLowerCase()}
+                      >
+                        <button
+                          type="button"
+                          class="faq-item-toggle w-full px-6 py-5 text-left"
+                          data-target={`faq-answer-${groupIndex}-${itemIndex}`}
+                          aria-expanded="false"
+                        >
+                          <div class="flex items-start justify-between gap-4">
+                            <div>
+                              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-stone-500">
+                                {item.term}
+                              </p>
+                              <p class="mt-2 text-base font-medium leading-7 text-stone-900">
+                                {item.question}
+                              </p>
+                            </div>
+                            <svg
+                              class="faq-chevron mt-1 h-5 w-5 shrink-0 text-stone-400 transition-transform duration-200"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </div>
+                        </button>
 
- <div
- id={`faq-answer-${groupIndex}-${itemIndex}`}
- class="faq-answer hidden px-6 pb-6"
- >
- <p class="max-w-3xl text-sm leading-7 text-stone-600">
- {item.answer}
- </p>
- </div>
- </article>
- ))}
- </div>
- </section>
- ))
- }
- </div>
- </div>
- </div>
- </div>
- </section>
+                        <div
+                          id={`faq-answer-${groupIndex}-${itemIndex}`}
+                          class="faq-answer hidden px-6 pb-6"
+                        >
+                          <p class="max-w-3xl text-sm leading-7 text-stone-600">
+                            {item.answer}
+                          </p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
- <section class="bg-[var(--bg-card)] py-16 sm:py-20">
- <div class="container mx-auto px-4 sm:px-6 lg:px-8">
- <div class="max-w-3xl">
- <p
- class="text-sm font-semibold uppercase tracking-[0.24em] text-primary-700"
- >
- Đọc tiếp nếu cần
- </p>
- <h2
- class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl"
- >
- Bước tiếp theo, nhưng không cần phải làm ngay
- </h2>
- <p class="mt-4 text-base leading-8 text-stone-600">
- Nếu trang này đã đủ để bạn bình tĩnh hơn và hiểu mình nên hỏi gì tiếp,
- vậy là nó hoàn thành vai trò. Các liên kết dưới đây chỉ là lựa chọn mở
- rộng.
- </p>
- </div>
+  <section class="bg-[var(--bg-card)] py-16 sm:py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p
+          class="text-primary-700 text-sm font-semibold uppercase tracking-[0.24em]"
+        >
+          Đọc tiếp nếu cần
+        </p>
+        <h2 class="mt-3 text-3xl font-bold text-stone-900 md:text-4xl">
+          Bước tiếp theo, nhưng không cần phải làm ngay
+        </h2>
+        <p class="mt-4 text-base leading-8 text-stone-600">
+          Nếu trang này đã đủ để bạn bình tĩnh hơn và hiểu mình nên hỏi gì tiếp,
+          vậy là nó hoàn thành vai trò. Các liên kết dưới đây chỉ là lựa chọn mở
+          rộng.
+        </p>
+      </div>
 
- <div class="mt-10 grid gap-5 lg:grid-cols-3">
- {
- nextSteps.map((item) => (
- <a
- href={item.href}
- class={`group rounded-[1.75rem] border p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${
- item.subtle
- ?'border-stone-300 bg-stone-50'
- :'border-stone-200 bg-[var(--bg-card)]'
- }`}
- >
- <p class="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
- {item.eyebrow}
- </p>
- <h3 class="mt-4 text-xl font-semibold text-stone-900 group-hover:text-primary-700">
- {item.title}
- </h3>
- <p class="mt-3 text-sm leading-7 text-stone-600">
- {item.description}
- </p>
- <span class="mt-5 inline-flex items-center text-sm font-semibold text-primary-700">
- {item.label}
- <svg
- class="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
- fill="none"
- stroke="currentColor"
- viewBox="0 0 24 24"
- >
- <path
- stroke-linecap="round"
- stroke-linejoin="round"
- stroke-width="2"
- d="M9 5l7 7-7 7"
- />
- </svg>
- </span>
- </a>
- ))
- }
- </div>
- </div>
- </section>
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          nextSteps.map((item) => (
+            <a
+              href={item.href}
+              class={`group rounded-[1.75rem] border p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${
+                item.subtle
+                  ? 'border-stone-300 bg-stone-50'
+                  : 'border-stone-200 bg-[var(--bg-card)]'
+              }`}
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
+                {item.eyebrow}
+              </p>
+              <h3 class="group-hover:text-primary-700 mt-4 text-xl font-semibold text-stone-900">
+                {item.title}
+              </h3>
+              <p class="mt-3 text-sm leading-7 text-stone-600">
+                {item.description}
+              </p>
+              <span class="text-primary-700 mt-5 inline-flex items-center text-sm font-semibold">
+                {item.label}
+                <svg
+                  class="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script>
- const faqButtons =
- document.querySelectorAll<HTMLButtonElement>('.faq-item-toggle');
- const faqGroups = document.querySelectorAll<HTMLElement>('[data-faq-group]');
- const faqItems = document.querySelectorAll<HTMLElement>('.faq-item');
- const searchInput = document.getElementById(
-'faq-search'
- ) as HTMLInputElement | null;
- const noResults = document.getElementById('faq-no-results');
- const resultCount = document.getElementById('faq-result-count');
+  const faqButtons =
+    document.querySelectorAll<HTMLButtonElement>('.faq-item-toggle');
+  const faqGroups = document.querySelectorAll<HTMLElement>('[data-faq-group]');
+  const faqItems = document.querySelectorAll<HTMLElement>('.faq-item');
+  const searchInput = document.getElementById(
+    'faq-search'
+  ) as HTMLInputElement | null;
+  const noResults = document.getElementById('faq-no-results');
+  const resultCount = document.getElementById('faq-result-count');
 
- const setFaqItemOpen = (item: HTMLElement, isOpen: boolean) => {
- const button = item.querySelector<HTMLButtonElement>('.faq-item-toggle');
- const answer = item.querySelector<HTMLElement>('.faq-answer');
- const chevron = item.querySelector<SVGElement>('.faq-chevron');
+  const setFaqItemOpen = (item: HTMLElement, isOpen: boolean) => {
+    const button = item.querySelector<HTMLButtonElement>('.faq-item-toggle');
+    const answer = item.querySelector<HTMLElement>('.faq-answer');
+    const chevron = item.querySelector<SVGElement>('.faq-chevron');
 
- button?.setAttribute('aria-expanded', isOpen.toString());
- answer?.classList.toggle('hidden', !isOpen);
- chevron?.classList.toggle('rotate-180', isOpen);
- };
+    button?.setAttribute('aria-expanded', isOpen.toString());
+    answer?.classList.toggle('hidden', !isOpen);
+    chevron?.classList.toggle('rotate-180', isOpen);
+  };
 
- faqButtons.forEach((button) => {
- button.addEventListener('click', () => {
- const targetId = button.dataset.target;
- if (!targetId) return;
+  faqButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.dataset.target;
+      if (!targetId) return;
 
- const item = button.closest<HTMLElement>('.faq-item');
- if (!item) return;
+      const item = button.closest<HTMLElement>('.faq-item');
+      if (!item) return;
 
- const answer = document.getElementById(targetId);
- const chevron = button.querySelector<SVGElement>('.faq-chevron');
- const isOpen = button.getAttribute('aria-expanded') ==='true';
+      const answer = document.getElementById(targetId);
+      const chevron = button.querySelector<SVGElement>('.faq-chevron');
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
 
- button.setAttribute('aria-expanded', (!isOpen).toString());
- answer?.classList.toggle('hidden', isOpen);
- chevron?.classList.toggle('rotate-180', !isOpen);
- });
- });
+      button.setAttribute('aria-expanded', (!isOpen).toString());
+      answer?.classList.toggle('hidden', isOpen);
+      chevron?.classList.toggle('rotate-180', !isOpen);
+    });
+  });
 
- searchInput?.addEventListener('input', () => {
- const query = searchInput.value.trim().toLowerCase();
- let visibleCount = 0;
+  searchInput?.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    let visibleCount = 0;
 
- faqGroups.forEach((group) => {
- const items = group.querySelectorAll<HTMLElement>('.faq-item');
- let groupVisibleCount = 0;
+    faqGroups.forEach((group) => {
+      const items = group.querySelectorAll<HTMLElement>('.faq-item');
+      let groupVisibleCount = 0;
 
- items.forEach((item) => {
- const term = item.dataset.term ??'';
- const question = item.dataset.question ??'';
- const answer = item.dataset.answer ??'';
- const matches =
- !query ||
- term.includes(query) ||
- question.includes(query) ||
- answer.includes(query);
+      items.forEach((item) => {
+        const term = item.dataset.term ?? '';
+        const question = item.dataset.question ?? '';
+        const answer = item.dataset.answer ?? '';
+        const matches =
+          !query ||
+          term.includes(query) ||
+          question.includes(query) ||
+          answer.includes(query);
 
- item.style.display = matches ?'':'none';
- if (matches) {
- groupVisibleCount += 1;
- }
+        item.style.display = matches ? '' : 'none';
+        if (matches) {
+          groupVisibleCount += 1;
+        }
 
- if (query) {
- setFaqItemOpen(item, matches);
- } else {
- setFaqItemOpen(item, false);
- }
- });
+        if (query) {
+          setFaqItemOpen(item, matches);
+        } else {
+          setFaqItemOpen(item, false);
+        }
+      });
 
- group.style.display = groupVisibleCount > 0 ?'':'none';
- visibleCount += groupVisibleCount;
- });
+      group.style.display = groupVisibleCount > 0 ? '' : 'none';
+      visibleCount += groupVisibleCount;
+    });
 
- if (resultCount) {
- resultCount.textContent = query
- ? `${visibleCount} câu hỏi khớp với từ khóa`
- : `${faqItems.length} câu hỏi cho người mới`;
- }
+    if (resultCount) {
+      resultCount.textContent = query
+        ? `${visibleCount} câu hỏi khớp với từ khóa`
+        : `${faqItems.length} câu hỏi cho người mới`;
+    }
 
- noResults?.classList.toggle('hidden', visibleCount > 0 || !query);
- });
+    noResults?.classList.toggle('hidden', visibleCount > 0 || !query);
+  });
 </script>
