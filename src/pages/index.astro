@@ -10,43 +10,113 @@ const referralUrl = 'https://go.behitek.com/fmarket';
   description="Behivest - Đầu tư dễ hiểu cho người Việt mới bắt đầu. Hướng dẫn bắt đầu đầu tư với số tiền nhỏ, không cần kinh nghiệm."
 >
   <!-- Hero -->
-  <section style="min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 100px 24px 60px;">
+  <section
+    class="relative"
+    style="min-height: 90vh; display: flex; align-items: center; justify-content: center; padding: 100px 24px 60px;"
+  >
     <div style="max-width: 720px; text-align: center;">
       <div style="margin-bottom: 24px;">
-        <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 600;">
+        <span
+          style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 600;"
+        >
           Dành cho sinh viên IT &amp; dev mới đi làm
         </span>
       </div>
-      <h1 style="font-size: clamp(32px, 5.5vw, 52px); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 24px; text-wrap: balance;">
-        Bắt đầu đầu tư với <span style="color: var(--accent);">500k/tháng</span>, không cần kinh nghiệm
+      <h1
+        style="font-size: clamp(32px, 5.5vw, 52px); font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 24px; text-wrap: balance;"
+      >
+        Bắt đầu đầu tư với <span style="color: var(--accent);">500k/tháng</span
+        >, không cần kinh nghiệm
       </h1>
-      <p style="font-size: 18px; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin: 0 auto 40px; text-wrap: pretty;">
-        Mình là tác giả luyencode.net. Sau nhiều lần được hỏi "nên bắt đầu đầu tư từ đâu?", mình gom lại câu trả lời ở đây — rõ ràng, không hứa hẹn, và có hướng dẫn cụ thể.
+      <p
+        style="font-size: 18px; color: var(--text-secondary); line-height: 1.7; max-width: 560px; margin: 0 auto 40px; text-wrap: pretty;"
+      >
+        Mình là tác giả luyencode.net. Sau nhiều lần được hỏi "nên bắt đầu đầu
+        tư từ đâu?", mình gom lại câu trả lời ở đây — rõ ràng, không hứa hẹn, và
+        có hướng dẫn cụ thể.
       </p>
-      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href={`${basePath}fmarket`} class="btn-primary">Mở Fmarket miễn phí →</a>
+      <div
+        style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;"
+      >
+        <a href={`${basePath}fmarket`} class="btn-primary"
+          >Mở Fmarket miễn phí →</a
+        >
         <a href="#why" class="btn-secondary">Vì sao mình giới thiệu?</a>
       </div>
-      <p style="font-size: 13px; color: var(--accent); font-weight: 600; margin-top: 20px; background: var(--accent-light); display: inline-block; padding: 6px 16px; border-radius: 20px;">
+      <p
+        style="font-size: 13px; color: var(--accent); font-weight: 600; margin-top: 20px; background: var(--accent-light); display: inline-block; padding: 6px 16px; border-radius: 20px;"
+      >
         🎁 Đăng ký qua link nhận ngay 50.000đ quà tặng
       </p>
+    </div>
+
+    <!-- Scrolldown Indicator -->
+    <div
+      class="absolute bottom-10 left-1/2 flex -translate-x-1/2 cursor-pointer flex-col items-center gap-2 transition-opacity hover:opacity-70"
+      style="color: var(--text-muted);"
+      onclick="window.scrollBy({ top: window.innerHeight - 100, behavior: 'smooth' })"
+    >
+      <span
+        style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;"
+        >Cuộn xuống</span
+      >
+      <svg
+        class="mt-1 h-5 w-5 animate-bounce"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
     </div>
   </section>
 
   <!-- Social proof bar -->
-  <section style="background: var(--bg-warm); padding: 48px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; text-align: center;">
+  <section
+    style="background: var(--bg-warm); padding: 48px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);"
+  >
+    <div
+      style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; text-align: center;"
+    >
       <div>
-        <div style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;">500k</div>
-        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Số tiền tối thiểu để bắt đầu</div>
+        <div
+          style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;"
+        >
+          500k
+        </div>
+        <div
+          style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;"
+        >
+          Số tiền tối thiểu để bắt đầu
+        </div>
       </div>
       <div>
-        <div style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;">~10 phút</div>
-        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Thời gian mở tài khoản</div>
+        <div
+          style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;"
+        >
+          ~10 phút
+        </div>
+        <div
+          style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;"
+        >
+          Thời gian mở tài khoản
+        </div>
       </div>
       <div>
-        <div style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;">100%</div>
-        <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Online, không cần gặp mặt</div>
+        <div
+          style="font-size: 32px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;"
+        >
+          100%
+        </div>
+        <div
+          style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;"
+        >
+          Online, không cần gặp mặt
+        </div>
       </div>
     </div>
   </section>
@@ -55,22 +125,53 @@ const referralUrl = 'https://go.behitek.com/fmarket';
   <section id="why" style="padding: 80px 24px;">
     <div style="max-width: 800px; margin: 0 auto;">
       <div style="margin-bottom: 48px;">
-        <div style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">Vì sao mình giới thiệu Fmarket</div>
-        <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 16px;">Đơn giản vì nó giải quyết đúng vấn đề của người mới.</h2>
-        <p style="font-size: 17px; color: var(--text-secondary); line-height: 1.7; max-width: 600px;">Không phải vì nó hoàn hảo. Mà vì nó đủ dễ để bạn thực sự bắt đầu thay vì chỉ đọc và suy nghĩ.</p>
+        <div
+          style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;"
+        >
+          Vì sao mình giới thiệu Fmarket
+        </div>
+        <h2
+          style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 16px;"
+        >
+          Đơn giản vì nó giải quyết đúng vấn đề của người mới.
+        </h2>
+        <p
+          style="font-size: 17px; color: var(--text-secondary); line-height: 1.7; max-width: 600px;"
+        >
+          Không phải vì nó hoàn hảo. Mà vì nó đủ dễ để bạn thực sự bắt đầu thay
+          vì chỉ đọc và suy nghĩ.
+        </p>
       </div>
       <div style="display: grid; gap: 16px;">
-        {[
-          { title: 'Không cần vốn lớn', desc: 'Bạn có thể bắt đầu với vài trăm nghìn. Quan trọng là tập thói quen, không phải số tiền ban đầu.' },
-          { title: 'Không cần chọn cổ phiếu', desc: 'Quỹ mở giúp bạn đầu tư vào nhiều cổ phiếu cùng lúc, do chuyên gia quản lý. Bạn không cần tự phân tích.' },
-          { title: 'Phù hợp với người bận', desc: 'Thiết lập đầu tư định kỳ xong, mỗi tháng tiền tự động được đầu tư. Không cần nhìn bảng giá mỗi ngày.' },
-          { title: 'Mở tài khoản online', desc: 'eKYC trên app, không cần đến quầy. Từ tải app đến sẵn sàng mua quỹ khoảng 10 phút.' },
-        ].map((item) => (
-          <div class="card">
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">{item.title}</h3>
-            <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.65;">{item.desc}</p>
-          </div>
-        ))}
+        {
+          [
+            {
+              title: 'Không cần vốn lớn',
+              desc: 'Bạn có thể bắt đầu với vài trăm nghìn. Quan trọng là tập thói quen, không phải số tiền ban đầu.',
+            },
+            {
+              title: 'Không cần chọn cổ phiếu',
+              desc: 'Quỹ mở giúp bạn đầu tư vào nhiều cổ phiếu cùng lúc, do chuyên gia quản lý. Bạn không cần tự phân tích.',
+            },
+            {
+              title: 'Phù hợp với người bận',
+              desc: 'Thiết lập đầu tư định kỳ xong, mỗi tháng tiền tự động được đầu tư. Không cần nhìn bảng giá mỗi ngày.',
+            },
+            {
+              title: 'Mở tài khoản online',
+              desc: 'eKYC trên app, không cần đến quầy. Từ tải app đến sẵn sàng mua quỹ khoảng 10 phút.',
+            },
+          ].map((item) => (
+            <div class="card">
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px;">
+                {item.title}
+              </h3>
+              <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.65;">
+                {item.desc}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -78,25 +179,57 @@ const referralUrl = 'https://go.behitek.com/fmarket';
   <!-- Honesty section -->
   <section style="padding: 80px 24px; background: var(--bg-warm);">
     <div style="max-width: 800px; margin: 0 auto;">
-      <div style="background: var(--bg-card); border-radius: var(--radius-lg); padding: clamp(32px, 5vw, 48px); border: 1px solid var(--border);">
+      <div
+        style="background: var(--bg-card); border-radius: var(--radius-lg); padding: clamp(32px, 5vw, 48px); border: 1px solid var(--border);"
+      >
         <div style="margin-bottom: 48px;">
-          <div style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">Minh bạch</div>
-          <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em;">Mình nói thẳng những gì đây KHÔNG phải.</h2>
+          <div
+            style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;"
+          >
+            Minh bạch
+          </div>
+          <h2
+            style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em;"
+          >
+            Mình nói thẳng những gì đây KHÔNG phải.
+          </h2>
         </div>
         <div style="display: grid; gap: 20px;">
-          {[
-            { icon: '✗', positive: false, text: 'Không phải lời hứa lợi nhuận. Đầu tư luôn có rủi ro.' },
-            { icon: '✗', positive: false, text: 'Không hợp nếu bạn muốn kiếm nhanh hay trading ngắn hạn.' },
-            { icon: '✗', positive: false, text: 'Không phải cách duy nhất để đầu tư — chỉ là một điểm bắt đầu.' },
-            { icon: '✓', positive: true, text: 'Đăng ký qua link của mình, bạn nhận 50.000đ quà tặng từ Fmarket.' },
-          ].map((item) => (
-            <div style="display: flex; gap: 14px; align-items: flex-start;">
-              <span style={`width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: ${item.positive ? 'var(--accent-light)' : '#FEF2F2'}; color: ${item.positive ? 'var(--accent)' : '#B91C1C'}; font-size: 13px; font-weight: 700;`}>
-                {item.icon}
-              </span>
-              <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; padding-top: 3px;">{item.text}</p>
-            </div>
-          ))}
+          {
+            [
+              {
+                icon: '✗',
+                positive: false,
+                text: 'Không phải lời hứa lợi nhuận. Đầu tư luôn có rủi ro.',
+              },
+              {
+                icon: '✗',
+                positive: false,
+                text: 'Không hợp nếu bạn muốn kiếm nhanh hay trading ngắn hạn.',
+              },
+              {
+                icon: '✗',
+                positive: false,
+                text: 'Không phải cách duy nhất để đầu tư — chỉ là một điểm bắt đầu.',
+              },
+              {
+                icon: '✓',
+                positive: true,
+                text: 'Đăng ký qua link của mình, bạn nhận 50.000đ quà tặng từ Fmarket.',
+              },
+            ].map((item) => (
+              <div style="display: flex; gap: 14px; align-items: flex-start;">
+                <span
+                  style={`width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: ${item.positive ? 'var(--accent-light)' : '#FEF2F2'}; color: ${item.positive ? 'var(--accent)' : '#B91C1C'}; font-size: 13px; font-weight: 700;`}
+                >
+                  {item.icon}
+                </span>
+                <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.6; padding-top: 3px;">
+                  {item.text}
+                </p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -106,34 +239,87 @@ const referralUrl = 'https://go.behitek.com/fmarket';
   <section style="padding: 80px 24px;">
     <div style="max-width: 800px; margin: 0 auto;">
       <div style="margin-bottom: 48px;">
-        <div style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;">Tìm hiểu thêm</div>
-        <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em;">Công cụ và nội dung giúp bạn tự tin hơn trước khi bắt đầu.</h2>
+        <div
+          style="font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;"
+        >
+          Tìm hiểu thêm
+        </div>
+        <h2
+          style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em;"
+        >
+          Công cụ và nội dung giúp bạn tự tin hơn trước khi bắt đầu.
+        </h2>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
-        {[
-          { title: 'Hiệu suất quỹ', desc: 'Xem dữ liệu hiệu suất thực tế của các quỹ mở trên Fmarket.', url: `${basePath}performance`, color: 'var(--accent)' },
-          { title: 'Công cụ tính toán', desc: 'Tính lãi kép, SIP, phân bổ ngân sách — miễn phí.', url: `${basePath}tools`, color: 'oklch(0.55 0.14 30)' },
-          { title: 'Blog đầu tư', desc: 'Bài viết dành cho người mới: lương 10 triệu nên đầu tư sao, quỹ mở là gì...', url: `${basePath}blog`, color: 'oklch(0.55 0.14 250)' },
-        ].map((item) => (
-          <a href={item.url} style="display: block; padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); transition: all 0.2s; cursor: pointer;" onmouseover={`this.style.borderColor='${item.color}'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.06)'`} onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-            <div style={`width: 8px; height: 8px; border-radius: 50%; background: ${item.color}; margin-bottom: 16px;`}></div>
-            <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text);">{item.title}</h3>
-            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">{item.desc}</p>
-            <span style={`font-size: 13px; font-weight: 600; color: ${item.color}; margin-top: 12px; display: inline-block;`}>Xem →</span>
-          </a>
-        ))}
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;"
+      >
+        {
+          [
+            {
+              title: 'Hiệu suất quỹ',
+              desc: 'Xem dữ liệu hiệu suất thực tế của các quỹ mở trên Fmarket.',
+              url: `${basePath}performance`,
+              color: 'var(--accent)',
+            },
+            {
+              title: 'Công cụ tính toán',
+              desc: 'Tính lãi kép, SIP, phân bổ ngân sách — miễn phí.',
+              url: `${basePath}tools`,
+              color: 'oklch(0.55 0.14 30)',
+            },
+            {
+              title: 'Blog đầu tư',
+              desc: 'Bài viết dành cho người mới: lương 10 triệu nên đầu tư sao, quỹ mở là gì...',
+              url: `${basePath}blog`,
+              color: 'oklch(0.55 0.14 250)',
+            },
+          ].map((item) => (
+            <a
+              href={item.url}
+              style="display: block; padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); transition: all 0.2s; cursor: pointer;"
+              onmouseover={`this.style.borderColor='${item.color}'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.06)'`}
+              onmouseout="this.style.borderColor='var(--border)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+            >
+              <div
+                style={`width: 8px; height: 8px; border-radius: 50%; background: ${item.color}; margin-bottom: 16px;`}
+              />
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text);">
+                {item.title}
+              </h3>
+              <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+                {item.desc}
+              </p>
+              <span
+                style={`font-size: 13px; font-weight: 600; color: ${item.color}; margin-top: 12px; display: inline-block;`}
+              >
+                Xem →
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- Final CTA -->
   <section style="padding: 80px 24px;">
-    <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px 0;">
-      <h2 style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px;">Sẵn sàng bắt đầu?</h2>
-      <p style="font-size: 17px; color: var(--text-secondary); margin: 0 auto 32px; max-width: 480px;">
-        Xem trang hướng dẫn chi tiết mình viết riêng cho người mới — có đủ lý do, bước làm, và câu hỏi thường gặp.
+    <div
+      style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px 0;"
+    >
+      <h2
+        style="font-size: clamp(24px, 4vw, 36px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px;"
+      >
+        Sẵn sàng bắt đầu?
+      </h2>
+      <p
+        style="font-size: 17px; color: var(--text-secondary); margin: 0 auto 32px; max-width: 480px;"
+      >
+        Xem trang hướng dẫn chi tiết mình viết riêng cho người mới — có đủ lý
+        do, bước làm, và câu hỏi thường gặp.
       </p>
-      <a href={`${basePath}fmarket`} class="btn-primary">Xem trang Fmarket cho người mới →</a>
+      <a href={`${basePath}fmarket`} class="btn-primary"
+        >Xem trang Fmarket cho người mới →</a
+      >
     </div>
   </section>
 </Layout>
