@@ -115,24 +115,34 @@ const referralUrl = 'https://go.behitek.com/fmarket';
         {
           [
             {
-              title: 'NAV (Net Asset Value)',
-              eng: 'Giá trị tài ròng',
+              title: 'NAV',
+              eng: 'Net Asset Value',
               desc: 'Giá trị tài sản ròng mỗi chứng chỉ quỹ. Đây là mức giá bạn mua hoặc bán chứng chỉ quỹ vào cuối mỗi phiên giao dịch.',
             },
             {
               title: 'Quỹ cổ phiếu',
-              eng: 'Rủi ro cao - Lợi nhuận cao',
+              eng: 'Stock Fund',
               desc: 'Đầu tư chủ yếu vào cổ phiếu. Tiềm năng sinh lời cao hơn nhưng biến động lớn hơn — phù hợp mục tiêu dài hạn 5+ năm.',
             },
             {
               title: 'Quỹ trái phiếu',
-              eng: 'Rủi ro thấp - Ổn định',
-              desc: 'Đầu tư chủ yếu vào trái phiếu. Ổn định hơn, thu nhập cố định, ít biến động — phù hợp ngắn đến trung hạn 1-3 năm.',
+              eng: 'Bond Fund',
+              desc: 'Đầu tư chủ yếu vào trái phiếu. Ổn định hơn, ít biến động — phù hợp mục tiêu ngắn đến trung hạn 1-3 năm.',
+            },
+            {
+              title: 'Quỹ cân bằng',
+              eng: 'Balanced Fund',
+              desc: 'Phân bổ vốn vào cả cổ phiếu lẫn trái phiếu để cân bằng rủi ro và lợi nhuận — phù hợp nhà đầu tư trung dung.',
             },
             {
               title: 'Hiệu suất (%)',
-              eng: 'Tăng trưởng giá',
-              desc: 'Phần trăm thay đổi NAV theo kỳ (1 tháng, 1 năm, 3 năm). Số dương = sinh lời, số âm = thua lỗ so với điểm đánh giá.',
+              eng: 'Performance',
+              desc: 'Phần trăm thay đổi NAV theo kỳ (1 tháng, 1 năm, 3 năm). Số dương = sinh lời, số âm = thua lỗ so với thời điểm ban đầu.',
+            },
+            {
+              title: 'Công ty quản lý quỹ',
+              eng: 'Fund Management Company',
+              desc: 'Tổ chức chuyên nghiệp quản lý danh mục đầu tư của quỹ. Uy tín và kinh nghiệm của công ty là yếu tố quan trọng khi chọn quỹ.',
             },
           ].map((item, i) => (
             <div class="card" style="padding: 28px;">
